@@ -1,5 +1,4 @@
-git config --global user.email "dlopezp36@gmail.com"
-git config --global user.name "Ploirad"
+
  
 #importacion de librerias
 
