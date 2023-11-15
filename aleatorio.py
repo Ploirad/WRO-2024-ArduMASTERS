@@ -29,10 +29,10 @@ def main():
    elif numero < aleatorio:
       distancia = "BAJO"
 #Fin del juego Adrián
-   texto = input()
    if fin == True:
       print("HAS GANADO, ¿QUIERES SEGUIR? (SI/NO)")
       while repeticion == False:
+         texto = input()
          if texto == "SI":
             repeticion = True
          elif texto == "NO":
