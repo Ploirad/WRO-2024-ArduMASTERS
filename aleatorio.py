@@ -15,19 +15,13 @@ def main():
       if int(numero) == num_aleatorio:
          print("Lo has adivinado en " + intentos)
          print("HAS GANADO, ¿QUIERES SEGUIR? (SI/NO)")
-         while repeticion == False:
-            texto = input()
-            acertado = True
-            if texto == "SI":
-               acertado = 
-            elif texto == "NO":
-               acertado = False
-            else:
-               print("ESCRIBE -SI- O -NO-")
+         if input("¿Quieres volver a jugar (y/n)?") == "y":
+            print("Genial!")
+            main()
       elif int(numero) < num_aleatorio:
          print("NO, ES MÁS ALTO")
       elif int(numero) > num_aleatorio:
          print("NO, ES MÁS BAJO")
 
-while hola == True:
+if input("¿Quieres jugar? (y/n)") == "y":
    main()
