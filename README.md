@@ -8,7 +8,7 @@
 
 [schemes](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/schemes)
 
-[src]
+[src](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/src)
 
 [t-photos]
 
