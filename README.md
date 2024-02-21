@@ -3,7 +3,7 @@
 </p>
 
 [models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models)
-[other]
+[other](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/other)
 [schemes]
 [src]
 [t-photos]
