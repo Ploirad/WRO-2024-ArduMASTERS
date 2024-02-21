@@ -10,7 +10,7 @@
 
 [src](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/src)
 
-[t-photos]
+[t-photos](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/t-photos)
 
 [v-photos]
 
