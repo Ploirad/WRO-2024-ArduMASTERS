@@ -3,9 +3,15 @@
 </p>
 
 [models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models)
+
 [other](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/other)
-[schemes]
+
+[schemes](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/schemes)
+
 [src]
+
 [t-photos]
+
 [v-photos]
+
 [video]
