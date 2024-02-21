@@ -12,6 +12,6 @@
 
 [t-photos](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/t-photos)
 
-[v-photos]
+[v-photos](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/v-photos)
 
 [video]
