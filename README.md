@@ -3,7 +3,7 @@
 </p>
 
 # [models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models)
-  
+  In models you can see every 3D models that we had used for make our car
 # [other](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/other)
 
 # [schemes](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/schemes)
@@ -15,4 +15,4 @@
 # [v-photos](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/v-photos)
 
 # [video](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/video)
-</h1>
+
