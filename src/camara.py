@@ -1,21 +1,19 @@
 import picamera
-from time import sleep
 
-# Inicializa la cámara
+# Set up the camera
 camera = picamera.PiCamera()
+camera.resolution = (1024, 768)
+camera.framerate = 30
 
-# Inicia la vista previa en directo en la pantalla
-camera.start_preview()
+# Set up the video recording
+start_time = time.time()
+output = '/home/pi/video.h264'
+camera.start_recording(output, format='h264')
 
-# Inicia la grabación de video en directo y guarda el archivo como "video_en_vivo.h264"
-camera.start_recording('video_en_vivo.h264')
+# Wait for 30 seconds
+while time.time() - start_time < 30:
+    pass
 
-# Espera durante 30 segundos mientras se graba el video en directo
-sleep(30)
-
-# Detiene la grabación y la vista previa en directo
+# Stop recording and release the camera
 camera.stop_recording()
-camera.stop_preview()
-
-# Libera los recursos de la cámara
-camera.close()
+camera.release()
