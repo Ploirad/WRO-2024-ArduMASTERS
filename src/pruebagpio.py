@@ -25,7 +25,6 @@ pwm_t = GPIO.PWM(servo_pin_traccion, 50) # Frecuencia de PWM: 50Hz (estándar pa
 while True:
   arranco = GPIO.input(boton_pin)
   if arranco == GPIO.LOW:
-    print("ON")
     valor_d = 7.5
     valor_t = 8
     pwm_d.start(valor_d)
@@ -40,6 +39,11 @@ while True:
     valor_t = 8
     pwm_d.start(valor_d)
     pwm_t.start(valor_t)
+    break
 
 # Detén el servo (opcional)
-pwm.stop()
+pwm_d.stop()
+pwm_t.stop()
+
+# Limpia los pines GPIO
+GPIO.cleanup()
