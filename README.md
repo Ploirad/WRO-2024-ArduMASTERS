@@ -4,14 +4,14 @@
 
 # [models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models)
 
-[other](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/other)
+# [other](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/other)
 
-[schemes](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/schemes)
+# [schemes](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/schemes)
 
-[src](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/src)
+# [src](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/src)
 
-[t-photos](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/t-photos)
+# [t-photos](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/t-photos)
 
-[v-photos](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/v-photos)
+# [v-photos](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/v-photos)
 
-[video](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/video)
+# [video](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/video)
