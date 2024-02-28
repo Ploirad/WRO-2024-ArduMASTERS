@@ -12,10 +12,11 @@ GPIO.setup(servo_pin, GPIO.OUT)
 pwm = GPIO.PWM(servo_pin, 50) # Frecuencia de PWM: 50Hz (estándar para servos)
 
 # Inicializa el servo en su posición neutra (90 grados)
-pwm.start(8) # Puede necesitar ajustar este valor según tu servo
-
+pwm.start(7) # Puede necesitar ajustar este valor según tu servo
+#6=Atras;  8=Alante;  =stop
+#2.5=izq; 7.5; 12,5=der
 # Espera un tiempo para que el servo se mueva a la posición inicial
-time.sleep(10)
+time.sleep(1)
 
 # Detén el servo (opcional)
 pwm.stop()
