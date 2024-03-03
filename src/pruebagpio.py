@@ -1,4 +1,3 @@
-#
 import RPi.GPIO as GPIO
 import time
 
@@ -42,7 +41,7 @@ time.sleep(4)
 #Reinicio
 pwm_d.start(6)
 pwm_t.start(7)
-time.sleep(4)
+time.sleep(3)
 
 # Detén el servo (opcional)
 pwm_d.stop()
