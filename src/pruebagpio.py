@@ -1,14 +1,12 @@
 import RPi.GPIO as GPIO
-
-# Limpia los pines GPIO
-GPIO.cleanup()
+import time
 
 # Define el pin GPIO que utilizarás para controlar el servo
 servo_pin_direccion = 18
 servo_pin_traccion = 17
 
 valor_d = 7.5 #2.5=izq; 7.5=centro; 12.5=der
-valor_t = 0   #6=Atras;  8=Alante;  =stop
+valor_t = 7   #6=Atras;  8=Alante;  7=stop
 
 # Configura el modo de los pines GPIO
 GPIO.setmode(GPIO.BCM)
@@ -20,19 +18,30 @@ pwm_d = GPIO.PWM(servo_pin_direccion, 50) # Frecuencia de PWM: 50Hz (estándar p
 pwm_t = GPIO.PWM(servo_pin_traccion, 50) # Frecuencia de PWM: 50Hz (estándar para servos)
 
 valor_d = 7.5
-valor_t = 8
-pwm_d.start(valor_d)
-pwm_t.start(valor_t)
-  
-valor_d = 2.5
-valor_t = 6
+valor_t = 12.5
 pwm_d.start(valor_d)
 pwm_t.start(valor_t)
 
-valor_d = 12.5
-valor_t = 8
+time.sleep(4)
+
+valor_d = 2.5
+valor_t = 2.5
 pwm_d.start(valor_d)
 pwm_t.start(valor_t)
+
+time.sleep(4)
+
+valor_d = 12.5
+valor_t = 12.5
+pwm_d.start(valor_d)
+pwm_t.start(valor_t)
+
+time.sleep(4)
+
+#Reinicio
+pwm_d.start(6)
+pwm_t.start(7)
+time.sleep(4)
 
 # Detén el servo (opcional)
 pwm_d.stop()
