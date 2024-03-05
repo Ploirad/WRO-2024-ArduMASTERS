@@ -95,6 +95,7 @@ while True:
         empezado = 1
     else:
         pwm_t.start(valor_t)
+        pwm_d.start(valor_d)
     
         # Actualiza las distancias
         update_distances()
