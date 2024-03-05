@@ -119,5 +119,5 @@ while True:
         print(f"Distancia hacia atras: {distancia_atras} cm")
         print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
         print(f"Distancia hacia derecha: {distancia_derecha} cm")
-
+        print("")
 GPIO.cleanup()
