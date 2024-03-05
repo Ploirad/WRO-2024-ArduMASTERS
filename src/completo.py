@@ -114,7 +114,7 @@ while True:
                 break
         else:
             valor_t = 12.5
-            valor_d = 7
+            valor_d = 6.5
         # Muestra las distancias
         print(f"Distancia hacia delante: {distancia_delante} cm")
         print(f"Distancia hacia atras: {distancia_atras} cm")
