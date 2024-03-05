@@ -99,14 +99,14 @@ while True:
         # Actualiza las distancias
         update_distances()
     
-        if distancia_delante < : 
-            if distancia_derecha > :
+        if distancia_delante < 15: 
+            if distancia_derecha > 20:
                 valor_t = 12.5
                 valor_d = 12.5
-            else if distancia_izquierda > :
+            else if distancia_izquierda > 20:
                 valor_t = 12.5
                 valor_d = 2.5
-            else if distancia_atras > :
+            else if distancia_atras > 30:
                 valor_d = 7.5
                 valor_t = 2.5
             else:
