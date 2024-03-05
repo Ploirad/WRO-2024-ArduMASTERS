@@ -10,8 +10,9 @@ TRIG_PIN_IZQUIERDA = 22
 ECHO_PIN_IZQUIERDA = 10
 TRIG_PIN_DERECHA = 5
 ECHO_PIN_DERECHA = 6
-servo_pin_direccion = 18
-servo_pin_traccion = 17
+servo_pin_direccion = 2
+servo_pin_traccion = 3
+button_pin = 9
 
 # Define variables
 empezado = 0
@@ -36,6 +37,7 @@ GPIO.setup(TRIG_PIN_IZQUIERDA, GPIO.OUT)
 GPIO.setup(ECHO_PIN_IZQUIERDA, GPIO.IN)
 GPIO.setup(TRIG_PIN_DERECHA, GPIO.OUT)
 GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN)
+GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #Iniciar servos
 pwm_d = GPIO.PWM(servo_pin_direccion, 50) # Frecuencia de PWM: 50Hz (estándar para servos)
@@ -60,8 +62,8 @@ def get_distance(trig_pin, echo_pin):
     # Calcula la distancia en centímetros
     distance = pulse_duration * 17150
 
-    # Redondea la distancia a dos decimales
-    distance = round(distance, 2)
+    # Redondea la distancia a tres decimales
+    distance = round(distance, 3)
 
     return distance
 
@@ -81,36 +83,41 @@ def primeras_medidas_paredes():
     distancia_comienzo_izquierda = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
     distancia_comienzo_derecha = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
 
-if __name__ == '__main__':
-    try:
-        # Configura los pines GPIO
-        setup()
-
-        while True:
-            if empezado == 0:
-                primeras_medidas_paredes()
-                empezado = 1
-            else:
+while True:
+    # Lee el estado del botón
+    button_state = GPIO.input(button_pin)
+    # Si el botón está presionado (estado HIGH)
+    if button_state == GPIO.HIGH:
+        print("Botón presionado")
+    
+    if empezado == 0:
+        primeras_medidas_paredes()
+        empezado = 1
+    else:
+        pwm_t.start(valor_t)
+    
+        # Actualiza las distancias
+        update_distances()
+    
+        if distancia_delante < : 
+            if distancia_derecha > :
                 valor_t = 12.5
-                pwm_t.start(valor_t)
-                
-                # Actualiza las distancias
-                update_distances()
+                valor_d = 12.5
+            else if distancia_izquierda > :
+                valor_t = 12.5
+                valor_d = 2.5
+            else if distancia_atras > :
+                valor_d = 7.5
+                valor_t = 2.5
+            else:
+                break
+        else:
+            valor_t = 12.5
+            valor_d = 7.5
+        # Muestra las distancias
+        print(f"Distancia hacia delante: {distancia_delante} cm")
+        print(f"Distancia hacia atras: {distancia_atras} cm")
+        print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
+        print(f"Distancia hacia derecha: {distancia_derecha} cm")
 
-                #if distancia_delante 
-                
-                # Muestra las distancias
-                print(f"Distancia hacia delante: {distancia_delante} cm")
-                print(f"Distancia hacia atras: {distancia_atras} cm")
-                print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
-                print(f"Distancia hacia derecha: {distancia_derecha} cm")
-        
-                time.sleep(1)
-
-    except KeyboardInterrupt:
-        # Maneja la interrupción del teclado
-        print("Programa interrumpido por el usuario")
-
-    finally:
-        # Limpia los pines GPIO
-        cleanup()
+GPIO.cleanup()
