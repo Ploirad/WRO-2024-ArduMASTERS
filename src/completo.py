@@ -24,7 +24,6 @@ distancia_comienzo_derecha = 0
 distancia_comienzo_izquierda = 0
 valor_d = 7.5 #Direccion 2.5=izq; 7.5=centro; 12.5=der
 valor_t = 7   #Traccion 2.5=Atras;  12.5=Alante;  7=stop
-encendido = 0
 
 # Configura los pines GPIO
 GPIO.setmode(GPIO.BCM)
@@ -75,46 +74,31 @@ def update_distances():
     distancia_izquierda = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
     distancia_derecha = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
 
-def cleanup():
-    # Limpia los pines GPIO
-    GPIO.cleanup()
-
-def primeras_medidas_paredes():
-    global distancia_comienzo_izquierda, distancia_comienzo_derecha
-    distancia_comienzo_izquierda = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
-    distancia_comienzo_derecha = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
-
 while True:
     # Lee el estado del botón
     button_state = GPIO.input(button_pin)
+    
     # Si el botón está presionado (estado HIGH)
     if button_state == GPIO.HIGH:
         print("Botón presionado")
-        #encendido = 1
-
-    #if encendido == 1:
-    #if empezado == 0:
-     #   primeras_medidas_paredes()
-      #  empezado = 1
-    #else:
-        # Actualiza las distancias
+    
+    # Actualiza las distancias
     update_distances()
 
     if distancia_delante < 15: 
         if distancia_derecha > 20:
-            valor_t =2.5
+            valor_t = 12.5
             valor_d = 11.5
         elif distancia_izquierda > 20:
-            valor_t = 2.5
+            valor_t = 12.5
             valor_d = 3.5
         elif distancia_atras > 30:
+            valor_t = 2.5
             valor_d = 7.5
-            valor_t = 12.5
         else:
-            encendido = 0
             break
     else:
-        valor_t = 2.5
+        valor_t = 12.5
         valor_d = 7.5
     # Muestra las distancias
     print(f"Distancia hacia delante: {distancia_delante} cm")
