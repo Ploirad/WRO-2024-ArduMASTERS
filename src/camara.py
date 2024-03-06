@@ -3,7 +3,7 @@ import picamera
 def record_video():
     with picamera.PiCamera() as camera:
         camera.resolution = (640, 480)
-        camera.framerate = 30
+        camera.framerate = 20
         camera.start_preview()
         # Allow camera warm-up time
         camera.wait_recording(2)
