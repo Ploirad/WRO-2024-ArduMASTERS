@@ -108,4 +108,8 @@ while True:
     print("")
     pwm_t.start(valor_t)
     pwm_d.start(valor_d)
+    if valor_t > 11:
+        print("avanti")
+    elif valor_t < 3:
+        print("back")
 GPIO.cleanup()
