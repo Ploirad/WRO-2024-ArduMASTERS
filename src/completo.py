@@ -102,19 +102,19 @@ while True:
 
     if distancia_delante < 15: 
         if distancia_derecha > 20:
-            valor_t = 12.5
+            valor_t =2.5
             valor_d = 11.5
         elif distancia_izquierda > 20:
-            valor_t = 12.5
+            valor_t = 2.5
             valor_d = 3.5
         elif distancia_atras > 30:
             valor_d = 7.5
-            valor_t = 2.5
+            valor_t = 12.5
         else:
             encendido = 0
             break
     else:
-        valor_t = 12.5
+        valor_t = 2.5
         valor_d = 7.5
     # Muestra las distancias
     print(f"Distancia hacia delante: {distancia_delante} cm")
