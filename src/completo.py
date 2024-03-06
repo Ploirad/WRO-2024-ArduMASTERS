@@ -112,4 +112,12 @@ while True:
         print("avanti")
     elif valor_t < 3:
         print("back")
+    else:
+        print("stop")
+    if valor_d > 11:
+        print("derecha")
+    elif valor_d < 4:
+        print("izquierda")
+    else:
+        print("centro")
 GPIO.cleanup()
