@@ -9,7 +9,7 @@ def record_video():
         camera.wait_recording(2)
 
         # Record for 30 seconds
-        camera.start_recording('video.h264')
+        camera.start_recording('video.mjpeg', format='mjpeg')
         camera.wait_recording(30)
         camera.stop_recording()
 
