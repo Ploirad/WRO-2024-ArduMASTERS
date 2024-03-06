@@ -97,7 +97,7 @@ while True:
             valor_d = 7.5
         else:
             break
-    else:
+    elif distancia_delante > 14:
         valor_t = 12.5
         valor_d = 7.5
     # Muestra las distancias
