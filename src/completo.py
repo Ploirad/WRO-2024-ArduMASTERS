@@ -100,6 +100,8 @@ while True:
     elif distancia_delante > 14:
         valor_t = 12.5
         valor_d = 7.5
+    else:
+        
     # Muestra las distancias
     print(f"Distancia hacia delante: {distancia_delante} cm")
     print(f"Distancia hacia atras: {distancia_atras} cm")
