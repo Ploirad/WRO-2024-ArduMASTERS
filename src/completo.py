@@ -23,7 +23,7 @@ distancia_derecha = 0
 distancia_comienzo_derecha = 0
 distancia_comienzo_izquierda = 0
 valor_d = 7.5 #Direccion 2.5=izq; 7.5=centro; 12.5=der
-valor_t = 7   #Traccion 6=Atras;  8=Alante;  7=stop
+valor_t = 7   #Traccion 2.5=Atras;  12.5=Alante;  7=stop
 encendido = 0
 
 # Configura los pines GPIO
