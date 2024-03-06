@@ -24,6 +24,7 @@ distancia_comienzo_derecha = 0
 distancia_comienzo_izquierda = 0
 valor_d = 7.5 #Direccion 2.5=izq; 7.5=centro; 12.5=der
 valor_t = 7   #Traccion 6=Atras;  8=Alante;  7=stop
+encendido = 0
 
 # Configura los pines GPIO
 GPIO.setmode(GPIO.BCM)
@@ -89,36 +90,39 @@ while True:
     # Si el botón está presionado (estado HIGH)
     if button_state == GPIO.HIGH:
         print("Botón presionado")
-    
-    if empezado == 0:
-        primeras_medidas_paredes()
-        empezado = 1
-    else:
-        pwm_t.start(valor_t)
-        pwm_d.start(valor_d)
-    
-        # Actualiza las distancias
-        update_distances()
-    
-        if distancia_delante < 15: 
-            if distancia_derecha > 20:
-                valor_t = 12.5
-                valor_d = 12.5
-            elif distancia_izquierda > 20:
-                valor_t = 12.5
-                valor_d = 2.5
-            elif distancia_atras > 30:
-                valor_d = 7.5
-                valor_t = 2.5
-            else:
-                break
+        encendido = 1
+
+    if encendio == 1:
+        if empezado == 0:
+            primeras_medidas_paredes()
+            empezado = 1
         else:
-            valor_t = 12.5
-            valor_d = 6.5
-        # Muestra las distancias
-        print(f"Distancia hacia delante: {distancia_delante} cm")
-        print(f"Distancia hacia atras: {distancia_atras} cm")
-        print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
-        print(f"Distancia hacia derecha: {distancia_derecha} cm")
-        print("")
+            pwm_t.start(valor_t)
+            pwm_d.start(valor_d)
+        
+            # Actualiza las distancias
+            update_distances()
+        
+            if distancia_delante < 15: 
+                if distancia_derecha > 20:
+                    valor_t = 12.5
+                    valor_d = 11.5
+                elif distancia_izquierda > 20:
+                    valor_t = 12.5
+                    valor_d = 3.5
+                elif distancia_atras > 30:
+                    valor_d = 7.5
+                    valor_t = 2.5
+                else:
+                    encendido = 0
+                    break
+            else:
+                valor_t = 12.5
+                valor_d = 6.5
+            # Muestra las distancias
+            print(f"Distancia hacia delante: {distancia_delante} cm")
+            print(f"Distancia hacia atras: {distancia_atras} cm")
+            print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
+            print(f"Distancia hacia derecha: {distancia_derecha} cm")
+            print("")
 GPIO.cleanup()
