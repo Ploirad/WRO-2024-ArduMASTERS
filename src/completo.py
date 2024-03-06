@@ -1,8 +1,6 @@
 import RPi.GPIO as GPIO
 import time
 
-GPIO.cleanup()
-
 # Define los pines
 TRIG_PIN_DELANTE = 23
 ECHO_PIN_DELANTE = 24
