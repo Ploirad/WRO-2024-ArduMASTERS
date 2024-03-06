@@ -1,19 +1,17 @@
 import picamera
 
-# Set up the camera
-camera = picamera.PiCamera()
-camera.resolution = (1024, 768)
-camera.framerate = 30
+def record_video():
+    with picamera.PiCamera() as camera:
+        camera.resolution = (1024, 768)
+        camera.framerate = 30
+        camera.start_preview()
+        # Allow camera warm-up time
+        camera.wait_recording(2)
 
-# Set up the video recording
-start_time = time.time()
-output = '/home/pi/video.h264'
-camera.start_recording(output, format='h264')
+        # Record for 30 seconds
+        camera.start_recording('video.h264')
+        camera.wait_recording(30)
+        camera.stop_recording()
 
-# Wait for 30 seconds
-while time.time() - start_time < 30:
-    pass
-
-# Stop recording and release the camera
-camera.stop_recording()
-camera.release()
+if __name__ == '__main__':
+    record_video()
