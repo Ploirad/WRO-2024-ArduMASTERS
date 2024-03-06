@@ -92,7 +92,7 @@ while True:
         print("Botón presionado")
         encendido = 1
 
-    if encendio == 1:
+    if encendido == 1:
         if empezado == 0:
             primeras_medidas_paredes()
             empezado = 1
