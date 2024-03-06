@@ -90,39 +90,38 @@ while True:
     # Si el botón está presionado (estado HIGH)
     if button_state == GPIO.HIGH:
         print("Botón presionado")
-        encendido = 1
+        #encendido = 1
 
-    if encendido == 1:
-        if empezado == 0:
-            primeras_medidas_paredes()
-            empezado = 1
+    #if encendido == 1:
+    #if empezado == 0:
+     #   primeras_medidas_paredes()
+      #  empezado = 1
+    #else:
+        # Actualiza las distancias
+    update_distances()
+
+    if distancia_delante < 15: 
+        if distancia_derecha > 20:
+            valor_t = 12.5
+            valor_d = 11.5
+        elif distancia_izquierda > 20:
+            valor_t = 12.5
+            valor_d = 3.5
+        elif distancia_atras > 30:
+            valor_d = 7.5
+            valor_t = 2.5
         else:
-            pwm_t.start(valor_t)
-            pwm_d.start(valor_d)
-        
-            # Actualiza las distancias
-            update_distances()
-        
-            if distancia_delante < 15: 
-                if distancia_derecha > 20:
-                    valor_t = 12.5
-                    valor_d = 11.5
-                elif distancia_izquierda > 20:
-                    valor_t = 12.5
-                    valor_d = 3.5
-                elif distancia_atras > 30:
-                    valor_d = 7.5
-                    valor_t = 2.5
-                else:
-                    encendido = 0
-                    break
-            else:
-                valor_t = 12.5
-                valor_d = 7.5
-            # Muestra las distancias
-            print(f"Distancia hacia delante: {distancia_delante} cm")
-            print(f"Distancia hacia atras: {distancia_atras} cm")
-            print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
-            print(f"Distancia hacia derecha: {distancia_derecha} cm")
-            print("")
+            encendido = 0
+            break
+    else:
+        valor_t = 12.5
+        valor_d = 7.5
+    # Muestra las distancias
+    print(f"Distancia hacia delante: {distancia_delante} cm")
+    print(f"Distancia hacia atras: {distancia_atras} cm")
+    print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
+    print(f"Distancia hacia derecha: {distancia_derecha} cm")
+    print("")
+    pwm_t.start(valor_t)
+    pwm_d.start(valor_d)
 GPIO.cleanup()
