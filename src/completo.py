@@ -24,6 +24,13 @@ distancia_comienzo_derecha = 0
 distancia_comienzo_izquierda = 0
 valor_d = 7.5 #Direccion 2.5=izq; 7.5=centro; 12.5=der
 valor_t = 7   #Traccion 2.5=Atras;  12.5=Alante;  7=stop
+comenzar = 0
+DISTANCIA_de_ACCION = {"MENOR QUE": 15, "MAYOR QUE": 14}
+TAvance = 12.5
+TAtras = 2.5
+GDer = 3.5
+GIzq = 11.5
+GCent = 6
 
 # Configura los pines GPIO
 GPIO.setmode(GPIO.BCM)
@@ -74,56 +81,108 @@ def update_distances():
     distancia_izquierda = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
     distancia_derecha = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
 
-try:
+def first_walls_distances():
+    global distancia_comienzo_derecha, distancia_comieno_izuierda
+    distancia_comienzo_derecha = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_IZQUIERDA)
+    distancia_comienzo_izuierda = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
+
+def change_for_no_mobility():
+    valor_t = TAtras
+    valor_d = GCent
     while True:
-        # Lee el estado del botón
-        button_state = GPIO.input(button_pin)
-        
-        # Si el botón está presionado (estado HIGH)
-        if button_state == GPIO.HIGH:
-            print("Botón presionado")
-        
-        # Actualiza las distancias
-        update_distances()
-    
-        if distancia_delante < 15: 
-            if distancia_derecha > 20:
-                valor_t = 12.5
-                valor_d = 3.5
-            elif distancia_izquierda > 20:
-                valor_t = 12.5
-                valor_d = 11.5
-            elif distancia_atras > 30:
-                valor_t = 2.5
-                valor_d = 6
-            else:
-                break
-        elif distancia_delante > 14:
-            valor_t = 12.5
-            valor_d = 6
-        else:
-            valor_t = 12.5
-            valor_d = 6
-        # Muestra las distancias
-        print(f"Distancia hacia delante: {distancia_delante} cm")
-        print(f"Distancia hacia atras: {distancia_atras} cm")
-        print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
-        print(f"Distancia hacia derecha: {distancia_derecha} cm")
-        print("")
         pwm_t.start(valor_t)
         pwm_d.start(valor_d)
-        if valor_t > 11:
-            print("avanti")
-        elif valor_t < 3:
-            print("back")
+        if distancia_atras > DISTANCIA_de_ACCION["MAYOR QUE]:
+            if distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"]:
+                #DERECHA
+                valor_t = TAtras
+                valor_d = GDer
+            elif distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"]:
+                #IZQUIERDA
+                valor_t = TAtras
+                valor_d = GIzq
+            elif distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
+                #ATRAS
+                change_for_no_mobility()
+        pwm_t.start(valor_t)
+        pwm_d.start(valor_d)
         else:
-            print("stop")
-        if valor_d > 11:
-            print("derecha")
-        elif valor_d < 4:
-            print("izquierda")
-        else:
-            print("centro")
+            comenzar = 0
+            break
+    
+try:
+    while True:
+        #TOMAR MEDIDAS DE LAS PAREDES INICIALES
+        if comenzar < 1:
+            first_walls_distances()
+
+        #TOMAR VALOR DEL BOTON
+        button_state = GPIO.input(button_pin)
+
+        #COMPROBAR EL BOTON
+        if button_state == GPIO.HIGH:
+            print("Botón presionado")
+            comenzar = 1
+
+        #EMPEZAR CODIGO (ARRANCAR)
+        while comenzar == 1:        
+            # Actualiza las distancias
+            update_distances()
+
+            if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"]:
+                #DERECHA
+                valor_t = TAvance
+                valor_d = GDer
+            elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"]:
+                #IZQUIERDA
+                valor_t = TAvance
+                valor_d = GIzq
+            elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
+                #ATRAS
+                change_for_no_mobility()
+            elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
+                #AVANCE
+                valor_t = TAvance
+                valor_d = GCent
+                
+            if distancia_derecha < distancia_comienzo_derecha or distancia_izquierda > distancia_comienzo_izquierda:
+                #A LA IZQUIERDA
+                valor_t = TAvance
+                valor_d = GIzq
+            elif distancia_derecha > distancia_comienzo_derecha or distancia_izquierda < distancia_comienzo_izquierda:
+                #A LA DERECHA
+                valor_t = TAvance
+                valor_d = GDer
+            elif distancia_derecha == distancia_comienzo_derecha or distancia_izquierda == distancia_comienzo_izquierda:
+                #NADA/ALANTE
+                valor_t = TAvance
+                valor_d = GCent
+            
+            pwm_t.start(valor_t)
+            pwm_d.start(valor_d)
+
+            #INNECESARIO {
+            # Muestra las distancias
+            print(f"Distancia hacia delante: {distancia_delante} cm")
+            print(f"Distancia hacia atras: {distancia_atras} cm")
+            print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
+            print(f"Distancia hacia derecha: {distancia_derecha} cm")
+            print("")
+            
+            if valor_t > 11:
+                print("avanti")
+            elif valor_t < 3:
+                print("back")
+            else:
+                print("stop")
+            if valor_d > 11:
+                print("derecha")
+            elif valor_d < 4:
+                print("izquierda")
+            else:
+                print("centro")
+            # }
+#SI SE CANCELA PERO TAMBIÉN ES INNECESARIO
 except KeyboardInterrupt:
     GPIO.cleanup()
-
+    
