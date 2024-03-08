@@ -74,55 +74,56 @@ def update_distances():
     distancia_izquierda = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
     distancia_derecha = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
 
-while True:
-    # Lee el estado del botón
-    button_state = GPIO.input(button_pin)
+try:
+    while True:
+        # Lee el estado del botón
+        button_state = GPIO.input(button_pin)
+        
+        # Si el botón está presionado (estado HIGH)
+        if button_state == GPIO.HIGH:
+            print("Botón presionado")
+        
+        # Actualiza las distancias
+        update_distances()
     
-    # Si el botón está presionado (estado HIGH)
-    if button_state == GPIO.HIGH:
-        print("Botón presionado")
-    
-    # Actualiza las distancias
-    update_distances()
-
-    if distancia_delante < 15: 
-        if distancia_derecha > 20:
+        if distancia_delante < 15: 
+            if distancia_derecha > 20:
+                valor_t = 12.5
+                valor_d = 11.5
+            elif distancia_izquierda > 20:
+                valor_t = 12.5
+                valor_d = 3.5
+            elif distancia_atras > 30:
+                valor_t = 2.5
+                valor_d = 7.5
+            else:
+                break
+        elif distancia_delante > 14:
             valor_t = 12.5
-            valor_d = 11.5
-        elif distancia_izquierda > 20:
-            valor_t = 12.5
-            valor_d = 3.5
-        elif distancia_atras > 30:
-            valor_t = 2.5
             valor_d = 7.5
         else:
-            break
-    elif distancia_delante > 14:
-        valor_t = 12.5
-        valor_d = 7.5
-    else:
-        valor_t = 12.5
-        valor_d = 7.5
-    # Muestra las distancias
-    print(f"Distancia hacia delante: {distancia_delante} cm")
-    print(f"Distancia hacia atras: {distancia_atras} cm")
-    print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
-    print(f"Distancia hacia derecha: {distancia_derecha} cm")
-    print("")
-    pwm_t.start(valor_t)
-    pwm_d.start(valor_d)
-    if valor_t > 11:
-        print("avanti")
-    elif valor_t < 3:
-        print("back")
-    else:
-        print("stop")
-    if valor_d > 11:
-        print("derecha")
-    elif valor_d < 4:
-        print("izquierda")
-    else:
-        print("centro")
-    if KeyboardInterrupt:
-        break
+            valor_t = 12.5
+            valor_d = 7.5
+        # Muestra las distancias
+        print(f"Distancia hacia delante: {distancia_delante} cm")
+        print(f"Distancia hacia atras: {distancia_atras} cm")
+        print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
+        print(f"Distancia hacia derecha: {distancia_derecha} cm")
+        print("")
+        pwm_t.start(valor_t)
+        pwm_d.start(valor_d)
+        if valor_t > 11:
+            print("avanti")
+        elif valor_t < 3:
+            print("back")
+        else:
+            print("stop")
+        if valor_d > 11:
+            print("derecha")
+        elif valor_d < 4:
+            print("izquierda")
+        else:
+            print("centro")
+except KeyboardInterrupt:
+    break
 GPIO.cleanup()
