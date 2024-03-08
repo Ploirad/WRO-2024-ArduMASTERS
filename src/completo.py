@@ -123,4 +123,6 @@ while True:
         print("izquierda")
     else:
         print("centro")
+    if keyboard_interrupt:
+        break
 GPIO.cleanup()
