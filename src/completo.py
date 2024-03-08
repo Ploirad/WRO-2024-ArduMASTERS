@@ -125,5 +125,4 @@ try:
         else:
             print("centro")
 except KeyboardInterrupt:
-    break
-GPIO.cleanup()
+    GPIO.cleanup()
