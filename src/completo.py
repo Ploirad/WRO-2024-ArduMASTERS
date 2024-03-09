@@ -82,6 +82,8 @@ def update_distances():
 
 try:
     while True:
+        pwm_t.start(valor_t)
+        pwm_d.start(valor_d)
         # Lee el estado del botón
         button_state = GPIO.input(button_pin)
         
