@@ -92,7 +92,7 @@ def change_for_no_mobility():
     while True:
         pwm_t.start(valor_t)
         pwm_d.start(valor_d)
-        if distancia_atras > DISTANCIA_de_ACCION["MAYOR QUE]:
+        if distancia_atras > DISTANCIA_de_ACCION["MAYOR QUE"]:
             if distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"]:
                 #DERECHA
                 valor_t = TAtras
