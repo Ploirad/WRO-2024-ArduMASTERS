@@ -24,15 +24,6 @@ distancia_comienzo_derecha = 0
 distancia_comienzo_izquierda = 0
 valor_d = 7.5 #Direccion 2.5=izq; 7.5=centro; 12.5=der
 valor_t = 7   #Traccion 2.5=Atras;  12.5=Alante;  7=stop
-comenzar = 0
-DISTANCIA_de_ACCION = {"MENOR QUE": 15, "MAYOR QUE": 14}
-TAvance = 12.5
-TAtras = 2.5
-GDer = 3.5
-GIzq = 11.5
-GCent = 6
-pulse_end = 0
-pulse_start = 0
 
 # Configura los pines GPIO
 GPIO.setmode(GPIO.BCM)
@@ -60,12 +51,10 @@ def get_distance(trig_pin, echo_pin):
 
     # Mide el tiempo transcurrido del pulso de eco
     while GPIO.input(echo_pin) == 0:
-        global pulse_start 
         pulse_start = time.time()
 
     while GPIO.input(echo_pin) == 1:
-        global pulse_end 
-        pusle_end = time.time()
+        pulse_end = time.time()
 
     # Calcula la duración del pulso de eco
     pulse_duration = pulse_end - pulse_start
@@ -85,79 +74,44 @@ def update_distances():
     distancia_izquierda = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
     distancia_derecha = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
 
-def first_walls_distances():
-    global distancia_comienzo_derecha, distancia_comieno_izuierda
-    distancia_comienzo_derecha = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_IZQUIERDA)
-    distancia_comienzo_izuierda = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
-
-def change_for_no_mobility():
-    valor_t = TAtras
-    valor_d = GCent
-    while True:
-        pwm_t.start(valor_t)
-        pwm_d.start(valor_d)
-        if distancia_atras > DISTANCIA_de_ACCION["MAYOR QUE"]:
-            if distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                #DERECHA
-                valor_t = TAtras
-                valor_d = GDer
-            elif distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                #IZQUIERDA
-                valor_t = TAtras
-                valor_d = GIzq
-            elif distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
-                #ATRAS
-                change_for_no_mobility()
-        else:
-            comenzar = 0
-            break
-        pwm_t.start(valor_t)
-        pwm_d.start(valor_d)
-    
 try:
     while True:
-        #TOMAR MEDIDAS DE LAS PAREDES INICIALES
-        #if comenzar < 1:
-        first_walls_distances()
-
-        #TOMAR VALOR DEL BOTON
+        # Lee el estado del botón
         button_state = GPIO.input(button_pin)
-
-        #COMPROBAR EL BOTON
+        
+        # Si el botón está presionado (estado HIGH)
         if button_state == GPIO.HIGH:
             print("Botón presionado")
         
-        #EMPEZAR CODIGO (ARRANCAR)
         # Actualiza las distancias
         update_distances()
-
-        if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"]:
-            #DERECHA
-            valor_t = TAvance
-            valor_d = GDer
-        elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"]:
-            #IZQUIERDA
-            valor_t = TAvance
-            valor_d = GIzq
-        elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
-            #ATRAS
-            change_for_no_mobility()
-        elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
-            #AVANCE
-            valor_t = TAvance
-            valor_d = GCent
-                    
-        pwm_t.start(valor_t)
-        pwm_d.start(valor_d)
-
-        #INNECESARIO {
+    
+        if distancia_delante < 15: 
+            if distancia_derecha > 20:
+                valor_t = 2.5
+                valor_d = 3.5
+            elif distancia_izquierda > 20:
+                valor_t = 2.5
+                valor_d = 11.5
+            elif distancia_atras > 30:
+                valor_t = 12.5
+                valor_d = 6
+            else:
+                break
+        elif distancia_delante > 14:
+            valor_t = 2.5
+            valor_d = 6
+        else:
+            valor_t = 2.5
+            valor_d = 6
         # Muestra las distancias
         print(f"Distancia hacia delante: {distancia_delante} cm")
         print(f"Distancia hacia atras: {distancia_atras} cm")
         print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
         print(f"Distancia hacia derecha: {distancia_derecha} cm")
         print("")
-        
+        pwm_t.start(valor_t)
+        pwm_d.start(valor_d)
         if valor_t > 11:
             print("avanti")
         elif valor_t < 3:
@@ -170,7 +124,5 @@ try:
             print("izquierda")
         else:
             print("centro")
-        # }
-#SI SE CANCELA PERO TAMBIÉN ES INNECESARIO
 except KeyboardInterrupt:
     GPIO.cleanup()
