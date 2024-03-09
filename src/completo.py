@@ -31,6 +31,8 @@ TAtras = 2.5
 GDer = 3.5
 GIzq = 11.5
 GCent = 6
+pulse_end = 0
+pulse_start = 0
 
 # Configura los pines GPIO
 GPIO.setmode(GPIO.BCM)
