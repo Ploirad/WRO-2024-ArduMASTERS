@@ -104,11 +104,11 @@ def change_for_no_mobility():
             elif distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
                 #ATRAS
                 change_for_no_mobility()
-        pwm_t.start(valor_t)
-        pwm_d.start(valor_d)
         else:
             comenzar = 0
             break
+        pwm_t.start(valor_t)
+        pwm_d.start(valor_d)
     
 try:
     while True:
@@ -185,4 +185,3 @@ try:
 #SI SE CANCELA PERO TAMBIÉN ES INNECESARIO
 except KeyboardInterrupt:
     GPIO.cleanup()
-    
