@@ -24,6 +24,12 @@ distancia_comienzo_derecha = 0
 distancia_comienzo_izquierda = 0
 valor_d = 7.5 #Direccion 2.5=izq; 7.5=centro; 12.5=der
 valor_t = 7   #Traccion 2.5=Atras;  12.5=Alante;  7=stop
+DISTANCIA_de_ACCION = {"MENOR QUE": 15, "MAYOR QUE": 14}
+TAvance = 12.5
+TAtras = 2.5
+GDer = 3.5
+GIzq = 11.5
+GCent = 6
 
 # Configura los pines GPIO
 GPIO.setmode(GPIO.BCM)
@@ -85,25 +91,23 @@ try:
         
         # Actualiza las distancias
         update_distances()
-    
-        if distancia_delante < 15: 
-            if distancia_derecha > 20:
-                valor_t = 2.5
-                valor_d = 3.5
-            elif distancia_izquierda > 20:
-                valor_t = 2.5
-                valor_d = 11.5
-            elif distancia_atras > 30:
-                valor_t = 12.5
-                valor_d = 6
-            else:
-                break
-        elif distancia_delante > 14:
-            valor_t = 2.5
-            valor_d = 6
-        else:
-            valor_t = 2.5
-            valor_d = 6
+
+        if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"]:
+            #DERECHA
+            valor_t = TAvance
+            valor_d = GDer
+        elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"]:
+            #IZQUIERDA
+            valor_t = TAvance
+            valor_d = GIzq
+        elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
+            #ATRAS
+            change_for_no_mobility()
+        elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
+            #AVANCE
+            valor_t = TAvance
+            valor_d = GCent
+        
         # Muestra las distancias
         print(f"Distancia hacia delante: {distancia_delante} cm")
         print(f"Distancia hacia atras: {distancia_atras} cm")
