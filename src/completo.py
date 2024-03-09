@@ -115,8 +115,8 @@ def change_for_no_mobility():
 try:
     while True:
         #TOMAR MEDIDAS DE LAS PAREDES INICIALES
-        if comenzar < 1:
-            first_walls_distances()
+        #if comenzar < 1:
+        first_walls_distances()
 
         #TOMAR VALOR DEL BOTON
         button_state = GPIO.input(button_pin)
@@ -124,11 +124,8 @@ try:
         #COMPROBAR EL BOTON
         if button_state == GPIO.HIGH:
             print("Botón presionado")
-            comenzar = 1
-
+        
         #EMPEZAR CODIGO (ARRANCAR)
-#       while True:
-#            if comenzar == 1:
         # Actualiza las distancias
         update_distances()
 
