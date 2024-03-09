@@ -126,7 +126,7 @@ try:
 
         #EMPEZAR CODIGO (ARRANCAR)
         while True:
-                if comenzar == 1:
+            if comenzar == 1:
                 # Actualiza las distancias
                 update_distances()
     
