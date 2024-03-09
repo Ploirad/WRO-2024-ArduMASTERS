@@ -125,64 +125,64 @@ try:
             comenzar = 1
 
         #EMPEZAR CODIGO (ARRANCAR)
-        while True:
-            if comenzar == 1:
-                # Actualiza las distancias
-                update_distances()
-    
-                if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                    #DERECHA
-                    valor_t = TAvance
-                    valor_d = GDer
-                elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                    #IZQUIERDA
-                    valor_t = TAvance
-                    valor_d = GIzq
-                elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
-                    #ATRAS
-                    change_for_no_mobility()
-                elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                    #AVANCE
-                    valor_t = TAvance
-                    valor_d = GCent
-                    
-                if distancia_derecha < distancia_comienzo_derecha or distancia_izquierda > distancia_comienzo_izquierda:
-                    #A LA IZQUIERDA
-                    valor_t = TAvance
-                    valor_d = GIzq
-                elif distancia_derecha > distancia_comienzo_derecha or distancia_izquierda < distancia_comienzo_izquierda:
-                    #A LA DERECHA
-                    valor_t = TAvance
-                    valor_d = GDer
-                elif distancia_derecha == distancia_comienzo_derecha or distancia_izquierda == distancia_comienzo_izquierda:
-                    #NADA/ALANTE
-                    valor_t = TAvance
-                    valor_d = GCent
-                
-                pwm_t.start(valor_t)
-                pwm_d.start(valor_d)
-    
-                #INNECESARIO {
-                # Muestra las distancias
-                print(f"Distancia hacia delante: {distancia_delante} cm")
-                print(f"Distancia hacia atras: {distancia_atras} cm")
-                print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
-                print(f"Distancia hacia derecha: {distancia_derecha} cm")
-                print("")
-                
-                if valor_t > 11:
-                    print("avanti")
-                elif valor_t < 3:
-                    print("back")
-                else:
-                    print("stop")
-                if valor_d > 11:
-                    print("derecha")
-                elif valor_d < 4:
-                    print("izquierda")
-                else:
-                    print("centro")
-                # }
+#       while True:
+#            if comenzar == 1:
+        # Actualiza las distancias
+        update_distances()
+
+        if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"]:
+            #DERECHA
+            valor_t = TAvance
+            valor_d = GDer
+        elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"]:
+            #IZQUIERDA
+            valor_t = TAvance
+            valor_d = GIzq
+        elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
+            #ATRAS
+            change_for_no_mobility()
+        elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
+            #AVANCE
+            valor_t = TAvance
+            valor_d = GCent
+            
+        if distancia_derecha < distancia_comienzo_derecha or distancia_izquierda > distancia_comienzo_izquierda:
+            #A LA IZQUIERDA
+            valor_t = TAvance
+            valor_d = GIzq
+        elif distancia_derecha > distancia_comienzo_derecha or distancia_izquierda < distancia_comienzo_izquierda:
+            #A LA DERECHA
+            valor_t = TAvance
+            valor_d = GDer
+        elif distancia_derecha == distancia_comienzo_derecha or distancia_izquierda == distancia_comienzo_izquierda:
+            #NADA/ALANTE
+            valor_t = TAvance
+            valor_d = GCent
+        
+        pwm_t.start(valor_t)
+        pwm_d.start(valor_d)
+
+        #INNECESARIO {
+        # Muestra las distancias
+        print(f"Distancia hacia delante: {distancia_delante} cm")
+        print(f"Distancia hacia atras: {distancia_atras} cm")
+        print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
+        print(f"Distancia hacia derecha: {distancia_derecha} cm")
+        print("")
+        
+        if valor_t > 11:
+            print("avanti")
+        elif valor_t < 3:
+            print("back")
+        else:
+            print("stop")
+        if valor_d > 11:
+            print("derecha")
+        elif valor_d < 4:
+            print("izquierda")
+        else:
+            print("centro")
+        # }
 #SI SE CANCELA PERO TAMBIÉN ES INNECESARIO
 except KeyboardInterrupt:
     GPIO.cleanup()
