@@ -80,30 +80,6 @@ def update_distances():
     distancia_izquierda = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
     distancia_derecha = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
 
-def change_for_no_mobility():
-    valor_t = TAtras
-    valor_d = GCent
-    while True:
-        pwm_t.start(valor_t)
-        pwm_d.start(valor_d)
-        if distancia_atras > DISTANCIA_de_ACCION["MAYOR QUE"]:
-            if distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                #DERECHA
-                valor_t = TAtras
-                valor_d = GDer
-            elif distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                #IZQUIERDA
-                valor_t = TAtras
-                valor_d = GIzq
-            elif distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
-                #ATRAS
-                change_for_no_mobility()
-        else:
-            comenzar = 0
-            break
-        pwm_t.start(valor_t)
-        pwm_d.start(valor_d)
-
 try:
     while True:
         # Lee el estado del botón
@@ -126,7 +102,8 @@ try:
             valor_d = GIzq
         elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
             #ATRAS
-            change_for_no_mobility()
+            valor_t = TAtras
+            valor_d = GCent
         elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
             #AVANCE
             valor_t = TAvance
