@@ -146,20 +146,7 @@ try:
             #AVANCE
             valor_t = TAvance
             valor_d = GCent
-            
-        if distancia_derecha < distancia_comienzo_derecha or distancia_izquierda > distancia_comienzo_izquierda:
-            #A LA IZQUIERDA
-            valor_t = TAvance
-            valor_d = GIzq
-        elif distancia_derecha > distancia_comienzo_derecha or distancia_izquierda < distancia_comienzo_izquierda:
-            #A LA DERECHA
-            valor_t = TAvance
-            valor_d = GDer
-        elif distancia_derecha == distancia_comienzo_derecha or distancia_izquierda == distancia_comienzo_izquierda:
-            #NADA/ALANTE
-            valor_t = TAvance
-            valor_d = GCent
-        
+                    
         pwm_t.start(valor_t)
         pwm_d.start(valor_d)
 
