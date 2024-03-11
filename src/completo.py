@@ -130,10 +130,11 @@ while True:
         else:
             print("stop")
         if valor_d > 11:
-            print("derecha")
+            print("izuierda")
         elif valor_d < 4:
-            print("izquierda")
+            print("derecha")
         else:
             print("centro")
     except KeyboardInterrupt:
         GPIO.cleanup()
+        
