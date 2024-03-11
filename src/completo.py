@@ -57,6 +57,7 @@ def get_distance(trig_pin, echo_pin):
     GPIO.output(trig_pin, False)
 
     pulse_end = 0
+    pulse_start = 0
     
     # Mide el tiempo transcurrido del pulso de eco
     while GPIO.input(echo_pin) == 0:
