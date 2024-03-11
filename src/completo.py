@@ -123,9 +123,9 @@ while True:
         print("")
         pwm_t.start(valor_t)
         pwm_d.start(valor_d)
-        if valor_t > 11:
+        if valor_t > 8:
             print("avanti")
-        elif valor_t < 3:
+        elif valor_t < 6:
             print("back")
         else:
             print("stop")
