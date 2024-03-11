@@ -84,8 +84,8 @@ def update_distances():
     distancia_izquierda = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
     distancia_derecha = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
 
-try:
-    while True:
+while True:
+    try:
         pwm_t.start(valor_t)
         pwm_d.start(valor_d)
         # Lee el estado del botón
@@ -135,5 +135,5 @@ try:
             print("izquierda")
         else:
             print("centro")
-except KeyboardInterrupt:
-    GPIO.cleanup()
+    except KeyboardInterrupt:
+        GPIO.cleanup()
