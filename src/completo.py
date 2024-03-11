@@ -25,8 +25,8 @@ distancia_comienzo_izquierda = 0
 valor_d = 7.5
 valor_t = 7   #Traccion 2.5=Atras;  12.5=Alante;  7=stop
 DISTANCIA_de_ACCION = {"MENOR QUE": 15, "MAYOR QUE": 14}
-TAvance = 3
-TAtras = 12
+TAvance = 12.5
+TAtras = 2.5
 GDer = 3.5
 GIzq = 11.5
 GCent = 6.2
