@@ -85,6 +85,7 @@ def update_distances():
     distancia_derecha = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
 
 def giro(valor_t, valor_d):
+    print("girando...")
     pwm_t.start(valor_t)
     pwm_d.start(valor_d)
     time.sleep(2)
@@ -100,6 +101,7 @@ def giro(valor_t, valor_d):
         pwm_d.start(GCent)
     valor_t = TAvance
     valor_d = GCent
+    print("...girado")
 
 while True:
     try:
@@ -133,6 +135,18 @@ while True:
             #AVANCE
             valor_t = TAvance
             valor_d = GCent
+
+        if distancia_derecha < 5:
+            #DERECHA
+            valor_t = TAvance
+            valor_d = GDer
+            giro(valor_t, valor_d)
+
+        if distancia_izquierda < 5:
+            #IZQUIERDA
+            valor_t = TAvance
+            valor_d = GIzq
+            giro(valor_t, valor_d)
         
         # Muestra las distancias
         print(f"Distancia hacia delante: {distancia_delante} cm")
@@ -149,7 +163,7 @@ while True:
         else:
             print("stop")
         if valor_d > 11:
-            print("izuierda")
+            print("izquierda")
         elif valor_d < 4:
             print("derecha")
         else:
