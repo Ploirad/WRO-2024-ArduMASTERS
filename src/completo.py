@@ -90,6 +90,16 @@ def giro():
     time.sleep(2)
     pwm_t.start(valor_t)
     pwm_d.start(GCent)
+    time.sleep(2)
+    pwm_t.start(valor_t)
+    if valor_d == GIzq:
+        pwm_d.start(GDer)
+    elif valor_d == GDer:
+        pwm_d.start(GIzq)
+    else:
+        pwm_d.start(GCent)
+    valor_t = TAvance
+    valor_d = GCent
 
 while True:
     try:
@@ -109,10 +119,12 @@ while True:
             #DERECHA
             valor_t = TAvance
             valor_d = GDer
+            giro()
         elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"]:
             #IZQUIERDA
             valor_t = TAvance
             valor_d = GIzq
+            giro()
         elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
             #ATRAS
             valor_t = TAtras
