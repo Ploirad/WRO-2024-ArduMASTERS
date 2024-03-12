@@ -125,7 +125,10 @@ while True:
             
             # Actualiza las distancias
             update_distances()
-    
+
+            if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
+                valor_t = TAvance
+
             if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"]:
                 #DERECHA
                 valor_t = TAvance
@@ -156,6 +159,9 @@ while True:
                 valor_t = TAvance
                 valor_d = GIzq
                 giro(valor_t, valor_d)
+
+            if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
+                valor_t = TAvance
             
             # Muestra las distancias
             print(f"Distancia hacia delante: {distancia_delante} cm")
