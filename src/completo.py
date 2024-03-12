@@ -126,8 +126,9 @@ while True:
             # Actualiza las distancias
             update_distances()
 
-            if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
-                valor_t = TAvance
+            if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]:
+                valor_t = TAtras
+                valor_d = GCent
             else:
                 if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"]:
                     #DERECHA
