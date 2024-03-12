@@ -81,7 +81,7 @@ def get_distance(trig_pin, echo_pin):
 def update_distances():
     global distancia_delante, distancia_atras, distancia_izquierda, distancia_derecha
     distancia_delante = get_distance(TRIG_PIN_DELANTE, ECHO_PIN_DELANTE)
-    #distancia_atras = get_distance(TRIG_PIN_ATRAS, ECHO_PIN_ATRAS)
+    distancia_atras = get_distance(TRIG_PIN_ATRAS, ECHO_PIN_ATRAS)
     distancia_izquierda = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
     distancia_derecha = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
 
@@ -159,7 +159,7 @@ while True:
             
             # Muestra las distancias
             print(f"Distancia hacia delante: {distancia_delante} cm")
-            #print(f"Distancia hacia atras: {distancia_atras} cm")
+            print(f"Distancia hacia atras: {distancia_atras} cm")
             print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
             print(f"Distancia hacia derecha: {distancia_derecha} cm")
             print("")
