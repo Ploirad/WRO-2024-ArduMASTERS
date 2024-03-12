@@ -128,40 +128,40 @@ while True:
 
             if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
                 valor_t = TAvance
-
-            if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                #DERECHA
-                valor_t = TAvance
-                valor_d = GDer
-                giro(valor_t, valor_d)
-            elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                #IZQUIERDA
-                valor_t = TAvance
-                valor_d = GIzq
-                giro(valor_t, valor_d)
-            elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
-                #ATRAS
-                valor_t = TAtras
-                valor_d = GCent
-            elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                #AVANCE
-                valor_t = TAvance
-                valor_d = GCent
+            else:
+                if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"]:
+                    #DERECHA
+                    valor_t = TAvance
+                    valor_d = GDer
+                    giro(valor_t, valor_d)
+                elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"]:
+                    #IZQUIERDA
+                    valor_t = TAvance
+                    valor_d = GIzq
+                    giro(valor_t, valor_d)
+                elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
+                    #ATRAS
+                    valor_t = TAtras
+                    valor_d = GCent
+                elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
+                    #AVANCE
+                    valor_t = TAvance
+                    valor_d = GCent
+        
+                if distancia_izquierda < 7:
+                    #DERECHA
+                    valor_t = TAvance
+                    valor_d = GDer
+                    giro(valor_t, valor_d)
+        
+                if distancia_derecha < 7:
+                    #IZQUIERDA
+                    valor_t = TAvance
+                    valor_d = GIzq
+                    giro(valor_t, valor_d)
     
-            if distancia_izquierda < 7:
-                #DERECHA
-                valor_t = TAvance
-                valor_d = GDer
-                giro(valor_t, valor_d)
-    
-            if distancia_derecha < 7:
-                #IZQUIERDA
-                valor_t = TAvance
-                valor_d = GIzq
-                giro(valor_t, valor_d)
-
-            if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
-                valor_t = TAvance
+                if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
+                    valor_t = TAvance
             
             # Muestra las distancias
             print(f"Distancia hacia delante: {distancia_delante} cm")
