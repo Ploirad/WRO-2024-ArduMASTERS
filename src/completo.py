@@ -136,13 +136,13 @@ while True:
             valor_t = TAvance
             valor_d = GCent
 
-        if distancia_derecha < 5:
+        if distancia_izuierda < 5:
             #DERECHA
             valor_t = TAvance
             valor_d = GDer
             giro(valor_t, valor_d)
 
-        if distancia_izquierda < 5:
+        if distancia_derecha < 5:
             #IZQUIERDA
             valor_t = TAvance
             valor_d = GIzq
