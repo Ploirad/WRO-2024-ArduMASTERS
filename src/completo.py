@@ -84,7 +84,7 @@ def update_distances():
     distancia_izquierda = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
     distancia_derecha = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
 
-def giro():
+def giro(valor_t, valor_d):
     pwm_t.start(valor_t)
     pwm_d.start(valor_d)
     time.sleep(2)
@@ -119,12 +119,12 @@ while True:
             #DERECHA
             valor_t = TAvance
             valor_d = GDer
-            giro()
+            giro(valor_t, valor_d)
         elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"]:
             #IZQUIERDA
             valor_t = TAvance
             valor_d = GIzq
-            giro()
+            giro(valor_t, valor_d)
         elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
             #ATRAS
             valor_t = TAtras
