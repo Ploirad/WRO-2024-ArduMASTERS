@@ -17,4 +17,6 @@ Here you find:
 - WRO Direction wheel ok.stl
 - WRO Servo box.stl
 - WRO Stub Axle Support.stl
+- WRO Ultrasonic Sensor Box.stl
+- WRO Wheel Cap.stl
 - 
