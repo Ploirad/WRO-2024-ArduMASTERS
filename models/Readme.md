@@ -30,6 +30,6 @@ And the inter folders:
   - WRO Raspberry Pi Support.stl
   - WRO Raspberry Pi Support.stl
   - WRO Lateral Ultrasound Supports.stl
-  - .
+  - WRO Raspberry Pi 4 Camera Box.stl
   - 
 # [Current_Car_Models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models/Current_Car_Models)
