@@ -15,4 +15,4 @@
 # [v-photos](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/v-photos)
   In this folder we got images from all the parts of our car.
 # [video](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/video)
-
+  In this folder we got a video from our car while it is moving
