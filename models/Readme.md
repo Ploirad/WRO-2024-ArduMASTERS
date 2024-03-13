@@ -9,4 +9,9 @@
 
 In this folder we got all the things that are related to de chasis of the robot.
 Here you find:
--
+- WRO Backweel.stl
+- WRO Chock Direction.stl
+- WRO L. Stub Axle.stl
+- WRO R. Stub Axle.stl
+- WRO Rear Drive Sprocket.stl
+- 
