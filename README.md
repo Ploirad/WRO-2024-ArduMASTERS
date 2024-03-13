@@ -3,7 +3,7 @@
 </p>
 
 # [models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models)
-  In this folder we got all the things that are related to de chasis of the robot. Here you find two inter folders:
+  In this folder we got all the things that are related to de chasis of the robot.
 # [other](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/other)
 
 # [schemes](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/schemes)
@@ -11,7 +11,7 @@
 # [src](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/src)
 
 # [t-photos](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/t-photos)
-
+  In this folder we got the images of our team.
 # [v-photos](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/v-photos)
 
 # [video](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/video)
