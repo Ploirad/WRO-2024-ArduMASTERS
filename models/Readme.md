@@ -19,4 +19,4 @@ Here you find:
 - WRO Stub Axle Support.stl
 - WRO Ultrasonic Sensor Box.stl
 - WRO Wheel Cap.stl
-- WRO Wheel Cap.stl
+- WRO steering wheel nut.stl
