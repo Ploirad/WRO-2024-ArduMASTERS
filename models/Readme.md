@@ -16,7 +16,7 @@ Here you find two inter folders:
   - WRO Front Wheel.stl
 # [Current_Car_Models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models/Current_Car_Models)
 
-  This folder contains all the things that have replaced the older ones. This are:
+  This folder contains all the things that we have in our car right now. This are:
    - WRO Battery Squad.stl
    - WRO Motor Support.stl
    - WRO Protoboard Support.stl
