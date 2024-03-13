@@ -29,7 +29,7 @@ And the inter folders:
   - WRO Protoboard Support.stl
   - WRO Raspberry Pi Support.stl
   - WRO Raspberry Pi Support.stl
-  - .
+  - WRO Lateral Ultrasound Supports.stl
   - .
   - 
 # [Current_Car_Models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models/Current_Car_Models)
