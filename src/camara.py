@@ -1,4 +1,4 @@
-from picamera import Picamera2, Preview
+from picamera2 import Picamera2, Preview
 
 def record_video():
     with picamera2.Picamera2() as camera:
