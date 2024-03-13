@@ -9,17 +9,7 @@
 
 In this folder we got all the things that are related to de chasis of the robot.
 Here you find:
-- WRO Backweel.stl
-- WRO Chock Direction.stl
-- WRO L. Stub Axle.stl
-- WRO R. Stub Axle.stl
-- WRO Rear Drive Sprocket.stl
-- WRO Direction wheel ok.stl
-- WRO Servo box.stl
-- WRO Stub Axle Support.stl
-- WRO Ultrasonic Sensor Box.stl
-- WRO Wheel Cap.stl
-- WRO steering wheel nut.stl
+
 
 And the inter folders:
 # [Old_Car_Models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models/Old_Car_Models)
@@ -31,5 +21,17 @@ And the inter folders:
   - WRO Raspberry Pi Support.stl
   - WRO Lateral Ultrasound Supports.stl
   - WRO Raspberry Pi 4 Camera Box.stl
-  - 
+  - WRO Raspberry Pi 4 Camera Support.stl
+  - WRO Backweel.stl
+  - WRO Backweel.stl
+  - WRO Chock Direction.stl
+  - WRO L. Stub Axle.stl
+  - WRO R. Stub Axle.stl
+  - WRO Rear Drive Sprocket.stl
+  - WRO Direction wheel ok.stl
+  - WRO Servo box.stl
+  - WRO Stub Axle Support.stl
+  - WRO Ultrasonic Sensor Box.stl
+  - WRO Wheel Cap.stl
+  - WRO steering wheel nut.stl
 # [Current_Car_Models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models/Current_Car_Models)
