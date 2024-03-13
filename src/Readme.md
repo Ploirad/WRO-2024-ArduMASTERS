@@ -8,7 +8,9 @@
   </h1><b/>
 
   This folder contains all the dodes that we got. Here you can find this codes:
-  - 
-  - 
-  - 
-  - 
+  - camera.py
+  - colors detector RGBY.py
+  - complete.py
+  - functional_try.py
+  - gpiotry.py
+  - gpiotry.py
