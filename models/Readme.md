@@ -23,5 +23,13 @@ Here you find:
 
 And the inter folders:
 # [Old_Car_Models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models/Old_Car_Models)
-  
+  This folder contains all the things that have been replaced for other ones. This are:
+  - WRO Battery Squad.stl
+  - WRO Motor Support.stl
+  - WRO Protoboard Support.stl
+  - WRO Raspberry Pi Support.stl
+  - WRO Raspberry Pi Support.stl
+  - .
+  - .
+  - 
 # [Current_Car_Models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models/Current_Car_Models)
