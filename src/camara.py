@@ -1,7 +1,7 @@
 import picamera2
 
 def record_video():
-    with picamera2.PiCamera2() as camera:
+    with picamera2.Picamera2() as camera:
         camera.resolution = (1024, 768)
         camera.framerate = 30
 
@@ -29,5 +29,4 @@ def record_video():
                 if frame.time > 30000:  # Stop recording after 30 seconds
                     break
 
-if __name__ == '__main__':
-    record_video()
+record_video()
