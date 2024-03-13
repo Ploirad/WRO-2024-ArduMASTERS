@@ -6,7 +6,7 @@ def record_video():
         Picamera2.framerate = 30
 
         # Preview configuration
-        preview_config = Picamera2.Preview.create()
+        preview_config = picamera2.Preview.create()
         preview_config.set_parameter(picamera2.Preview.Parameter.FRAME_RATE, Picamera2.framerate)
         preview_config.set_parameter(picamera2.Preview.Parameter.RESOLUTION, Picamera2.resolution)
 
