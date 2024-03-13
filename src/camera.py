@@ -2,18 +2,18 @@ from picamera2 import Picamera2, Preview
 
 def record_video():
     with Picamera2():
-        picamera2.resolution = (640, 480)
-        picamera2.framerate = 30
+        Picamera2.resolution = (640, 480)
+        Picamera2.framerate = 30
 
         # Preview configuration
         preview_config = Picamera2.Preview.create()
-        preview_config.set_parameter(picamera2.Preview.Parameter.FRAME_RATE, picamera2.framerate)
-        preview_config.set_parameter(picamera2.Preview.Parameter.RESOLUTION, picamera2.resolution)
+        preview_config.set_parameter(picamera2.Preview.Parameter.FRAME_RATE, Picamera2.framerate)
+        preview_config.set_parameter(picamera2.Preview.Parameter.RESOLUTION, Picamera2.resolution)
 
         # Video configuration
         video_config = picamera2.Video.create()
-        video_config.set_parameter(picamera2.Video.Parameter.FRAME_RATE, picamera2.framerate)
-        video_config.set_parameter(picamera2.Video.Parameter.RESOLUTION, picamera2.resolution)
+        video_config.set_parameter(picamera2.Video.Parameter.FRAME_RATE, Picamera2.framerate)
+        video_config.set_parameter(picamera2.Video.Parameter.RESOLUTION, Picamera2.resolution)
 
         picamera2.start_preview(preview_config)
 
