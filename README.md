@@ -3,7 +3,7 @@
 </p>
 
 # [models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models)
-  In models you can see every 3D models that we had used for make our car
+  In this folder we got all the things that are related to de chasis of the robot. Here you find two inter folders:
 # [other](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/other)
 
 # [schemes](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/schemes)
