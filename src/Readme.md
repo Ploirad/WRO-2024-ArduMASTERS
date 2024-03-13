@@ -13,4 +13,4 @@
   - complete.py
   - functional_try.py
   - gpiotry.py
-  - gpiotry.py
+  - ultrasound.py
