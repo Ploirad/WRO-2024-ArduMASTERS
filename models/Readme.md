@@ -11,7 +11,7 @@ In this folder we got all the things that are related to de chasis of the robot.
 Here you find two inter folders:
 
 # [Old_Car_Models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models/Old_Car_Models)
-  This folder contains that have replaced the older ones. This are:
+  This folder contains all the things that have replaced the older ones. This are:
   - WRO Chassis.stl
   - WRO Front Wheel.stl
 # [Current_Car_Models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models/Current_Car_Models)
