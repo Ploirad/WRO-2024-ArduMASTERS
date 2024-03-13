@@ -1,7 +1,7 @@
 from picamera2 import Picamera2, Preview
 
 def record_video():
-    with Picamera2.Picamera2() as camera:
+    with Picamera2() as camera:
         camera.resolution = (640, 480)
         camera.framerate = 30
 
