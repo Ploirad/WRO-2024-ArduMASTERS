@@ -2,7 +2,7 @@ import picamera2
 
 def record_video():
     with picamera2.Picamera2() as camera:
-        camera.resolution = (1024, 768)
+        camera.resolution = (640, 480)
         camera.framerate = 30
 
         # Preview configuration
@@ -21,11 +21,11 @@ def record_video():
         camera.wait(2000)
 
         # Create a software encoder
-        encoder = picamera2.SoftwareEncoder(camera, 'h264', video_config)
+        encoder = picamera2.SoftwareEncoder(camera, 'mp4', video_config)
 
         # Create a file object for the output video
         with open('video.h264', 'wb') as output_file:
-            for frame in encoder.capture_continuous(output_file, format='h264', use_video_port=True):
+            for frame in encoder.capture_continuous(output_file, format='mp4', use_video_port=True):
                 if frame.time > 30000:  # Stop recording after 30 seconds
                     break
 
