@@ -14,4 +14,7 @@ Here you find:
 - WRO L. Stub Axle.stl
 - WRO R. Stub Axle.stl
 - WRO Rear Drive Sprocket.stl
+- WRO Direction wheel ok.stl
+- WRO Servo box.stl
+- WRO Stub Axle Support.stl
 - 
