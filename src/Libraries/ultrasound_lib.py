@@ -39,3 +39,16 @@ class Ultrasound:
         distance = pulse_duration * 17150
         distance = round(distance, 3)
         return distance
+
+    def get_US_forward():
+        df = get_distance(TRIG_PIN_DELANTE, ECHO_PIN_DELANTE)
+        return df
+    def get_US_backward():
+        db = get_distance(TRIG_PIN_ATRAS, ECHO_PIN_ATRAS)
+        return db
+    def get_US_left():
+        dl = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
+        return dl
+    def get_US_right():
+        dr = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
+        return dr
