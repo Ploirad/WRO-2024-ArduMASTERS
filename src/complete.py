@@ -149,7 +149,7 @@ while True:
                     valor_t = TAvance
                     valor_d = GCent
         
-                if distancia_izquierda < 7 and diatancia_derecha > distancia_izquierda:
+                if distancia_izquierda < 7 and distancia_derecha > distancia_izquierda:
                     #DERECHA
                     valor_t = TAvance
                     valor_d = GDer
