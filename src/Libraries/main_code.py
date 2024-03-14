@@ -28,5 +28,6 @@ while True:
 
   try:
     if empezar:
-      print("empezado")  except KeyboardInterrupt:
+      print("empezado")
+  except KeyboardInterrupt:
         GPIO.cleanup()
