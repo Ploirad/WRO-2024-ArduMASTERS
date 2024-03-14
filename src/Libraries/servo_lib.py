@@ -1,4 +1,4 @@
-import RPI.GPIO as GPIO
+import RPi.GPIO as GPIO
 
 class servos:
   def __init__(self, traccion_pin, direccion_pin):
