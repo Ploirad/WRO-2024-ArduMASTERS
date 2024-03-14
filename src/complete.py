@@ -130,12 +130,12 @@ while True:
                 valor_t = TAtras
                 valor_d = GCent
             else:
-                if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"]:
+                if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_derecha > distancia_izquierda:
                     #DERECHA
                     valor_t = TAvance
                     valor_d = GDer
                     giro(valor_t, valor_d)
-                elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"]:
+                elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_izquierda > distancia_derecha:
                     #IZQUIERDA
                     valor_t = TAvance
                     valor_d = GIzq
@@ -149,13 +149,13 @@ while True:
                     valor_t = TAvance
                     valor_d = GCent
         
-                if distancia_izquierda < 7:
+                if distancia_izquierda < 7 and diatancia_derecha > distancia_izquierda:
                     #DERECHA
                     valor_t = TAvance
                     valor_d = GDer
                     giro(valor_t, valor_d)
         
-                if distancia_derecha < 7:
+                if distancia_derecha < 7 and distancia_izquierda > distancia_derecha:
                     #IZQUIERDA
                     valor_t = TAvance
                     valor_d = GIzq
