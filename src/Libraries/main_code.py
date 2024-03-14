@@ -17,8 +17,8 @@ button_pin = 9
 estado_boton = False
 empezar = False
 
-ultrasonidos = Us.Ultrasound(TRIG_pin_DELANTE, ECHO_pin_DELANTE, TRIG_pin_ATRAS, ECHO_pin_ATRAS, TRIG_pin_IZQUIERDA, ECHO_pin_IZQUIERDA, TRIG_pin_DERECHA, ECHO_pin_DERECHA)
-servos = Servomotor.servos(servo_pin_traccion, servo_pin_direccion)
+#ultrasonidos = Us.Ultrasound(TRIG_pin_DELANTE, ECHO_pin_DELANTE, TRIG_pin_ATRAS, ECHO_pin_ATRAS, TRIG_pin_IZQUIERDA, ECHO_pin_IZQUIERDA, TRIG_pin_DERECHA, ECHO_pin_DERECHA)
+#servos = Servomotor.servos(servo_pin_traccion, servo_pin_direccion)
 Boton = boton.Button(button_pin)
 while True:
   estado_boton = Boton.button_lecture()
