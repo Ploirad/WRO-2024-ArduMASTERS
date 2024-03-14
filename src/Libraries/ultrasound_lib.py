@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 
-class Servos:
+class Ultrasound:
     def __init__(self, Tforw, Eforw, Tback, Eback, TI, EI, TD, ED):
       self.TRIG_PIN_DELANTE = Tforw
       self.ECHO_PIN_DELANTE = Eforw
@@ -24,3 +24,18 @@ class Servos:
       GPIO.setup(TRIG_PIN_DERECHA, GPIO.OUT)
       GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN)
 
+    def get_distance(trig_pin, echo_pin):
+        # Envía un pulso al pin Trig
+        GPIO.output(trig_pin, True)
+        time.sleep(0.00001)
+        GPIO.output(trig_pin, False)
+        pulse_end = 0
+        pulse_start = 0
+        while GPIO.input(echo_pin) == 0:
+            pulse_start = time.time()
+        while GPIO.input(echo_pin) == 1:
+            pulse_end = time.time()
+        pulse_duration = pulse_end - pulse_start
+        distance = pulse_duration * 17150
+        distance = round(distance, 3)
+        return distance
