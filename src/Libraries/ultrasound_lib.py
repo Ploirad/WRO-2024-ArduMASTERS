@@ -39,14 +39,14 @@ class Ultrasound:
         return distance
 
     def get_US_forward(self):
-        df = self.get_distance(Tforw, Eforw)
+        df = self.get_distance(self.Tforw, self.Eforw)
         return df
     def get_US_backward():
-        db = self.get_distance(Tback, Eback)
+        db = self.get_distance(self.Tback, self.Eback)
         return db
     def get_US_left():
-        dl = self.get_distance(TI, EI)
+        dl = self.get_distance(self.TI, self.EI)
         return dl
     def get_US_right():
-        dr = self.get_distance(TD, ED)
+        dr = self.get_distance(self.TD, self.ED)
         return dr
