@@ -38,15 +38,15 @@ class Ultrasound:
         distance = round(distance, 3)
         return distance
 
-    def get_US_forward(self):
-        df = self.get_distance(self.Tforw, self.Eforw)
+    def get_US_forward():
+        df = get_distance(Tforw, Eforw)
         return df
     def get_US_backward():
-        db = self.get_distance(self.Tback, self.Eback)
+        db = get_distance(Tback, Eback)
         return db
     def get_US_left():
-        dl = self.get_distance(self.TI, self.EI)
+        dl = get_distance(TI, EI)
         return dl
     def get_US_right():
-        dr = self.get_distance(self.TD, self.ED)
+        dr = get_distance(TD, ED)
         return dr
