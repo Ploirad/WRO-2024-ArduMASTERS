@@ -2,27 +2,23 @@ import RPi.GPIO as GPIO
 
 class Ultrasound:
     def __init__(self, Tforw, Eforw, Tback, Eback, TI, EI, TD, ED):
-      self.TRIG_PIN_DELANTE = Tforw
-      self.ECHO_PIN_DELANTE = Eforw
-      self.TRIG_PIN_ATRAS = Tback
-      self.ECHO_PIN_ATRAS = Eback
-      self.TRIG_PIN_IZQUIERDA = TI
-      self.ECHO_PIN_IZQUIERDA = EI
-      self.TRIG_PIN_DERECHA = TD
-      self.ECHO_PIN_DERECHA = ED
-      distancia_delante = 0
-      distancia_atras = 0
-      distancia_izquierda = 0
-      distancia_derecha = 0
+      self.Tforw = Tforw
+      self.Eforw = Eforw
+      self.Tback = Tback
+      self.Eback = Eback
+      self.TI = TI
+      self.EI = EI
+      self.TD = TD
+      self.ED = ED
       GPIO.setmode(GPIO.BCM)
-      GPIO.setup(TRIG_PIN_DELANTE, GPIO.OUT)
-      GPIO.setup(ECHO_PIN_DELANTE, GPIO.IN)
-      GPIO.setup(TRIG_PIN_ATRAS, GPIO.OUT)
-      GPIO.setup(ECHO_PIN_ATRAS, GPIO.IN)
-      GPIO.setup(TRIG_PIN_IZQUIERDA, GPIO.OUT)
-      GPIO.setup(ECHO_PIN_IZQUIERDA, GPIO.IN)
-      GPIO.setup(TRIG_PIN_DERECHA, GPIO.OUT)
-      GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN)
+      GPIO.setup(Tforw, GPIO.OUT)
+      GPIO.setup(Eforw, GPIO.IN)
+      GPIO.setup(Tback, GPIO.OUT)
+      GPIO.setup(Eback, GPIO.IN)
+      GPIO.setup(TI, GPIO.OUT)
+      GPIO.setup(EI, GPIO.IN)
+      GPIO.setup(TD, GPIO.OUT)
+      GPIO.setup(ED, GPIO.IN)
 
     def get_distance(trig_pin, echo_pin):
         # Envía un pulso al pin Trig
@@ -41,14 +37,14 @@ class Ultrasound:
         return distance
 
     def get_US_forward():
-        df = get_distance(TRIG_PIN_DELANTE, ECHO_PIN_DELANTE)
+        df = get_distance(Tforw, Eforw)
         return df
     def get_US_backward():
-        db = get_distance(TRIG_PIN_ATRAS, ECHO_PIN_ATRAS)
+        db = get_distance(Tback, Eback)
         return db
     def get_US_left():
-        dl = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
+        dl = get_distance(TI, EI)
         return dl
     def get_US_right():
-        dr = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
+        dr = get_distance(TD, ED)
         return dr
