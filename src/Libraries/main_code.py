@@ -1,4 +1,4 @@
-import servo_lib.py as Servomotor
+import servo_lib as Servomotor
 import ultrasound_lib as Us
 import button as boton
 import time
