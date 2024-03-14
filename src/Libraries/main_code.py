@@ -1,6 +1,6 @@
 import servo_lib.py as Servomotor
-import ultrasound_lib.py as Us
-import button.py as boton
+import ultrasound_lib as Us
+import button as boton
 import time
 
 TRIG_pin_DELANTE = 23
