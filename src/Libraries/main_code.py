@@ -21,7 +21,7 @@ empezar = False
 #servos = Servomotor.servos(servo_pin_traccion, servo_pin_direccion)
 boton = button.Button(button_pin)
 while True:
-  estado_boton = Boton.button_lecture()
+  estado_boton = boton.button_lecture()
   if estado_boton:
     print("Botón presionado")
     empezar = True
