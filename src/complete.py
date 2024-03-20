@@ -204,8 +204,8 @@ while True:
                     valor_t = TAvance
                     valor_d = GIzq
                     giro(valor_t, valor_d)
-            if vueltas == 24:
-                v = 0
+           # if vueltas == 24:
+            #    v = 0
                 
             print(f"NumberLinea:{numberlinea}")
             print(f"Linea:{linea}")
