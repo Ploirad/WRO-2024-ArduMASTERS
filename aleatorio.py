@@ -13,7 +13,7 @@ def main():
       numero = input()
       intentos += 1
       if int(numero) == num_aleatorio:
-         print("Lo has adivinado en " + intentos)
+         print(f"Lo has adivinado en {intentos}")
          print("HAS GANADO, ¿QUIERES SEGUIR? (SI/NO)")
          if input("¿Quieres volver a jugar (y/n)?") == "y":
             print("Genial!")
