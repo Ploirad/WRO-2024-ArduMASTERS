@@ -30,3 +30,5 @@ def record_video():
 if  __name__ == "__main__":
     try:
         record_video()
+    except KeyboardInterrupt:
+        print("Stopping recording...")</s>
