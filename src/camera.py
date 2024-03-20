@@ -25,6 +25,6 @@ def record_video():
 
         # Create a file object for the output video
         with open('video.h264', 'wb') as output_file:
-            for frame in encoder.capture_continuous(output_file, format='mp4', use_video_
+            for frame in encoder.capture_continuous(output_file, format='mp4', use_video_)
 
 record_video()
