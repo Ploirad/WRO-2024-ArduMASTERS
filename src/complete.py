@@ -13,8 +13,10 @@ ECHO_PIN_DERECHA = 6
 servo_pin_direccion = 2
 servo_pin_traccion = 3
 button_pin = 9
+IRsensor = 8
 
 # Define variables
+numberlinea = 0
 empezado = 0
 distancia_delante = 0
 distancia_atras = 0
@@ -46,6 +48,7 @@ GPIO.setup(ECHO_PIN_IZQUIERDA, GPIO.IN)
 GPIO.setup(TRIG_PIN_DERECHA, GPIO.OUT)
 GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN)
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(IRsensor, GPIO.IN)
 
 #Iniciar servos
 pwm_d = GPIO.PWM(servo_pin_direccion, 50) # Frecuencia de PWM: 50Hz (estándar para servos)
@@ -114,6 +117,12 @@ while True:
 
     try:
         if v == 1:
+            linea = GPIO.input(IRsensor)
+            # Toma de decisiones
+            if linea == 1:
+              numberlinea = numberlinea + 1
+            print(f"NumberLinea{numberlinea}")
+            print(f"Linea:{linea}")
             pwm_t.start(valor_t)
             pwm_d.start(valor_d)
             # Lee el estado del botón
@@ -187,3 +196,6 @@ while True:
     except KeyboardInterrupt:
         GPIO.cleanup()
             
+
+
+
