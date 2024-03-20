@@ -209,6 +209,6 @@ while True:
                 
             print(f"NumberLinea:{numberlinea}")
             print(f"Linea:{linea}")
-            print(f"Vueltas:{float(vueltas/8)} es decir {vueltas} giros
+            print(f"Vueltas:{float(vueltas/8)} es decir {vueltas} giros")
     except KeyboardInterrupt:
         GPIO.cleanup()
