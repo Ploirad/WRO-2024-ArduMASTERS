@@ -18,6 +18,7 @@ try:
           numberlinea = numberlinea + 1
         print(f"NumberLinea{numberlinea}")
         print(f"Linea:{linea}")
+        time.sleep(1)
 
 except KeyboardInterrupt:
     GPIO.cleanup()
