@@ -24,7 +24,9 @@ def record_video():
         encoder = H264Encoder(picam2, 'mp4', video_config)
 
         # Create a file object for the output video
-        with open('video.h264', 'wb') as output_file:
-            for frame in encoder.capture_continuous(output_file, format='mp4', use_video_)
-
-record_video()
+        with open('video.mp4', 'wb') as output_file:
+            for frame in encoder.capture_continuous(output_file, format='mp4'):
+                pass
+if  __name__ == "__main__":
+    try:
+        record_video()
