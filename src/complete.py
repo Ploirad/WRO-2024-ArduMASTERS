@@ -17,6 +17,7 @@ IRsensor = 8
 
 # Define variables
 numberlinea = 0
+vueltas = 0
 empezado = 0
 distancia_delante = 0
 distancia_atras = 0
@@ -117,12 +118,6 @@ while True:
 
     try:
         if v == 1:
-            linea = GPIO.input(IRsensor)
-            # Toma de decisiones
-            if linea == 1:
-              numberlinea = numberlinea + 1
-            print(f"NumberLinea{numberlinea}")
-            print(f"Linea:{linea}")
             pwm_t.start(valor_t)
             pwm_d.start(valor_d)
             # Lee el estado del botón
@@ -193,9 +188,27 @@ while True:
                 print("derecha")
             else:
                 print("centro")
+            
+            linea = GPIO.input(IRsensor)
+            if linea == 1:
+                numberlinea = numberlinea + 1
+                vueltas = vueltas + 1
+                if distancia_derecha > distancia_izquierda:
+                    #DERECHA
+                    valor_t = TAvance
+                    valor_d = GDer
+                    giro(valor_t, valor_d)
+        
+                elif distancia_izquierda > distancia_derecha:
+                    #IZQUIERDA
+                    valor_t = TAvance
+                    valor_d = GIzq
+                    giro(valor_t, valor_d)
+            if vueltas == 24:
+                v = 0
+                
+            print(f"NumberLinea:{numberlinea}")
+            print(f"Linea:{linea}")
+            print(f"Vueltas:{float(vueltas/8)} es decir {vueltas} giros
     except KeyboardInterrupt:
         GPIO.cleanup()
-            
-
-
-
