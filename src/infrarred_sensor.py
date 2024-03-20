@@ -14,7 +14,7 @@ try:
         linea = GPIO.input(IRsensor)
         
         # Toma de decisiones
-        if linea == 1:
+        if linea == 0:
           numberlinea = numberlinea + 1
         print(f"NumberLinea{numberlinea}")
         print(f"Linea:{linea}")
