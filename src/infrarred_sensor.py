@@ -16,7 +16,8 @@ try:
         # Toma de decisiones
         if linea == 1:
           numberlinea = numberlinea + 1
-        print(nl)
+        print(f"NumberLinea{numberlinea}")
+        print(f"Linea:{linea}")
 
 except KeyboardInterrupt:
     GPIO.cleanup()
