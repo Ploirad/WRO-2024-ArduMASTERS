@@ -8,7 +8,7 @@ def record_video():
         picam2.framerate = 30
 
         # Preview configuration
-        preview_config = picam2.preview_configuration(main={"size": picam2.resolution})
+        preview_config = picam2.create_preview_configuration(main={"size": picam2.resolution})
         preview_config.set_parameter(picam2.Preview.Parameter.FRAME_RATE, picam2.framerate)
         preview_config.set_parameter(picam2.Preview.Parameter.RESOLUTION, picam2.resolution)
 
