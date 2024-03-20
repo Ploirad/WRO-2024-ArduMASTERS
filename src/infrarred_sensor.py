@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 
 # Configuración de pines
-IRsensor = 17
+IRsensor = 8
 numberlinea = 0
 
 # Inicialización de GPIO
