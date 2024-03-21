@@ -104,6 +104,7 @@ def giro(valor_t, valor_d):
         pwm_d.start(GIzq)
     else:
         pwm_d.start(GCent)
+    time.sleep(2)
     valor_t = TAvance
     valor_d = GCent
     print("...girado")
