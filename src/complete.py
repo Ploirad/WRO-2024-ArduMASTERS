@@ -211,7 +211,7 @@ while True:
                 print(f"NumberLinea:{numberlinea}")
                 print(f"Linea:{linea}")
                 print(f"Vueltas:{float(vueltas/8)} es decir {vueltas} giros")
-            except Exception as e:
-                print(f"ERROR: {e}")
+            except:
+                print("ERROR")
     except KeyboardInterrupt:
         GPIO.cleanup()
