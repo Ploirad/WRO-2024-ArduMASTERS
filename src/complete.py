@@ -118,98 +118,100 @@ while True:
 
     try:
         if v == 1:
-            pwm_t.start(valor_t)
-            pwm_d.start(valor_d)
-            # Lee el estado del botón
-            button_state = GPIO.input(button_pin)
-            
-            # Si el botón está presionado (estado HIGH)
-            if button_state == GPIO.HIGH:
-                print("Botón presionado")
-            
-            # Actualiza las distancias
-            update_distances()
-
-            if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]:
-                valor_t = TAtras
-                valor_d = GCent
-            else:
-                if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_derecha > distancia_izquierda:
-                    #DERECHA
-                    valor_t = TAvance
-                    valor_d = GDer
-                    giro(valor_t, valor_d)
-                elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_izquierda > distancia_derecha:
-                    #IZQUIERDA
-                    valor_t = TAvance
-                    valor_d = GIzq
-                    giro(valor_t, valor_d)
-                elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
-                    #ATRAS
+            try:
+                pwm_t.start(valor_t)
+                pwm_d.start(valor_d)
+                # Lee el estado del botón
+                button_state = GPIO.input(button_pin)
+                
+                # Si el botón está presionado (estado HIGH)
+                if button_state == GPIO.HIGH:
+                    print("Botón presionado")
+                
+                # Actualiza las distancias
+                update_distances()
+    
+                if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]:
                     valor_t = TAtras
                     valor_d = GCent
-                elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                    #AVANCE
-                    valor_t = TAvance
-                    valor_d = GCent
-        
-                if distancia_izquierda < 7 and distancia_derecha > distancia_izquierda:
-                    #DERECHA
-                    valor_t = TAvance
-                    valor_d = GDer
-                    giro(valor_t, valor_d)
-        
-                if distancia_derecha < 7 and distancia_izquierda > distancia_derecha:
-                    #IZQUIERDA
-                    valor_t = TAvance
-                    valor_d = GIzq
-                    giro(valor_t, valor_d)
-    
-                if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
-                    valor_t = TAvance
+                else:
+                    if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_derecha > distancia_izquierda:
+                        #DERECHA
+                        valor_t = TAvance
+                        valor_d = GDer
+                        giro(valor_t, valor_d)
+                    elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_izquierda > distancia_derecha:
+                        #IZQUIERDA
+                        valor_t = TAvance
+                        valor_d = GIzq
+                        giro(valor_t, valor_d)
+                    elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
+                        #ATRAS
+                        valor_t = TAtras
+                        valor_d = GCent
+                    elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
+                        #AVANCE
+                        valor_t = TAvance
+                        valor_d = GCent
             
-            # Muestra las distancias
-            print(f"Distancia hacia delante: {distancia_delante} cm")
-            print(f"Distancia hacia atras: {distancia_atras} cm")
-            print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
-            print(f"Distancia hacia derecha: {distancia_derecha} cm")
-            print("")
-            pwm_t.start(valor_t)
-            pwm_d.start(valor_d)
-            if valor_t > 8:
-                print("avanti")
-            elif valor_t < 6:
-                print("back")
-            else:
-                print("stop")
-            if valor_d > 11:
-                print("izquierda")
-            elif valor_d < 4:
-                print("derecha")
-            else:
-                print("centro")
+                    if distancia_izquierda < 7 and distancia_derecha > distancia_izquierda:
+                        #DERECHA
+                        valor_t = TAvance
+                        valor_d = GDer
+                        giro(valor_t, valor_d)
             
-            linea = GPIO.input(IRsensor)
-            if linea == 0:
-                numberlinea = numberlinea + 1
-                vueltas = vueltas + 1
-                if distancia_derecha > distancia_izquierda:
-                    #DERECHA
-                    valor_t = TAvance
-                    valor_d = GDer
-                    giro(valor_t, valor_d)
+                    if distancia_derecha < 7 and distancia_izquierda > distancia_derecha:
+                        #IZQUIERDA
+                        valor_t = TAvance
+                        valor_d = GIzq
+                        giro(valor_t, valor_d)
         
-                elif distancia_izquierda > distancia_derecha:
-                    #IZQUIERDA
-                    valor_t = TAvance
-                    valor_d = GIzq
-                    giro(valor_t, valor_d)
-           # if vueltas == 24:
-            #    v = 0
+                    if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
+                        valor_t = TAvance
                 
-            print(f"NumberLinea:{numberlinea}")
-            print(f"Linea:{linea}")
-            print(f"Vueltas:{float(vueltas/8)} es decir {vueltas} giros")
-    except:    # KeyboardInterrupt:
-        print("error")
+                # Muestra las distancias
+                print(f"Distancia hacia delante: {distancia_delante} cm")
+                print(f"Distancia hacia atras: {distancia_atras} cm")
+                print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
+                print(f"Distancia hacia derecha: {distancia_derecha} cm")
+                print("")
+                pwm_t.start(valor_t)
+                pwm_d.start(valor_d)
+                if valor_t > 8:
+                    print("avanti")
+                elif valor_t < 6:
+                    print("back")
+                else:
+                    print("stop")
+                if valor_d > 11:
+                    print("izquierda")
+                elif valor_d < 4:
+                    print("derecha")
+                else:
+                    print("centro")
+                
+                linea = GPIO.input(IRsensor)
+                if linea == 0:
+                    numberlinea = numberlinea + 1
+                    vueltas = vueltas + 1
+                    if distancia_derecha > distancia_izquierda:
+                        #DERECHA
+                        valor_t = TAvance
+                        valor_d = GDer
+                        giro(valor_t, valor_d)
+            
+                    elif distancia_izquierda > distancia_derecha:
+                        #IZQUIERDA
+                        valor_t = TAvance
+                        valor_d = GIzq
+                        giro(valor_t, valor_d)
+               # if vueltas == 24:
+                #    v = 0
+                    
+                print(f"NumberLinea:{numberlinea}")
+                print(f"Linea:{linea}")
+                print(f"Vueltas:{float(vueltas/8)} es decir {vueltas} giros")
+            except Exception as e:
+                print(f"ERROR: {e}")
+    except KeyboardInterrupt:
         GPIO.cleanup()
