@@ -37,7 +37,7 @@ def main():
                 print("Distancia atrás:", distancia_atras, "cm")
                 print("Distancia izquierda:", distancia_izquierda, "cm")
                 print("Distancia derecha:", distancia_derecha, "cm")
-                time.sleep(1)  # Espera 1 segundo
+                print("")
             
         except KeyboardInterrupt:
             GPIO.cleanup()
