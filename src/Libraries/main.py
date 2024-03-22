@@ -33,7 +33,7 @@ def main():
                 distancia_izquierda = get_distance(TI, EI)
                 distancia_derecha = get_distance(TD, ED)
 
-                if linea_detectada():
+                if leer_linea():
                     print("Línea detectada")
                 else:
                     print("No se detecta línea")
