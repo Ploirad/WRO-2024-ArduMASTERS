@@ -1,14 +1,13 @@
-#LIBRERIAS
 import RPi.GPIO as GPIO
 import time
 from servo_control import *
 from ultrasound import *
 from siguelineas import *
 
-#PINES
+# Pines
 button_pin = 9
 
-#CONSTANTES (NO CAMBIAN)
+# Constantes (no cambian)
 DA = (14, 15)
 TAvance = 12.5
 TAtras = 2.5
@@ -25,7 +24,8 @@ def main():
     init_servos()
     init_ultrasonido()
     init_siguelineas()
-    #VARIABLES
+    
+    # Variables
     NoLinea = 0
     NoTotalVueltas = 0
     NoMaxVueltas = 0
@@ -85,7 +85,8 @@ def main():
         except KeyboardInterrupt:
             GPIO.cleanup()
 
-try:
-    main()
-except KeyboardInterrupt:
-    GPIO.cleanup()
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        GPIO.cleanup()
