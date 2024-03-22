@@ -46,14 +46,14 @@ def main():
                 DD = get_distance(TI, EI)
                 DI = get_distance(TD, ED)
 
-                if Dforw < DA[2] and DD < DA[2] and DI < DA[2]:
+                if Dforw < DA[1] and DD < DA[1] and DI < DA[1]:
                     giro(TAtras, GCent)
                 else:
-                    if Dforw < DA[2] and DD > DA[1] and DD > DI:
+                    if Dforw < DA[1] and DD > DA[0] and DD > DI:
                         giro(TAvance, GDer)
-                    elif Dforw < DA[2] and DI > DA[1] and DI > DD:
+                    elif Dforw < DA[1] and DI > DA[0] and DI > DD:
                         giro(TAvance, GIzq)
-                    elif Dforw > DA[1]:
+                    elif Dforw > DA[0]:
                         giro(TAvance, GCent)
                 if DI < 7 and DD > DI:
                     giro(TAvance, GDer)
