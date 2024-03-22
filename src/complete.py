@@ -230,6 +230,7 @@ while True:
                         giro_linea(valor_t, valor_d)
                 if vueltas == 24:
                     v = 0
+                    GPIO.cleanup()
                     
                 print(f"NumberLinea:{numberlinea}")
                 print(f"Linea:{linea}")
