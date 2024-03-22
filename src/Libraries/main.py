@@ -27,16 +27,6 @@ def main():
         try:
             if v == 1:
                 # Lógica principal del robot
-                
-                # Ejemplo de uso de los servos
-                print("Moviendo los servos...")
-                giro(12.5, 6.0)  # Ejemplo: mover hacia adelante y centrar dirección
-                time.sleep(2)    # Espera 2 segundos
-                giro(2.5, 11.5)  # Ejemplo: mover hacia atrás y girar a la derecha
-                time.sleep(2)    # Espera 2 segundos
-                giro(12.5, 3.5)  # Ejemplo: mover hacia adelante y girar a la izquierda
-                time.sleep(2)    # Espera 2 segundos
-                
                 # Ejemplo de uso de los ultrasonidos
                 distancia_delante = get_distance(Tforw, Eforw)
                 distancia_atras = get_distance(Tback, Eback)
