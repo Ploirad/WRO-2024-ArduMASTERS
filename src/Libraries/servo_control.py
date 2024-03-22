@@ -1,11 +1,9 @@
 import RPi.GPIO as GPIO
-import time
 
 servo_pin_direccion = 2
 servo_pin_traccion = 3
 
 def init_servos():
-    GPIO.setmode(GPIO.BCM)
     GPIO.setup(servo_pin_direccion, GPIO.OUT)
     GPIO.setup(servo_pin_traccion, GPIO.OUT)
 
@@ -15,6 +13,8 @@ def giro(valor_t, valor_d):
     
     pwm_d.start(valor_d)
     pwm_t.start(valor_t)
+    # Resto del código de giro
+
     time.sleep(2)
     pwm_d.start(6.0)
     pwm_t.start(valor_t)
