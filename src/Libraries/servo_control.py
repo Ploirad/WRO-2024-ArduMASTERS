@@ -31,3 +31,8 @@ def giro(valor_t, valor_d):
     time.sleep(2)
     valor_t = 12.5
     valor_d = 6.0
+def avance_recto():
+    pwm_d = GPIO.PWM(servo_pin_direccion, 50)
+    pwm_t = GPIO.PWM(servo_pin_traccion, 50)
+    pwm_d.start(6.0)
+    pwm_t.start(12.5)
