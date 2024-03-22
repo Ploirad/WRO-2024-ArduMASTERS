@@ -85,8 +85,7 @@ def main():
         except KeyboardInterrupt:
             GPIO.cleanup()
 
-if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        GPIO.cleanup()
+try:
+    main()
+except KeyboardInterrupt:
+    GPIO.cleanup()
