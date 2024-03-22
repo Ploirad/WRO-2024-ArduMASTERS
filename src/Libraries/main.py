@@ -58,6 +58,8 @@ def main():
                     giro(TAvance, GDer)
                 if DD < 7 and DI > DD:
                     giro(TAvance, GIzq)
+                if Dback < DA[1]:
+                    giro(TAvance, GCent)
                 
                 if leer_linea():
                     print("HAY LINEA")
@@ -72,8 +74,8 @@ def main():
 
                 if NoTotalVueltas == NoMaxVueltas:
                     v = 0
-                print("Distancia delante:", DForw, "cm")
-                print("Distancia atrás:", DBack, "cm")
+                print("Distancia delante:", Dforw, "cm")
+                print("Distancia atrás:", Dback, "cm")
                 print("Distancia izquierda:", DI, "cm")
                 print("Distancia derecha:", DD, "cm")
                 print("")
