@@ -16,11 +16,6 @@ GDer = 3.5
 GIzq = 11.5
 GCent = 6.0
 
-#VARIABLES
-NoLinea = 0
-NoTotalVueltas = 0
-NoMaxVueltas = 0
-
 def setup_GPIO():
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
@@ -30,6 +25,10 @@ def main():
     init_servos()
     init_ultrasonido()
     init_siguelineas()
+    #VARIABLES
+    NoLinea = 0
+    NoTotalVueltas = 0
+    NoMaxVueltas = 0
     v = 0
     
     while True:
