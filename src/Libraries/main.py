@@ -74,10 +74,10 @@ def main():
 
                 if NoTotalVueltas == NoMaxVueltas:
                     v = 0
-                print("Distancia delante:", Dforw, "cm")
-                print("Distancia atrás:", Dback, "cm")
-                print("Distancia izquierda:", DI, "cm")
-                print("Distancia derecha:", DD, "cm")
+                print(f"Distancia delante: {Dforw} cm")
+                print(f"Distancia atrás: {Dback} cm")
+                print(f"Distancia izquierda: {DI} cm")
+                print(f"Distancia derecha: {DD} cm")
                 print("")
             else:
                 print("PULSE EL BOTON")
