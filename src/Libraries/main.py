@@ -1,10 +1,26 @@
+#LIBRERIAS
 import RPi.GPIO as GPIO
 import time
 from servo_control import *
 from ultrasound import *
 from siguelineas import *
 
+#PINES
 button_pin = 9
+
+#CONSTANTES (NO CAMBIAN)
+DA = (14, 15)
+TAvance = 12.5
+TAtras = 2.5
+GDer = 3.5
+GIzq = 11.5
+GCent = 6.0
+
+#VARIABLES
+NoLinea = 0
+NoTotalVueltas = 0
+NoMaxVueltas = 0
+v = 0
 
 def setup_GPIO():
     GPIO.setmode(GPIO.BCM)
@@ -16,7 +32,6 @@ def main():
     init_ultrasonido()
     init_siguelineas()
     
-    v = 0
     while True:
         button_state = GPIO.input(button_pin)
         if button_state == GPIO.HIGH:
@@ -26,23 +41,46 @@ def main():
         
         try:
             if v == 1:
-                # Lógica principal del robot
-                # Ejemplo de uso de los ultrasonidos
-                distancia_delante = get_distance(Tforw, Eforw)
-                distancia_atras = get_distance(Tback, Eback)
-                distancia_izquierda = get_distance(TI, EI)
-                distancia_derecha = get_distance(TD, ED)
+                Dforw = get_distance(Tforw, Eforw)
+                Dback = get_distance(Tback, Eback)
+                DD = get_distance(TI, EI)
+                DI = get_distance(TD, ED)
 
-                if leer_linea():
-                    print("Línea detectada")
+                if Dforw < DA(2) and DD < DA(2) and DI < DA(2):
+                    giro(TAtras, GCent)
                 else:
-                    print("No se detecta línea")
+                    if Dforw < DA(2) and DD > DA(1) and DD > DI:
+                        giro(TAvance, GDer)
+                    elif Dforw < DA(2) and DI > DA(1) and DI > DD:
+                        giro(TAvance, GIzq)
+                    elif Dforw > DA(1):
+                        giro(TAvance, GCent)
+                if DI < 7 and DD > DI:
+                    giro(TAvance, GDer)
+                if DD < 7 and DI > DD:
+                    giro(TAvance, GIzq)
+                
+                if leer_linea():
+                    print("HAY LINEA")
+                    NoLinea += 1
+                    NoTotalVueltas += 1
+                    if DD > DI:
+                        giro(TAvance, GDer)
+                    elif DI > DD:
+                        giro(TAvance, GIzq)
+                else:
+                    print("NO HAY LINEA")
+
+                if NoTotalVueltas == NoMaxVueltas:
+                    v = 0
                 print("Distancia delante:", distancia_delante, "cm")
                 print("Distancia atrás:", distancia_atras, "cm")
                 print("Distancia izquierda:", distancia_izquierda, "cm")
                 print("Distancia derecha:", distancia_derecha, "cm")
                 print("")
-            
+            else:
+                print("PULSE EL BOTON")
+        
         except KeyboardInterrupt:
             GPIO.cleanup()
 
