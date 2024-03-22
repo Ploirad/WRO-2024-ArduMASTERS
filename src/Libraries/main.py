@@ -26,13 +26,14 @@ def main():
             if v == 1:
                 # Lógica principal del robot
                 
-                # Aquí puedes agregar tu lógica para controlar el robot
-                # Por ejemplo, mover los servos en respuesta a ciertas condiciones,
-                # leer sensores, etc.
-                
-                # Por ahora, simplemente imprime un mensaje
-                print("Ejecutando lógica principal del robot...")
-                time.sleep(1)  # Espera 1 segundo antes de continuar
+                # Ejemplo de uso de los servos
+                print("Moviendo los servos...")
+                giro(12.5, 6.0)  # Ejemplo: mover hacia adelante y centrar dirección
+                time.sleep(2)    # Espera 2 segundos
+                giro(2.5, 11.5)  # Ejemplo: mover hacia atrás y girar a la derecha
+                time.sleep(2)    # Espera 2 segundos
+                giro(12.5, 3.5)  # Ejemplo: mover hacia adelante y girar a la izquierda
+                time.sleep(2)    # Espera 2 segundos
             
         except KeyboardInterrupt:
             GPIO.cleanup()
