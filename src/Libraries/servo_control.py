@@ -1,5 +1,4 @@
 import RPi.GPIO as GPIO
-import time
 
 servo_pin_direccion = 2
 servo_pin_traccion = 3
