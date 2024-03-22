@@ -11,7 +11,6 @@ TD = 5
 ED = 6
 
 def init_ultrasonido():
-    GPIO.setmode(GPIO.BCM)
     GPIO.setup(Tforw, GPIO.OUT)
     GPIO.setup(Eforw, GPIO.IN)
     GPIO.setup(Tback, GPIO.OUT)
