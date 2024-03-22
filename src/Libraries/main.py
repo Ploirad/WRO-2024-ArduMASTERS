@@ -20,7 +20,6 @@ GCent = 6.0
 NoLinea = 0
 NoTotalVueltas = 0
 NoMaxVueltas = 0
-v = 0
 
 def setup_GPIO():
     GPIO.setmode(GPIO.BCM)
@@ -31,6 +30,7 @@ def main():
     init_servos()
     init_ultrasonido()
     init_siguelineas()
+    v = 0
     
     while True:
         button_state = GPIO.input(button_pin)
