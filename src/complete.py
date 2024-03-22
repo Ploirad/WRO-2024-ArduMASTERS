@@ -109,6 +109,14 @@ def giro(valor_t, valor_d):
     valor_d = GCent
     print("...girado")
 
+def giro_linea(valor_t, valor_d):
+    print("girando...")
+    pwm_t.start(valor_t)
+    pwm_d.start(valor_d)
+    time.sleep(2)
+    pwm_t.start(valor_t)
+    pwm_d.start(GCent)
+
 while True:
     # Lee el estado del botón
     button_state = GPIO.input(button_pin)
@@ -213,13 +221,13 @@ while True:
                         #DERECHA
                         valor_t = TAvance
                         valor_d = GDer
-                        giro(valor_t, valor_d)
+                        giro_linea(valor_t, valor_d)
             
                     elif distancia_izquierda > distancia_derecha:
                         #IZQUIERDA
                         valor_t = TAvance
                         valor_d = GIzq
-                        giro(valor_t, valor_d)
+                        giro_linea(valor_t, valor_d)
                # if vueltas == 24:
                 #    v = 0
                     
