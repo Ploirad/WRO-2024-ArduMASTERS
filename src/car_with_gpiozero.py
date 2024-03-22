@@ -22,6 +22,11 @@ ultrasonido_izquierda = DistanceSensor(echo=10, trigger=22)
 ultrasonido_derecha = DistanceSensor(echo=6, trigger=5)
 boton = Button(button_pin)
 
+valor_min = 0.0
+valor_max = 1.0
+valor_servo = (TAvance - valor_min) / (valor_max - valor_min) * 2 - 1
+servo_direccion.value = valor_servo
+
 # Función para el giro del servo
 def giro(valor_t, valor_d):
     print("girando...")
