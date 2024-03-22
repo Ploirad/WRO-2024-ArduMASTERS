@@ -2,110 +2,108 @@ from gpiozero import Servo, DistanceSensor, Button
 import time
 
 # Define los pines
+TRIG_PIN_DELANTE = 23
+ECHO_PIN_DELANTE = 24
+TRIG_PIN_ATRAS = 17
+ECHO_PIN_ATRAS = 27
+TRIG_PIN_IZQUIERDA = 22
+ECHO_PIN_IZQUIERDA = 10
+TRIG_PIN_DERECHA = 5
+ECHO_PIN_DERECHA = 6
 servo_pin_direccion = 2
 servo_pin_traccion = 3
 button_pin = 9
+IRsensor = 8
 
-# Define las constantes
-TAvance = 12.5
-TAtras = 2.5
-GDer = 3.5
-GIzq = 11.5
-GCent = 6.0
+# Define variables
+numberlinea = 0
+vueltas = 0
+distancia_delante = 0
+distancia_atras = 0
+distancia_izquierda = 0
+distancia_derecha = 0
+valor_d = 0.0
+valor_t = 0.0
 DISTANCIA_de_ACCION = {"MENOR QUE": 15, "MAYOR QUE": 14}
 
-# Configura el servo y el sensor de ultrasonidos
+# Inicializar dispositivos
 servo_direccion = Servo(servo_pin_direccion)
-ultrasonido_delante = DistanceSensor(echo=24, trigger=23)
-ultrasonido_atras = DistanceSensor(echo=27, trigger=17)
-ultrasonido_izquierda = DistanceSensor(echo=10, trigger=22)
-ultrasonido_derecha = DistanceSensor(echo=6, trigger=5)
-boton = Button(button_pin)
+servo_traccion = Servo(servo_pin_traccion)
+button = Button(button_pin)
+sensor_delante = DistanceSensor(TRIG_PIN_DELANTE, ECHO_PIN_DELANTE)
+sensor_atras = DistanceSensor(TRIG_PIN_ATRAS, ECHO_PIN_ATRAS)
+sensor_izquierda = DistanceSensor(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
+sensor_derecha = DistanceSensor(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
 
-# Función para el giro del servo
+def update_distances():
+    global distancia_delante, distancia_atras, distancia_izquierda, distancia_derecha
+    distancia_delante = sensor_delante.distance * 100  # Convertir a cm
+    distancia_atras = sensor_atras.distance * 100  # Convertir a cm
+    distancia_izquierda = sensor_izquierda.distance * 100  # Convertir a cm
+    distancia_derecha = sensor_derecha.distance * 100  # Convertir a cm
+
 def giro(valor_t, valor_d):
-    print("girando...")
+    servo_traccion.value = valor_t
     servo_direccion.value = valor_d
     time.sleep(2)
-    servo_direccion.value = GCent
+    servo_traccion.value = 0.0  # Detener tracción
+    servo_direccion.value = 0.0  # Centrar dirección
     time.sleep(2)
-    servo_direccion.value = GIzq if valor_d == GIzq else GDer if valor_d == GDer else GCent
+    servo_traccion.value = valor_t
+    if valor_d == -1.0:
+        servo_direccion.value = 1.0
+    elif valor_d == 1.0:
+        servo_direccion.value = -1.0
+    else:
+        servo_direccion.value = 0.0
     time.sleep(2)
-    print("...girado")
+    servo_traccion.value = 0.0  # Detener tracción
+    servo_direccion.value = 0.0  # Centrar dirección
 
-try:
-    while True:
-        boton.wait_for_press()
+while True:
+    if button.is_pressed:
         print("Botón presionado")
+        time.sleep(0.2)  # Debounce
         
-        # Leer las distancias de los sensores de ultrasonidos
-        distancia_delante = ultrasonido_delante.distance * 100  # Convertir a centímetros
-        distancia_atras = ultrasonido_atras.distance * 100
-        distancia_izquierda = ultrasonido_izquierda.distance * 100
-        distancia_derecha = ultrasonido_derecha.distance * 100
+        # Obtener valores del servo
+        valor_d = 1.0  # Valor para girar a la derecha
+        valor_t = 1.0  # Valor para avanzar
         
-        # Actualizar la dirección del servo
-        servo_direccion.value = TAvance
+        giro(valor_t, valor_d)
+    
+    try:
+        # Actualizar distancias
+        update_distances()
         
-        # Determinar la acción en función de las distancias medidas
-        if (distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and
-            distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"] and
-            distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]):
-            servo_direccion.value = TAtras, GCent
+        # Lógica de control aquí
+        if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"]:
+            valor_t = -1.0  # Retroceder
+            valor_d = 0.0  # Centrar dirección
+            giro(valor_t, valor_d)
+        elif distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
+            valor_t = 1.0  # Avanzar
+            valor_d = 1.0  # Girar a la derecha
+            giro(valor_t, valor_d)
+        elif distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]:
+            valor_t = 1.0  # Avanzar
+            valor_d = -1.0  # Girar a la izquierda
+            giro(valor_t, valor_d)
         else:
-            if (distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and
-                distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"] and
-                distancia_derecha > distancia_izquierda):
-                # DERECHA
-                giro(TAvance, GDer)
-            elif (distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and
-                  distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"] and
-                  distancia_izquierda > distancia_derecha):
-                # IZQUIERDA
-                giro(TAvance, GIzq)
-            elif (distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and
-                  distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and
-                  distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]):
-                # ATRAS
-                servo_direccion.value = TAtras, GCent
-            elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                # AVANCE
-                servo_direccion.value = TAvance, GCent
+            valor_t = 1.0  # Avanzar
+            valor_d = 0.0  # Centrar dirección
+            giro(valor_t, valor_d)
         
-        # Mostrar las distancias y la dirección del servo
+        # Muestra las distancias
         print(f"Distancia hacia delante: {distancia_delante} cm")
         print(f"Distancia hacia atrás: {distancia_atras} cm")
         print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
         print(f"Distancia hacia derecha: {distancia_derecha} cm")
         print("")
-        
-        # Mostrar la dirección del servo
-        if 8 < servo_direccion.value < 12:
-            print("avanti")
-        elif servo_direccion.value < 6:
-            print("back")
-        else:
-            print("stop")
-        
-        if servo_direccion.value > 11:
-            print("izquierda")
-        elif servo_direccion.value < 4:
-            print("derecha")
-        else:
-            print("centro")
-        
-        # Leer el estado del sensor de línea
-        if not IRsensor.is_pressed:
-            numberlinea += 1
-            vueltas += 1
-            if distancia_derecha > distancia_izquierda:
-                # DERECHA
-                giro(TAvance, GDer)
-            elif distancia_izquierda > distancia_derecha:
-                # IZQUIERDA
-                giro(TAvance, GIzq)
+    
+    except KeyboardInterrupt:
+        break
 
-except KeyboardInterrupt:
-    print("Programa detenido por el usuario")
-finally:
-    servo_direccion.detach()
+# Detener todos los servos y limpiar GPIO al salir
+servo_direccion.close()
+servo_traccion.close()
+GPIO.cleanup()
