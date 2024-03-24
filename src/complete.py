@@ -96,7 +96,7 @@ def giro(valor_t, valor_d):
     time.sleep(1)
     pwm_t.start(valor_t)
     pwm_d.start(GCent)
-    time.sleep(1)
+    time.sleep(0.5)
     pwm_t.start(valor_t)
     if valor_d == GIzq:
         pwm_d.start(GDer)
