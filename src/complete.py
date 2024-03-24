@@ -93,10 +93,10 @@ def giro(valor_t, valor_d):
     print("girando...")
     pwm_t.start(valor_t)
     pwm_d.start(valor_d)
-    time.sleep(2)
+    time.sleep(1)
     pwm_t.start(valor_t)
     pwm_d.start(GCent)
-    time.sleep(2)
+    time.sleep(1)
     pwm_t.start(valor_t)
     if valor_d == GIzq:
         pwm_d.start(GDer)
@@ -104,7 +104,7 @@ def giro(valor_t, valor_d):
         pwm_d.start(GIzq)
     else:
         pwm_d.start(GCent)
-    time.sleep(2)
+    time.sleep(1)
     valor_t = TAvance
     valor_d = GCent
     print("...girado")
