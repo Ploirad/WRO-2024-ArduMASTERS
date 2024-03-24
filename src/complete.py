@@ -237,8 +237,8 @@ while True:
                 print(f"Vueltas:{float(vueltas/8)} es decir {vueltas} giros")
             except:
                 print("ERROR")
-                #if KeyboardInterrupt:
-                 #   v = 0
-                  #  GPIO.cleanup()
+                if KeyboardInterrupt:
+                    v = 0
+                    GPIO.cleanup()
     except KeyboardInterrupt:
         GPIO.cleanup()
