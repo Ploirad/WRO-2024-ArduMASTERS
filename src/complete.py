@@ -162,12 +162,12 @@ while True:
                         #DERECHA
                         valor_t = TAvance
                         valor_d = GDer
-                        giro(valor_t, valor_d)
+                        giro_linea(valor_t, valor_d)
                     elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_izquierda > distancia_derecha:
                         #IZQUIERDA
                         valor_t = TAvance
                         valor_d = GIzq
-                        giro(valor_t, valor_d)
+                        giro_linea(valor_t, valor_d)
                     elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
                         #ATRAS
                         valor_t = TAtras
