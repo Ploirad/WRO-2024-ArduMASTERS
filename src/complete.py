@@ -113,7 +113,7 @@ def giro_linea(valor_t, valor_d):
     print("girando...")
     pwm_t.start(valor_t)
     pwm_d.start(valor_d)
-    time.sleep(2)
+    time.sleep(3)
     pwm_t.start(valor_t)
     pwm_d.start(GCent)
 
