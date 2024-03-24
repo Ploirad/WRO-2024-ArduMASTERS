@@ -214,7 +214,7 @@ while True:
                     print("centro")
                 
                 linea = GPIO.input(IRsensor)
-                if linea == 0:
+                if linea == 1:
                     numberlinea = numberlinea + 1
                     vueltas = vueltas + 1
                     if distancia_derecha > distancia_izquierda:
