@@ -177,20 +177,20 @@ while True:
                         valor_t = TAvance
                         valor_d = GCent
             
-                    if distancia_izquierda < 7 and distancia_derecha > distancia_izquierda:
+                    #if distancia_izquierda < 7 and distancia_derecha > distancia_izquierda:
                         #DERECHA
-                        valor_t = TAvance
-                        valor_d = GDer
-                        giro(valor_t, valor_d)
+                     #   valor_t = TAvance
+                      #  valor_d = GDer
+                       # giro(valor_t, valor_d)
             
-                    if distancia_derecha < 7 and distancia_izquierda > distancia_derecha:
-                        #IZQUIERDA
-                        valor_t = TAvance
-                        valor_d = GIzq
-                        giro(valor_t, valor_d)
+#                    if distancia_derecha < 7 and distancia_izquierda > distancia_derecha:
+ #                       #IZQUIERDA
+  #                      valor_t = TAvance
+   #                     valor_d = GIzq
+    #                    giro(valor_t, valor_d)
             
-                    if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
-                        valor_t = TAvance
+     #               if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
+      #                  valor_t = TAvance
                 
                 # Muestra las distancias
                 print(f"Distancia hacia delante: {distancia_delante} cm")
@@ -214,20 +214,20 @@ while True:
                     print("centro")
                 
                 linea = GPIO.input(IRsensor)
-                if linea == 1:
-                    numberlinea = numberlinea + 1
-                    vueltas = vueltas + 1
-                    if distancia_derecha > distancia_izquierda:
+     #           if linea == 1:
+      #              numberlinea = numberlinea + 1
+       #             vueltas = vueltas + 1
+              #      if distancia_derecha > distancia_izquierda:
                         #DERECHA
-                        valor_t = TAvance
-                        valor_d = GDer
-                        giro_linea(valor_t, valor_d)
+       #                 valor_t = TAvance
+        #                valor_d = GDer
+         #               giro_linea(valor_t, valor_d)
             
-                    elif distancia_izquierda > distancia_derecha:
+             #       elif distancia_izquierda > distancia_derecha:
                         #IZQUIERDA
-                        valor_t = TAvance
-                        valor_d = GIzq
-                        giro_linea(valor_t, valor_d)
+          #              valor_t = TAvance
+           #             valor_d = GIzq
+            #            giro_linea(valor_t, valor_d)
                 if vueltas == 24:
                     v = 0
                     GPIO.cleanup()
