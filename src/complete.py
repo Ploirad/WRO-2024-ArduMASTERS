@@ -156,11 +156,12 @@ while True:
                 # Actualiza las distancias
                 update_distances()
             
-               if girando == 0:
-                    if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]:
-                        valor_t = TAtras
-                        valor_d = GCent
-                    else:
+               
+                if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]:
+                    valor_t = TAtras
+                    valor_d = GCent
+                else:
+                    if girando == 0:
                         if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_derecha > distancia_izquierda:
                             #DERECHA
                             valor_t = TAvance
@@ -173,15 +174,15 @@ while True:
                             valor_d = GIzq
                             girando = 1
                             giro_linea(valor_t, valor_d)
-                        elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
-                            #ATRAS
-                            valor_t = TAtras
-                            valor_d = GCent
-                        elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                            #AVANCE
-                            valor_t = TAvance
-                            valor_d = GCent
-                            girando = 0
+                    elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"]:
+                        #ATRAS
+                        valor_t = TAtras
+                        valor_d = GCent
+                    elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
+                        #AVANCE
+                        valor_t = TAvance
+                        valor_d = GCent
+                        girando = 0
                 
                     #if distancia_izquierda < 7 and distancia_derecha > distancia_izquierda:
                         #DERECHA
