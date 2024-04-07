@@ -26,12 +26,12 @@ distancia_izquierda = 0
 distancia_derecha = 0
 distancia_comienzo_derecha = 0
 distancia_comienzo_izquierda = 0
-DISTANCIA_de_ACCION = {"MENOR QUE": 23, "MAYOR QUE": 22}
+DISTANCIA_de_ACCION = {"MENOR QUE": 25, "MAYOR QUE": 24}
 TAvance = 12.5
 TAtras = 2.5
 GDer = 3.5
 GIzq = 11.5
-GCent = 5.8
+GCent = 5.9
 valor_d = GCent
 valor_t = TAvance
 pulse_end = 0
@@ -122,6 +122,7 @@ def giro_linea(valor_t, valor_d):
 while True:
     # Lee el estado del botón
     button_state = GPIO.input(button_pin)
+    pwm_d.start(valor_d)
     
     if button_state == GPIO.HIGH:
         print("Botón presionado")
@@ -145,7 +146,6 @@ while True:
         if v == 1:
             try:
                 pwm_t.start(valor_t)
-                pwm_d.start(valor_d)
                 # Lee el estado del botón
                 button_state = GPIO.input(button_pin)
                 
