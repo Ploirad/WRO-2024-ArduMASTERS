@@ -16,7 +16,7 @@ button_pin = 9
 IRsensor = 8
 
 # Define variables
-tiempo_de_giro_linea = 1.5
+tiempo_de_giro_linea = 1
 numberlinea = 0
 vueltas = 0
 empezado = 0
@@ -33,7 +33,7 @@ TAvance = 12.5
 TAtras = 2.5
 GDer = 3.5
 GIzq = 11.5
-GCent = 5.7
+GCent = 5.8
 pulse_end = 0
 v = 0
 girando = 0
