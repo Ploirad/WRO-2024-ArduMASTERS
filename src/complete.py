@@ -26,14 +26,14 @@ distancia_izquierda = 0
 distancia_derecha = 0
 distancia_comienzo_derecha = 0
 distancia_comienzo_izquierda = 0
-valor_d = 7.5
-valor_t = 7.0   #Traccion 2.5=Atras;  12.5=Alante;  7=stop
 DISTANCIA_de_ACCION = {"MENOR QUE": 23, "MAYOR QUE": 22}
 TAvance = 12.5
 TAtras = 2.5
 GDer = 3.5
 GIzq = 11.5
 GCent = 5.8
+valor_d = GCent
+valor_t = TAvance
 pulse_end = 0
 v = 0
 girando = 0
