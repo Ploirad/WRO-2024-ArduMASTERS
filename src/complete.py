@@ -37,6 +37,8 @@ valor_t = TAvance
 pulse_end = 0
 v = 0
 girando = 0
+x = 4
+numero_de_giros_para_acabar = x * 3
 
 # Configura los pines GPIO
 GPIO.setmode(GPIO.BCM)
@@ -237,7 +239,7 @@ while True:
           #              valor_t = TAvance
            #             valor_d = GIzq
             #            giro_linea(valor_t, valor_d)
-                if vueltas == 24:
+                if vueltas == numero_de_giros_para_acabar:
                     v = 0
                     GPIO.cleanup()
                 print(f"NumberLinea:{numberlinea}")
