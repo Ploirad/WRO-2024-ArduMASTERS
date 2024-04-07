@@ -188,20 +188,20 @@ while True:
                         valor_d = GCent
                         girando = 0
                 
-                    #if distancia_izquierda < 7 and distancia_derecha > distancia_izquierda:
+                    if distancia_izquierda < 3:
                         #DERECHA
-                     #   valor_t = TAvance
-                      #  valor_d = GDer
-                       # giro(valor_t, valor_d)
+                        valor_t = TAvance
+                        valor_d = GDer
+                        giro(valor_t, valor_d)
             
-#                    if distancia_derecha < 7 and distancia_izquierda > distancia_derecha:
- #                       #IZQUIERDA
-  #                      valor_t = TAvance
-   #                     valor_d = GIzq
-    #                    giro(valor_t, valor_d)
+                    if distancia_derecha < 3:
+                        #IZQUIERDA
+                        valor_t = TAvance
+                        valor_d = GIzq
+                        giro(valor_t, valor_d)
             
-     #               if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
-      #                  valor_t = TAvance
+                    if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
+                        valor_t = TAvance
                 
                 # Muestra las distancias
                 print(f"Distancia hacia delante: {distancia_delante} cm")
