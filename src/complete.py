@@ -33,7 +33,7 @@ TAvance = 12.5
 TAtras = 2.5
 GDer = 3.5
 GIzq = 11.5
-GCent = 5.5
+GCent = 5.7
 pulse_end = 0
 v = 0
 
