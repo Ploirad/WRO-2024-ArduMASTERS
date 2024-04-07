@@ -201,10 +201,6 @@ while True:
      #               if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
       #                  valor_t = TAvance
                 
-                #print()
-                print(f"NumberLinea:{numberlinea}")
-                print(f"Linea:{linea}")
-                print(f"Vueltas:{float(vueltas/8)} es decir {vueltas} giros")
                 # Muestra las distancias
                 print(f"Distancia hacia delante: {distancia_delante} cm")
                 print(f"Distancia hacia atras: {distancia_atras} cm")
@@ -244,6 +240,9 @@ while True:
                 if vueltas == 24:
                     v = 0
                     GPIO.cleanup()
+                print(f"NumberLinea:{numberlinea}")
+                print(f"Linea:{linea}")
+                print(f"Vueltas:{float(vueltas/8)} es decir {vueltas} giros")
                     
             except:
                 print("ERROR")
