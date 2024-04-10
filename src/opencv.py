@@ -1,30 +1,30 @@
-from picamera import PiCamera
-from time import sleep
+import picamera2
+import time
+import numpy as np
 
 # Initialize the camera
-camera = PiCamera()
+camera = picamera2.PiCamera2()
+
+# Set the camera resolution
+camera.sensor_mode = 'mode_1080p'
 
 # Start the camera preview
 camera.start_preview()
 
 # Allow the camera to warm up
-sleep(2)
+time.sleep(2)
 
 # Capture an image
-camera.capture('/home/pi/image.jpg')
+img = camera.capture()
 
 # Stop the camera preview
 camera.stop_preview()
 
-# Open the image file
-with open('/home/pi/image.jpg', 'rb') as f:
-    img = f.read()
-
-# Decode the image data
-img_data = np.frombuffer(img, dtype=np.uint8)
+# Convert the image data to a NumPy array
+img_data = np.array(img.data)
 
 # Reshape the image data into a height x width x 3 array
-img_data = img_data.reshape((480, 640, 3))
+img_data = img_data.reshape((1080, 1920, 3))
 
 # Print the RGB values of the first 10 pixels
 for i in range(10):
