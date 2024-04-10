@@ -3,14 +3,13 @@ import time
 import numpy as np
 
 # Initialize the camera
-camera = picamera2.Camera()
+camera = picamera2.PiCamera2()
 
-# Set the camera configuration
-config = picamera2.PreviewDefinition(width=1920, height=1080, format='RGB888')
-camera.configure(config)
+# Set the camera resolution
+camera.sensor_mode = 'mode_1080p'
 
 # Start the camera preview
-camera.start()
+camera.start_preview()
 
 # Allow the camera to warm up
 time.sleep(2)
@@ -19,7 +18,7 @@ time.sleep(2)
 image = camera.capture_array()
 
 # Stop the camera preview
-camera.stop()
+camera.stop_preview()
 
 # Convert the image data to a NumPy array
 img_data = np.array(image)
