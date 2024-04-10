@@ -3,7 +3,7 @@ import time
 import numpy as np
 
 # Initialize the camera
-camera = picamera2.Camera()
+camera = picamera2.PiCamera2()
 
 # Set the camera configuration
 config = picamera2.PreviewDefinition(width=1920, height=1080, format='RGB888')
