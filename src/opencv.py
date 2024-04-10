@@ -1,47 +1,69 @@
-import cv2
+ import cv2
 import numpy as np
 
-# Definimos una función para detectar colores y graficar contornos
-def draw(mask, color):
-    contornos,_ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+# Definimos una función para detectar colores y obtener coordenadas
+def detect_colors(frame):
+    # Convertimos de BGR a HSV
+    frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     
-    for c in contornos:
+    # Definimos los rangos de color en HSV
+    azul_bajo = np.array([100, 100, 20], np.uint8)
+    azul_alto = np.array([125, 255, 255], np.uint8)
+
+    amarillo_bajo = np.array([15, 100, 20], np.uint8)
+    amarillo_alto = np.array([45, 255, 255], np.uint8)
+
+    rojo_bajo1 = np.array([0, 100, 20], np.uint8)
+    rojo_alto1 = np.array([5, 255, 255], np.uint8)
+    rojo_bajo2 = np.array([175, 100, 20], np.uint8)
+    rojo_alto2 = np.array([179, 255, 255], np.uint8)
+
+    # Detectamos los colores en las máscaras
+    mask_azul = cv2.inRange(frame_hsv, azul_bajo, azul_alto)
+    mask_amarillo = cv2.inRange(frame_hsv, amarillo_bajo, amarillo_alto)
+    mask_rojo1 = cv2.inRange(frame_hsv, rojo_bajo1, rojo_alto1)
+    mask_rojo2 = cv2.inRange(frame_hsv, rojo_bajo2, rojo_alto2)
+    mask_rojo = cv2.add(mask_rojo1, mask_rojo2)
+
+    # Buscamos contornos y obtenemos el centro de cada objeto detectado
+    colors = []
+    contours, _ = cv2.findContours(mask_azul, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    for c in contours:
         area = cv2.contourArea(c)
-        
-        # Si el área de interés es mayor a
-        if area > 5000:    
+        if area > 5000:
             M = cv2.moments(c)
-            if (M["m00"] == 0):
+            if M["m00"] == 0:
                 M["m00"] = 1
-                
-            x = int(M["m10"]/M["m00"])
-            y = int(M["m01"]/M["m00"])
-            
-            #--- Dibujamos los contornos seleccionados ---
-            newContorno = cv2.convexHull(c)
-             
-            #--- Dibujamos un punto de r=7 y color verde ---
-            cv2.circle(frame, (x, y), 7, (0, 255, 0), -1)
-                                 
-            # Puntos, ubicación, fuente, grosor, color, tamaño
-            cv2.putText(frame, '{}, {}'.format(x, y), (x+10, y), font, 0.75, (0, 255, 0), 1, cv2.LINE_AA)
-            cv2.drawContours(frame, [newContorno], 0, color, 3)
+            x = int(M["m10"] / M["m00"])
+            y = int(M["m01"] / M["m00"])
+            colors.append((frame[y, x, 0], frame[y, x, 1], frame[y, x, 2], 'azul'))
 
-# Definimos el puerto de la cámara a emplear         
+    contours, _ = cv2.findContours(mask_amarillo, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    for c in contours:
+        area = cv2.contourArea(c)
+        if area > 5000:
+            M = cv2.moments(c)
+            if M["m00"] == 0:
+                M["m00"] = 1
+            x = int(M["m10"] / M["m00"])
+            y = int(M["m01"] / M["m00"])
+            colors.append((frame[y, x, 0], frame[y, x, 1], frame[y, x, 2], 'amarillo'))
+
+    contours, _ = cv2.findContours(mask_rojo, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    for c in contours:
+        area = cv2.contourArea(c)
+        if area > 5000:
+            M = cv2.moments(c)
+            if M["m00"] == 0:
+                M["m00"] = 1
+            x = int(M["m10"] / M["m00"])
+            y = int(M["m01"] / M["m00"])
+            colors.append((frame[y, x, 0], frame[y, x, 1], frame[y, x, 2], 'rojo'))
+
+    return colors
+
+# Definimos el puerto de la cámara a emplear
 cap = cv2.VideoCapture(0)
-
-# Máscara de colores a detectar
-azulBajo = np.array([100, 100, 20], np.uint8)
-azulAlto = np.array([125, 255, 255], np.uint8)
-
-amarilloBajo = np.array([15, 100, 20], np.uint8)
-amarilloAlto = np.array([45, 255, 255], np.uint8)
-
-rojoBajo1 = np.array([0, 100, 20], np.uint8)
-rojoAlto1 = np.array([5, 255, 255], np.uint8)
-
-rojoBajo2 = np.array([175, 100, 20], np.uint8)
-rojoAlto2 = np.array([179, 255, 255], np.uint8)
 
 # Mientras está activada la captura de video
 while True:
@@ -50,25 +72,13 @@ while True:
 
     # Si hay imagen capturada
     if ret == True:
+        # Detectamos colores y obtenemos RGB
+        detected_colors = detect_colors(frame)
+        
+        # Imprimimos los colores detectados en RGB
+        for color in detected_colors:
+            print(f"Color {color[3]}: R={color[0]}, G={color[1]}, B={color[2]}")
 
-        # Pasamos de BGR a HSV
-        frameHSV = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        
-        maskAzul = cv2.inRange(frameHSV, azulBajo, azulAlto)
-
-        maskAmarillo = cv2.inRange(frameHSV, amarilloBajo, amarilloAlto)
-        
-        maskRojo1 = cv2.inRange(frameHSV, rojoBajo1, rojoAlto1)
-        maskRojo2 = cv2.inRange(frameHSV, rojoBajo2, rojoAlto2)
-        maskRojo = cv2.add(maskRojo1, maskRojo2)
-        
-        draw(maskAzul, (255, 0, 0))
-        draw(maskAmarillo, (0, 255, 255))
-        draw(maskRojo, (0, 0, 255))
-        
-        # Mostramos la ventana de captura
-        cv2.imshow('Captura de video', frame)
-        
         # Detenemos la visualización con la tecla 's'
         if cv2.waitKey(1) & 0xFF == ord('s'):
             break
