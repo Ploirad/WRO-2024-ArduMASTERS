@@ -10,6 +10,6 @@ picam2.configure(video_config)
 
 encoder = Encoder()
 
-picam2.start_recording(encoder,'test.h264')
+picam2.start_recording(encoder,'test.mp4')
 time.sleep(10)
 picam2.stop_recording()
