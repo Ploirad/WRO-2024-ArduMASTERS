@@ -8,7 +8,7 @@ picam2 = Picamera2()
 video_config = picam2.create_video_configuration()
 picam2.configure(video_config)
 
-encoder = H264Encoder(1)
+encoder = H264Encoder()
 
 picam2.start_recording(encoder,'test.mp')
 time.sleep(10)
