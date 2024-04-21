@@ -90,6 +90,30 @@ def giro_linea(valor_t, valor_d):
     pwm_t.start(valor_t)
     pwm_d.start(GCent)
 
+def giro_tras(valor_t, valor_d):
+    valor_t = TAtras
+    if valor_d == GIzq:
+        valor_d = GDer
+    elif valor_d == GDer:
+        valor_d = GIzq
+    else:
+        valor_d = GCent       
+    pwm_t.start(valor_t)
+    pwm_d.start(valor_d)
+    time.sleep(2)
+    valor_t = TAvance
+    if valor_d == GIzq:
+        valor_d = GDer
+    elif valor_d == GDer:
+        valor_d = GIzq
+    else:
+        valor_d = GCent
+    pwm_t.start(valor_t)
+    pwm_d.start(valor_d)
+    time.sleep(2)
+    valor_t = TAvance
+    valor_d = GCent
+
 while True:
     # Lee el estado del botón
     button_state = GPIO.input(button_pin)
@@ -146,40 +170,19 @@ while True:
                     #DERECHA
                     valor_t = TAvance
                     valor_d = GDer
-                    giro_linea(valor_t, valor_d)
-        
+                    giro_tras(valor_t, valor_d)
+                
                 if distancia_derecha < 5.5:
                     #IZQUIERDA
                     valor_t = TAvance
                     valor_d = GIzq
-                    giro_linea(valor_t, valor_d)
+                    giro_tras(valor_t, valor_d)
         
                 if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
                     valor_t = TAvance
                 else:
                     if distancia_delante < 5:
-                        valor_t = TAtras
-                        if valor_d == GIzq:
-                            valor_d = GDer
-                        elif valor_d == GDer:
-                            valor_d = GIzq
-                        else:
-                            valor_d = GCent       
-                        pwm_t.start(valor_t)
-                        pwm_d.start(valor_d)
-                        time.sleep(2)
-                        valor_t = TAvance
-                        if valor_d == GIzq:
-                            valor_d = GDer
-                        elif valor_d == GDer:
-                            valor_d = GIzq
-                        else:
-                            valor_d = GCent
-                        pwm_t.start(valor_t)
-                        pwm_d.start(valor_d)
-                        time.sleep(2)
-                        valor_t = TAvance
-                        valor_d = GCent
+                        giro_tras(valor_t, valor_d)
             # Muestra las distancias
             print(f"Distancia hacia delante: {distancia_delante} cm")
             print(f"Distancia hacia atras: {distancia_atras} cm")
