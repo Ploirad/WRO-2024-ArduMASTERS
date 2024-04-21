@@ -113,6 +113,8 @@ def giro_tras(valor_t, valor_d):
     time.sleep(2)
     valor_t = TAvance
     valor_d = GCent
+    pwm_t.start(valor_t)
+    pwm_d.start(valor_d)
 
 while True:
     # Lee el estado del botón
@@ -166,13 +168,13 @@ while True:
                     valor_d = GCent
                     girando = 0
             
-                if distancia_izquierda < 5.5:
+                if distancia_izquierda < 6:
                     #DERECHA
                     valor_t = TAvance
                     valor_d = GDer
                     giro_tras(valor_t, valor_d)
                 
-                if distancia_derecha < 5.5:
+                if distancia_derecha < 6:
                     #IZQUIERDA
                     valor_t = TAvance
                     valor_d = GIzq
