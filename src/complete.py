@@ -21,6 +21,8 @@ numberlinea = 0
 vueltas = 0
 empezado = 0
 distancia_delante = 0
+ant_d_d = 0
+vueltas_e = 0
 distancia_atras = 0
 distancia_izquierda = 0
 distancia_derecha = 0
@@ -76,7 +78,8 @@ def get_distance(trig_pin, echo_pin):
     return distance
 
 def update_distances():
-    global distancia_delante, distancia_atras, distancia_izquierda, distancia_derecha
+    global distancia_delante, distancia_atras, distancia_izquierda, distancia_derecha, ant_d_d
+    ant_d_d = distancia_delante
     distancia_delante = get_distance(TRIG_PIN_DELANTE, ECHO_PIN_DELANTE)
     distancia_atras = get_distance(TRIG_PIN_ATRAS, ECHO_PIN_ATRAS)
     distancia_izquierda = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
@@ -185,6 +188,12 @@ while True:
                 else:
                     if distancia_delante < 5:
                         giro_tras(valor_t, valor_d)
+
+                if ant_d_d == distancia_delante:
+                    vueltas_e += 1
+                    if vueltas_e == 5:
+                        giro_tras(valor_t, valor_d)
+                        e = 0
             # Muestra las distancias
             print(f"Distancia hacia delante: {distancia_delante} cm")
             print(f"Distancia hacia atras: {distancia_atras} cm")
