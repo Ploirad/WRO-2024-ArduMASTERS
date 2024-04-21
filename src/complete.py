@@ -172,13 +172,13 @@ while True:
                     #DERECHA
                     valor_t = TAvance
                     valor_d = GDer
-                    giro_tras(valor_t, valor_d)
+                    giro_linea(valor_t, valor_d)
                 
                 if distancia_derecha < 6:
                     #IZQUIERDA
                     valor_t = TAvance
                     valor_d = GIzq
-                    giro_tras(valor_t, valor_d)
+                    giro_linea(valor_t, valor_d)
         
                 if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
                     valor_t = TAvance
