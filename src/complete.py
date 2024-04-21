@@ -191,7 +191,7 @@ while True:
 
                 if ant_d_d == distancia_delante:
                     vueltas_e += 1
-                    if vueltas_e == 3:
+                    if vueltas_e == 1:
                         giro_tras(valor_t, valor_d)
                         e = 0
             # Muestra las distancias
