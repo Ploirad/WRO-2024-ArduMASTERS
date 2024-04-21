@@ -156,7 +156,30 @@ while True:
         
                 if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
                     valor_t = TAvance
-            
+                else:
+                    if distancia_delante < 4:
+                        valor_t = TAtras
+                        if valor_d == GIzq:
+                            valor_d = GDer
+                        elif valor_d == GDer:
+                            valor_d = GIzq
+                        else:
+                            valor_d = GCent       
+                        pwm_t.start(valor_t)
+                        pwm_d.start(valor_d)
+                        time.sleep(2)
+                        valor_t = TAvance
+                        if valor_d == GIzq:
+                            valor_d = GDer
+                        elif valor_d == GDer:
+                            valor_d = GIzq
+                        else:
+                            valor_d = GCent
+                        pwm_t.start(valor_t)
+                        pwm_d.start(valor_d)
+                        time.sleep(2)
+                        valor_t = TAvance
+                        valor_d = GCent
             # Muestra las distancias
             print(f"Distancia hacia delante: {distancia_delante} cm")
             print(f"Distancia hacia atras: {distancia_atras} cm")
