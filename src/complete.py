@@ -157,7 +157,7 @@ while True:
                 if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
                     valor_t = TAvance
                 else:
-                    if distancia_delante < 4:
+                    if distancia_delante < 5:
                         valor_t = TAtras
                         if valor_d == GIzq:
                             valor_d = GDer
