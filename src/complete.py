@@ -221,7 +221,7 @@ while True:
             print(f"NumberLinea:{numberlinea}")
             print(f"Linea:{linea}")
             print(f"Vueltas:{float(vueltas/x)} es decir {vueltas} giros")
-    except e = exception:
+    except exception = e:
         if e == KeyboardInterrupt:
             GPIO.cleanup()
         else:
