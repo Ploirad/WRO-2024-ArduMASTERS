@@ -7,4 +7,10 @@
 <h1>Summary:
   </h1><b/>
 
-  In this folder we got images from all the parts of our car 
+  In this folder we got images of all the angles of our car:
+  - Front
+  - Back
+  - Up
+  - Under
+  - Right
+  - Left 
