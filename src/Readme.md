@@ -23,10 +23,10 @@
   - ultrasound.py
   - detección_coloresHSV.py
   - 
-  Here we got  a internal folder two. Our folder is :
+  Here we got  a internal folder too, that contains all of our libraries . Our folder is :
   # [Libraries](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/src/Libraries)
 
-  In this folder we got ouer libraries:
+  In this folder we got:
   - main.py
   - servo_control.py
   - siguelineas.py
