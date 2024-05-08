@@ -11,12 +11,12 @@ In this folder we got all the things that are related to de chasis of the robot.
 Here you find two inter folders:
 
 # [Old_Car_Models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models/Old_Car_Models)
-  This folder contains all the things that have been replaced for other ones. This are:
+  This folder contains all the things that have been replaced for other ones because we think thy are not usefull or we found better ones for the car. This are:
   - WRO Chassis.stl
   - WRO Front Wheel.stl
 # [Current_Car_Models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models/Current_Car_Models)
 
-  This folder contains all the things that we have in our car right now. This are:
+  This folder contains all the things that we have in our car right now, this ones are the best ones we found for our car. This are:
    - WRO Battery Squad.stl
    - WRO Motor Support.stl
    - WRO Protoboard Support.stl
