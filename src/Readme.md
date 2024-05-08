@@ -7,7 +7,7 @@
 <h1>Summary:
   </h1><b/>
 
-  This folder contains all the dodes that we got. Here you can find this codes:
+  This folder contains all the codes that we have been doing all the curse for our robot. Here you can find this codes:
   - camera.py
   - colors detector RGBY.py
   - complete.py
