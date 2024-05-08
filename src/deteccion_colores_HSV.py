@@ -8,10 +8,10 @@ import numpy as np
 def extractColor(frame, r):
     frameHSV = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     imagenNueva = frameHSV[r[1]:r[1]+r[3],r[0]:r[0]+r[2]]
-    hMin, hMax = (345), (365)
-    sMin, sMax = (74), (94)
-    vMin, vMax = (83), (100)
-    
+    H,S,V = imagenNueva[:,:,0], imagenNueva[:,:,1], imagenNueva[:,:,2]
+    hMin, hMax = np.min(H), np.max(H)
+    sMin, sMax = np.min(S), np.max(S)
+    vMin, vMax = np.min(V), np.max(V)
     bajo = np.array([hMin, sMin, vMin], np.uint8)
     alto = np.array([hMax, sMax, vMax], np.uint8)
     return bajo, alto
@@ -52,14 +52,11 @@ time.sleep(0.3)
 cuenta = 0
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     image = frame.array
-    roi = cv2.selectROI("frame", image, fromCenter=False, showCrosshair=True)
-    roi = tuple(map(int,roi))
-    bajo, alto = extractColor(image, roi)
+    bajo, alto = extractColor(image, ([345, 74, 83],[365, 94, 100]))
     f, mask, cx, cy = testColor(image, bajo, alto)
     print(cx,cy)
     cv2.imshow("frame", f)
     cv2.imshow("frame2", mask)
-        
     rawCapture.truncate(0)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
