@@ -7,7 +7,7 @@
 <h1>Summary:
   </h1><b/>
 
-In this folder we got all the things that are related to de chasis of the robot.
+In this folder we got all the things that are related to de chasis of the robot, including older ones that were discarded.
 Here you find two inter folders:
 
 # [Old_Car_Models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models/Old_Car_Models)
