@@ -4,25 +4,12 @@ import time
 import cv2
 import numpy as np
 
-
-def extractColor(frame, r):
-    frameHSV = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    imagenNueva = frameHSV[r[1]:r[1]+r[3],r[0]:r[0]+r[2]]
-    H,S,V = imagenNueva[:,:,0], imagenNueva[:,:,1], imagenNueva[:,:,2]
-    hMin, hMax = np.min(H), np.max(H)
-    sMin, sMax = np.min(S), np.max(S)
-    vMin, vMax = np.min(V), np.max(V)
-    bajo = np.array([hMin, sMin, vMin], np.uint8)
-    alto = np.array([hMax, sMax, vMax], np.uint8)
-    return bajo, alto
-
-
 def testColor(frame, bajo, alto):
     frame2 = frame.copy()
     frameHSV = cv2.cvtColor(frame2, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(frameHSV, bajo, alto)
     cx, cy = obtenerCentroide(mask)
-    frame2[mask == 255] = (0,255,0)
+    frame2[mask == 255] = (255,255,255)
     cv2.circle(frame2, (cx,cy), 5,(0,0,255), -1)
     return frame2, mask, cx,cy
 
@@ -48,11 +35,11 @@ camera = PiCamera()
 camera.resolution = resolucion
 rawCapture = PiRGBArray(camera, size=resolucion)
 time.sleep(0.3)
+bajo, alto = [345, 74, 83],[365, 94, 100]
 
 cuenta = 0
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     image = frame.array
-    bajo, alto = extractColor(image, ([345, 74, 83],[365, 94, 100]))
     f, mask, cx, cy = testColor(image, bajo, alto)
     print(cx,cy)
     cv2.imshow("frame", f)
