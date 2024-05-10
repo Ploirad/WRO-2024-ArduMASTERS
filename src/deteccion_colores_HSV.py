@@ -9,7 +9,7 @@ def testColor(frame, bajo, alto):
     frameHSV = cv2.cvtColor(frame2, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(frameHSV, bajo, alto)
     cx, cy = obtenerCentroide(mask)
-    frame2[mask == 255] = (255,255,255)
+    frame2[mask == 255] = (0,0,100)
     cv2.circle(frame2, (cx,cy), 5,(0,0,255), -1)
     return frame2, mask, cx,cy
 
