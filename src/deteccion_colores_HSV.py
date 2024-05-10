@@ -35,8 +35,7 @@ camera = PiCamera()
 camera.resolution = resolucion
 rawCapture = PiRGBArray(camera, size=resolucion)
 time.sleep(0.3)
-bajo, alto = [0, 0, 50],[50, 50, 255]
-cuenta = 0
+bajo, alto = np.array([344, 75, 0]),np.array([364, 95, 10])
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     image = frame.array
     f, mask, cx, cy = testColor(image, bajo, alto)
