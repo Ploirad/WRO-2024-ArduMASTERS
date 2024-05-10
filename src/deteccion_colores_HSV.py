@@ -35,10 +35,15 @@ camera = PiCamera()
 camera.resolution = resolucion
 rawCapture = PiRGBArray(camera, size=resolucion)
 time.sleep(0.3)
-bajo, alto = np.array([344, 75, 0]),np.array([364, 95, 10])
+bajoR, altoR = np.array([355, 169, 55]),np.array([0, 198, 51])
+bajoG, altoG = np.array([111, 134, 51]),np.array([120, 198, 51])
+bajoM, altoM = np.array([300, 198, 28]),np.array([300, 198, 51])
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     image = frame.array
-    f, mask, cx, cy = testColor(image, bajo, alto)
+    f, mask1, cx, cy = testColor(image, bajoR, altoR)
+    f, mask2, cx, cy = testColor(image, bajoG, altoG)
+    f, mask3, cx, cy = testColor(image, bajoM, altoM)
+    mask = cv2.bitwise_or(mask1, mask2, mask3)
     print(cx,cy)
     cv2.imshow("frame", f)
     cv2.imshow("frame2", mask)
