@@ -170,9 +170,9 @@ while True:
             f, mask3, cx3, cy3, w3, h3 = testColor(image, bajoM, altoM, (300, 100, 100))
             print([cx1,cy1], [cx2, cy2], [cx3, cy3])
             print([w1, h1], [w2, h2], [w3, h3])
-            cv2.imshow("frame: Rojo", mask1)
-            cv2.imshow("frame: Verde", mask2)
-            cv2.imshow("frame: Morado", mask3)
+            #cv2.imshow("frame: Rojo", mask1)
+            #cv2.imshow("frame: Verde", mask2)
+            #cv2.imshow("frame: Morado", mask3)
             rawCapture.truncate(0)
             pwm_t.start(valor_t)    
             if v == 1:
