@@ -195,11 +195,11 @@ def main():
                                 girando = 1
                                 vueltas += 1
                                 giro_linea(valor_t, valor_d)
-                    elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                        #AVANCE
-                        valor_t = TAvance
-                        valor_d = GCent
-                        girando = 0
+                            elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
+                                #AVANCE
+                                valor_t = TAvance
+                                valor_d = GCent
+                                girando = 0
 
                     if distancia_izquierda < 6:
                         #DERECHA
