@@ -5,6 +5,8 @@ from picamera.array import PiRGBArray
 import cv2
 import numpy as np
 
+GPIO.setmode(GPIO.BCM)
+
 class Robot:
     def __init__(self):
         self.TRIG_PIN_DELANTE = 23
