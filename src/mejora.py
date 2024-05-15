@@ -9,12 +9,23 @@ GPIO.setmode(GPIO.BCM)
 
 class Robot:
     def __init__(self):
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.SERVO_PIN_DIRECCION, GPIO.OUT)
+        self.SERVO_FREQ = 50
+        self.SERVO_MIN_DC = 5
+        self.SERVO_MAX_DC = 12
+        self.SERVO_MIN_ANGLE = 0
+        self.SERVO_MAX_ANGLE = 180
+    
+        self.MOTOR_LEFT_PWM = 18
+        self.MOTOR_LEFT_DIR = 23
+        self.MOTOR_RIGHT_PWM = 24
+        self.MOTOR_RIGHT_DIR = 25
+    
+        self.SERVO_PIN_DIRECCION = 17
+        self.SERVO_PIN_VELOCIDAD = 27
+    
         self.pwm_d = GPIO.PWM(self.SERVO_PIN_DIRECCION, self.SERVO_FREQ)
         self.pwm_d.start(self.SERVO_MIN_DC)
     
-        GPIO.setup(self.SERVO_PIN_VELOCIDAD, GPIO.OUT)
         self.pwm_v = GPIO.PWM(self.SERVO_PIN_VELOCIDAD, self.SERVO_FREQ)
         self.pwm_v.start(self.SERVO_MIN_DC)
     
@@ -33,7 +44,11 @@ class Robot:
         self.Kd = 0.001
         self.set_point = 0
         self.error = 0
-
+    
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.SERVO_PIN_DIRECCION, GPIO.OUT)
+        GPIO.setup(self.SERVO_PIN_VELOCIDAD, GPIO.OUT)
+    
     def get_distance(self, trig_pin: int, echo_pin: int) -> float:
         """Get the distance from the ultrasonic sensor"""
         # Send a pulse to the trig pin
