@@ -167,3 +167,7 @@ class Robot:
             self.pwm_t.stop()
             self.pwm_d.stop()
             GPIO.cleanup()
+
+if __name__ == "__main__":
+    robot = Robot()
+    robot.run()
