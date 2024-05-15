@@ -159,39 +159,23 @@ while True:
     # Lee el estado del botón
     button_state = GPIO.input(button_pin)
     pwm_d.start(valor_d)
-    
     if button_state == GPIO.HIGH:
         print("Botón presionado")
-        if v == 0:
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setup(servo_pin_direccion, GPIO.OUT)
-            GPIO.setup(servo_pin_traccion, GPIO.OUT)
-            GPIO.setup(TRIG_PIN_DELANTE, GPIO.OUT)
-            GPIO.setup(ECHO_PIN_DELANTE, GPIO.IN)
-            GPIO.setup(TRIG_PIN_ATRAS, GPIO.OUT)
-            GPIO.setup(ECHO_PIN_ATRAS, GPIO.IN)
-            GPIO.setup(TRIG_PIN_IZQUIERDA, GPIO.OUT)
-            GPIO.setup(ECHO_PIN_IZQUIERDA, GPIO.IN)
-            GPIO.setup(TRIG_PIN_DERECHA, GPIO.OUT)
-            GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN)
-            GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-            GPIO.setup(IRsensor, GPIO.IN)
         v = 1
-
     try:
-        if v == 1:
-            for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-                image = frame.array
-                f, mask1, cx1, cy1, w1, h1 = testColor(image, bajoR, altoR, (355, 83, 93))
-                f, mask2, cx2, cy2, w2, h2= testColor(image, bajoG, altoG, (111, 79, 83))
-                f, mask3, cx3, cy3, w3, h3 = testColor(image, bajoM, altoM, (300, 100, 100))
-                print([cx1,cy1], [cx2, cy2], [cx3, cy3])
-                print([w1, h1], [w2, h2], [w3, h3])
-                cv2.imshow("frame: Rojo", mask1)
-                cv2.imshow("frame: Verde", mask2)
-                cv2.imshow("frame: Morado", mask3)
-                rawCapture.truncate(0)
-                pwm_t.start(valor_t)
+        for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+            image = frame.array
+            f, mask1, cx1, cy1, w1, h1 = testColor(image, bajoR, altoR, (355, 83, 93))
+            f, mask2, cx2, cy2, w2, h2= testColor(image, bajoG, altoG, (111, 79, 83))
+            f, mask3, cx3, cy3, w3, h3 = testColor(image, bajoM, altoM, (300, 100, 100))
+            print([cx1,cy1], [cx2, cy2], [cx3, cy3])
+            print([w1, h1], [w2, h2], [w3, h3])
+            cv2.imshow("frame: Rojo", mask1)
+            cv2.imshow("frame: Verde", mask2)
+            cv2.imshow("frame: Morado", mask3)
+            rawCapture.truncate(0)
+            pwm_t.start(valor_t)    
+            if v == 1:
                 update_distances()
                 if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]:
                         valor_t = TAtras
