@@ -1,5 +1,10 @@
 import RPi.GPIO as GPIO
 import time
+from picamera import PiCamera
+from picamera.array import PiRGBArray
+import time
+import cv2
+import numpy as np
 
 # Define los pines
 TRIG_PIN_DELANTE = 23
@@ -39,8 +44,16 @@ valor_t = TAvance
 pulse_end = 0
 v = 0
 girando = 0
-x = 40
+x = 4
 numero_de_giros_para_acabar = x * 3
+resolucion = (640,480)
+camera = PiCamera()
+camera.resolution = resolucion
+rawCapture = PiRGBArray(camera, size=resolucion)
+time.sleep(0.3)
+bajoR, altoR = np.array([174, 175, 138]),np.array([176, 212, 163])
+bajoG, altoG = np.array([57, 104, 114]),np.array([65, 156, 140])
+bajoM, altoM = np.array([164, 148, 134]),np.array([167, 185, 168])
 
 # Configura los pines GPIO
 GPIO.setmode(GPIO.BCM)
@@ -60,6 +73,43 @@ GPIO.setup(IRsensor, GPIO.IN)
 #Iniciar servos
 pwm_d = GPIO.PWM(servo_pin_direccion, 50) # Frecuencia de PWM: 50Hz (estándar para servos)
 pwm_t = GPIO.PWM(servo_pin_traccion, 50) # Frecuencia de PWM: 50Hz (estándar para servos)
+
+def testColor(frame, bajo, alto, color):
+    frame2 = frame.copy()
+    frameHSV = cv2.cvtColor(frame2, cv2.COLOR_BGR2HSV)
+    mask = cv2.inRange(frameHSV, bajo, alto)
+    cx, cy, w, h = obtenerCentroide(mask)
+    frame2[mask == 255] = color
+    cv2.circle(frame2, (cx,cy), 5,(0,0,255), -1)
+    return frame2, mask, cx,cy, w, h
+
+
+def obtenerCentroide(imgBin):
+    cx = 0
+    cy = 0
+    cBlancas = cv2.findNonZero(imgBin)
+    x, y, w, h = cv2.boundingRect(cBlancas)
+    try:
+        sumX, sumY = np.sum(cBlancas, axis=0).squeeze()
+        nPuntos = len(cBlancas)
+        cx = int(sumX / nPuntos)
+        cy = int(sumY / nPuntos)
+    except:
+        pass
+    return cx, cy, w, h
+
+def camera_for():
+    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+        image = frame.array
+        f, mask1, cx1, cy1, w1, h1 = testColor(image, bajoR, altoR, (355, 83, 93))
+        f, mask2, cx2, cy2, w2, h2= testColor(image, bajoG, altoG, (111, 79, 83))
+        f, mask3, cx3, cy3, w3, h3 = testColor(image, bajoM, altoM, (300, 100, 100))
+        print([cx1,cy1], [cx2, cy2], [cx3, cy3])
+        print([w1, h1], [w2, h2], [w3, h3])
+        cv2.imshow("frame: Rojo", mask1)
+        cv2.imshow("frame: Verde", mask2)
+        cv2.imshow("frame: Morado", mask3)
+        rawCapture.truncate(0)
 
 def get_distance(trig_pin, echo_pin):
     # Envía un pulso al pin Trig
