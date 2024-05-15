@@ -30,7 +30,7 @@ distancia_izquierda = 0
 distancia_derecha = 0
 distancia_comienzo_derecha = 0
 distancia_comienzo_izquierda = 0
-DISTANCIA_de_ACCION = {"MENOR QUE": 25, "MAYOR QUE": 24}
+DISTANCIA_de_ACCION = {"menor que": 25, "mayor que": 24}
 TAvance = 12.5
 TAtras = 2.5
 GDer = 4.5
@@ -53,6 +53,7 @@ bajoM, altoM = np.array([164, 148, 134]),np.array([167, 185, 168])
 
 def setup_gpio():
     GPIO.setmode(GPIO.BCM)
+    GPIO.setwarnings(False)
     GPIO.setup(SERVO_PIN_DIRECCION, GPIO.OUT)
     GPIO.setup(SERVO_PIN_TRACCION, GPIO.OUT)
     GPIO.setup(TRIG_PIN_DELANTE, GPIO.OUT)
@@ -62,7 +63,8 @@ def setup_gpio():
     GPIO.setup(TRIG_PIN_IZQUIERDA, GPIO.OUT)
     GPIO.setup(ECHO_PIN_IZQUIERDA, GPIO.IN)
     GPIO.setup(TRIG_PIN_DERECHA, GPIO.OUT)
-    GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN), GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+    GPIO.setup(ECHO_PIN_DERECHA,GPIO.IN)
+    GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 def setup_servos():
     global pwm_d, pwm_t
@@ -107,6 +109,14 @@ def get_distance(trig_pin, echo_pin):
     distance = pulse_duration * 17150
     distance = round(distance, 3)
     return distance
+
+def update_distances():
+    global distancia_delante, distancia_atras, distancia_izquierda, distancia_derecha, ant_d_d
+    ant_d_d = distancia_delante
+    distancia_delante = get_distance(TRIG_PIN_DELANTE, ECHO_PIN_DELANTE)
+    distancia_atras = get_distance(TRIG_PIN_ATRAS, ECHO_PIN_ATRAS)
+    distancia_izquierda = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
+    distancia_derecha = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
 
 def update_distances():
     global distancia_delante, distancia_atras, distancia_izquierda, distancia_derecha, ant_d_d
@@ -176,30 +186,30 @@ def main():
                     if cv2.waitKey(1) & 0xFF == ord('q'):
                         break
                     update_distances()
-                    if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]:
+                    if distancia_delante < DISTANCIA_de_ACCION["menor que"] and distancia_izquierda < DISTANCIA_de_ACCION["menor que"] and distancia_derecha < DISTANCIA_de_ACCION["menor que"]:
                         valor_t = TAtras
                         valor_d = GCent
                     else:
                         if girando == 0:
-                            if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_derecha > distancia_izquierda:
+                            if distancia_delante < DISTANCIA_de_ACCION["menor que"] and distancia_derecha > DISTANCIA_de_ACCION["mayor que"] and distancia_derecha > distancia_izquierda:
                                 #DERECHA
                                 valor_t = TAvance
                                 valor_d = GDer
                                 girando = 1
                                 vueltas += 1
                                 giro_linea(valor_t, valor_d)
-                            elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_izquierda > distancia_derecha:
+                            elif distancia_delante < DISTANCIA_de_ACCION["menor que"] and distancia_izquierda > DISTANCIA_de_ACCION["mayor que"] and distancia_izquierda > distancia_derecha:
                                 #IZQUIERDA
                                 valor_t = TAvance
                                 valor_d = GIzq
                                 girando = 1
                                 vueltas += 1
                                 giro_linea(valor_t, valor_d)
-                            elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                                #AVANCE
-                                valor_t = TAvance
-                                valor_d = GCent
-                                girando = 0
+                    elif distancia_delante > DISTANCIA_de_ACCION["mayor que"]:
+                        #AVANCE
+                        valor_t = TAvance
+                        valor_d = GCent
+                        girando = 0
 
                     if distancia_izquierda < 6:
                         #DERECHA
@@ -213,7 +223,7 @@ def main():
                         valor_d = GIzq
                         giro_linea(valor_t, valor_d)
 
-                    if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
+                    if distancia_atras < DISTANCIA_de_ACCION["mayor que"]:
                         valor_t = TAvance
                     else:
                         if distancia_delante < 5:
