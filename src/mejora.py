@@ -9,33 +9,30 @@ GPIO.setmode(GPIO.BCM)
 
 class Robot:
     def __init__(self):
-        self.TRIG_PIN_DELANTE = 23
-        self.ECHO_PIN_DELANTE = 24
-        self.TRIG_PIN_ATRAS = 17
-        self.ECHO_PIN_ATRAS = 27
-        self.TRIG_PIN_IZQUIERDA = 22
-        self.ECHO_PIN_IZQUIERDA = 10
-        self.TRIG_PIN_DERECHA = 5
-        self.ECHO_PIN_DERECHA = 6
-        self.SERVO_PIN_DIRECCION = 2
-        self.SERVO_PIN_TRACCION = 3
-        self.BUTTON_PIN = 9
-        self.IRSENSOR_PIN = 8
-
-        self.SERVO_FREQ = 50
-
-        self.DISTANCIA_DE_ACCION = {"MENOR QUE": 25, "MAYOR QUE": 24}
-
-        self.BAJO_R, self.ALTO_R = np.array([174, 175, 138]), np.array([176, 212, 163])
-        self.BAJO_G, self.ALTO_G = np.array([57, 104, 114]), np.array([65, 156, 140])
-        self.BAJO_M, self.ALTO_M = np.array([164, 148, 134]), np.array([167, 185, 168])
-
-        self.camera = PiCamera()
-        self.camera.resolution = (640, 480)
-        self.raw_capture = PiRGBArray(self.camera, size=(640, 480))
-
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.SERVO_PIN_DIRECCION, GPIO.OUT)
         self.pwm_d = GPIO.PWM(self.SERVO_PIN_DIRECCION, self.SERVO_FREQ)
-        self.pwm_t = GPIO.PWM(self.SERVO_PIN_TRACCION, self.SERVO_FREQ)
+        self.pwm_d.start(self.SERVO_MIN_DC)
+    
+        GPIO.setup(self.SERVO_PIN_VELOCIDAD, GPIO.OUT)
+        self.pwm_v = GPIO.PWM(self.SERVO_PIN_VELOCIDAD, self.SERVO_FREQ)
+        self.pwm_v.start(self.SERVO_MIN_DC)
+    
+        self.servo_dir_angle = self.SERVO_MIN_ANGLE
+        self.servo_vel_angle = self.SERVO_MIN_ANGLE
+    
+        self.left_motor = Motor(self.MOTOR_LEFT_PWM, self.MOTOR_LEFT_DIR)
+        self.right_motor = Motor(self.MOTOR_RIGHT_PWM, self.MOTOR_RIGHT_DIR)
+    
+        self.last_time = time.time()
+        self.last_error = 0
+        self.integral = 0
+        self.derivative = 0
+        self.Kp = 0.05
+        self.Ki = 0.0001
+        self.Kd = 0.001
+        self.set_point = 0
+        self.error = 0
 
     def get_distance(self, trig_pin: int, echo_pin: int) -> float:
         """Get the distance from the ultrasonic sensor"""
@@ -124,7 +121,6 @@ class Robot:
         GPIO.setup(self.TRIG_PIN_DERECHA, GPIO.OUT)
         GPIO.setup(self.ECHO_PIN_DERECHA, GPIO.IN)
         GPIO.setup(self.BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        GPIO.setup(self.IRSENSOR_PIN, GPIO.IN)
 
         self.pwm_d.start(GCent)
         self.pwm_t.start(TAvance)
