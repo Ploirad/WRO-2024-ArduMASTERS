@@ -4,12 +4,12 @@ import time
 import cv2
 import numpy as np
 
-def testColor(frame, bajo, alto):
+def testColor(frame, bajo, alto, color):
     frame2 = frame.copy()
     frameHSV = cv2.cvtColor(frame2, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(frameHSV, bajo, alto)
     cx, cy = obtenerCentroide(mask)
-    frame2[mask == 255] = (0,0,100)
+    frame2[mask == 255] = color
     cv2.circle(frame2, (cx,cy), 5,(0,0,255), -1)
     return frame2, mask, cx,cy
 
@@ -40,13 +40,14 @@ bajoG, altoG = np.array([48, 136, 108]),np.array([56, 164, 129])
 bajoM, altoM = np.array([169, 152, 155]),np.array([172, 179, 188])
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     image = frame.array
-    f, mask1, cx, cy = testColor(image, bajoR, altoR)
-    f, mask2, cx, cy = testColor(image, bajoG, altoG)
-    f, mask3, cx, cy = testColor(image, bajoM, altoM)
-    mask = cv2.bitwise_or(mask1, mask2, mask3)
+    f, mask1, cx, cy = testColor(image, bajoR, altoR, (355, 83, 93))
+    f, mask2, cx, cy = testColor(image, bajoG, altoG, (111, 79, 83))
+    f, mask3, cx, cy = testColor(image, bajoM, altoM, (300, 100, 100))
     print(cx,cy)
     cv2.imshow("frame", f)
-    cv2.imshow("frame2", mask)
+    cv2.imshow("frame: Rojo", mask1)
+    cv2.imshow("frame: Verde", mask2)
+    cv2.imshow("frame: Morado", mask3)
     rawCapture.truncate(0)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
