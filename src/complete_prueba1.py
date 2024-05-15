@@ -39,7 +39,7 @@ valor_t = TAvance
 pulse_end = 0
 v = 0
 girando = 0
-x = 40
+x = 4
 numero_de_giros_para_acabar = x * 3
 
 # Configura los pines GPIO
