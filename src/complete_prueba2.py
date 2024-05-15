@@ -2,7 +2,6 @@ import RPi.GPIO as GPIO
 import time
 from picamera import PiCamera
 from picamera.array import PiRGBArray
-import time
 import cv2
 import numpy as np
 
