@@ -194,6 +194,7 @@ while True:
 
     try:
         if v == 1:
+            camera_for()
             pwm_t.start(valor_t)
             update_distances()
             if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]:
