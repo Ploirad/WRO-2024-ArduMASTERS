@@ -23,6 +23,10 @@ class Robot:
         self.SERVO_PIN_DIRECCION = 17
         self.SERVO_PIN_VELOCIDAD = 27
     
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.SERVO_PIN_DIRECCION, GPIO.OUT)
+        GPIO.setup(self.SERVO_PIN_VELOCIDAD, GPIO.OUT)
+    
         self.pwm_d = GPIO.PWM(self.SERVO_PIN_DIRECCION, self.SERVO_FREQ)
         self.pwm_d.start(self.SERVO_MIN_DC)
     
@@ -44,10 +48,6 @@ class Robot:
         self.Kd = 0.001
         self.set_point = 0
         self.error = 0
-    
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(self.SERVO_PIN_DIRECCION, GPIO.OUT)
-        GPIO.setup(self.SERVO_PIN_VELOCIDAD, GPIO.OUT)
     
     def get_distance(self, trig_pin: int, echo_pin: int) -> float:
         """Get the distance from the ultrasonic sensor"""
