@@ -17,4 +17,4 @@
 # [video](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/video)
   In this folder we got a video from our car while it is moving
 
-Este vehículo esta basado en una raspberry pi 4 modelo B, tiene 4 sensores de ultrasonidos (uno delantero, uno trasero, uno en la izquierda, uno en la derecha), un servo de 180 grados de giro para controlar la dirección y otro de 360 grados de giro para controlar la tracción, una resistencia de 
+Este vehículo esta basado en diversos componentes tanto electronicos que son los siguientes: una raspberry pi 4 modelo B, tiene 4 sensores de ultrasonidos (uno delantero, uno trasero, uno en la izquierda, uno en la derecha), un servo de 180 grados de giro para controlar la dirección y otro de 360 grados de giro para controlar la tracción, una resistencia de 10 kilohomios, un pulsador en pull down, una placa de prototipado (protoboard); como componentes fabricados con plástico
