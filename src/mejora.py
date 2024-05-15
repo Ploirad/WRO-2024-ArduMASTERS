@@ -62,8 +62,7 @@ def setup_gpio():
     GPIO.setup(TRIG_PIN_IZQUIERDA, GPIO.OUT)
     GPIO.setup(ECHO_PIN_IZQUIERDA, GPIO.IN)
     GPIO.setup(TRIG_PIN_DERECHA, GPIO.OUT)
-    GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN)GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-    GPIO.setup(IR_SENSOR, GPIO.IN)
+    GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN), GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 def setup_servos():
     global pwm_d, pwm_t
@@ -135,7 +134,7 @@ def giro_tras(valor_t, valor_d):
         valor_d = GCent       
     pwm_t.start(valor_t)
     pwm_d.start(valor_d)
-time.sleep(2)
+    time.sleep(2)
     valor_t = TAvance
     if valor_d == GIzq:
         valor_d = GDer
@@ -205,7 +204,7 @@ def main():
                     if distancia_izquierda < 6:
                         #DERECHA
                         valor_t = TAvance
-                       valor_d = GDer
+                        valor_d = GDer
                         giro_linea(valor_t, valor_d)
 
                     if distancia_derecha < 6:
