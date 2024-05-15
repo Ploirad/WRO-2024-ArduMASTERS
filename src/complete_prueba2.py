@@ -98,19 +98,6 @@ def obtenerCentroide(imgBin):
         pass
     return cx, cy, w, h
 
-def camera_for():
-    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-        image = frame.array
-        f, mask1, cx1, cy1, w1, h1 = testColor(image, bajoR, altoR, (355, 83, 93))
-        f, mask2, cx2, cy2, w2, h2= testColor(image, bajoG, altoG, (111, 79, 83))
-        f, mask3, cx3, cy3, w3, h3 = testColor(image, bajoM, altoM, (300, 100, 100))
-        print([cx1,cy1], [cx2, cy2], [cx3, cy3])
-        print([w1, h1], [w2, h2], [w3, h3])
-        cv2.imshow("frame: Rojo", mask1)
-        cv2.imshow("frame: Verde", mask2)
-        cv2.imshow("frame: Morado", mask3)
-        rawCapture.truncate(0)
-
 def get_distance(trig_pin, echo_pin):
     # Envía un pulso al pin Trig
     GPIO.output(trig_pin, True)
@@ -194,84 +181,94 @@ while True:
 
     try:
         if v == 1:
-            camera_for()
-            pwm_t.start(valor_t)
-            update_distances()
-            if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]:
-                    valor_t = TAtras
-                    valor_d = GCent
-            else:
-                if girando == 0:
-                    if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_derecha > distancia_izquierda:
+            for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+                image = frame.array
+                f, mask1, cx1, cy1, w1, h1 = testColor(image, bajoR, altoR, (355, 83, 93))
+                f, mask2, cx2, cy2, w2, h2= testColor(image, bajoG, altoG, (111, 79, 83))
+                f, mask3, cx3, cy3, w3, h3 = testColor(image, bajoM, altoM, (300, 100, 100))
+                print([cx1,cy1], [cx2, cy2], [cx3, cy3])
+                print([w1, h1], [w2, h2], [w3, h3])
+                cv2.imshow("frame: Rojo", mask1)
+                cv2.imshow("frame: Verde", mask2)
+                cv2.imshow("frame: Morado", mask3)
+                rawCapture.truncate(0)
+                pwm_t.start(valor_t)
+                update_distances()
+                if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]:
+                        valor_t = TAtras
+                        valor_d = GCent
+                else:
+                    if girando == 0:
+                        if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_derecha > distancia_izquierda:
+                            #DERECHA
+                            valor_t = TAvance
+                            valor_d = GDer
+                            girando = 1
+                            vueltas += 1
+                            giro_linea(valor_t, valor_d)
+                        elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_izquierda > distancia_derecha:
+                            #IZQUIERDA
+                            valor_t = TAvance
+                            valor_d = GIzq
+                            girando = 1
+                            vueltas += 1
+                            giro_linea(valor_t, valor_d)
+                    elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
+                        #AVANCE
+                        valor_t = TAvance
+                        valor_d = GCent
+                        girando = 0
+                
+                    if distancia_izquierda < 6:
                         #DERECHA
                         valor_t = TAvance
                         valor_d = GDer
-                        girando = 1
-                        vueltas += 1
                         giro_linea(valor_t, valor_d)
-                    elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_izquierda > distancia_derecha:
+                    
+                    if distancia_derecha < 6:
                         #IZQUIERDA
                         valor_t = TAvance
                         valor_d = GIzq
-                        girando = 1
-                        vueltas += 1
                         giro_linea(valor_t, valor_d)
-                elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                    #AVANCE
-                    valor_t = TAvance
-                    valor_d = GCent
-                    girando = 0
             
-                if distancia_izquierda < 6:
-                    #DERECHA
-                    valor_t = TAvance
-                    valor_d = GDer
-                    giro_linea(valor_t, valor_d)
-                
-                if distancia_derecha < 6:
-                    #IZQUIERDA
-                    valor_t = TAvance
-                    valor_d = GIzq
-                    giro_linea(valor_t, valor_d)
-        
-                if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
-                    valor_t = TAvance
+                    if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
+                        valor_t = TAvance
+                    else:
+                        if distancia_delante < 5:
+                            giro_tras(valor_t, valor_d)
+    
+                    if ant_d_d == distancia_delante:
+                        vueltas_e += 1
+                        if vueltas_e == 1:
+                            giro_tras(valor_t, valor_d)
+                            e = 0
+                # Muestra las distancias
+                print(f"Distancia hacia delante: {distancia_delante} cm")
+                print(f"Distancia hacia atras: {distancia_atras} cm")
+                print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
+                print(f"Distancia hacia derecha: {distancia_derecha} cm")
+                print("")
+                pwm_t.start(valor_t)
+                pwm_d.start(valor_d)
+                if valor_t > 8:
+                    print("avanti")
+                elif valor_t < 6:
+                    print("back")
                 else:
-                    if distancia_delante < 5:
-                        giro_tras(valor_t, valor_d)
-
-                if ant_d_d == distancia_delante:
-                    vueltas_e += 1
-                    if vueltas_e == 1:
-                        giro_tras(valor_t, valor_d)
-                        e = 0
-            # Muestra las distancias
-            print(f"Distancia hacia delante: {distancia_delante} cm")
-            print(f"Distancia hacia atras: {distancia_atras} cm")
-            print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
-            print(f"Distancia hacia derecha: {distancia_derecha} cm")
-            print("")
-            pwm_t.start(valor_t)
-            pwm_d.start(valor_d)
-            if valor_t > 8:
-                print("avanti")
-            elif valor_t < 6:
-                print("back")
-            else:
-                print("stop")
-            if valor_d > 11:
-                print("izquierda")
-            elif valor_d < 4:
-                print("derecha")
-            else:
-                print("centro")            
-            linea = GPIO.input(IRsensor)
-            if vueltas == numero_de_giros_para_acabar:
-                v = 0
-                GPIO.cleanup()
-            print(f"NumberLinea:{numberlinea}")
-            print(f"Linea:{linea}")
-            print(f"Vueltas:{float(vueltas/x)} es decir {vueltas} giros")
+                    print("stop")
+                if valor_d > 11:
+                    print("izquierda")
+                elif valor_d < 4:
+                    print("derecha")
+                else:
+                    print("centro")            
+                linea = GPIO.input(IRsensor)
+                if vueltas == numero_de_giros_para_acabar:
+                    v = 0
+                    GPIO.cleanup()
+                print(f"NumberLinea:{numberlinea}")
+                print(f"Linea:{linea}")
+                print(f"Vueltas:{float(vueltas/x)} es decir {vueltas} giros")
     except KeyboardInterrupt:
         GPIO.cleanup()
     except:
