@@ -17,7 +17,6 @@ ECHO_PIN_DERECHA = 6
 servo_pin_direccion = 2
 servo_pin_traccion = 3
 button_pin = 9
-IRsensor = 8
 
 # Define variables
 tiempo_de_giro_linea = 1
@@ -80,7 +79,7 @@ def testColor(frame, bajo, alto, color):
     cx, cy, w, h = obtenerCentroide(mask)
     frame2[mask == 255] = color
     cv2.circle(frame2, (cx,cy), 5,(0,0,255), -1)
-    return frame2, mask, cx,cy, w, h
+    return frame2, mask, cx, cy, w, h
 
 
 def obtenerCentroide(imgBin):
@@ -170,9 +169,9 @@ while True:
             f, mask3, cx3, cy3, w3, h3 = testColor(image, bajoM, altoM, (300, 100, 100))
             print([cx1,cy1], [cx2, cy2], [cx3, cy3])
             print([w1, h1], [w2, h2], [w3, h3])
-            #cv2.imshow("frame: Rojo", mask1)
-            #cv2.imshow("frame: Verde", mask2)
-            #cv2.imshow("frame: Morado", mask3)
+            cv2.imshow("frame: Rojo", mask1)
+            cv2.imshow("frame: Verde", mask2)
+            cv2.imshow("frame: Morado", mask3)
             rawCapture.truncate(0)
             pwm_t.start(valor_t)    
             if v == 1:
@@ -244,13 +243,10 @@ while True:
                 elif valor_d < 4:
                     print("derecha")
                 else:
-                    print("centro")            
-                linea = GPIO.input(IRsensor)
+                    print("centro")           
                 if vueltas == numero_de_giros_para_acabar:
                     v = 0
                     GPIO.cleanup()
-                print(f"NumberLinea:{numberlinea}")
-                print(f"Linea:{linea}")
                 print(f"Vueltas:{float(vueltas/x)} es decir {vueltas} giros")
     except KeyboardInterrupt:
         GPIO.cleanup()
