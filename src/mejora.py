@@ -111,10 +111,21 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # Detección de colores y análisis de imagen
     masks, centroids, dimensions = detect_colors(image)
 
-    # Mostrar las máscaras de color y la imagen original en ventanas separadas
+    # Mostrar las máscaras de color y la imagen original en ventanas separadas con tamaños personalizados
+    cv2.namedWindow("Original", cv2.WINDOW_NORMAL)
+    cv2.resizeWindow("Original", 400, 300)
     cv2.imshow("Original", image)
+    
+    cv2.namedWindow("Red Mask", cv2.WINDOW_NORMAL)
+    cv2.resizeWindow("Red Mask", 400, 300)
     cv2.imshow("Red Mask", masks[0])
+    
+    cv2.namedWindow("Green Mask", cv2.WINDOW_NORMAL)
+    cv2.resizeWindow("Green Mask", 400, 300)
     cv2.imshow("Green Mask", masks[1])
+    
+    cv2.namedWindow("Magenta Mask", cv2.WINDOW_NORMAL)
+    cv2.resizeWindow("Magenta Mask", 400, 300)
     cv2.imshow("Magenta Mask", masks[2])
 
     # Imprimir información de centroides y dimensiones en la consola
