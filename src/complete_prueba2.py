@@ -48,7 +48,7 @@ distancia_izquierda = 0
 distancia_derecha = 0
 distancia_comienzo_derecha = 0
 distancia_comienzo_izquierda = 0
-DISTANCIA_de_ACCION = {"MENOR QUE": 25, "MAYOR QUE": 24}
+DISTANCIA_de_ACCION = {"MENOR QUE": 15, "MAYOR QUE": 14}
 TAvance = 12.5
 TAtras = 2.5
 GDer = 4.5
@@ -60,7 +60,7 @@ pulse_end = 0
 v = 0
 girando = 0
 x = 4
-c = 0
+
 numero_de_giros_para_acabar = x * 3
 camera = PiCamera()
 camera.resolution = (640, 480)
@@ -243,29 +243,20 @@ try:
                     valor_d = GCent
             else:
                 if girando == 0:
-                    if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"]:
-                        if c == 1:
-                            valor_t = TAvance
-                            valor_d = GIzq
-                            c = 0
-                        elif c == 2:
-                            valor_t = TAtras
-                            valor_d = GCent
-                            c = 0
-                        elif distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_derecha > distancia_izquierda:
-                            # DERECHA
-                            valor_t = TAvance
-                            valor_d = GDer
-                            girando = 1
-                            vueltas += 1
-                            giro_linea(valor_t, valor_d)
-                        elif distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_izquierda > distancia_derecha:
-                            # IZQUIERDA
-                            valor_t = TAvance
-                            valor_d = GIzq
-                            girando = 1
-                            vueltas += 1
-                            giro_linea(valor_t, valor_d)
+                    if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_derecha > distancia_izquierda:
+                        # DERECHA
+                        valor_t = TAvance
+                        valor_d = GDer
+                        girando = 1
+                        vueltas += 1
+                        giro_linea(valor_t, valor_d)
+                    elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_izquierda > distancia_derecha:
+                        # IZQUIERDA
+                        valor_t = TAvance
+                        valor_d = GIzq
+                        girando = 1
+                        vueltas += 1
+                        giro_linea(valor_t, valor_d)
                 elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
                     # AVANCE
                     valor_t = TAvance
@@ -347,32 +338,32 @@ try:
             print("V a la IZQ")
             if v == 1:
                 valor_d = GCent
-                c = 1
+                
         elif cx_v > 266 and cx_v < 374:
             print("V al CENT")
             if v == 1:
                 valor_d = GIzq
-            c = 1
+            
         else:
             print("V a la DER")
             if v == 1:
                 valor_d = GIzq
-            c = 1
+            
         if cx_r < 266:
             print("R a la IZQ")
             if v == 1:
                 valor_d = GDer
-            c = 2
+            
         elif cx_r > 266 and cx_r < 374:
             print("R al CENT")
             if v == 1:
                 valor_d = GCent
-            c = 2
+            
         else:
             print("R a la DER")
             if v == 1:
                 valor_d = GDer
-            c = 2
+            
         if cx_m < 266:
             print("M a la IZQ")
         elif cx_m > 266 and cx_m < 374:
