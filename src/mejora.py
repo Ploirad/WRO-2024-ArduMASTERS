@@ -72,6 +72,8 @@ def detect_colors(frame):
             centroids_red = [(cx, cy)]
             x, y, w, h = cv2.boundingRect(contour)
             dimensions_red = [(w, h)]
+            Av = w*h
+            cx_v = cx
 
     centroids_green = None
     dimensions_green = None
@@ -85,6 +87,8 @@ def detect_colors(frame):
             centroids_green = [(cx, cy)]
             x, y, w, h = cv2.boundingRect(contour)
             dimensions_green = [(w, h)]
+            Av = w*h
+            cx_v = cx
 
     centroids_magenta = None
     dimensions_magenta = None
@@ -98,8 +102,10 @@ def detect_colors(frame):
             centroids_magenta = [(cx, cy)]
             x, y, w, h = cv2.boundingRect(contour)
             dimensions_magenta = [(w, h)]
+            Am = w*h
+            cx_m = cx
 
-    return [mask_red, mask_green, mask_magenta], [centroids_red, centroids_green, centroids_magenta], [dimensions_red, dimensions_green, dimensions_magenta]
+    return [mask_red, mask_green, mask_magenta], [cx_r, cx_v, cx_m], [dimensions_red, dimensions_green, dimensions_magenta], [Ar, Av, Am]
 
 
 # Bucle principal
@@ -108,7 +114,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     image = frame.array
 
     # Detección de colores y análisis de imagen
-    masks, centroids, dimensions = detect_colors(image)
+    masks, cx, dimensions, A = detect_colors(image)
 
     # Mostrar las máscaras de color y la imagen original en ventanas separadas con tamaños personalizados
     cv2.namedWindow("Original", cv2.WINDOW_NORMAL)
@@ -127,16 +133,11 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     cv2.resizeWindow("Magenta Mask", 400, 300)
     cv2.imshow("Magenta Mask", masks[2])
 
-    Am = dimensions[2]
-    #Am = Am[0] * Am[1]
-
-    Ar = dimensions[0]
-    #Ar = Ar[0] * Ar[1]
-
-    Av = dimensions[0]
-    #Av = Av[0] * Av[0]
+    Am = A[2]
+    Ar = A[0]
+    Av = A[1]
     
-    print(f"C: R:{centroids[0]}, V:{centroids[1]}, M:{centroids[2]}")
+    print(f"C: R:{cx[0]}, V:{cx[1]}, M:{cx[2]}")
     print(f"D: R:{Ar}, V:{Av}, M:{Am}")
     # Limpiar el búfer de captura para la siguiente imagen
     rawCapture.truncate(0)
