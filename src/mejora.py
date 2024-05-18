@@ -139,7 +139,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     print("Magenta Centroids:", centroids[2])
     print("Red Dimensions:", dimensions[0])
     print("Green Dimensions:", dimensions[1])
-    print("Magenta Dimensions, dimensions[2])
+    print("Magenta Dimensions:", dimensions[2])
     # Limpiar el búfer de captura para la siguiente imagen
     rawCapture.truncate(0)
     
