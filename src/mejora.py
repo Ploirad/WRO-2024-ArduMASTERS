@@ -141,39 +141,42 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     Am, Ar, Av = A[2], A[0], A[1]  # Cambiar el orden
     if Am is None:
-        Am = 320
+        Am = 0
     if Ar is None:
-        Ar = 320
+        Ar = 0
     if Av is None:
-        Av = 320
+        Av = 0
 
     cx_v, cx_r, cx_m = cx[1], cx[0], cx[2]
+    if cx_v is None:
+        cx_v = 320
+    if cx_r is None:
+        cx_r = 320
+    if cx_m is None:
+        cx_m = 320
     
     print(f"C: R:{cx[0]}, V:{cx[1]}, M:{cx[2]}")
     print(f"D: R:{Ar}, V:{Av}, M:{Am}")
     # Limpiar el búfer de captura para la siguiente imagen
     rawCapture.truncate(0)
-    if cx_v != None:
-        if cx_v < 170:
-            print("V a la IZQ")
-        elif cx_v > 170 and cx_v < 470:
-            print("V al CENT")
-        else:
-            print("V a la DER")
-    if cx_r != None:
-        if cx_r < 170:
-            print("R a la IZQ")
-        elif cx_r > 170 and cx_v < 470:
-            print("R al CENT")
-        else:
-            print("R a la DER")
-    if cx_m != None:
-        if cx_m < 170:
-            print("M a la IZQ")
-        elif cx_m > 170 and cx_v < 470:
-            print("M al CENT")
-        else:
-            print("M a la DER")
+    if cx_v < 170:
+        print("V a la IZQ")
+    elif cx_v > 170 and cx_v < 470:
+        print("V al CENT")
+    else:
+        print("V a la DER")
+    if cx_r < 170:
+        print("R a la IZQ")
+    elif cx_r > 170 and cx_v < 470:
+        print("R al CENT")
+    else:
+        print("R a la DER")
+    if cx_m < 170:
+        print("M a la IZQ")
+    elif cx_m > 170 and cx_v < 470:
+        print("M al CENT")
+    else:
+        print("M a la DER")
     # Esperar una tecla para salir (salida si se presiona 'q')
     key = cv2.waitKey(1) & 0xFF
     if key == ord("q"):
