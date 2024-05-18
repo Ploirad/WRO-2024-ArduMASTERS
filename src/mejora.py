@@ -128,11 +128,8 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     cv2.resizeWindow("Magenta Mask", 400, 300)
     cv2.imshow("Magenta Mask", masks[2])
 
-    # Dibujar el centroide en la imagen original
-    color_red = (0, 0, 255)
-    color_green = (0, 255, 0)
-    color_magenta = (255, 0, 255)
-
+    print(f"C: R:{centroids[0]}, V:{centroids[1]}, M:{centroids[2]}")
+    print(f"D: R:{dimensions[0]}, V:{dimensions[1]}, M:{dimensions[2]}")
     # Limpiar el búfer de captura para la siguiente imagen
     rawCapture.truncate(0)
 
