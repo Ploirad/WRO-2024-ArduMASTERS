@@ -139,9 +139,8 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     cv2.resizeWindow("Magenta Mask", 400, 300)
     cv2.imshow("Magenta Mask", masks[2])
 
-    Am = A[2]
-    Ar = A[0]
-    Av = A[1]
+    Am, Ar, Av = A[2], A[0], A[1]
+    cx_v, cx_r, cx_m = cx[1], cx[0], cx[2]
     
     print(f"C: R:{cx[0]}, V:{cx[1]}, M:{cx[2]}")
     print(f"D: R:{Ar}, V:{Av}, M:{Am}")
