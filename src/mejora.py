@@ -5,7 +5,7 @@ from picamera.array import PiRGBArray
 import cv2
 import numpy as np
 
-# Define los pines
+# Definición de pines GPIO
 TRIG_PIN_DELANTE = 23
 ECHO_PIN_DELANTE = 24
 TRIG_PIN_ATRAS = 17
@@ -17,45 +17,10 @@ ECHO_PIN_DERECHA = 6
 servo_pin_direccion = 2
 servo_pin_traccion = 3
 button_pin = 9
+IRsensor = 8
 
-# Define variables
-tiempo_de_giro_linea = 1
-vueltas = 0
-empezado = 0
-distancia_delante = 0
-ant_d_d = 0
-vueltas_e = 0
-distancia_atras = 0
-distancia_izquierda = 0
-distancia_derecha = 0
-distancia_comienzo_derecha = 0
-distancia_comienzo_izquierda = 0
-DISTANCIA_de_ACCION = {"MENOR QUE": 25, "MAYOR QUE": 24}
-TAvance = 12.5
-TAtras = 2.5
-GDer = 4.5
-GIzq = 10.5
-GCent = 5.9
-valor_d = GCent
-valor_t = TAvance
-pulse_end = 0
-v = 0
-girando = 0
-x = 4
-numero_de_giros_para_acabar = x * 3
-resolucion = (640, 480)
-camera = PiCamera()
-camera.resolution = resolucion
-rawCapture = PiRGBArray(camera, size=resolucion)
-time.sleep(0.3)
-bajoR, altoR = np.array([174, 175, 138]), np.array([176, 212, 163])
-bajoG, altoG = np.array([57, 104, 114]), np.array([65, 156, 140])
-bajoM, altoM = np.array([164, 148, 134]), np.array([167, 185, 168])
-
-# Configura los pines GPIO
+# Configuración de GPIO
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(servo_pin_direccion, GPIO.OUT)
-GPIO.setup(servo_pin_traccion, GPIO.OUT)
 GPIO.setup(TRIG_PIN_DELANTE, GPIO.OUT)
 GPIO.setup(ECHO_PIN_DELANTE, GPIO.IN)
 GPIO.setup(TRIG_PIN_ATRAS, GPIO.OUT)
@@ -64,214 +29,106 @@ GPIO.setup(TRIG_PIN_IZQUIERDA, GPIO.OUT)
 GPIO.setup(ECHO_PIN_IZQUIERDA, GPIO.IN)
 GPIO.setup(TRIG_PIN_DERECHA, GPIO.OUT)
 GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN)
+GPIO.setup(servo_pin_direccion, GPIO.OUT)
+GPIO.setup(servo_pin_traccion, GPIO.OUT)
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-# Iniciar servos
-pwm_d = GPIO.PWM(servo_pin_direccion, 50)  # Frecuencia de PWM: 50Hz (estándar para servos)
-pwm_t = GPIO.PWM(servo_pin_traccion, 50)  # Frecuencia de PWM: 50Hz (estándar para servos)
+# Inicialización de la cámara
+camera = PiCamera()
+camera.resolution = (640, 480)
+rawCapture = PiRGBArray(camera, size=(640, 480))
+time.sleep(0.1)
 
-def testColor(frame, bajo, alto, color):
-    frame2 = frame.copy()
-    frameHSV = cv2.cvtColor(frame2, cv2.COLOR_BGR2HSV)
-    mask = cv2.inRange(frameHSV, bajo, alto)
-    cx, cy, w, h = obtenerCentroide(mask)
-    frame2[mask == 255] = color
-    cv2.circle(frame2, (cx, cy), 5, (0, 0, 255), -1)
-    return frame2, mask, cx, cy, w, h
+# Funciones de detección de colores y análisis de imágenes
+def detect_colors(frame):
+    hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-def obtenerCentroide(imgBin):
-    cx = 0
-    cy = 0
-    cBlancas = cv2.findNonZero(imgBin)
-    x, y, w, h = cv2.boundingRect(cBlancas)
-    try:
-        sumX, sumY = np.sum(cBlancas, axis=0).squeeze()
-        nPuntos = len(cBlancas)
-        cx = int(sumX / nPuntos)
-        cy = int(sumY / nPuntos)
-    except:
-        pass
-    return cx, cy, w, h
+    # Rangos de color para detección
+    lower_red = np.array([0, 100, 100])
+    upper_red = np.array([10, 255, 255])
+    lower_green = np.array([40, 100, 100])
+    upper_green = np.array([80, 255, 255])
+    lower_magenta = np.array([125, 100, 100])
+    upper_magenta = np.array([150, 255, 255])
 
-def get_distance(trig_pin, echo_pin):
-    # Envía un pulso al pin Trig
-    GPIO.output(trig_pin, True)
-    time.sleep(0.00001)
-    GPIO.output(trig_pin, False)
-    pulse_end = 0
-    pulse_start = 0
-    while GPIO.input(echo_pin) == 0:
-        pulse_start = time.time()
-    while GPIO.input(echo_pin) == 1:
-        pulse_end = time.time()
-    pulse_duration = pulse_end - pulse_start
-    distance = pulse_duration * 17150
-    distance = round(distance, 3)
-    return distance
+    # Detección de colores
+    mask_red = cv2.inRange(hsv_frame, lower_red, upper_red)
+    mask_green = cv2.inRange(hsv_frame, lower_green, upper_green)
+    mask_magenta = cv2.inRange(hsv_frame, lower_magenta, upper_magenta)
 
-def update_distances():
-    global distancia_delante, distancia_atras, distancia_izquierda, distancia_derecha, ant_d_d
-    ant_d_d = distancia_delante
-    distancia_delante = get_distance(TRIG_PIN_DELANTE, ECHO_PIN_DELANTE)
-    distancia_atras = get_distance(TRIG_PIN_ATRAS, ECHO_PIN_ATRAS)
-    distancia_izquierda = get_distance(TRIG_PIN_IZQUIERDA, ECHO_PIN_IZQUIERDA)
-    distancia_derecha = get_distance(TRIG_PIN_DERECHA, ECHO_PIN_DERECHA)
+    # Aplicar operaciones morfológicas para mejorar la detección
+    kernel = np.ones((5, 5), np.uint8)
+    mask_red = cv2.morphologyEx(mask_red, cv2.MORPH_OPEN, kernel)
+    mask_green = cv2.morphologyEx(mask_green, cv2.MORPH_OPEN, kernel)
+    mask_magenta = cv2.morphologyEx(mask_magenta, cv2.MORPH_OPEN, kernel)
 
-def giro_linea(valor_t, valor_d):
-    print("girando...")
-    pwm_t.start(valor_t)
-    pwm_d.start(valor_d)
-    time.sleep(tiempo_de_giro_linea)
-    pwm_t.start(valor_t)
-    pwm_d.start(GCent)
+    # Encontrar contornos y calcular centroides y dimensiones
+    contours_red, _ = cv2.findContours(mask_red, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours_green, _ = cv2.findContours(mask_green, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contours_magenta, _ = cv2.findContours(mask_magenta, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-def giro_tras(valor_t, valor_d):
-    valor_t = TAtras
-    if valor_d == GIzq:
-        valor_d = GDer
-    elif valor_d == GDer:
-        valor_d = GIzq
-    else:
-        valor_d = GCent       
-    pwm_t.start(valor_t)
-    pwm_d.start(valor_d)
-    time.sleep(2)
-    valor_t = TAvance
-    if valor_d == GIzq:
-        valor_d = GDer
-    elif valor_d == GDer:
-        valor_d = GIzq
-    else:
-        valor_d = GCent
-    pwm_t.start(valor_t)
-    pwm_d.start(valor_d)
-    time.sleep(2)
-    valor_t = TAvance
-    valor_d = GCent
-    pwm_t.start(valor_t)
-    pwm_d.start(valor_d)
+    centroids_red = []
+    centroids_green = []
+    centroids_magenta = []
 
-try:
-    # Iniciar la cámara y comenzar la captura de imágenes
-    camera.start_preview()
-    time.sleep(2)
+    dimensions_red = []
+    dimensions_green = []
+    dimensions_magenta = []
 
-    while True:
-        # Capturar imagen de la cámara
-        camera.capture(rawCapture, format="bgr")
-        image = rawCapture.array
+    for contour in contours_red:
+        M = cv2.moments(contour)
+        if M["m00"] != 0:
+            cx = int(M["m10"] / M["m00"])
+            cy = int(M["m01"] / M["m00"])
+            centroids_red.append((cx, cy))
+            x, y, w, h = cv2.boundingRect(contour)
+            dimensions_red.append((w, h))
 
-        # Procesar la imagen para detectar colores
-        f1, mask1, cx1, cy1, w1, h1 = testColor(image, bajoR, altoR, (0, 0, 255))
-        f2, mask2, cx2, cy2, w2, h2 = testColor(image, bajoG, altoG, (0, 255, 0))
-        f3, mask3, cx3, cy3, w3, h3 = testColor(image, bajoM, altoM, (255, 0, 255))
-        
-        # Redimensionar las ventanas para que sean más pequeñas
-        small_image = cv2.resize(image, (320, 240))
-        small_mask1 = cv2.resize(mask1, (320, 240))
-        small_mask2 = cv2.resize(mask2, (320, 240))
-        small_mask3 = cv2.resize(mask3, (320, 240))
+    for contour in contours_green:
+        M = cv2.moments(contour)
+        if M["m00"] != 0:
+            cx = int(M["m10"] / M["m00"])
+            cy = int(M["m01"] / M["m00"])
+            centroids_green.append((cx, cy))
+            x, y, w, h = cv2.boundingRect(contour)
+            dimensions_green.append((w, h))
 
-        # Mostrar las imágenes y máscaras en ventanas separadas
-        cv2.imshow("Imagen normal", small_image)
-        cv2.imshow("Máscara Rojo", small_mask1)
-        cv2.imshow("Máscara Verde", small_mask2)
-        cv2.imshow("Máscara Magenta", small_mask3)
-        
-        rawCapture.truncate(0)
+    for contour in contours_magenta:
+        M = cv2.moments(contour)
+        if M["m00"] != 0:
+            cx = int(M["m10"] / M["m00"])
+            cy = int(M["m01"] / M["m00"])
+            centroids_magenta.append((cx, cy))
+            x, y, w, h = cv2.boundingRect(contour)
+            dimensions_magenta.append((w, h))
 
-        # Verificar si el botón ha sido presionado
-        button_state = GPIO.input(button_pin)
-        if button_state == GPIO.HIGH:
-            print("Botón presionado")
-            v = 1
-        else:
-            v = 0
+    return [mask_red, mask_green, mask_magenta], [centroids_red, centroids_green, centroids_magenta], [dimensions_red, dimensions_green, dimensions_magenta]
 
-        if v == 1:
-            update_distances()
-            if (distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and
-                distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"] and
-                distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]):
-                valor_t = TAtras
-                valor_d = GCent
-            else:
-                if girando == 0:
-                    if (distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and
-                        distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"] and
-                        distancia_derecha > distancia_izquierda):
-                        # DERECHA
-                        valor_t = TAvance
-                        valor_d = GDer
-                        girando = 1
-                        vueltas += 1
-                        giro_linea(valor_t, valor_d)
-                    elif (distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and
-                          distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"] and
-                          distancia_izquierda > distancia_derecha):
-                        # IZQUIERDA
-                        valor_t = TAvance
-                        valor_d = GIzq
-                        girando = 1
-                        vueltas += 1
-                        giro_linea(valor_t, valor_d)
-                elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                    # AVANCE
-                    valor_t = TAvance
-                    valor_d = GCent
-                    girando = 0
+# Bucle principal
+for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+    image = frame.array
 
-                if distancia_izquierda < 6:
-                    # DERECHA
-                    valor_t = TAvance
-                    valor_d = GDer
-                    giro_linea(valor_t, valor_d)
+    # Detectar colores
+    masks, centroids, dimensions = detect_colors(image)
 
-                if distancia_derecha < 6:
-                    # IZQUIERDA
-                    valor_t = TAvance
-                    valor_d = GIzq
-                    giro_linea(valor_t, valor_d)
+    # Mostrar imágenes y máscaras
+    cv2.imshow("Frame", image)
+    cv2.imshow("Red Mask", masks[0])
+    cv2.imshow("Green Mask", masks[1])
+    cv2.imshow("Magenta Mask", masks[2])
 
-                if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
-                    valor_t = TAvance
-                else:
-                    if distancia_delante < 5:
-                        giro_tras(valor_t, valor_d)
+    # Mostrar información de centroides y dimensiones
+    for color, centroid_list, dimension_list in zip(["Red", "Green", "Magenta"], centroids, dimensions):
+        for centroid, dimension in zip(centroid_list, dimension_list):
+            print(f"{color} Centroid: {centroid}, Dimension: {dimension}")
 
-                if ant_d_d == distancia_delante:
-                    vueltas_e += 1
-                    if vueltas_e == 1:
-                        giro_tras(valor_t, valor_d)
-                        vueltas_e = 0
+    # Limpiar el buffer de la cámara para la siguiente captura
+    rawCapture.truncate(0)
 
-            # Muestra las distancias
-            print(f"Distancia hacia delante: {distancia_delante} cm")
-            print(f"Distancia hacia atras: {distancia_atras} cm")
-            print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
-            print(f"Distancia hacia derecha: {distancia_derecha} cm")
-            print("")
-            pwm_t.start(valor_t)
-            pwm_d.start(valor_d)
-            if valor_t > 8:
-                print("avanti")
-            elif valor_t < 6:
-                print("back")
-            else:
-                print("stop")
-            if valor_d > 11:
-                print("izquierda")
-            elif valor_d < 4:
-                print("derecha")
-            else:
-                print("centro")
-            if vueltas == numero_de_giros_para_acabar:
-                v = 0
-                GPIO.cleanup()
-            print(f"Vueltas:{float(vueltas/x)} es decir {vueltas} giros")
+    # Espera por la tecla 'q' para salir del bucle
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 
-except KeyboardInterrupt:
-    GPIO.cleanup()
-except Exception as e:
-    print(f"Error: {e}")
-    GPIO.cleanup()
+# Limpieza de GPIO y cierre de ventanas
+GPIO.cleanup()
+cv2.destroyAllWindows()
