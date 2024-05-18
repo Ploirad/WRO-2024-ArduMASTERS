@@ -212,19 +212,19 @@ try:
 
         # Mostrar las máscaras de color y la imagen original en ventanas separadas con tamaños personalizados
         cv2.namedWindow("Original", cv2.WINDOW_NORMAL)
-        cv2.resizeWindow("Original", 400, 300)
+        cv2.resizeWindow("Original", 200, 150)
         cv2.imshow("Original", image)
 
         cv2.namedWindow("Red Mask", cv2.WINDOW_NORMAL)
-        cv2.resizeWindow("Red Mask", 400, 300)
+        cv2.resizeWindow("Red Mask", 200, 150)
         cv2.imshow("Red Mask", masks[0])
 
         cv2.namedWindow("Green Mask", cv2.WINDOW_NORMAL)
-        cv2.resizeWindow("Green Mask", 400, 300)
+        cv2.resizeWindow("Green Mask", 200, 150)
         cv2.imshow("Green Mask", masks[1])
 
         cv2.namedWindow("Magenta Mask", cv2.WINDOW_NORMAL)
-        cv2.resizeWindow("Magenta Mask", 400, 300)
+        cv2.resizeWindow("Magenta Mask", 200, 150)
         cv2.imshow("Magenta Mask", masks[2])
 
         # Lee el estado del botón
