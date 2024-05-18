@@ -349,7 +349,7 @@ try:
             print("R a la IZQ")
             if v == 1:
                 valor_d = GDer
-        elif cx_r > 266 and cx_v < 374:
+        elif cx_r > 266 and cx_r < 374:
             print("R al CENT")
             if v == 1:
                 valor_d = GCent
@@ -359,7 +359,7 @@ try:
                 valor_d = GDer
         if cx_m < 266:
             print("M a la IZQ")
-        elif cx_m > 266 and cx_v < 374:
+        elif cx_m > 266 and cx_m < 374:
             print("M al CENT")
         else:
             print("M a la DER")
