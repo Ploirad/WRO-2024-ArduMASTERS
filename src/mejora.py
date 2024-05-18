@@ -42,13 +42,13 @@ time.sleep(0.1)
 def detect_colors(frame):
     hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    # Rangos de color para detección
-    lower_red = np.array([0, 100, 100])
-    upper_red = np.array([10, 255, 255])
-    lower_green = np.array([40, 100, 100])
-    upper_green = np.array([80, 255, 255])
-    lower_magenta = np.array([125, 100, 100])
-    upper_magenta = np.array([150, 255, 255])
+    # Nuevos rangos de color
+    lower_red = np.array([174, 175, 138])
+    upper_red = np.array([176, 212, 163])
+    lower_green = np.array([57, 104, 114])
+    upper_green = np.array([65, 156, 140])
+    lower_magenta = np.array([164, 148, 134])
+    upper_magenta = np.array([167, 185, 168])
 
     # Detección de colores
     mask_red = cv2.inRange(hsv_frame, lower_red, upper_red)
@@ -104,27 +104,31 @@ def detect_colors(frame):
     return [mask_red, mask_green, mask_magenta], [centroids_red, centroids_green, centroids_magenta], [dimensions_red, dimensions_green, dimensions_magenta]
 
 # Bucle principal
-for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+for frame in camera:
+    # Captura de imagen
     image = frame.array
 
-    # Detectar colores
+    # Detección de colores y análisis de imagen
     masks, centroids, dimensions = detect_colors(image)
 
-    # Mostrar imágenes y máscaras
-    cv2.imshow("Frame", image)
+    # Mostrar las máscaras de color y la imagen original en ventanas separadas
+    cv2.imshow("Original", image)
     cv2.imshow("Red Mask", masks[0])
     cv2.imshow("Green Mask", masks[1])
     cv2.imshow("Magenta Mask", masks[2])
 
-    # Mostrar información de centroides y dimensiones
-    for color, centroid_list, dimension_list in zip(["Red", "Green", "Magenta"], centroids, dimensions):
-        for centroid, dimension in zip(centroid_list, dimension_list):
-            print(f"{color} Centroid: {centroid}, Dimension: {dimension}")
+    # Imprimir información de centroides y dimensiones en la consola
+    print("Red Centroids:", centroids[0])
+    print("Red Dimensions:", dimensions[0])
+    print("Green Centroids:", centroids[1])
+    print("Green Dimensions:", dimensions[1])
+    print("Magenta Centroids:", centroids[2])
+    print("Magenta Dimensions:", dimensions[2])
 
-    # Limpiar el buffer de la cámara para la siguiente captura
+    # Limpieza del buffer de captura
     rawCapture.truncate(0)
 
-    # Espera por la tecla 'q' para salir del bucle
+    # Salida del bucle si se presiona 'q'
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
