@@ -127,8 +127,17 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     cv2.resizeWindow("Magenta Mask", 400, 300)
     cv2.imshow("Magenta Mask", masks[2])
 
+    Am = dimensions[2]
+    Am = Am[0] * Am[1]
+
+    Ar = dimensions[0]
+    Ar = Ar[0] * Ar[1]
+
+    Av = dimensions[0]
+    Av = Av[0] * Av[0]
+    
     print(f"C: R:{centroids[0]}, V:{centroids[1]}, M:{centroids[2]}")
-    print(f"D: R:{dimensions[0]}, V:{dimensions[1]}, M:{dimensions[2]}")
+    print(f"D: R:{Ar}, V:{Av}, M:{Am}")
     # Limpiar el búfer de captura para la siguiente imagen
     rawCapture.truncate(0)
 
