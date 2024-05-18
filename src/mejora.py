@@ -104,25 +104,13 @@ def detect_colors(frame):
     return [mask_red, mask_green, mask_magenta], [centroids_red, centroids_green, centroids_magenta], [dimensions_red, dimensions_green, dimensions_magenta]
 
 # Bucle principal
+# Bucle principal
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     # Captura de imagen
     image = frame.array
 
     # Detección de colores y análisis de imagen
     masks, centroids, dimensions = detect_colors(image)
-
-    # Mostrar las máscaras de color en ventanas separadas con tamaños personalizados
-    cv2.namedWindow("Red Mask", cv2.WINDOW_NORMAL)
-    cv2.resizeWindow("Red Mask", 400, 300)
-    cv2.imshow("Red Mask", masks[0])
-    
-    cv2.namedWindow("Green Mask", cv2.WINDOW_NORMAL)
-    cv2.resizeWindow("Green Mask", 400, 300)
-    cv2.imshow("Green Mask", masks[1])
-    
-    cv2.namedWindow("Magenta Mask", cv2.WINDOW_NORMAL)
-    cv2.resizeWindow("Magenta Mask", 400, 300)
-    cv2.imshow("Magenta Mask", masks[2])
 
     # Dibujar el centroide en cada máscara de color
     colors = [(0, 0, 255), (0, 255, 0), (255, 0, 255)]  # Colores para cada máscara
@@ -131,14 +119,14 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
             cx, cy = centroid[0]  # Seleccionar el único centroide
             cv2.circle(mask, (cx, cy), 5, color, -1)
 
-    # Mostrar las máscaras de color con el centroide dibujado
+    # Mostrar las imágenes con las máscaras de color y los centroides correspondientes
     cv2.imshow("Red Mask with Centroid", masks[0])
     cv2.imshow("Green Mask with Centroid", masks[1])
     cv2.imshow("Magenta Mask with Centroid", masks[2])
 
     # Mostrar la imagen original
     cv2.namedWindow("Original", cv2.WINDOW_NORMAL)
-    cv2.resizeWindow("Original", 400, 300)
+    cv2.resizeWindow("Original", 800, 600)  # Tamaño personalizado
     cv2.imshow("Original", image)
 
     # Limpiar el búfer de captura para la siguiente imagen
