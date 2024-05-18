@@ -129,16 +129,16 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     cv2.resizeWindow("Magenta Mask", 400, 300)
     cv2.imshow("Magenta Mask", masks[2])
 
-    # Dibujar centroides en la imagen original
+    # Dibujar el centroide en la imagen original
     color_red = (0, 0, 255)
     color_green = (0, 255, 0)
     color_magenta = (255, 0, 255)
 
     for centroid, color in zip(centroids, [color_red, color_green, color_magenta]):
-        for cx, cy in centroid:
-            cv2.circle(image, (cx, cy), 5, color, -1)
+        cx, cy = centroid[0]  # Seleccionar el único centroide
+        cv2.circle(image, (cx, cy), 5, color, -1)
 
-    # Mostrar la imagen original con los centroides dibujados
+    # Mostrar la imagen original con el centroide dibujado
     cv2.namedWindow("Centroids", cv2.WINDOW_NORMAL)
     cv2.resizeWindow("Centroids", 400, 300)
     cv2.imshow("Centroids", image)
