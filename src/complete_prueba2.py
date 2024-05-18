@@ -335,16 +335,28 @@ try:
         rawCapture.truncate(0)
         if cx_v < 170:
             print("V a la IZQ")
+            if v == 1:
+                valor_d = GCent
         elif cx_v > 170 and cx_v < 470:
             print("V al CENT")
+            if v == 1:
+                valor_d = GIzq
         else:
             print("V a la DER")
+            if v == 1:
+                valor_d = GIzq
         if cx_r < 170:
             print("R a la IZQ")
+            if v == 1:
+                valor_d = GDer
         elif cx_r > 170 and cx_v < 470:
             print("R al CENT")
+            if v == 1:
+                valor_d = GCent
         else:
             print("R a la DER")
+            if v == 1:
+                valor_d = GDer
         if cx_m < 170:
             print("M a la IZQ")
         elif cx_m > 170 and cx_v < 470:
