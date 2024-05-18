@@ -20,7 +20,6 @@ button_pin = 9
 
 # Define variables
 tiempo_de_giro_linea = 1
-numberlinea = 0
 vueltas = 0
 empezado = 0
 distancia_delante = 0
@@ -66,7 +65,6 @@ GPIO.setup(ECHO_PIN_IZQUIERDA, GPIO.IN)
 GPIO.setup(TRIG_PIN_DERECHA, GPIO.OUT)
 GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN)
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(IRsensor, GPIO.IN)
 
 #Iniciar servos
 pwm_d = GPIO.PWM(servo_pin_direccion, 50) # Frecuencia de PWM: 50Hz (estándar para servos)
