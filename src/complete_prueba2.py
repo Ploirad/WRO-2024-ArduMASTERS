@@ -127,14 +127,16 @@ def giro_tras(valor_t, valor_d):
 
 def detect_colors(frame):
     hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
+    # 238, 39, 55 ///  68, 214, 44 /// 255, 0, 255
     # Nuevos rangos de color
-    lower_red = np.array([174, 175, 25])
-    upper_red = np.array([176, 212, 250])
-    lower_green = np.array([57, 104, 25])
-    upper_green = np.array([65, 156, 250])
-    lower_magenta = np.array([164, 148, 25])
-    upper_magenta = np.array([167, 185, 250])
+    lower_red = np.array([345, 76, 61])
+    upper_red = np.array([360, 100, 100])
+    
+    lower_green = np.array([93, 59, 54])
+    upper_green = np.array([136, 100, 100])
+    
+    lower_magenta = np.array([302, 54, 100])
+    upper_magenta = np.array([320, 100, 100])
 
     # Detección de colores
     mask_red = cv2.inRange(hsv_frame, lower_red, upper_red)
