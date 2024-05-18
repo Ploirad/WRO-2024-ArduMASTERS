@@ -62,7 +62,7 @@ def detect_colors(frame):
     # Encontrar contornos y calcular centroides y dimensiones
     centroids_red = None
     dimensions_red = None
-    #cx_r = None
+    cx_r = None
     contours_red, _ = cv2.findContours(mask_red, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     if contours_red:
         contour = max(contours_red, key=cv2.contourArea)
@@ -78,6 +78,7 @@ def detect_colors(frame):
 
     centroids_green = None
     dimensions_green = None
+    cx_v = None
     contours_green, _ = cv2.findContours(mask_green, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     if contours_green:
         contour = max(contours_green, key=cv2.contourArea)
@@ -93,6 +94,7 @@ def detect_colors(frame):
 
     centroids_magenta = None
     dimensions_magenta = None
+    cx_m = None
     contours_magenta, _ = cv2.findContours(mask_magenta, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     if contours_magenta:
         contour = max(contours_magenta, key=cv2.contourArea)
