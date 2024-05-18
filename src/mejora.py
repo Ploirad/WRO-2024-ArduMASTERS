@@ -37,8 +37,6 @@ camera = PiCamera()
 camera.resolution = (640, 480)
 rawCapture = PiRGBArray(camera, size=(640, 480))
 time.sleep(0.1)
-
-# Funciones de detección de colores y análisis de imágenes
 def detect_colors(frame):
     hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
@@ -62,46 +60,47 @@ def detect_colors(frame):
     mask_magenta = cv2.morphologyEx(mask_magenta, cv2.MORPH_OPEN, kernel)
 
     # Encontrar contornos y calcular centroides y dimensiones
+    centroids_red = None
+    dimensions_red = None
     contours_red, _ = cv2.findContours(mask_red, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    if contours_red:
+        contour = max(contours_red, key=cv2.contourArea)
+        M = cv2.moments(contour)
+        if M["m00"] != 0:
+            cx = int(M["m10"] / M["m00"])
+            cy = int(M["m01"] / M["m00"])
+            centroids_red = [(cx, cy)]
+            x, y, w, h = cv2.boundingRect(contour)
+            dimensions_red = [(w, h)]
+
+    centroids_green = None
+    dimensions_green = None
     contours_green, _ = cv2.findContours(mask_green, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    if contours_green:
+        contour = max(contours_green, key=cv2.contourArea)
+        M = cv2.moments(contour)
+        if M["m00"] != 0:
+            cx = int(M["m10"] / M["m00"])
+            cy = int(M["m01"] / M["m00"])
+            centroids_green = [(cx, cy)]
+            x, y, w, h = cv2.boundingRect(contour)
+            dimensions_green = [(w, h)]
+
+    centroids_magenta = None
+    dimensions_magenta = None
     contours_magenta, _ = cv2.findContours(mask_magenta, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
-    centroids_red = []
-    centroids_green = []
-    centroids_magenta = []
-
-    dimensions_red = []
-    dimensions_green = []
-    dimensions_magenta = []
-
-    for contour in contours_red:
+    if contours_magenta:
+        contour = max(contours_magenta, key=cv2.contourArea)
         M = cv2.moments(contour)
         if M["m00"] != 0:
             cx = int(M["m10"] / M["m00"])
             cy = int(M["m01"] / M["m00"])
-            centroids_red.append((cx, cy))
+            centroids_magenta = [(cx, cy)]
             x, y, w, h = cv2.boundingRect(contour)
-            dimensions_red.append((w, h))
-
-    for contour in contours_green:
-        M = cv2.moments(contour)
-        if M["m00"] != 0:
-            cx = int(M["m10"] / M["m00"])
-            cy = int(M["m01"] / M["m00"])
-            centroids_green.append((cx, cy))
-            x, y, w, h = cv2.boundingRect(contour)
-            dimensions_green.append((w, h))
-
-    for contour in contours_magenta:
-        M = cv2.moments(contour)
-        if M["m00"] != 0:
-            cx = int(M["m10"] / M["m00"])
-            cy = int(M["m01"] / M["m00"])
-            centroids_magenta.append((cx, cy))
-            x, y, w, h = cv2.boundingRect(contour)
-            dimensions_magenta.append((w, h))
+            dimensions_magenta = [(w, h)]
 
     return [mask_red, mask_green, mask_magenta], [centroids_red, centroids_green, centroids_magenta], [dimensions_red, dimensions_green, dimensions_magenta]
+
 
 # Bucle principal
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
