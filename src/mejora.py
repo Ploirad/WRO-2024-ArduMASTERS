@@ -147,7 +147,26 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     print(f"D: R:{Ar}, V:{Av}, M:{Am}")
     # Limpiar el búfer de captura para la siguiente imagen
     rawCapture.truncate(0)
+    if cx_v < 170:
+        print("V a la IZQ")
+    elif cx_v > 170 and cx_v < 470:
+        print("V al CENT")
+    else:
+        print("V a la DER")
 
+    if cx_r < 170:
+        print("R a la IZQ")
+    elif cx_r > 170 and cx_v < 470:
+        print("R al CENT")
+    else:
+        print("R a la DER")
+
+    if cx_m < 170:
+        print("M a la IZQ")
+    elif cx_m > 170 and cx_v < 470:
+        print("M al CENT")
+    else:
+        print("M a la DER")
     # Esperar una tecla para salir (salida si se presiona 'q')
     key = cv2.waitKey(1) & 0xFF
     if key == ord("q"):
