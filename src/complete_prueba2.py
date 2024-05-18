@@ -329,7 +329,7 @@ try:
         if cx_m is None:
             cx_m = 320
 
-        print(f"C: R:{cx[0]}, V:{cx[1]}, M:{cx[2]}")
+        print(f"C: R:{cx_r}, V:{cx_v}, M:{cx_m}")
         print(f"D: R:{Ar}, V:{Av}, M:{Am}")
         # Limpiar el búfer de captura para la siguiente imagen
         rawCapture.truncate(0)
@@ -357,9 +357,9 @@ try:
             print("R a la DER")
             if v == 1:
                 valor_d = GDer
-        if cx_m < 170:
+        if cx_m < 266:
             print("M a la IZQ")
-        elif cx_m > 170 and cx_v < 470:
+        elif cx_m > 266 and cx_v < 374:
             print("M al CENT")
         else:
             print("M a la DER")
