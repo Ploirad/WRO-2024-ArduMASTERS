@@ -104,17 +104,13 @@ def detect_colors(frame):
     return [mask_red, mask_green, mask_magenta], [centroids_red, centroids_green, centroids_magenta], [dimensions_red, dimensions_green, dimensions_magenta]
 
 # Bucle principal
+# Bucle principal
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     # Captura de imagen
     image = frame.array
 
     # Detección de colores y análisis de imagen
     masks, centroids, dimensions = detect_colors(image)
-
-    # Dibujar centroides en las máscaras de color
-    for color, centroid_list in zip(['Red', 'Green', 'Magenta'], centroids):
-        for centroid in centroid_list:
-            cv2.circle(masks[0], centroid, 5, (255, 255, 255), -1)
 
     # Mostrar las máscaras de color y la imagen original en ventanas separadas con tamaños personalizados
     cv2.namedWindow("Original", cv2.WINDOW_NORMAL)
@@ -133,19 +129,30 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     cv2.resizeWindow("Magenta Mask", 400, 300)
     cv2.imshow("Magenta Mask", masks[2])
 
-    # Imprimir información de centroides y dimensiones en la consola
-    print("Red Centroids:", centroids[0])
-    print("Green Centroids:", centroids[1])
-    print("Magenta Centroids:", centroids[2])
-    print("Red Dimensions:", dimensions[0])
-    print("Green Dimensions:", dimensions[1])
-    print("Magenta Dimensions:", dimensions[2])
+    # Dibujar centroides en la imagen original
+    color_red = (0, 0, 255)
+    color_green = (0, 255, 0)
+    color_magenta = (255, 0, 255)
+
+    for centroid, color in zip(centroids, [color_red, color_green, color_magenta]):
+        for cx, cy in centroid:
+            cv2.circle(image, (cx, cy), 5, color, -1)
+
+    # Mostrar la imagen original con los centroides dibujados
+    cv2.namedWindow("Centroids", cv2.WINDOW_NORMAL)
+    cv2.resizeWindow("Centroids", 400, 300)
+    cv2.imshow("Centroids", image)
+
     # Limpiar el búfer de captura para la siguiente imagen
     rawCapture.truncate(0)
-    
+
     # Esperar una tecla para salir (salida si se presiona 'q')
     key = cv2.waitKey(1) & 0xFF
     if key == ord("q"):
         break
+
+# Limpiar y cerrar las ventanas
 cv2.destroyAllWindows()
+
+# Limpiar configuraciones de GPIO
 GPIO.cleanup()
