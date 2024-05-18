@@ -333,11 +333,11 @@ try:
         print(f"D: R:{Ar}, V:{Av}, M:{Am}")
         # Limpiar el búfer de captura para la siguiente imagen
         rawCapture.truncate(0)
-        if cx_v < 213:
+        if cx_v < 266:
             print("V a la IZQ")
             if v == 1:
                 valor_d = GCent
-        elif cx_v > 213 and cx_v < 427:
+        elif cx_v > 266 and cx_v < 374:
             print("V al CENT")
             if v == 1:
                 valor_d = GIzq
@@ -345,11 +345,11 @@ try:
             print("V a la DER")
             if v == 1:
                 valor_d = GIzq
-        if cx_r < 213:
+        if cx_r < 266:
             print("R a la IZQ")
             if v == 1:
                 valor_d = GDer
-        elif cx_r > 213 and cx_v < 427:
+        elif cx_r > 266 and cx_v < 374:
             print("R al CENT")
             if v == 1:
                 valor_d = GCent
