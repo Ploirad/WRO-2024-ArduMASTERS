@@ -104,7 +104,6 @@ def detect_colors(frame):
     return [mask_red, mask_green, mask_magenta], [centroids_red, centroids_green, centroids_magenta], [dimensions_red, dimensions_green, dimensions_magenta]
 
 # Bucle principal
-# Bucle principal
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     # Captura de imagen
     image = frame.array
@@ -112,11 +111,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # Detección de colores y análisis de imagen
     masks, centroids, dimensions = detect_colors(image)
 
-    # Mostrar las máscaras de color y la imagen original en ventanas separadas con tamaños personalizados
-    cv2.namedWindow("Original", cv2.WINDOW_NORMAL)
-    cv2.resizeWindow("Original", 400, 300)
-    cv2.imshow("Original", image)
-    
+    # Mostrar las máscaras de color en ventanas separadas con tamaños personalizados
     cv2.namedWindow("Red Mask", cv2.WINDOW_NORMAL)
     cv2.resizeWindow("Red Mask", 400, 300)
     cv2.imshow("Red Mask", masks[0])
@@ -129,19 +124,22 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     cv2.resizeWindow("Magenta Mask", 400, 300)
     cv2.imshow("Magenta Mask", masks[2])
 
-    # Dibujar el centroide en la imagen original
-    color_red = (0, 0, 255)
-    color_green = (0, 255, 0)
-    color_magenta = (255, 0, 255)
+    # Dibujar el centroide en cada máscara de color
+    colors = [(0, 0, 255), (0, 255, 0), (255, 0, 255)]  # Colores para cada máscara
+    for mask, centroid, color in zip(masks, centroids, colors):
+        if centroid:
+            cx, cy = centroid[0]  # Seleccionar el único centroide
+            cv2.circle(mask, (cx, cy), 5, color, -1)
 
-    for centroid, color in zip(centroids, [color_red, color_green, color_magenta]):
-        cx, cy = centroid[0]  # Seleccionar el único centroide
-        cv2.circle(image, (cx, cy), 5, color, -1)
+    # Mostrar las máscaras de color con el centroide dibujado
+    cv2.imshow("Red Mask with Centroid", masks[0])
+    cv2.imshow("Green Mask with Centroid", masks[1])
+    cv2.imshow("Magenta Mask with Centroid", masks[2])
 
-    # Mostrar la imagen original con el centroide dibujado
-    cv2.namedWindow("Centroids", cv2.WINDOW_NORMAL)
-    cv2.resizeWindow("Centroids", 400, 300)
-    cv2.imshow("Centroids", image)
+    # Mostrar la imagen original
+    cv2.namedWindow("Original", cv2.WINDOW_NORMAL)
+    cv2.resizeWindow("Original", 400, 300)
+    cv2.imshow("Original", image)
 
     # Limpiar el búfer de captura para la siguiente imagen
     rawCapture.truncate(0)
