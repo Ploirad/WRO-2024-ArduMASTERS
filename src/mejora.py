@@ -162,14 +162,22 @@ try:
         image = rawCapture.array
 
         # Procesar la imagen para detectar colores
-        f, mask1, cx1, cy1, w1, h1 = testColor(image, bajoR, altoR, (355, 83, 93))
-        f, mask2, cx2, cy2, w2, h2 = testColor(image, bajoG, altoG, (111, 79, 83))
-        f, mask3, cx3, cy3, w3, h3 = testColor(image, bajoM, altoM, (300, 100, 100))
+        f1, mask1, cx1, cy1, w1, h1 = testColor(image, bajoR, altoR, (0, 0, 255))
+        f2, mask2, cx2, cy2, w2, h2 = testColor(image, bajoG, altoG, (0, 255, 0))
+        f3, mask3, cx3, cy3, w3, h3 = testColor(image, bajoM, altoM, (255, 0, 255))
         
-        # Mostrar las máscaras de los colores detectados
-        cv2.imshow("frame: Rojo", mask1)
-        cv2.imshow("frame: Verde", mask2)
-        cv2.imshow("frame: Morado", mask3)
+        # Redimensionar las ventanas para que sean más pequeñas
+        small_image = cv2.resize(image, (320, 240))
+        small_mask1 = cv2.resize(mask1, (320, 240))
+        small_mask2 = cv2.resize(mask2, (320, 240))
+        small_mask3 = cv2.resize(mask3, (320, 240))
+
+        # Mostrar las imágenes y máscaras en ventanas separadas
+        cv2.imshow("Imagen normal", small_image)
+        cv2.imshow("Máscara Rojo", small_mask1)
+        cv2.imshow("Máscara Verde", small_mask2)
+        cv2.imshow("Máscara Magenta", small_mask3)
+        
         rawCapture.truncate(0)
 
         # Verificar si el botón ha sido presionado
@@ -235,7 +243,7 @@ try:
                     vueltas_e += 1
                     if vueltas_e == 1:
                         giro_tras(valor_t, valor_d)
-                        e = 0
+                        vueltas_e = 0
 
             # Muestra las distancias
             print(f"Distancia hacia delante: {distancia_delante} cm")
