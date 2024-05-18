@@ -104,7 +104,7 @@ def detect_colors(frame):
     return [mask_red, mask_green, mask_magenta], [centroids_red, centroids_green, centroids_magenta], [dimensions_red, dimensions_green, dimensions_magenta]
 
 # Bucle principal
-for frame in camera:
+for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     # Captura de imagen
     image = frame.array
 
@@ -119,19 +119,22 @@ for frame in camera:
 
     # Imprimir información de centroides y dimensiones en la consola
     print("Red Centroids:", centroids[0])
-    print("Red Dimensions:", dimensions[0])
     print("Green Centroids:", centroids[1])
-    print("Green Dimensions:", dimensions[1])
     print("Magenta Centroids:", centroids[2])
+    print("Red Dimensions:", dimensions[0])
+    print("Green Dimensions:", dimensions[1])
     print("Magenta Dimensions:", dimensions[2])
 
-    # Limpieza del buffer de captura
+    # Limpiar el búfer de captura para la siguiente imagen
     rawCapture.truncate(0)
 
-    # Salida del bucle si se presiona 'q'
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    # Esperar una tecla para salir (salida si se presiona 'q')
+    key = cv2.waitKey(1) & 0xFF
+    if key == ord("q"):
         break
 
-# Limpieza de GPIO y cierre de ventanas
-GPIO.cleanup()
+# Limpiar y cerrar las ventanas
 cv2.destroyAllWindows()
+
+# Limpiar configuraciones de GPIO
+GPIO.cleanup()
