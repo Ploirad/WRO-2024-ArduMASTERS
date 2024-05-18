@@ -17,7 +17,6 @@ ECHO_PIN_DERECHA = 6
 servo_pin_direccion = 2
 servo_pin_traccion = 3
 button_pin = 9
-IRsensor = 8
 
 # Configuración de GPIO
 GPIO.setmode(GPIO.BCM)
