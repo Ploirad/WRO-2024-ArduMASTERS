@@ -243,7 +243,7 @@ try:
                     valor_d = GCent
             else:
                 if girando == 0:
-                    if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"]
+                    if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"]:
                         if c == 1:
                             valor_t = TAvance
                             valor_d = GIzq
