@@ -325,10 +325,19 @@ try:
         cx_v, cx_r, cx_m = cx[1], cx[0], cx[2]
         if cx_v is None:
             cx_v = 320
+            vf = True
+        else:
+            vf = False
         if cx_r is None:
             cx_r = 320
+            rf = True
+        else:
+            rf = False
         if cx_m is None:
             cx_m = 320
+            mf = True:
+        else:
+            mf = False
 
         print(f"C: R:{cx_r}, V:{cx_v}, M:{cx_m}")
         print(f"D: R:{Ar}, V:{Av}, M:{Am}")
@@ -336,40 +345,40 @@ try:
         rawCapture.truncate(0)
         if cx_v < 266:
             print("V a la IZQ")
-            if v == 1:
+            if (not vf) and v == 1:
                 valor_d = GCent
                 
         elif cx_v > 266 and cx_v < 374:
             print("V al CENT")
-            if v == 1:
+            if (not vf) and v == 1:
                 valor_d = GIzq
             
         else:
             print("V a la DER")
-            if v == 1:
+            if (not vf) and v == 1:
                 valor_d = GIzq
             
         if cx_r < 266:
             print("R a la IZQ")
-            if v == 1:
+            if (not rf) and v == 1:
                 valor_d = GDer
             
         elif cx_r > 266 and cx_r < 374:
             print("R al CENT")
-            if v == 1:
+            if (not rf) and v == 1:
                 valor_d = GCent
             
         else:
             print("R a la DER")
-            if v == 1:
+            if (not rf) and v == 1:
                 valor_d = GDer
             
         if cx_m < 266:
-            print("M a la IZQ")
+            print(f"M a la IZQ y {mf}")
         elif cx_m > 266 and cx_m < 374:
-            print("M al CENT")
+            print(f"M al CENT y {mf}")
         else:
-            print("M a la DER")
+            print(f"M a la DER y {mf}")
         # Esperar una tecla para salir (salida si se presiona 'q')
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):
