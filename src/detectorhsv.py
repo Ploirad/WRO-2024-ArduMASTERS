@@ -45,8 +45,16 @@ try:
 
             # Rango de colores HSV (con ajustes para mejor detección)
             sensitivity = 15  # Sensibilidad ajustable
-            lower_bound = np.array([selected_hsv[0] - sensitivity, max(50, selected_hsv[1] - 50), max(50, selected_hsv[2] - 50)])
-            upper_bound = np.array([selected_hsv[0] + sensitivity, 255, 255])
+            lower_bound = np.array([
+                max(0, selected_hsv[0] - sensitivity), 
+                max(50, selected_hsv[1] - 50), 
+                max(50, selected_hsv[2] - 50)
+            ])
+            upper_bound = np.array([
+                min(179, selected_hsv[0] + sensitivity), 
+                255, 
+                255
+            ])
 
         if selected_hsv is not None:
             # Convertir la imagen a HSV
