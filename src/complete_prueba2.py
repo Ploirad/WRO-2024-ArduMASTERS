@@ -129,14 +129,14 @@ def detect_colors(frame):
     hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     # 238, 39, 55 ///  68, 214, 44 /// 255, 0, 255
     # Nuevos rangos de color
-    lower_red = np.array([359, 100, 77])
-    upper_red = np.array([359, 52, 100])
+    lower_red = np.array([350, 55, 80])
+    upper_red = np.array([350, 55, 100])
     
-    lower_green = np.array([111, 80, 60])
-    upper_green = np.array([111, 100, 100])
+    lower_green = np.array([135, 60, 49])
+    upper_green = np.array([135, 60, 100])
     
-    lower_magenta = np.array([300, 100, 77])
-    upper_magenta = np.array([334, 98, 100])
+    lower_magenta = np.array([321, 59, 63])
+    upper_magenta = np.array([321, 59, 100])
 
     # Detección de colores
     mask_red = cv2.inRange(hsv_frame, lower_red, upper_red)
