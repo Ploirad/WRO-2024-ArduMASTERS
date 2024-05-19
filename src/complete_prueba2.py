@@ -335,7 +335,7 @@ try:
             rf = False
         if cx_m is None:
             cx_m = 320
-            mf = True:
+            mf = True
         else:
             mf = False
 
