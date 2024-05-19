@@ -47,6 +47,7 @@ try:
             lower_bound = np.array([selected_hsv[0] - 10, 100, 100])
             upper_bound = np.array([selected_hsv[0] + 10, 255, 255])
 
+        if selected_hsv is not None:
             # Convertir la imagen a HSV
             hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
             
