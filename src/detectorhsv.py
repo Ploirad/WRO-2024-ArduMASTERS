@@ -43,9 +43,10 @@ try:
             print(f"Color BGR seleccionado: {bgr_color}")
             print(f"Color HSV correspondiente: {selected_hsv}")
 
-            # Rango de colores HSV
-            lower_bound = np.array([selected_hsv[0] - 10, 100, 100])
-            upper_bound = np.array([selected_hsv[0] + 10, 255, 255])
+            # Rango de colores HSV (con ajustes para mejor detección)
+            sensitivity = 15  # Sensibilidad ajustable
+            lower_bound = np.array([selected_hsv[0] - sensitivity, max(50, selected_hsv[1] - 50), max(50, selected_hsv[2] - 50)])
+            upper_bound = np.array([selected_hsv[0] + sensitivity, 255, 255])
 
         if selected_hsv is not None:
             # Convertir la imagen a HSV
@@ -53,6 +54,11 @@ try:
             
             # Crear una máscara con el rango de color seleccionado
             mask = cv2.inRange(hsv_image, lower_bound, upper_bound)
+            
+            # Aplicar operaciones morfológicas para reducir el ruido en la máscara
+            kernel = np.ones((5, 5), np.uint8)
+            mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+            mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
             
             # Mostrar la máscara
             cv2.imshow('Mask', mask)
