@@ -1,9 +1,12 @@
 import cv2
 import numpy as np
+from picamera.array import PiRGBArray
+from picamera import PiCamera
+import time
 
 # Variables globales para almacenar el punto seleccionado y la imagen
 clicked_point = None
-image = None
+selected_hsv = None
 
 # Callback del mouse
 def mouse_callback(event, x, y, flags, param):
@@ -18,33 +21,51 @@ def bgr_to_hsv(bgr_color):
     hsv_color = cv2.cvtColor(bgr_color, cv2.COLOR_BGR2HSV)
     return hsv_color[0][0]
 
-# Cargar la imagen
-image = cv2.imread('image.jpg')  # Cambia 'image.jpg' a la ruta de tu imagen
-cv2.imshow('Image', image)
+# Inicializar la cámara
+camera = PiCamera()
+camera.resolution = (640, 480)
+camera.framerate = 32
+rawCapture = PiRGBArray(camera, size=(640, 480))
+
+# Permitir que la cámara se caliente
+time.sleep(0.1)
+
+cv2.namedWindow('Image')
 cv2.setMouseCallback('Image', mouse_callback)
 
-while True:
-    cv2.imshow('Image', image)
-    key = cv2.waitKey(1) & 0xFF
-    if key == ord('q'):  # Presiona 'q' para salir
-        break
-    if clicked_point:
-        bgr_color = image[clicked_point[1], clicked_point[0]].tolist()
-        hsv_color = bgr_to_hsv(bgr_color)
-        print(f"Color BGR seleccionado: {bgr_color}")
-        print(f"Color HSV correspondiente: {hsv_color}")
+try:
+    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+        image = frame.array
         
-        # Rango de colores HSV
-        lower_bound = np.array([hsv_color[0] - 10, 100, 100])
-        upper_bound = np.array([hsv_color[0] + 10, 255, 255])
+        if clicked_point:
+            bgr_color = image[clicked_point[1], clicked_point[0]].tolist()
+            selected_hsv = bgr_to_hsv(bgr_color)
+            print(f"Color BGR seleccionado: {bgr_color}")
+            print(f"Color HSV correspondiente: {selected_hsv}")
 
-        # Convertir la imagen a HSV
-        hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-        
-        # Crear una máscara con el rango de color seleccionado
-        mask = cv2.inRange(hsv_image, lower_bound, upper_bound)
-        
-        # Mostrar la máscara
-        cv2.imshow('Mask', mask)
+            # Rango de colores HSV
+            lower_bound = np.array([selected_hsv[0] - 10, 100, 100])
+            upper_bound = np.array([selected_hsv[0] + 10, 255, 255])
 
+            # Convertir la imagen a HSV
+            hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+            
+            # Crear una máscara con el rango de color seleccionado
+            mask = cv2.inRange(hsv_image, lower_bound, upper_bound)
+            
+            # Mostrar la máscara
+            cv2.imshow('Mask', mask)
+
+        cv2.imshow('Image', image)
+
+        key = cv2.waitKey(1) & 0xFF
+        rawCapture.truncate(0)
+
+        if key == ord('q'):
+            break
+
+except KeyboardInterrupt:
+    pass
+
+# Limpiar y cerrar las ventanas
 cv2.destroyAllWindows()
