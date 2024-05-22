@@ -60,7 +60,7 @@ pulse_end = 0
 v = 0
 girando = 0
 x = 4
-
+comprobar_morado = False
 numero_de_giros_para_acabar = x * 3
 camera = PiCamera()
 camera.resolution = (640, 480)
@@ -201,6 +201,21 @@ def detect_colors(frame):
 
     return [mask_red, mask_green, mask_magenta], [cx_r, cx_v, cx_m], [dimensions_red, dimensions_green, dimensions_magenta], [Ar, Av, Am]
 
+def compM(Am):
+    global cx_m, distancia_derecha, distancia_izquierda
+    if distancia_derecha > distancia_izquierda:
+        pwm_d.start(GDer)
+    elif distancia_derecha < distancia_izquierda:
+        pwm_d.start(GIzq)
+    else:
+        if cx_m < 266:
+            print(f"M a la IZQ y {mf}")
+        elif cx_m > 266 and cx_m < 374:
+            print(f"M al CENT y {mf}")
+        else:
+            print(f"M a la DER y {mf}")
+        
+
 # Bucle principal
 try:
     for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
@@ -306,8 +321,8 @@ try:
                 print("derecha")
             else:
                 print("centro")
-            # No se define el sensor IR en el código original
-            # linea = GPIO.input(IRsensor)
+            if vueltas == 9:
+                comprobar_morado = True
             if vueltas == numero_de_giros_para_acabar:
                 v = 0
                 GPIO.cleanup()
@@ -372,13 +387,8 @@ try:
             print("R a la DER")
             if (not rf) and v == 1:
                 valor_d = GDer
-            
-        if cx_m < 266:
-            print(f"M a la IZQ y {mf}")
-        elif cx_m > 266 and cx_m < 374:
-            print(f"M al CENT y {mf}")
-        else:
-            print(f"M a la DER y {mf}")
+        if comprobar_morado:   
+            compM(Am)
         # Esperar una tecla para salir (salida si se presiona 'q')
         key = cv2.waitKey(1) & 0xFF
         if key == ord("q"):
