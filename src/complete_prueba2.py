@@ -225,17 +225,17 @@ def compM(Am):
         pwm_d.start(GCent)
         time.sleep(1)
         if p == 1:
-            while distancia_atras > 5:
+            while distancia_atras > 5 or distancia_delante > 5:
                 pwm_t.start(TAtras)
                 pwm_d.start(GIzq)
-            if distancia_atras <= 5:
+            if distancia_atras <= 5 or distancia_delante <= 5:
                 v = 0
                 z = False
         if p == 2:
-            while distancia_atras > 5:
+            while distancia_atras > 5 or distancia_delante > 5:
                 pwm_t.start(TAtras)
                 pwm_d.start(GDer)
-            if distancia_atras <= 5:
+            if distancia_atras <= 5 or distancia_delante <= 5:
                 v = 0
                 z = False
             
