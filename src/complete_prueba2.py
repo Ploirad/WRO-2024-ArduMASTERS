@@ -243,6 +243,7 @@ def compM(Am):
 while z:
     try:
         for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+            update_distances()
             # Captura de imagen
             image = frame.array
     
@@ -276,7 +277,6 @@ while z:
     
             if v == 1:
                 pwm_t.start(valor_t)
-                update_distances()
                 if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]:
                         valor_t = TAtras
                         valor_d = GCent
