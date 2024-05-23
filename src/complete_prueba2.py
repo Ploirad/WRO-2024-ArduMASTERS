@@ -129,11 +129,11 @@ def detect_colors(frame):
     hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     # 238, 39, 55 ///  68, 214, 44 /// 255, 0, 255
     # Nuevos rangos de color
-    lower_red = np.array([174, 175, 90])
+    lower_red = np.array([175, 126, 68])
     upper_red = np.array([176, 212, 255])
-    lower_green = np.array([57, 104, 90])
+    lower_green = np.array([62, 147, 49])
     upper_green = np.array([65, 156, 255])
-    lower_magenta = np.array([164, 148, 90])
+    lower_magenta = np.array([138, 87, 25])
     upper_magenta = np.array([167, 185, 255])
 
     # Detección de colores
@@ -202,7 +202,7 @@ def detect_colors(frame):
     return [mask_red, mask_green, mask_magenta], [cx_r, cx_v, cx_m], [dimensions_red, dimensions_green, dimensions_magenta], [Ar, Av, Am]
 
 def compM(Am):
-    global cx_m, distancia_derecha, distancia_izquierda
+    global cx_m, distancia_derecha, distancia_izquierda, distancia_atras, distancia_delante
     if distancia_derecha > distancia_izquierda:
         pwm_d.start(GDer)
     elif distancia_derecha < distancia_izquierda:
@@ -214,7 +214,6 @@ def compM(Am):
             print(f"M al CENT y {mf}")
         else:
             print(f"M a la DER y {mf}")
-        
 
 # Bucle principal
 try:
