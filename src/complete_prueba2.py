@@ -206,6 +206,7 @@ z = True
 def compM(Am):
     global cx_m, distancia_derecha, distancia_izquierda, distancia_atras, distancia_delante, AmV
     p = 0
+    print(f"p = {p}; AmV = {AmV}")
     if AmV == False:
         if cx_m < 266:
             print(f"M a la IZQ y {mf}")
