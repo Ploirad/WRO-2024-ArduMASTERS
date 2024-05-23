@@ -223,7 +223,7 @@ def compM(Am):
     if p != 0:
         pwm_t.start(TAvance)
         pwm_d.start(GCent)
-        time.sleep(1)
+        time.sleep(10)
         if p == 1:
             while distancia_atras > 5 or distancia_delante > 5:
                 pwm_t.start(TAtras)
@@ -238,7 +238,6 @@ def compM(Am):
             if distancia_atras <= 5 or distancia_delante <= 5:
                 v = 0
                 z = False
-            
         
 # Bucle principal
 while z:
