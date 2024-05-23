@@ -223,7 +223,7 @@ def compM(Am):
     if p != 0:
         pwm_t.start(TAvance)
         pwm_d.start(GCent)
-        time.sleep(10)
+        time.sleep(3.5)
         if p == 1:
             while distancia_atras > 5 or distancia_delante > 5:
                 pwm_t.start(TAtras)
