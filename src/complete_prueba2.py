@@ -212,7 +212,7 @@ def compM(Am):
             p = 1
         elif cx_m > 266 and cx_m < 374:
             print(f"M al CENT y {mf}")
-            if distancia_dercha >= distancia_izquierda:
+            if distancia_derecha >= distancia_izquierda:
                 p = 2
             elif distancia_derecha < distancia_izquierda:
                 p = 1
