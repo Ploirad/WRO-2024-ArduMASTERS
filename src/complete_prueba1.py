@@ -13,11 +13,9 @@ ECHO_PIN_DERECHA = 6
 servo_pin_direccion = 2
 servo_pin_traccion = 3
 button_pin = 9
-IRsensor = 8
 
 # Define variables
 tiempo_de_giro_linea = 1
-numberlinea = 0
 vueltas = 0
 empezado = 0
 distancia_delante = 0
@@ -40,6 +38,7 @@ pulse_end = 0
 v = 0
 girando = 0
 x = 4
+arrancar = False
 numero_de_giros_para_acabar = x * 3
 
 # Configura los pines GPIO
@@ -55,7 +54,6 @@ GPIO.setup(ECHO_PIN_IZQUIERDA, GPIO.IN)
 GPIO.setup(TRIG_PIN_DERECHA, GPIO.OUT)
 GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN)
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(IRsensor, GPIO.IN)
 
 #Iniciar servos
 pwm_d = GPIO.PWM(servo_pin_direccion, 50) # Frecuencia de PWM: 50Hz (estándar para servos)
@@ -120,27 +118,16 @@ def giro_tras(valor_t, valor_d):
     pwm_d.start(valor_d)
 
 while True:
-    # Lee el estado del botón
     button_state = GPIO.input(button_pin)
     pwm_d.start(valor_d)
     
     if button_state == GPIO.HIGH:
         print("Botón presionado")
-        if v == 0:
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setup(servo_pin_direccion, GPIO.OUT)
-            GPIO.setup(servo_pin_traccion, GPIO.OUT)
-            GPIO.setup(TRIG_PIN_DELANTE, GPIO.OUT)
-            GPIO.setup(ECHO_PIN_DELANTE, GPIO.IN)
-            GPIO.setup(TRIG_PIN_ATRAS, GPIO.OUT)
-            GPIO.setup(ECHO_PIN_ATRAS, GPIO.IN)
-            GPIO.setup(TRIG_PIN_IZQUIERDA, GPIO.OUT)
-            GPIO.setup(ECHO_PIN_IZQUIERDA, GPIO.IN)
-            GPIO.setup(TRIG_PIN_DERECHA, GPIO.OUT)
-            GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN)
-            GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-            GPIO.setup(IRsensor, GPIO.IN)
+        arrancar = True
+
+    if button_state == GPIO.LOW and arrancar:
         v = 1
+        arrancar = False
 
     try:
         if v == 1:
