@@ -108,7 +108,12 @@ def giro_tras(valor_t, valor_d):
     elif valor_d == GDer:
         valor_d = GIzq
     else:
-        valor_d = GCent
+        if distancia_izquierda > distancia_derecha:
+            valor_d = GIzq
+        elif distancia_izquierda < distancia_derecha:
+            valor_d = GDer
+        else:
+            valor_d = GCent
     pwm_t.start(valor_t)
     pwm_d.start(valor_d)
     time.sleep(2)
