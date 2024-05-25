@@ -27,8 +27,8 @@ distancia_derecha = 0
 distancia_comienzo_derecha = 0
 distancia_comienzo_izquierda = 0
 DISTANCIA_de_ACCION = {"MENOR QUE": 25, "MAYOR QUE": 24}
-TAvance = 2.5
-TAtras = 12.5
+TAvance = 12.5
+TAtras = 2.5
 GDer = 4.5
 GIzq = 10.5
 GCent = 6#5.9
@@ -176,11 +176,11 @@ while True:
                     if distancia_delante < 5:
                         giro_tras(valor_t, valor_d)
 
-                if ant_d_d == distancia_delante:
-                    vueltas_e += 1
-                    if vueltas_e == 1:
-                        giro_tras(valor_t, valor_d)
-                        e = 0
+                #if ant_d_d == distancia_delante:
+                #    vueltas_e += 1
+                #    if vueltas_e == 1:
+                #        giro_tras(valor_t, valor_d)
+                #        e = 0
             # Muestra las distancias
             print(f"Distancia hacia delante: {distancia_delante} cm")
             print(f"Distancia hacia atras: {distancia_atras} cm")
