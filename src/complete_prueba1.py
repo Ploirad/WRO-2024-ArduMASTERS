@@ -191,22 +191,24 @@ while True:
             pwm_d.start(valor_d)
             if valor_t > 8:
                 print("avanti")
+                valor_t = TAvance
             elif valor_t < 6:
                 print("back")
+                valor_t = TAtras
             else:
                 print("stop")
             if valor_d > 11:
                 print("izquierda")
+                valor_d = GIzq
             elif valor_d < 4:
                 print("derecha")
+                valor_d = GDer
             else:
-                print("centro")            
-            linea = GPIO.input(IRsensor)
+                print("centro")
+                valor_d = GCent
             if vueltas == numero_de_giros_para_acabar:
                 v = 0
                 GPIO.cleanup()
-            print(f"NumberLinea:{numberlinea}")
-            print(f"Linea:{linea}")
             print(f"Vueltas:{float(vueltas/x)} es decir {vueltas} giros")
     except KeyboardInterrupt:
         GPIO.cleanup()
