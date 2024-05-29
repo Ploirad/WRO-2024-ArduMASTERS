@@ -23,7 +23,7 @@ This vehicle is based on various electronic components that are the following: a
 
   [Raspberry pi board 4b](https://www.pccomponentes.com/raspberry-pi-4-modelo-b-1gb?srsltid=AfmBOor7e5gz_l_mhNrlmIvPpev5mD4w_F6gRI0Sq0gdIIrgkIOrMfPgvyI)
 
-  [servo 360 degrees](https://www.kiwi-electronics.com/en/sg90-servo-360-degree-continuous-rotation-1-3kg-cm-9g-10866) (The gear head of the servo motor sprocket is composed of ABS (acrylonitrile butaryel stylene))
+  [servo 360 degrees](https://www.amazon.es/dp/B0B186Y84X?psc=1&ref=ppx_yo2ov_dt_b_product_details) (The gear head of the servo motor sprocket is composed of ABS (acrylonitrile butaryel stylene))
 
   [servo 180 degrees](https://novatronicec.com/index.php/product/servo-sg90-9g-180-grados-2/) (The gear head of the servo motor sprocket is composed of ABS (acrylonitrile butaryel stylene))
 
