@@ -20,7 +20,7 @@
 This vehicle is based on various electronic components that are the following: a raspberry pi 4 model B, it has 4 ultrasonic sensors (one front, one rear, one on the left, one on the right), a 180 degree servo rotation to control direction and another 360 degree rotation to control traction, a 10 kilohom resistor, a pull down button, a prototyping plate (protoboard); as components made of plastic.
 
 <h3>CAR COMPONENTS </h2>
-1. Raspberry pi board 4b # [we bought it here](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/t-photos)
+1. Raspberry pi board 4b
  [we bought it here](https://www.pccomponentes.com/raspberry-pi-4-modelo-b-1gb?srsltid=AfmBOor7e5gz_l_mhNrlmIvPpev5mD4w_F6gRI0Sq0gdIIrgkIOrMfPgvyI).
 
 2. servo 360 degrees https://www.kiwi-electronics.com/en/sg90-servo-360-degree-continuous-rotation-1-3kg-cm-9g-10866
