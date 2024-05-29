@@ -251,21 +251,21 @@ while z:
             masks, cx, dimensions, A = detect_colors(image)
     
             # Mostrar las máscaras de color y la imagen original en ventanas separadas con tamaños personalizados
-            cv2.namedWindow("Original", cv2.WINDOW_NORMAL)
-            cv2.resizeWindow("Original", 200, 150)
-            cv2.imshow("Original", image)
+            #cv2.namedWindow("Original", cv2.WINDOW_NORMAL)
+            #cv2.resizeWindow("Original", 200, 150)
+            #cv2.imshow("Original", image)
     
-            cv2.namedWindow("Red Mask", cv2.WINDOW_NORMAL)
-            cv2.resizeWindow("Red Mask", 200, 150)
-            cv2.imshow("Red Mask", masks[0])
+            #cv2.namedWindow("Red Mask", cv2.WINDOW_NORMAL)
+            #cv2.resizeWindow("Red Mask", 200, 150)
+            #cv2.imshow("Red Mask", masks[0])
     
-            cv2.namedWindow("Green Mask", cv2.WINDOW_NORMAL)
-            cv2.resizeWindow("Green Mask", 200, 150)
-            cv2.imshow("Green Mask", masks[1])
+            #cv2.namedWindow("Green Mask", cv2.WINDOW_NORMAL)
+            #cv2.resizeWindow("Green Mask", 200, 150)
+            #cv2.imshow("Green Mask", masks[1])
     
-            cv2.namedWindow("Magenta Mask", cv2.WINDOW_NORMAL)
-            cv2.resizeWindow("Magenta Mask", 200, 150)
-            cv2.imshow("Magenta Mask", masks[2])
+            #cv2.namedWindow("Magenta Mask", cv2.WINDOW_NORMAL)
+            #cv2.resizeWindow("Magenta Mask", 200, 150)
+            #cv2.imshow("Magenta Mask", masks[2])
     
             # Lee el estado del botón
             button_state = GPIO.input(button_pin)
@@ -414,7 +414,7 @@ while z:
                 print("R a la DER")
                 if (not rf) and v == 1:
                     valor_d = GDer
-            if True: #comprobar_morado:   
+            if comprobar_morado:   
                 compM(Am)
             # Esperar una tecla para salir (salida si se presiona 'q')
             key = cv2.waitKey(1) & 0xFF
