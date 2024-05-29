@@ -27,6 +27,8 @@ pwm_t = GPIO.PWM(servo_pin_traccion, 50) # Frecuencia de PWM: 50Hz (estándar pa
 
 while True:
     button_state = GPIO.input(button_pin)
+    pwm_d.start(valor_d)
+    pwm_t.start(valor_t)
     if button_state == GPIO.HIGH:
         print("Botón presionado")
         arrancar = True
