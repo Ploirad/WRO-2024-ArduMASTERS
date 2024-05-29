@@ -21,7 +21,7 @@ This vehicle is based on various electronic components that are the following: a
 
 <h3>CAR COMPONENTS </h2>
 1. Raspberry pi board 4b
- [we bought it here](https://www.pccomponentes.com/raspberry-pi-4-modelo-b-1gb?srsltid=AfmBOor7e5gz_l_mhNrlmIvPpev5mD4w_F6gRI0Sq0gdIIrgkIOrMfPgvyI).
+   https://www.pccomponentes.com/raspberry-pi-4-modelo-b-1gb?srsltid=AfmBOor7e5gz_l_mhNrlmIvPpev5mD4w_F6gRI0Sq0gdIIrgkIOrMfPgvyI
 
 2. servo 360 degrees https://www.kiwi-electronics.com/en/sg90-servo-360-degree-continuous-rotation-1-3kg-cm-9g-10866
 
