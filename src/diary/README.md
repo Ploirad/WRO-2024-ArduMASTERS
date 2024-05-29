@@ -8,7 +8,7 @@
 # [deteccion_colores_HSV.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/src/diary/deteccion_colores_HSV.py)
 # [detectorhsv.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/src/diary/detectorhsv.py)
 # [functional_try.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/src/diary/functional_try.py)
-# [gpiotry.py]()
+# [gpiotry.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/src/diary/gpiotry.py)
 # [infrarred_sensor.py]()
 # [mejora.py]()
 # [streaming_camerapy]()
