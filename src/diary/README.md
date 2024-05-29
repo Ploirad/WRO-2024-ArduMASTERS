@@ -6,7 +6,7 @@
 # [car_with_gpiozero.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/src/diary/car_with_gpiozero.py)
 # [colors detector RGBY.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/src/diary/colors%20detector%20RGBY.py)
 # [deteccion_colores_HSV.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/src/diary/deteccion_colores_HSV.py)
-# [detectorhsv.py]()
+# [detectorhsv.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/src/diary/detectorhsv.py)
 # [functional_try.py]()
 # [gpiotry.py]()
 # [infrarred_sensor.py]()
