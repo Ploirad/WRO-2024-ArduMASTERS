@@ -3,4 +3,13 @@
 </p> 
 
 # [camara.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/src/diary/camara.py)
-# [car_with_gpiozero.py](()
+# [car_with_gpiozero.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/src/diary/car_with_gpiozero.py)
+# [colors detector RGBY.py]()
+# [deteccion_colores_HSV.py]()
+# [detectorhsv.py]()
+# [functional_try.py]()
+# [gpiotry.py]()
+# [infrarred_sensor.py]()
+# [mejora.py]()
+# [streaming_camerapy]()
+# [ultrasound.py]()
