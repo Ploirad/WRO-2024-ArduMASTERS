@@ -41,10 +41,8 @@ This vehicle is based on various electronic components that are the following: a
 
   [Two Voltage 18650 Lithium Battery Holder Mobile Power Expansion Board Module V8.5V/3A 3V/1A Micro USB for Arduino ESP32 ESP8266](https://es.aliexpress.com/item/1005005748706142.html?gatewayAdapt=glo2esp)
 
-  [3D print, from Adrian's house]
+  3D print, from Adrian's house
 
-  [4 polilactic acid and neoprene wheels]
+  [4 polilactic acid and neoprene wheels](https://www.amazon.es/Kesheng-Neopreno-Negro-143cm-Material/dp/B07KVYBV9Z/ref=asc_df_B07KVYBV9Z/?tag=googshopes-21&linkCode=df0&hvadid=341428494159&hvpos=&hvnetw=g&hvrand=3886967609260050970&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1005459&hvtargid=pla-875526241392&psc=1&mcid=6e046e347dcd318aad29ee63fc04ee98)
 
   [4 flanges](https://www.amazon.es/ISOLATECH-incoloras-bicicleta-naturaleza-resistente/dp/B0CC254RH5?source=ps-sl-shoppingads-lpcontext&ref_=fplfs&smid=A3NCGPGAY5WDC1&th=1)
-
-  [4 screws]
