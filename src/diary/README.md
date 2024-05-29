@@ -10,6 +10,6 @@
 # [functional_try.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/src/diary/functional_try.py)
 # [gpiotry.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/src/diary/gpiotry.py)
 # [infrarred_sensor.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/src/diary/infrarred_sensor.py)
-# [mejora.py]()
+# [mejora.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/src/diary/mejora.py)
 # [streaming_camerapy]()
 # [ultrasound.py]()
