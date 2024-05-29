@@ -3,4 +3,4 @@
 </p> 
 
 # [camara.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/src/diary/camara.py)
-# [](()
+# [car_with_gpiozero.py](()
