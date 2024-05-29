@@ -35,7 +35,7 @@ This vehicle is based on various electronic components that are the following: a
 
   [Picamera](https://www.amazon.es/Raspberry-Pi-Camera-Module-8MP/dp/B01ER2SKFS)
 
-  [banch of cables] (https://electronperdido.com/shop/cables/arduino/cable-arduino-macho-hembra-20cm-40-unidades/)
+  [banch of cables](https://electronperdido.com/shop/cables/arduino/cable-arduino-macho-hembra-20cm-40-unidades/)
 
   [resistence of 10 kiloohms](https://www.agelectronica.com/detalle.php?p=RP-10K)
 
