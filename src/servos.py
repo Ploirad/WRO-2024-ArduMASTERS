@@ -13,6 +13,7 @@ GIzq = 10.5
 GCent = 6#5.9
 valor_d = GCent
 valor_t = TAvance
+arrancar = False
 
 # Configura los pines GPIO
 GPIO.setmode(GPIO.BCM)
