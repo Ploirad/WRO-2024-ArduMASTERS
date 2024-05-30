@@ -6,8 +6,8 @@ servo_pin_traccion = 3
 button_pin = 9
 
 # Define variables
-TAvance = 20#12.5
-TAtras = 0#2.5
+TAvance = 12.5
+TAtras = 2.5
 GDer = 4.5
 GIzq = 10.5
 GCent = 7.5
