@@ -34,18 +34,3 @@ def obtenerCentroide(imgBin):
         pass
     
     return cx, cy
-camera.capture(rawCapture, format="bgr")
-imagen = rawCapture.array
-
-# Definir los rangos de color bajo y alto en formato HSV
-bajo = np.array([0, 100, 100])
-alto = np.array([20, 255, 255])
-
-# Probar el color en la imagen capturada
-imagen_procesada = testColor(imagen, bajo, alto)
-
-# Mostrar la imagen original y la imagen procesada
-cv2.imshow("Original", imagen)
-cv2.imshow("Procesada", imagen_procesada)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
