@@ -21,5 +21,9 @@ def movimiento(vel, dir, stop):
         Motor.stop()
         Direccion.start(7.5)
 
+v = input("vel: ")
+v = int(v)
+d = input("dir: ")
+d = int(d)
 while True:
-   movimiento(0, 90, False)
+    movimiento(v, d, False)
