@@ -25,9 +25,7 @@ def movimiento(vel,dir,stop):
 import time
 
 while True:
-   movimiento(1, 0, 0)
+   movimiento(100, 180, 0)
    time.sleep(5)
-   movimiento(1, 1, 0)
-   time.sleep(5)
-   movimiento(0, 0, 0)
+   movimiento(100, 0, 0)
    time.sleep(5)
