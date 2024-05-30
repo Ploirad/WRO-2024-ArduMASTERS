@@ -6,8 +6,7 @@ GPIO.setup(3, GPIO.OUT)
 Motor = GPIO.PWM(3, 50)
 Direccion = GPIO.PWM(2, 50)
 
-def movimiento(vel,dir,stop):
-   
+def movimiento(vel, dir, stop):
     if vel > 0:
         sen = 12.5
     elif vel < 0: 
@@ -23,4 +22,4 @@ def movimiento(vel,dir,stop):
         Direccion.start(7.5)
 
 while True:
-   movimiento(0, 100, 0)
+   movimiento(1, 100, 0)
