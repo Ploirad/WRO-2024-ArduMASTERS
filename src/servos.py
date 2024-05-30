@@ -12,7 +12,7 @@ GDer = 4.5
 GIzq = 10.5
 GCent = 7.5
 valor_d = GCent
-valor_t = TAvance
+#valor_t = TAvance
 arrancar = False
 
 # Configura los pines GPIO
@@ -40,7 +40,7 @@ while True:
         valor_d = GCent
         valor_t = TAvance
         pwm_d.start(valor_d)
-        pwm_t.start(valor_t)
+#        pwm_t.start(valor_t)
     except KeyboardInterrupt:
         GPIO.cleanup()
     except:
