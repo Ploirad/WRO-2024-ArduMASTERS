@@ -37,17 +37,17 @@ while True:
         valor_t = TAvance
         pwm_d.start(valor_d)
         pwm_t.start(valor_t)
-        time.sleep(1)
+        time.sleep(5)
         valor_d = GCent
         valor_t = TAtras
         pwm_d.start(valor_d)
         pwm_t.start(valor_t)
-        time.sleep(1)
+        time.sleep(5)
         valor_d = GDer
         valor_t = TAvance
         pwm_d.start(valor_d)
         pwm_t.start(valor_t)
-        time.sleep(1)
+        time.sleep(5)
     except KeyboardInterrupt:
         arrancar = False
         GPIO.cleanup()
