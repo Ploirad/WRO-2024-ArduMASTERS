@@ -12,7 +12,7 @@ GDer = 4.5
 GIzq = 10.5
 GCent = 7.5
 valor_d = GCent
-#valor_t = TAvance
+valor_t = TAvance
 arrancar = False
 
 # Configura los pines GPIO
