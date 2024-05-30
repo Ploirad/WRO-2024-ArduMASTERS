@@ -31,28 +31,25 @@ while True:
         print("Botón presionado")
         arrancar = True
 
-    if button_state == GPIO.LOW and arrancar:
-        v = 1
-        arrancar = False
-
     try:
       if arrancar:
         valor_d = GIzq
         valor_t = TAvance
         pwm_d.start(valor_d)
         pwm_t.start(valor_t)
-        time.sleep(3)
+        time.sleep(1)
         valor_d = GCent
         valor_t = TAtras
         pwm_d.start(valor_d)
         pwm_t.start(valor_t)
-        time.sleep(3)
+        time.sleep(1)
         valor_d = GDer
         valor_t = TAvance
         pwm_d.start(valor_d)
         pwm_t.start(valor_t)
-        time.sleep(3)
+        time.sleep(1)
     except KeyboardInterrupt:
+        arrancar = False
         GPIO.cleanup()
     except:
         pass
