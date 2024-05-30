@@ -16,10 +16,10 @@ def movimiento(vel, dir, stop):
 
     if not stop:
         Motor.start(sen)
-        Direccion.start(4.5+dir/30)
+        Direccion.start(4.5+(dir/30))
     else:
         Motor.stop()
         Direccion.start(7.5)
 
 while True:
-   movimiento(0, -180, 0)
+   movimiento(0, 90, 0)
