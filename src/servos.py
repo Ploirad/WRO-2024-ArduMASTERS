@@ -37,7 +37,7 @@ while True:
 
     try:
       if arrancar:
-        valor_d = GIzq
+        valor_d = GCent
         valor_t = TAvance
         pwm_d.start(valor_d)
 #        pwm_t.start(valor_t)
