@@ -1,3 +1,5 @@
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BCM)
 GPIO.setup(2, GPIO.OUT)
 GPIO.setup(3, GPIO.OUT)
 
@@ -19,3 +21,5 @@ def movimiento(vel,dir,stop):
     else:
         Motor.stop()
         Direccion.start(6)
+
+movimiento(1, 0, 0)
