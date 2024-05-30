@@ -1,5 +1,5 @@
 import RPi.GPIO as GPIO
-
+import time
 # Define los pines
 servo_pin_direccion = 2
 servo_pin_traccion = 3
@@ -37,10 +37,21 @@ while True:
 
     try:
       if arrancar:
-        valor_d = GCent
+        valor_d = GIzq
         valor_t = TAvance
         pwm_d.start(valor_d)
-#        pwm_t.start(valor_t)
+        pwm_t.start(valor_t)
+        time.sleep(3)
+        valor_d = GCent
+        valor_t = TAtras
+        pwm_d.start(valor_d)
+        pwm_t.start(valor_t)
+        time.sleep(3)
+        valor_d = GDer
+        valor_t = TAvance
+        pwm_d.start(valor_d)
+        pwm_t.start(valor_t)
+        time.sleep(3)
     except KeyboardInterrupt:
         GPIO.cleanup()
     except:
