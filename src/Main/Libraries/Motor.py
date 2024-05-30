@@ -22,4 +22,4 @@ def movimiento(vel, dir, stop):
         Direccion.start(7.5)
 
 while True:
-   movimiento(0, 90, 0)
+   movimiento(0, 90, False)
