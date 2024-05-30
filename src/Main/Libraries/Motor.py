@@ -25,5 +25,7 @@ v = input("vel: ")
 v = int(v)
 d = input("dir: ")
 d = int(d)
+print(v)
+print(d)
 while True:
     movimiento(v, d, False)
