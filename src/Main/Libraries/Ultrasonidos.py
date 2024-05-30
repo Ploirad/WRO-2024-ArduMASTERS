@@ -1,3 +1,6 @@
+import RPi.GPIO as GPIO
+import time
+
 GPIO.setup(23, GPIO.OUT)
 GPIO.setup(24, GPIO.IN)
 GPIO.setup(5, GPIO.OUT)
@@ -46,3 +49,8 @@ def measure_distance(position):
     distance = (elapsed_time * 34300) / 2
 
     return distance
+
+print(measure_distance(1))
+print(measure_distance(2))
+print(measure_distance(3))
+print(measure_distance(4))
