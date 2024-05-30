@@ -50,7 +50,9 @@ def measure_distance(position):
 
     return distance
 
-print(measure_distance(1))
-print(measure_distance(2))
-print(measure_distance(3))
-print(measure_distance(4))
+while True:
+    print(f"1:{measure_distance(1)}")
+    print(f"2:{measure_distance(2)}")
+    print(f"3:{measure_distance(3)}")
+    print(f"4:{measure_distance(4)}")
+    time.sleep(1)
