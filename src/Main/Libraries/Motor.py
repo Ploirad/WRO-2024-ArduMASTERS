@@ -31,4 +31,4 @@ def movimiento(vel, dir, stop):
         Motor.stop()
         Direccion.start(10.5)
 
-direccion(0, 0, True)
+movimiento(0, 0, True)
