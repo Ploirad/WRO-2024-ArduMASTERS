@@ -4,7 +4,7 @@ import time
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 TF = False
 arrancado = False
 
@@ -28,6 +28,5 @@ while True:
       if DTrasera < 5:
         M.movimiento(1, 0, TF)
   else:
-    button_state = GPIO.input(button_pin)
-    if button_state == GPIO.HIGH:
+    if GPIO.input(9) == GPIO.HIGH:
       arrancado = True
