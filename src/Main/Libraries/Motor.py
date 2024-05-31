@@ -6,7 +6,7 @@ GPIO.setup(3, GPIO.OUT)
 Motor = GPIO.PWM(3, 50)
 Direccion = GPIO.PWM(2, 50)
 
-m = 6
+m = 8
 
 def movimiento(vel, dir, stop):
     stop_direccion = False
