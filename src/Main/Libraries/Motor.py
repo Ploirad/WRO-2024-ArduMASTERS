@@ -31,9 +31,9 @@ def m(a, b):
     Motor.start(a)
     Direccion.start(b)
 import time
-a = float(input("a: "))
-b = float(input("b: "))
+a = int(input("a: "))
+b = int(input("b: "))
 while True:
     t1 = time.time()
-    movimiento(a, b)
+    movimiento(a, b, 0)
     print(time.time() - t1)
