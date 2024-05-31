@@ -11,9 +11,13 @@ arrancado = False
 while True:
   if arrancado:
     print("vuelta")
+    t1 = time.time()
     DDelantera = HC.measure_distance(1)
+    print (time.time() - t1)
     DDerecha = HC.measure_distance(2)
+    print (time.time() - t1)
     DIzquierda = HC.measure_distance(4)
+    print (time.time() - t1)
     if DDelantera > 20:
       if DDerecha < 6 and DIzquierda > 6:
         M.movimiento(1, -1, TF)
