@@ -25,9 +25,9 @@ def movimiento(vel, dir, stop):
             elif dir < 0:
                 Direccion.start(18)
             else:
-                Direccion.start(10)
+                Direccion.start(8)
         else:
-            Direccion.start(10)
+            Direccion.start(8)
     else:
         Motor.stop()
-        Direccion.start(10.5)
+        Direccion.start(8)
