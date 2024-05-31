@@ -18,9 +18,9 @@ def movimiento(vel, dir, stop):
         Motor.start(sen)
         #Direccion.start(4.5+(dir/30))
         if dir > 0:
-            Direccion.start(4.5)
+            Direccion.start(2.5)
         elif dir < 0:
-            Direccion.start(10.5)
+            Direccion.start(12.5)
         else:
             Direccion.start(7.5)
     else:
