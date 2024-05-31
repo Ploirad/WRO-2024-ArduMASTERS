@@ -22,7 +22,7 @@ def movimiento(vel, dir, stop):
         elif dir < 0:
             Direccion.start(12.5)
         else:
-            Direccion.start(7.5)
+            Direccion.start(10)
     else:
         Motor.stop()
         Direccion.start(7.5)
@@ -35,5 +35,5 @@ a = float(input("a: "))
 b = float(input("b: "))
 while True:
     t1 = time.time()
-    m(a, b)
+    movimiento(a, b)
     print(time.time() - t1)
