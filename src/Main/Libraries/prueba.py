@@ -27,7 +27,7 @@ while True:
     elif DDelantera > 5:
       M.movimiento(1, (-1 if DDerecha > DIzquierda else (1 if DIzquierda > DDerecha else DDerecha)), TF)
     else:
-      M.movimiento(-1, (1 if DDerecha > DIzquierda else (-1 if DIzquierda > DDerecha else DDerecha)), TF)
+      M.movimiento(-1, (-1 if DDerecha > DIzquierda else (1 if DIzquierda > DDerecha else DDerecha)), TF)
       DTrasera = HC.measure_distance(3)
       if DTrasera < 5:
         M.movimiento(1, 0, TF)
