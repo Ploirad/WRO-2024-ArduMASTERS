@@ -26,3 +26,11 @@ def movimiento(vel, dir, stop):
     else:
         Motor.stop()
         Direccion.start(7.5)
+
+import time
+a = int(input("a: "))
+b = int(input("b: "))
+while True:
+    t1 = time.time()
+    movimiento(a, b, 0)
+    print(t1-time.time())
