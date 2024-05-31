@@ -8,7 +8,7 @@ Direccion = GPIO.PWM(2, 50)
 
 def movimiento(vel, dir, stop):
     stop_direccion = False
-    sen = 10.5
+    sen = 10
     if vel > 0:
         sen = 12.5
     elif vel < 0: 
@@ -21,13 +21,13 @@ def movimiento(vel, dir, stop):
         #Direccion.start(4.5+(dir/30))
         if not stop_direccion:
             if dir > 0:
-                Direccion.start(2.5)
+                Direccion.start(2)
             elif dir < 0:
-                Direccion.start(12.5)
+                Direccion.start(13)
             else:
-                Direccion.start(10.5)
+                Direccion.start(10)
         else:
-            Direccion.start(10.5)
+            Direccion.start(10)
     else:
         Motor.stop()
         Direccion.start(10.5)
