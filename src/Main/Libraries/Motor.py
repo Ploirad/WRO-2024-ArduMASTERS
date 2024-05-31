@@ -16,7 +16,19 @@ def movimiento(vel, dir, stop):
 
     if not stop:
         Motor.start(sen)
-        Direccion.start(4.5+(dir/30))
+        #Direccion.start(4.5+(dir/30))
+        if dir > 0:
+            Direccion.start(4.5)
+        elif dir < 0:
+            Direccion.start(10.5)
+        else:
+            Direccion.start(7.5)
     else:
         Motor.stop()
         Direccion.start(7.5)
+
+import time
+while True:
+    t1 = time.time()
+    movimiento(0, )
+    print(time.time() - t1)
