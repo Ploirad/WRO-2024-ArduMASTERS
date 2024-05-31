@@ -10,6 +10,7 @@ arrancado = False
 
 while True:
   if arrancado:
+    print("vuelta")
     DDelantera = HC.measure_distance(1)
     DDerecha = HC.measure_distance(2)
     DIzquierda = HC.measure_distance(4)
@@ -28,5 +29,6 @@ while True:
       if DTrasera < 5:
         M.movimiento(1, 0, TF)
   else:
+    print("esperando al boton")
     if GPIO.input(9) == GPIO.HIGH:
       arrancado = True
