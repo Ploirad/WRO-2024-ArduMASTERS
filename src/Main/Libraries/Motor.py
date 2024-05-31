@@ -33,4 +33,4 @@ b = int(input("b: "))
 while True:
     t1 = time.time()
     movimiento(a, b, 0)
-    print(t1-time.time())
+    print(time.time()-t1)
