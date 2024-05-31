@@ -28,7 +28,7 @@ def measure_distance(position):
 
     # Asegurarse de que el pin TRIG está limpio
     GPIO.output(GPIO_TRIGGER, False)
-    time.sleep(2)
+    #time.sleep(2)
 
     # Enviar un pulso de 10µs para disparar el sensor
     GPIO.output(GPIO_TRIGGER, True)
