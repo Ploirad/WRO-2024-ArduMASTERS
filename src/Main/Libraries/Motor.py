@@ -31,9 +31,3 @@ def movimiento(vel, dir, stop):
     else:
         Motor.stop()
         Direccion.start(10.5)
-
-a = int(input("a: "))
-b = int(input("b: "))
-c = int(input("c: "))
-while True:
-    movimiento(a, b, c)
