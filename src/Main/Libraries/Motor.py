@@ -27,10 +27,13 @@ def movimiento(vel, dir, stop):
         Motor.stop()
         Direccion.start(7.5)
 
+def m(a, b):
+    Motor.start(a)
+    Direccion.start(b)
 import time
+a = int(input("a: "))
+b = int(input("b: "))
 while True:
     t1 = time.time()
-    a = int(input("a: "))
-    b = int(input("b: "))
-    movimiento(a, b, 0)
+    m(a, b)
     print(time.time() - t1)
