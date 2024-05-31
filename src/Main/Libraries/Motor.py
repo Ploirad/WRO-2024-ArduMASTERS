@@ -8,6 +8,7 @@ Direccion = GPIO.PWM(2, 50)
 
 def movimiento(vel, dir, stop):
     stop_direccion = False
+    sen = 10.5
     if vel > 0:
         sen = 12.5
     elif vel < 0: 
