@@ -30,5 +30,7 @@ def movimiento(vel, dir, stop):
 import time
 while True:
     t1 = time.time()
-    movimiento(0, )
+    a = int(input("a: "))
+    b = int(input("b: "))
+    movimiento(a, b, 0)
     print(time.time() - t1)
