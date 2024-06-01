@@ -7,8 +7,6 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 TF = False
 arrancado = False
-DDelanteraAnteriorTruncada = 0.0
-DDelantera = 0.0
 
 while True:
   if arrancado:
@@ -18,7 +16,7 @@ while True:
     DIzquierda = HC.measure_distance(4)
     print(DDelantera)
     print(DDerecha)
-  print(DIzquierda)
+    print(DIzquierda)
     if DDelantera > 30:
       if DDerecha < 6 and DIzquierda > 6:
         M.movimiento(1, -1, TF)
