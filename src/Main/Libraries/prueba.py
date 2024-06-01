@@ -36,7 +36,7 @@ while True:
         M.movimiento(1, 0, TF)
 
     if ((int((10*DDelantera)))/10) == DDelanteraAnteriorTruncada:
-      M.movimiento(-1, 0, TF)
+      M.retroceso_unico(TF)
   else:
     print("esperando al boton")
     if GPIO.input(9) == GPIO.HIGH:
