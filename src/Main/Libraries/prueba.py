@@ -59,9 +59,9 @@ while True:
         print(DIzquierda)
         print(DTrasera)
         if DDerecha > DIzquierda:
-          M.movimiento(-1, -1, TF)
-        else:
           M.movimiento(-1, 1, TF)
+        else:
+          M.movimiento(-1, -1, TF)
       time.sleep(2)
       if DDerecha > DIzquierda:
         M.movimiento(1, 1, TF)
