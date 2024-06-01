@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+import time
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(2, GPIO.OUT)
 GPIO.setup(3, GPIO.OUT)
@@ -32,3 +33,7 @@ def movimiento(vel, dir, stop):
     else:
         Motor.stop()
         Direccion.start(m)
+
+def retroceso_unico(stop):
+    Motor.start(2)
+    time.sleep(1)
