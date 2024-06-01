@@ -7,7 +7,7 @@ Motor = GPIO.PWM(3, 50)
 Direccion = GPIO.PWM(2, 50)
 
 def movimiento(vel, dir, stop):
-    m = 9
+    m = 9.5
     stop_direccion = False
     sen = 10
     if vel > 0:
