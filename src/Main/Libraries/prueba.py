@@ -50,8 +50,8 @@ while True:
     else:
       #RETROCEDER HASTA QUE LA DISTAANCIA DE ATRAS SEA 5CM
       while DDelantera < 10:    
-        DTrasera = HC.measure_distance(3)
-        print(DTrasera)
+        DDelantera = HC.measure_distance(1)
+        print(DDelantera)
         if DDerecha > DIzquierda:
           M.movimiento(-1, -1, TF)
         else:
