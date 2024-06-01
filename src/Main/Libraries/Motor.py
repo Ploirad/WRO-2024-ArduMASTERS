@@ -33,7 +33,3 @@ def movimiento(vel, dir, stop):
     else:
         Motor.stop()
         Direccion.start(m)
-
-def retroceso_unico(stop):
-    Motor.start(2)
-    time.sleep(1)
