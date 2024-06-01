@@ -1,3 +1,8 @@
+from picamera import PiCamera
+from picamera.array import PiRGBArray
+import cv2
+import numpy as np
+import time
 resolucion = (640,480)
 
 camera = PiCamera()

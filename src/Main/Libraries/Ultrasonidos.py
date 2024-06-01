@@ -1,3 +1,8 @@
+import RPi.GPIO as GPIO
+import time
+
+GPIO.setmode(GPIO.BCM)
+
 GPIO.setup(23, GPIO.OUT)
 GPIO.setup(24, GPIO.IN)
 GPIO.setup(5, GPIO.OUT)
@@ -25,7 +30,6 @@ def measure_distance(position):
 
     # Assure the TRIG pin is clean
     GPIO.output(GPIO_TRIGGER, False)
-    time.sleep(2)
 
     # Send a pulse of 10µs to trig the sensor
     GPIO.output(GPIO_TRIGGER, True)
@@ -46,3 +50,4 @@ def measure_distance(position):
     distance = (elapsed_time * 34300) / 2
 
     return distance
+

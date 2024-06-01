@@ -1,7 +1,11 @@
+import RPi.GPIO as GPIO
+
+GPIO.setmode(GPIO.BCM)
+
 GPIO.setup(2, GPIO.OUT)
 GPIO.setup(3, GPIO.OUT)
 
-# Declase the PWM pins for the motors
+# Declare the PWM pins for the motors
 Motor = GPIO.PWM(2,50)
 Direccion = GPIO.PWM(3,50)
 
