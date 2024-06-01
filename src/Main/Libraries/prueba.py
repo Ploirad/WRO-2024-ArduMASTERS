@@ -13,7 +13,7 @@ DDelantera = 0.0
 while True:
   if arrancado:
     print("vuelta")
-    DDelanteraAnteriorTruncada = (int((10*DDelantera)))/10
+    DDelanteraAnteriorTruncada = (int((100*DDelantera)))/100
     DDelantera = HC.measure_distance(1)
     DDerecha = HC.measure_distance(2)
     DIzquierda = HC.measure_distance(4)
@@ -21,7 +21,7 @@ while True:
     print(DDerecha)
     print(DIzquierda)
 
-    if not (((int((10*DDelantera)))/10) == DDelanteraAnteriorTruncada):
+    if not (((int((100*DDelantera)))/100) == DDelanteraAnteriorTruncada):
       if DDelantera > 30:
         if DDerecha < 6 and DIzquierda > 6:
           M.movimiento(1, -1, TF)
@@ -37,7 +37,7 @@ while True:
         if DTrasera < 5:
           M.movimiento(1, 0, TF)
     else:
-      print(f"retroceso, {((int((10*DDelantera)))/10)} = {DDelanteraAnteriorTruncada}")
+      print(f"retroceso, {((int((100*DDelantera)))/100)} = {DDelanteraAnteriorTruncada}")
       M.movimiento(-1, 0, TF)
       time.sleep(1)
   else:
