@@ -21,10 +21,7 @@ while True:
     print(DDerecha)
     print(DIzquierda)
 
-    if ((int((10*DDelantera)))/10) == DDelanteraAnteriorTruncada:
-      print(f"retroceso, {((int((10*DDelantera)))/10)} = {DDelanteraAnteriorTruncada}")
-      M.movimiento(-1, 0, TF)
-    else:
+    if not (((int((10*DDelantera)))/10) == DDelanteraAnteriorTruncada):
       if DDelantera > 30:
         if DDerecha < 6 and DIzquierda > 6:
           M.movimiento(1, -1, TF)
@@ -39,6 +36,10 @@ while True:
         DTrasera = HC.measure_distance(3)
         if DTrasera < 5:
           M.movimiento(1, 0, TF)
+    else:
+      print(f"retroceso, {((int((10*DDelantera)))/10)} = {DDelanteraAnteriorTruncada}")
+      M.movimiento(-1, 0, TF)
+      time.sleep(1)
   else:
     print("esperando al boton")
     if GPIO.input(9) == GPIO.HIGH:
