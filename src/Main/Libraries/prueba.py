@@ -49,15 +49,15 @@ while True:
     #SI ESTA DEMASIADO CERCA DE LA PARED VE PARA ATRAS Y GIRA AL LADO MAS PEQUEÑO
     else:
       #RETROCEDER HASTA QUE LA DISTAANCIA DE ATRAS SEA 5CM
-      while DDelantera < 10:    
+      while DDelantera < 30:    
         DDelantera = HC.measure_distance(1)
         print(DDelantera)
         if DDerecha > DIzquierda:
           M.movimiento(-1, -1, TF)
         else:
           M.movimiento(-1, 1, TF)
-      if DDelantera > 9:
-        M.movimiento(1, 0, TF)
+      time.sleep(2)
+      M.movimiento(1, 0, TF)
   
   #SINO SE HA ARRANCADO
   else:
