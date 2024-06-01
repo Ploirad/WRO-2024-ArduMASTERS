@@ -122,7 +122,19 @@ def giro_tras(valor_t, valor_d):
     pwm_t.start(valor_t)
     pwm_d.start(valor_d)
 
-while True:
+while True:   
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(servo_pin_direccion, GPIO.OUT)
+    GPIO.setup(servo_pin_traccion, GPIO.OUT)
+    GPIO.setup(TRIG_PIN_DELANTE, GPIO.OUT)
+    GPIO.setup(ECHO_PIN_DELANTE, GPIO.IN)
+    GPIO.setup(TRIG_PIN_ATRAS, GPIO.OUT)
+    GPIO.setup(ECHO_PIN_ATRAS, GPIO.IN)
+    GPIO.setup(TRIG_PIN_IZQUIERDA, GPIO.OUT)
+    GPIO.setup(ECHO_PIN_IZQUIERDA, GPIO.IN)
+    GPIO.setup(TRIG_PIN_DERECHA, GPIO.OUT)
+    GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN)
+    GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     button_state = GPIO.input(button_pin)
     pwm_d.start(valor_d)
     
