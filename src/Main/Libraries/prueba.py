@@ -51,14 +51,23 @@ while True:
       #RETROCEDER HASTA QUE LA DISTAANCIA DE ATRAS SEA 5CM
       while DDelantera < 30:    
         DDelantera = HC.measure_distance(1)
+        DDerecha = HC.measure_distance(2)
+        DTrasera = HC.measure_distance(3)
+        DIzquierda = HC.measure_distance(4)
         print(DDelantera)
+        print(DDerecha)
+        print(DIzquierda)
+        print(DTrasera)
         if DDerecha > DIzquierda:
           M.movimiento(-1, -1, TF)
         else:
           M.movimiento(-1, 1, TF)
       time.sleep(2)
-      M.movimiento(1, 0, TF)
-  
+      if DDerecha > DIzquierda:
+        M.movimiento(1, 1, TF)
+      else:
+        M.movimiento(1, -1, TF)
+        
   #SINO SE HA ARRANCADO
   else:
     print("esperando al boton")
