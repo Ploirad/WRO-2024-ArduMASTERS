@@ -43,16 +43,17 @@ while True:
       #IR AL LADO MAS GRANDE
       if DDerecha > DIzquierda:
         M.movimiento(1, 1, TF)
-      elif DDerecha < DIzquierda:
-        M.movimiento(1, -1, TF)
       else:
-        M.movimiento(1, 0, TF)
+        M.movimiento(1, -1, TF)
     
     #SI ESTA DEMASIADO CERCA DE LA PARED VE PARA ATRAS Y GIRA AL LADO MAS PEQUEÑO
     else:
       #RETROCEDER HASTA QUE LA DISTAANCIA DE ATRAS SEA 5CM
       while DTrasera > 5:
-        M.movimiento(-1, (-1 if DDerecha > DIzquierda else (1 if DIzquierda > DDerecha else DDerecha)), TF)
+        if DDerecha > DIzquierda:
+          M.movimiento(-1, -1, TF)
+        else:
+          M.movimiento(-1, 1, TF)
         time.sleep(2)
       if DTrasera < 5:
         M.movimiento(1, 0, TF)
