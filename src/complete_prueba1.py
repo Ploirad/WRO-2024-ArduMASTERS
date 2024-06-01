@@ -150,6 +150,7 @@ while True:
                         girando = 1
                         vueltas += 1
                         giro_linea(valor_t, valor_d)
+                        valor_d = GCent
                     elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_izquierda > distancia_derecha:
                         #IZQUIERDA
                         valor_t = TAvance
@@ -157,6 +158,7 @@ while True:
                         girando = 1
                         vueltas += 1
                         giro_linea(valor_t, valor_d)
+                        valor_d = GCent
                 elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
                     #AVANCE
                     valor_t = TAvance
@@ -168,13 +170,14 @@ while True:
                     valor_t = TAvance
                     valor_d = GDer
                     giro_linea(valor_t, valor_d)
+                    valor_d = GCent
                 
                 if distancia_derecha < 6:
                     #IZQUIERDA
                     valor_t = TAvance
                     valor_d = GIzq
                     giro_linea(valor_t, valor_d)
-        
+                    valor_d = GCent
                 if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
                     valor_t = TAvance
                 else:
