@@ -7,10 +7,13 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 TF = False
 arrancado = False
+DDelanteraAnteriorTruncada = 0.0
+DDelantera = 0.0
 
 while True:
   if arrancado:
     print("vuelta")
+    DDelanteraAnteriorTruncada = (int((10*DDelantera)))/10
     DDelantera = HC.measure_distance(1)
     DDerecha = HC.measure_distance(2)
     DIzquierda = HC.measure_distance(4)
@@ -31,6 +34,9 @@ while True:
       DTrasera = HC.measure_distance(3)
       if DTrasera < 5:
         M.movimiento(1, 0, TF)
+
+    if ((int((10*DDelantera)))/10) == DDelanteraAnteriorTruncada:
+      M.movimiento(-1, 0, TF)
   else:
     print("esperando al boton")
     if GPIO.input(9) == GPIO.HIGH:
