@@ -1,21 +1,27 @@
 GPIO.setup(2, GPIO.OUT)
 GPIO.setup(3, GPIO.OUT)
 
+# Declase the PWM pins for the motors
 Motor = GPIO.PWM(2,50)
 Direccion = GPIO.PWM(3,50)
 
-def movimiento(vel,dir,stop):
-   
-    if vel > 0:
-        sen = 12.5
-    elif vel < 0: 
-        sen = 2.5
+# Inputs of the function are VELocity and DIRection
+def movement(vel,dir):
+    
+    # Convert input into usable value
+    if vel == 1:
+        # Max velocity forward 
+        vel = 12.5
+    elif vel == -1: 
+        # Max velocity backward
+        vel = 2.5
     else:
+        # If null is introduced stop car
         stop = 1
 
     if not stop:
-        Motor.start(sen)
+        Motor.start(vel)
         Direccion.start(4.5+dir/30)
     else:
         Motor.stop()
-        Direccion.start(6)
+        Direccion.start(7,5)

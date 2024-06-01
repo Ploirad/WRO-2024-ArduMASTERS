@@ -21,21 +21,21 @@ def get_color():
 
     # Determine the detected color based on RGB values
     if r > 200 and g > 200 and b > 200:
-        return "Blanco"
+        return "White"
     elif r > g and r > b:
-        return "Rojo"
+        return "Red"
     elif g > r and g > b:
-        return "Verde"
+        return "Green"
     elif b > r and b > g:
-        return "Azul"
+        return "Blue"
     elif r > 100 and g > 100 and b < 100:
-        return "Amarillo"
+        return "Yellow"
     elif r > 100 and g < 100 and b > 100:
-        return "Púrpura"
+        return "Purple"
     elif r < 100 and g > 100 and b > 100:
-        return "Cian"
+        return "Cyan"
     else:
-        return "Desconocido"
+        return "Unknown"
 
 # Example usage
 detected_color = get_color()
