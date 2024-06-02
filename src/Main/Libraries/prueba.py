@@ -1,6 +1,6 @@
 #LIBRERIAS
 import Ultrasonidos as HC  #Contiene la funcion:  HC.measure_distance(pos)  Para obtener la distancia que hay en el HC ubicado en la posicion pos
-import Motor as M          #Contiene la funcion:  M.movimiento(AvanceRetroceso, DerechaCentroIzquierda, Parar)     Para mover los servos segun lo dicho en las variables
+import Motor as M          #Contiene la funcion:  M.movement(AvanceRetroceso, DerechaCentroIzquierda)     Para mover los servos segun lo dicho en las variables
 import time
 import RPi.GPIO as GPIO
 
@@ -9,7 +9,6 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #VARIABLES
-TF = False #variable para evitar los funcionamientos cuando no se debe
 arrancado = False #variable que comprueba si el coche esta o no arrancado
 
 #BUCLE PRINCIPAL
@@ -32,19 +31,19 @@ while True:
     if DDelantera > 30:
       #SI ALGUNA DISTANCIA LATERAL ES MUY PEQUEÑA GIRAR AL OPUESTO
       if DDerecha < 6 and DIzquierda > 6:
-        M.movimiento(1, -1, TF)
+        M.movement(1, -1)
       elif DIzquierda < 6 and DDerecha > 6:
-        M.movimiento(1, 1, TF)
+        M.movement(1, 1)
       else:
-        M.movimiento(1, 0, TF)
+        M.movement(1, 0)
     
     #SI HAY POCA DISTANCIA PARA AVANZAR
     elif DDelantera > 5:
       #IR AL LADO MAS GRANDE
       if DDerecha > DIzquierda:
-        M.movimiento(1, 1, TF)
+        M.movement(1, 1)
       else:
-        M.movimiento(1, -1, TF)
+        M.movement(1, -1)
     
     #SI ESTA DEMASIADO CERCA DE LA PARED VE PARA ATRAS Y GIRA AL LADO MAS PEQUEÑO
     else:
@@ -59,14 +58,14 @@ while True:
         print(DIzquierda)
         print(DTrasera)
         if DDerecha > DIzquierda:
-          M.movimiento(-1, -1, TF)
+          M.movement(-1, -1)
         else:
-          M.movimiento(-1, 1, TF)
+          M.movement(-1, 1)
       time.sleep(2)
       if DDerecha > DIzquierda:
-        M.movimiento(1, -1, TF)
+        M.movement(1, -1)
       else:
-        M.movimiento(1, 1, TF)
+        M.movement(1, 1)
         
   #SINO SE HA ARRANCADO
   else:
