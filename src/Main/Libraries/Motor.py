@@ -10,8 +10,7 @@ Motor = GPIO.PWM(3, 50)
 Direccion = GPIO.PWM(2, 50)
 
 # Inputs of the function are VELocity and DIRection
-def movement(vel, dir):
-    stop = 0
+def movement(vel, dir, stop):
     # Convert input into usable value
     if vel == 1:
         # Max velocity forward 
