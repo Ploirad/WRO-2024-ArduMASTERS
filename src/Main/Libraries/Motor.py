@@ -11,7 +11,7 @@ Direccion = GPIO.PWM(2, 50)
 
 # Inputs of the function are VELocity and DIRection
 def movement(vel, dir):
-    
+    stop = 0
     # Convert input into usable value
     if vel == 1:
         # Max velocity forward 
