@@ -31,9 +31,9 @@ time.sleep(0.5)
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True).array:
     
     #Capturar frame segmentado por umbral de todos los colores
-    FR = Camara.testColor(frame,R_bajo,R_alto)[1]
-    FV = Camara.testColor(frame,V_bajo,V_alto)[1]
-    FM = Camara.testColor(frame,M_bajo,M_alto)[1]
+    FR = Camara.testColor(frame, R_bajo, R_alto)[1]
+    FV = Camara.testColor(frame, V_bajo, V_alto)[1]
+    FM = Camara.testColor(frame, M_bajo, M_alto)[1]
     
     #Definir una bounding box al frame segmentado
     BR = cv2.boundingRect(FR)
@@ -51,12 +51,12 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     if side == "der":
         cx = BP[0] + 40
         if cx < 210:
-            M.movimiento(1,90,0)
+            M.movimiento(1, 0, 0)
         else:
-            M.movimiento(1,0,0)
+            M.movimiento(1, -1, 0)
     else:
         cx = BP[0] - 40
         if cx > 420:
-            M.movimiento(1,90,0)
+            M.movimiento(1, 0, 0)
         else:
-            M.movimiento(1,180,0)
+            M.movimiento(1, 1, 0)
