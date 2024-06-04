@@ -11,14 +11,14 @@ import numpy as np
 GPIO.setmode(GPIO.BCM)
 
 #Definir rangos de color ROJO
-R_bajo = np.array([ ,  ,  ], np.uint8)
-R_alto = np.array([ ,  ,  ], np.uint8)
+R_bajo = np.array([175, 126, 68], np.uint8)
+R_alto = np.array([176, 212, 255], np.uint8)
 #Definir rangos de color VERDE
-V_bajo = np.array([ ,  ,  ], np.uint8)
-V_alto = np.array([ ,  ,  ], np.uint8)
+V_bajo = np.array([62, 147, 49], np.uint8)
+V_alto = np.array([65, 156, 255], np.uint8)
 #Definir rangos de color MORADO
-M_bajo = np.array([ ,  ,  ], np.uint8)
-M_alto = np.array([ ,  ,  ], np.uint8)
+M_bajo = np.array([138, 87, 25], np.uint8)
+M_alto = np.array([167, 185, 255], np.uint8)
 
 #Dfinir camara y resolucion
 resolucion = (640,480)
