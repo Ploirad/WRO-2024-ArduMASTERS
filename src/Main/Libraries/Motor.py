@@ -26,7 +26,7 @@ def movement(vel, dir, stop):
         Motor.start(vel)
         if dir == 0:
             Direccion.start(7.5)
-        elif dir >= 1:
+        elif dir <= -1:
             Direccion.start(12.5)
         else:
             Direccion.start(2.5)
