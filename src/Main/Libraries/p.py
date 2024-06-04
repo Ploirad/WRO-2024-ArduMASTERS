@@ -2,6 +2,9 @@ import cv2
 
 # Abre la cámara
 cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+
 
 # Verifica si la cámara se ha abierto correctamente
 if not cap.isOpened():
