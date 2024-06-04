@@ -1,6 +1,6 @@
-import Motor as M
-import Ultrasonidos as HC
-import Camara
+from Libraries import Motor as M
+from Libraries import Ultrasonidos as HC
+from Libraries import Camara
 import RPi.GPIO as GPIO
 from picamera import PiCamera
 from picamera.array import PiRGBArray
