@@ -10,6 +10,7 @@ GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 #VARIABLES
 arrancado = False #variable que comprueba si el coche esta o no arrancado
+TF = False
 
 #BUCLE PRINCIPAL
 while True:
@@ -31,19 +32,19 @@ while True:
     if DDelantera > 30:
       #SI ALGUNA DISTANCIA LATERAL ES MUY PEQUEÑA GIRAR AL OPUESTO
       if DDerecha < 6 and DIzquierda > 6:
-        M.movement(1, -1)
+        M.movement(1, -1, TF)
       elif DIzquierda < 6 and DDerecha > 6:
-        M.movement(1, 1)
+        M.movement(1, 1, TF)
       else:
-        M.movement(1, 0)
+        M.movement(1, 0, TF)
     
     #SI HAY POCA DISTANCIA PARA AVANZAR
     elif DDelantera > 5:
       #IR AL LADO MAS GRANDE
       if DDerecha > DIzquierda:
-        M.movement(1, 1)
+        M.movement(1, 1, TF)
       else:
-        M.movement(1, -1)
+        M.movement(1, -1, TF)
     
     #SI ESTA DEMASIADO CERCA DE LA PARED VE PARA ATRAS Y GIRA AL LADO MAS PEQUEÑO
     else:
@@ -58,14 +59,14 @@ while True:
         print(DIzquierda)
         print(DTrasera)
         if DDerecha > DIzquierda:
-          M.movement(-1, -1)
+          M.movement(-1, -1, TF)
         else:
-          M.movement(-1, 1)
+          M.movement(-1, 1, TF)
       time.sleep(2)
       if DDerecha > DIzquierda:
-        M.movement(1, -1)
+        M.movement(1, -1, TF)
       else:
-        M.movement(1, 1)
+        M.movement(1, 1, TF)
         
   #SINO SE HA ARRANCADO
   else:
