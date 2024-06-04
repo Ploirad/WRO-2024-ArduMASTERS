@@ -1,14 +1,7 @@
 import numpy as np
-import picamera
+import cv2
 
-# Capture an image using the Picamera
-camera = picamera.PiCamera()
-camera.capture('image.jpg')
-
-# Load the image
-image = np.array(camera.capture('image.jpg'))
-
-# Define the color ranges
+# Define los rangos de colores
 lower_red = np.array([175, 126, 68])
 upper_red = np.array([176, 212, 255])
 
@@ -18,33 +11,51 @@ upper_green = np.array([65, 156, 255])
 lower_magenta = np.array([138, 87, 25])
 upper_magenta = np.array([167, 185, 255])
 
-# Initialize lists to store the positions of each color
-red_positions = []
-green_positions = []
-magenta_positions = []
-
-# Iterate over the pixels in the image
-for i in range(image.shape[0]):
-    for j in range(image.shape[1]):
-        pixel = image[i, j]
-        if (lower_red <= pixel).all() and (pixel <= upper_red).all():
-            red_positions.append((i, j))
-        elif (lower_green <= pixel).all() and (pixel <= upper_green).all():
-            green_positions.append((i, j))
-        elif (lower_magenta <= pixel).all() and (pixel <= upper_magenta).all():
-            magenta_positions.append((i, j))
-
-# Calculate the centroid of each list of positions
-def calculate_centroid(positions):
-    if len(positions) == 0:
-        return None
+# Función para encontrar centroides
+def find_centroid(mask):
+    M = cv2.moments(mask)
+    if M["m00"] != 0:
+        cx = int(M["m10"] / M["m00"])
+        cy = int(M["m01"] / M["m00"])
+        return cx, cy
     else:
-        return np.mean(positions, axis=0)
+        return None
 
-centroid_red = calculate_centroid(red_positions)
-centroid_green = calculate_centroid(green_positions)
-centroid_magenta = calculate_centroid(magenta_positions)
+# Captura de video desde la cámara
+cap = cv2.VideoCapture(0)
 
-print("Centroid of Red:", centroid_red)
-print("Centroid of Green:", centroid_green)
-print("Centroid of Magenta:", centroid_magenta)
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    # Convertir de BGR a HSV
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+    # Threshold para cada rango de color
+    mask_red = cv2.inRange(hsv, lower_red, upper_red)
+    mask_green = cv2.inRange(hsv, lower_green, upper_green)
+    mask_magenta = cv2.inRange(hsv, lower_magenta, upper_magenta)
+
+    # Encuentra los centroides
+    centroid_red = find_centroid(mask_red)
+    centroid_green = find_centroid(mask_green)
+    centroid_magenta = find_centroid(mask_magenta)
+
+    # Dibuja los centroides en el marco original
+    if centroid_red:
+        cv2.circle(frame, centroid_red, 5, (0, 0, 255), -1)
+    if centroid_green:
+        cv2.circle(frame, centroid_green, 5, (0, 255, 0), -1)
+    if centroid_magenta:
+        cv2.circle(frame, centroid_magenta, 5, (255, 0, 255), -1)
+
+    # Muestra el marco
+    cv2.imshow('Frame', frame)
+
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# Libera la cámara y cierra todas las ventanas
+cap.release()
+cv2.destroyAllWindows()
