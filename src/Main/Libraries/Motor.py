@@ -10,7 +10,7 @@ Motor = GPIO.PWM(2,50)
 Direccion = GPIO.PWM(3,50)
 
 # Inputs of the function are VELocity and DIRection
-def movement(vel,dir):
+def movement(vel, dir):
     
     # Convert input into usable value
     if vel == 1:
@@ -25,7 +25,12 @@ def movement(vel,dir):
 
     if not stop:
         Motor.start(vel)
-        Direccion.start(4.5+dir/30)
+        if dir == 0:
+            Direccion.start(7.5)
+        elif dir >= 1:
+            Direccion.start(12.5)
+        else:
+            Direccion.start(2.5)
     else:
         Motor.stop()
-        Direccion.start(7,5)
+        Direccion.start(7.5)
