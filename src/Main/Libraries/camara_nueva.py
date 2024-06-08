@@ -1,3 +1,5 @@
+# nombre del archivo: color_detection.py
+
 import picamera
 import picamera.array
 import cv2
@@ -18,12 +20,12 @@ def detectar_color(frame):
     res_r = cv2.bitwise_and(frame, frame, mask=mask_r)
     res_v = cv2.bitwise_and(frame, frame, mask=mask_v)
     res_m = cv2.bitwise_and(frame, frame, mask=mask_m)
-
+    
     # Calcular el centroide para cada color
     cr = calcular_centroide(mask_r)
     cv = calcular_centroide(mask_v)
     cm = calcular_centroide(mask_m)
-
+    
     return cr, cv, cm
 
 def calcular_centroide(mask):
@@ -40,15 +42,19 @@ def obtener_centroides(resolution=(640, 480)):
         with picamera.array.PiRGBArray(camera) as stream:
             camera.resolution = resolution
             camera.start_preview()
-            camera.capture(stream, 'bgr')
-            frame = stream.array
-
-            cr, cv, cm = detectar_color(frame)
+            # Esperar un momento para que la cámara se estabilice
+            camera.start_recording('/dev/null', format='h264', motion_output='/dev/null')
+            camera.wait_recording(1)
+            camera.stop_recording()
             
-            camera.stop_preview()
-            
-    return cr, cv, cm
-
+            while True:
+                camera.capture(stream, 'bgr', use_video_port=True)
+                frame = stream.array
+                cr, cv, cm = detectar_color(frame)
+                return cr, cv, cm
+                
+                stream.seek(0)
+                stream.truncate()
 
 
 
