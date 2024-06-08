@@ -53,7 +53,7 @@ def obtener_centroides(resolution=(640, 480)):
 
 
 def main():
-    cr, cv, cm = color_detection.obtener_centroides()
+    cr, cv, cm = obtener_centroides()
     print("Coordenadas del centroide Rojo:", cr)
     print("Coordenadas del centroide Verde:", cv)
     print("Coordenadas del centroide Magenta:", cm)
