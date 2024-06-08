@@ -27,6 +27,7 @@ red_centroid = 0
 magenta_centroid = 0
 
 def update_variables():
+  global frontal_distance, right_distance, left_distance, back_distance, green_area, red_area, magenta_area, green_centroid, red_centroid, magenta_centroid
   frontal_distance = US.measure_distance(1)
   print(f"frontal_distance = {frontal_distance}")
   right_distance = US.measure_distance(2)
