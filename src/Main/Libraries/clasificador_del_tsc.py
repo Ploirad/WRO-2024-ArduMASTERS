@@ -10,4 +10,4 @@ while True:
     print("GRIS")
   else:
     print("---")
-  print(f"r = {r}, g = {g}", b = {b}, c = {c})
+  print(f"r = {r}, g = {g}, b = {b}, c = {c}")
