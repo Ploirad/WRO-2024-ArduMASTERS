@@ -1,45 +1,45 @@
-from smbus import SMBus
-import time
+import smbus2
 
 def read_color():
     # Dirección del sensor TCS34725
     TCS34725_ADDRESS = 0x29
 
     # Registro de control
-    TCS34725_COMMAND_BIT = 0x80
     TCS34725_ENABLE = 0x00
     TCS34725_ATIME = 0x01
-    TCS34725_INTEGRATIONTIME_50MS = 0xEB  # 50ms de integración
-    TCS34725_WAITTIME = 0x03
-    TCS34725_ENABLE_AIEN = 0x10  # Interrupción de ADC activada
-    TCS34725_ENABLE_WEN = 0x08  # Espera habilitada
-    TCS34725_ENABLE_PON = 0x01  # Encendido normal
-    TCS34725_ENABLE_AEN = 0x02  # Habilitar ADC y la interrupción de ADC
+    TCS34725_CONTROL = 0x0F
+    TCS34725_ID = 0x12
+    TCS34725_CDATAL = 0x14
+    TCS34725_RDATAL = 0x16
+    TCS34725_GDATAL = 0x18
+    TCS34725_BDATAL = 0x1A
 
     # Inicializar el bus I2C
-    bus = SMBus(1)
+    bus = smbus2.SMBus(1)
 
     # Configurar el sensor TCS34725
-    bus.write_byte_data(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | TCS34725_ATIME, TCS34725_INTEGRATIONTIME_50MS)
-    bus.write_byte_data(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | TCS34725_ENABLE, TCS34725_ENABLE_PON)
-    bus.write_byte_data(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | TCS34725_ENABLE, TCS34725_ENABLE_PON | TCS34725_ENABLE_AEN)
+    bus.write_byte_data(TCS34725_ADDRESS, TCS34725_ENABLE, 0x01)
+    bus.write_byte_data(TCS34725_ADDRESS, TCS34725_ATIME, 0xEB)
+    bus.write_byte_data(TCS34725_ADDRESS, TCS34725_CONTROL, 0x03)
+
+    # Leer el ID del sensor para verificar si está listo
+    sensor_id = bus.read_byte_data(TCS34725_ADDRESS, TCS34725_ID)
+    while sensor_id != 0x44:
+        sensor_id = bus.read_byte_data(TCS34725_ADDRESS, TCS34725_ID)
 
     # Leer los valores de color
-    data = bus.read_i2c_block_data(TCS34725_ADDRESS, 0x16 | 0x80, 8)
-    red = data[1] << 8 | data[0]
-    green = data[3] << 8 | data[2]
-    blue = data[5] << 8 | data[4]
-    clear = data[7] << 8 | data[6]
+    red = bus.read_word_data(TCS34725_ADDRESS, TCS34725_RDATAL)
+    green = bus.read_word_data(TCS34725_ADDRESS, TCS34725_GDATAL)
+    blue = bus.read_word_data(TCS34725_ADDRESS, TCS34725_BDATAL)
+    clear = bus.read_word_data(TCS34725_ADDRESS, TCS34725_CDATAL)
 
     # Limpiar y cerrar el bus I2C
-    #bus.write_byte_data(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | TCS34725_ENABLE, 0)
-    #bus.close()
+    bus.close()
 
     # Devolver los valores de color
     return red, green, blue, clear
 
 # Ejemplo de uso
 if __name__ == "__main__":
-    while True:
-        r, g, b, c = read_color()
-        print(f"Rojo: {r}, Verde: {g}, Azul: {b}, Claro: {c}")
+    r, g, b, c = read_color()
+    print(f"Rojo: {r}, Verde: {g}, Azul: {b}, Claro: {c}")
