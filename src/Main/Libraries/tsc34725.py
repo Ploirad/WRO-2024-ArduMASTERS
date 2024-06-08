@@ -1,46 +1,36 @@
-from smbus import SMBus
-import time
+import board
+import busio
+import adafruit_tcs34725
+
+# Configurar el bus I2C
+i2c = busio.I2C(board.SCL, board.SDA)
+
+# Inicializar el sensor
+sensor = adafruit_tcs34725.TCS34725(i2c)
 
 def read_color():
-    # Dirección del sensor TCS34725
-    TCS34725_ADDRESS = 0x29
+    # Leer los valores de color RGB del sensor
+    r, g, b, _ = sensor.color_rgb_bytes
+    
+    # Determinar el color basado en los valores RGB
+    if r > 200 and g > 200 and b > 200:
+        color = "Blanco"
+    elif r > g and r > b:
+        color = "Rojo"
+    elif g > r and g > b:
+        color = "Verde"
+    elif b > r and b > g:
+        color = "Azul"
+    else:
+        color = "Otros"
+    
+    return color
 
-    # Registro de control
-    TCS34725_COMMAND_BIT = 0x80
-    TCS34725_ENABLE = 0x00
-    TCS34725_ATIME = 0x01
-    TCS34725_INTEGRATIONTIME_50MS = 0xEB  # 50ms de integración
-    TCS34725_WAITTIME = 0x03
-    TCS34725_ENABLE_AIEN = 0x10  # Interrupción de ADC activada
-    TCS34725_ENABLE_WEN = 0x08  # Espera habilitada
-    TCS34725_ENABLE_PON = 0x01  # Encendido normal
-    TCS34725_ENABLE_AEN = 0x02  # Habilitar ADC y la interrupción de ADC
+try:
+    while True:
+        color = read_color()
+        print("Color detectado:", color)
+        time.sleep(1)
 
-    # Inicializar el bus I2C
-    bus = SMBus(1)
-
-    # Configurar el sensor TCS34725
-    bus.write_byte_data(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | TCS34725_ATIME, TCS34725_INTEGRATIONTIME_50MS)
-    bus.write_byte_data(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | TCS34725_ENABLE, TCS34725_ENABLE_PON)
-    time.sleep(0.5)
-    bus.write_byte_data(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | TCS34725_ENABLE, TCS34725_ENABLE_PON | TCS34725_ENABLE_AEN)
-
-    # Leer los valores de color
-    data = bus.read_i2c_block_data(TCS34725_ADDRESS, 0x16 | 0x80, 8)
-    red = data[1] << 8 | data[0]
-    green = data[3] << 8 | data[2]
-    blue = data[5] << 8 | data[4]
-    clear = data[7] << 8 | data[6]
-
-    # Limpiar y cerrar el bus I2C
-    bus.write_byte_data(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | TCS34725_ENABLE, 0)
-    bus.close()
-
-    # Devolver los valores de color
-    return red, green, blue, clear
-
-# Ejemplo de uso
-while True:
-    if __name__ == "__main__":
-        r, g, b, c = read_color()
-        print(f"Rojo: {r}, Verde: {g}, Azul: {b}, Claro: {c}")
+except KeyboardInterrupt:
+    pass
