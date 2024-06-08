@@ -68,7 +68,7 @@ def aparcar():
   print("CAR STOPPED")
 
 while run:
-  if B.button_state():
+  if not B.button_state():
     start = True
     print("BOTON PULSADO")
   
