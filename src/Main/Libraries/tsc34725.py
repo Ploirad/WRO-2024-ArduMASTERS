@@ -1,4 +1,4 @@
-import smbus
+import smbus2
 import time
 
 # Dirección del sensor TCS34725
@@ -19,7 +19,7 @@ TCS34725_BDATAL = 0x1A
 TCS34725_BDATAH = 0x1B
 
 # Configuración del bus I2C
-bus = smbus.SMBus(1)
+bus = smbus2.SMBus(1)
 
 def tcs34725_init():
     # Encender el sensor
