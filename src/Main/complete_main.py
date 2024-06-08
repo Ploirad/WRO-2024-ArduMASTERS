@@ -126,12 +126,12 @@ while run:
     
     if green_area > red_area:
       if green_area > 10000:
-        M.movement(1, 1, False)
+        M.movement(-1, 1, False)
         print("V>R")
     
     else:
       if red_area > 10000:
-        M.movement(1, -1, False)
+        M.movement(1, 1, False)
         print("R>V")
 
     #AÑADIR AQUÍ EL DETECTOR TCS PARA SABER SI HEMOS DADO UNA VUELTA
