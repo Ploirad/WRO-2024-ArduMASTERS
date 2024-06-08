@@ -75,6 +75,8 @@ while run:
   if start:
     update_variables()
 
+    M.movement(-1, 1, False)
+
     if frontal_distance > 30:
       if right_distance < 10:
         M.movement(1, 1, False)
@@ -131,6 +133,7 @@ while run:
       if red_area > 10000:
         M.movement(1, -1, False)
         print("R>V")
+
     #AÑADIR AQUÍ EL DETECTOR TCS PARA SABER SI HEMOS DADO UNA VUELTA
 
     if vueltas == 3:
