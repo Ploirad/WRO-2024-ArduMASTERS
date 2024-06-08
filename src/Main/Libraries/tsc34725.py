@@ -1,6 +1,10 @@
-import smbus2
+import pigpio
+import time
 
 def read_color():
+    # Inicializar el objeto PiGPIO
+    pi = pigpio.pi()
+
     # Dirección del sensor TCS34725
     TCS34725_ADDRESS = 0x29
 
@@ -14,27 +18,22 @@ def read_color():
     TCS34725_GDATAL = 0x18
     TCS34725_BDATAL = 0x1A
 
-    # Inicializar el bus I2C
-    bus = smbus2.SMBus(1)
-
     # Configurar el sensor TCS34725
-    bus.write_byte_data(TCS34725_ADDRESS, TCS34725_ENABLE, 0x01)
-    bus.write_byte_data(TCS34725_ADDRESS, TCS34725_ATIME, 0xEB)
-    bus.write_byte_data(TCS34725_ADDRESS, TCS34725_CONTROL, 0x03)
+    pi.i2c_write_byte_data(TCS34725_ADDRESS, TCS34725_ENABLE, 0x01)
+    pi.i2c_write_byte_data(TCS34725_ADDRESS, TCS34725_ATIME, 0xEB)
+    pi.i2c_write_byte_data(TCS34725_ADDRESS, TCS34725_CONTROL, 0x03)
 
-    # Leer el ID del sensor para verificar si está listo
-    sensor_id = bus.read_byte_data(TCS34725_ADDRESS, TCS34725_ID)
-    while sensor_id != 0x44:
-        sensor_id = bus.read_byte_data(TCS34725_ADDRESS, TCS34725_ID)
+    # Esperar a que el sensor se estabilice
+    time.sleep(0.5)
 
     # Leer los valores de color
-    red = bus.read_word_data(TCS34725_ADDRESS, TCS34725_RDATAL)
-    green = bus.read_word_data(TCS34725_ADDRESS, TCS34725_GDATAL)
-    blue = bus.read_word_data(TCS34725_ADDRESS, TCS34725_BDATAL)
-    clear = bus.read_word_data(TCS34725_ADDRESS, TCS34725_CDATAL)
+    red = pi.i2c_read_word_data(TCS34725_ADDRESS, TCS34725_RDATAL)
+    green = pi.i2c_read_word_data(TCS34725_ADDRESS, TCS34725_GDATAL)
+    blue = pi.i2c_read_word_data(TCS34725_ADDRESS, TCS34725_BDATAL)
+    clear = pi.i2c_read_word_data(TCS34725_ADDRESS, TCS34725_CDATAL)
 
-    # Limpiar y cerrar el bus I2C
-    bus.close()
+    # Cerrar la conexión con PiGPIO
+    pi.stop()
 
     # Devolver los valores de color
     return red, green, blue, clear
