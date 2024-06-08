@@ -1,7 +1,7 @@
 #Special Libraries                             #Functions
 import Libraries.Motor as M            #movement(vel, dir, stop)
 import Libraries.Ultrasonidos as US    #measure_distance(position)  -> distance
-import Libraries.color_detector as cam #obtener_centroide()           -> green_area, red_area, magent_area, cv, cr, cm
+import Libraries.color_detector as cam #obtener_centroides()           -> green_area, red_area, magent_area, cv, cr, cm
 import Libraries.Boton as B            #button_state()              -> True/False
 
 #Variables
@@ -31,7 +31,7 @@ def update_variables():
   right_distance = US.measure_distance(2)
   left_distance = US.measure_distance(4)
   back_distance = US.measure_distance(3)
-  green_area, red_area, magenta_area, green_centroid, red_centroid, magenta_centroid = cam.obtener_centroide()
+  green_area, red_area, magenta_area, green_centroid, red_centroid, magenta_centroid = cam.obtener_centroides()
 
 #640 _> 0-213-427-640
 def aparcar():
