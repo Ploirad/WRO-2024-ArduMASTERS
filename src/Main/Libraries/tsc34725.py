@@ -1,5 +1,5 @@
-from smbus import SMBus
 import time
+from smbus import SMBus
 
 def read_color():
     # Dirección del sensor TCS34725
@@ -22,7 +22,7 @@ def read_color():
     # Configurar el sensor TCS34725
     bus.write_byte_data(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | TCS34725_ATIME, TCS34725_INTEGRATIONTIME_50MS)
     bus.write_byte_data(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | TCS34725_ENABLE, TCS34725_ENABLE_PON)
-    time.sleep(0.5)
+    time.sleep(0.5)  # Esperar 0.5 segundos después de encender el sensor
     bus.write_byte_data(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | TCS34725_ENABLE, TCS34725_ENABLE_PON | TCS34725_ENABLE_AEN)
 
     # Leer los valores de color
