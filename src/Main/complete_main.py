@@ -77,8 +77,6 @@ while run:
   if start:
     update_variables()
 
-    M.movement(-1, 1, False)
-
     if frontal_distance > 30:
       if right_distance < 10:
         M.movement(1, 1, False)
