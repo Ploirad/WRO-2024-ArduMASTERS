@@ -52,18 +52,3 @@ def obtener_centroides(resolution=(640, 480)):
                 frame = stream.array
                 green_area, red_area, magent_area, cv, cr, cm = detectar_color(frame)
                 return green_area, red_area, magent_area, cv, cr, cm
-
-
-def main():
-    av, ar, am, cv, cr, cm = obtener_centroides()
-    print(f"Coordenadas del centroide Rojo: {cr}")
-    print(f"Coordenadas del centroide Verde: {cv}")
-    print(f"Coordenadas del centroide Magenta: {cm}")
-    print("")
-    print(f"Area Rojo: {ar}")
-    print(f"Area Verde: {av}")
-    print(f"Area Magenta: {am}")
-    print("")
-    print("")
-while True:
-    main()
