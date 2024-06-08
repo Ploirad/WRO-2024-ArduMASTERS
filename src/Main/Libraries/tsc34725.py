@@ -1,3 +1,4 @@
+import time
 import board
 import busio
 import adafruit_tcs34725
@@ -10,7 +11,7 @@ sensor = adafruit_tcs34725.TCS34725(i2c)
 
 def read_color():
     # Leer los valores de color RGB del sensor
-    r, g, b, _ = sensor.color_rgb_bytes
+    r, g, b = sensor.color_rgb_bytes
     
     # Determinar el color basado en los valores RGB
     if r > 200 and g > 200 and b > 200:
