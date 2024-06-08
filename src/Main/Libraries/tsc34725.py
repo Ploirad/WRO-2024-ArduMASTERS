@@ -38,3 +38,6 @@ def read_color():
 
     # Devolver los valores de color
     return red, green, blue, clear
+
+while True:
+    print(read_color())
