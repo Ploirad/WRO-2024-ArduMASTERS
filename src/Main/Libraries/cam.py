@@ -51,7 +51,7 @@ while True:
         cv2.circle(frame, centroid_magenta, 5, (255, 0, 255), -1)
 
     # Muestra el marco
-    cv2.imshow('Frame', frame)
+    #cv2.imshow('Frame', frame)
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
