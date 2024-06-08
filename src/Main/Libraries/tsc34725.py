@@ -16,7 +16,26 @@ def read_color():
 
     return clear, red, green, blue
 
-# Ejemplo de uso
-if __name__ == "__main__":
-    c, r, g, b = read_color()
-    print(f"Rojo: {r}, Verde: {g}, Azul: {b}, Claro: {c}")
+def detect_color(clear, red, green, blue):
+    saturation = min(red, green, blue) / clear
+    value = clear / 65535
+
+    if saturation > 0.3:
+        if red > green and red > blue:
+            return "Rojo"
+        elif green > red and green > blue:
+            return "Verde"
+        elif blue > red and blue > green:
+            return "Azul"
+    elif value < 0.2:
+        return "Negro"
+    else:
+        return "Blanco"
+
+# Loop infinito para detectar colores continuamente
+while True:
+    clear, red, green, blue = read_color()
+    color = detect_color(clear, red, green, blue)
+
+    print("Color detectado:", color)
+    time.sleep(1)  # Esperar 1 segundo antes de la próxima detección
