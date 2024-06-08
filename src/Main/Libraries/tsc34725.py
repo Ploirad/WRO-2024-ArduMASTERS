@@ -41,16 +41,8 @@ def read_color():
     red = data[1] << 8 | data[0]
     green = data[3] << 8 | data[2]
     blue = data[5] << 8 | data[4]
-    
-    # Devolver el color dominante
-    if red > green and red > blue:
-        return "Rojo"
-    elif green > red and green > blue:
-        return "Verde"
-    elif blue > red and blue > green:
-        return "Azul"
-    else:
-        return "Otros"
+
+    return red, green, blue
 
 try:
     tcs34725_init() # Inicializar el sensor
