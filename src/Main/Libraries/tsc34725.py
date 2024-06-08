@@ -1,5 +1,5 @@
-import time
 from smbus import SMBus
+import time
 
 def read_color():
     # Dirección del sensor TCS34725
@@ -38,5 +38,7 @@ def read_color():
     # Devolver los valores de color
     return red, green, blue, clear
 
-while True:
-    print(read_color())
+# Ejemplo de uso
+if __name__ == "__main__":
+    r, g, b, c = read_color()
+    print(f"Rojo: {r}, Verde: {g}, Azul: {b}, Claro: {c}")
