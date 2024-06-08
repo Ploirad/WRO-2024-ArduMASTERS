@@ -5,7 +5,7 @@ import Libraries.color_detector as cam #obtener_centroides()           -> green_
 import Libraries.Boton as B            #button_state()              -> True/False
 
 #Variables
-start = False #It says if the car have to start or not
+start = False
 run = True
 Aparcar = False
 vueltas = 0
@@ -126,7 +126,7 @@ while run:
     
     if green_area > red_area:
       if green_area > 10000:
-        M.movement(-1, 1, False)
+        M.movement(1, -1, False)
         print("V>R")
     
     else:
