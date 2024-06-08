@@ -40,6 +40,7 @@ def read_color():
     return red, green, blue, clear
 
 # Ejemplo de uso
-if __name__ == "__main__":
-    r, g, b, c = read_color()
-    print(f"Rojo: {r}, Verde: {g}, Azul: {b}, Claro: {c}")
+while True:
+    if __name__ == "__main__":
+        r, g, b, c = read_color()
+        print(f"Rojo: {r}, Verde: {g}, Azul: {b}, Claro: {c}")
