@@ -17,15 +17,14 @@ def detectar_color(frame):
     mask_r = cv2.inRange(hsv, R_bajo, R_alto)
     mask_v = cv2.inRange(hsv, V_bajo, V_alto)
     mask_m = cv2.inRange(hsv, M_bajo, M_alto)
-    res_r = cv2.bitwise_and(frame, frame, mask=mask_r)
-    res_v = cv2.bitwise_and(frame, frame, mask=mask_v)
-    res_m = cv2.bitwise_and(frame, frame, mask=mask_m)
     
     # Mostrar las imágenes binarias de cada color
-    cv2.imshow('Mascara Roja', mask_r)
-    cv2.imshow('Mascara Verde', mask_v)
-    cv2.imshow('Mascara Magenta', mask_m)
-    cv2.waitKey(1)  # Esperar un poco para mostrar las imágenes
+    print("Mascara Roja:")
+    print(mask_r)
+    print("Mascara Verde:")
+    print(mask_v)
+    print("Mascara Magenta:")
+    print(mask_m)
     
     # Calcular el centroide para cada color
     cr = calcular_centroide(mask_r)
@@ -62,6 +61,7 @@ def obtener_centroides(resolution=(640, 480)):
                 
                 stream.seek(0)
                 stream.truncate()
+
 
 
 
