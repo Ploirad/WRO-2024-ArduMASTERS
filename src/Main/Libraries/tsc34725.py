@@ -32,8 +32,8 @@ def read_color():
     clear = data[7] << 8 | data[6]
 
     # Limpiar y cerrar el bus I2C
-    bus.write_byte_data(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | TCS34725_ENABLE, 0)
-    bus.close()
+    #bus.write_byte_data(TCS34725_ADDRESS, TCS34725_COMMAND_BIT | TCS34725_ENABLE, 0)
+    #bus.close()
 
     # Devolver los valores de color
     return red, green, blue, clear
