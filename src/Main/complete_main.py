@@ -28,11 +28,16 @@ magenta_centroid = 0
 
 def update_variables():
   frontal_distance = US.measure_distance(1)
-  print(frontal_distance)
+  print(f"frontal_distance = {frontal_distance}")
   right_distance = US.measure_distance(2)
+  print(f"right_distance = {right_distance}")
   left_distance = US.measure_distance(4)
+  print(f"left_distance = {left_distance}")
   back_distance = US.measure_distance(3)
+  print(f"back_distance = {back_distance}")
   green_area, red_area, magenta_area, green_centroid, red_centroid, magenta_centroid = cam.obtener_centroides()
+  print(f"green_area = {green_area}, red_area = {red_area}, magenta_area = {magenta_area}")
+  print(f"green_centroid = {green_centroid}, red_centroid = {red_centroid}, magenta_centroid = {magenta_centroid}")
 
 #640 _> 0-213-427-640
 def aparcar():
@@ -65,6 +70,7 @@ def aparcar():
 while run:
   if B.button_state():
     start = True
+    print("BOTON PULSADO")
   
   if start:
     update_variables()
@@ -119,11 +125,12 @@ while run:
     if green_area > red_area:
       if green_area > 10000:
         M.movement(1, 1, False)
+        print("V>R")
     
     else:
       if red_area > 10000:
         M.movement(1, -1, False)
-
+        print("R>V")
     #AÑADIR AQUÍ EL DETECTOR TCS PARA SABER SI HEMOS DADO UNA VUELTA
 
     if vueltas == 3:
