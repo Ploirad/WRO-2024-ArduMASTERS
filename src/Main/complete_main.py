@@ -125,7 +125,7 @@ while run:
       M.movement(1, 0, False)
     
     if green_area > red_area:
-      if green_area > 1200:
+      if green_area > 4: #1200:
         M.movement(1, -1, False)
         print("V>R")
     
