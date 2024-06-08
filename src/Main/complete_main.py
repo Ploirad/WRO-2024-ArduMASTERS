@@ -28,6 +28,7 @@ magenta_centroid = 0
 
 def update_variables():
   frontal_distance = US.measure_distance(1)
+  print(frontal_distance)
   right_distance = US.measure_distance(2)
   left_distance = US.measure_distance(4)
   back_distance = US.measure_distance(3)
