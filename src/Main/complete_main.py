@@ -42,6 +42,7 @@ def update_variables():
 
 #640 _> 0-213-427-640
 def aparcar():
+  global frontal_distance, right_distance, left_distance, back_distance, magenta_area, magenta_centroid, run, start, Aparcar
   update_variables()
 
   if magenta_centroid < 213:
