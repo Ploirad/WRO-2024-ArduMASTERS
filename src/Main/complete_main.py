@@ -1,4 +1,4 @@
-import Libraries.Motor as M            # movement(vel, dir, stop)
+import Libraries.Motor as M            # movement(vel, dir, stop)                avance()
 import Libraries.Ultrasonidos as US    # measure_distance(position) -> distance
 import Libraries.color_detector as cam # obtener_centroides() -> green_area, red_area, magent_area, cv, cr, cm
 import Libraries.Boton as B            # button_state() -> True/False
