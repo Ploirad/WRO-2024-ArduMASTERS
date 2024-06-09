@@ -41,7 +41,7 @@ def update_camera():
 def aparcar():
     global magenta_area, magenta_centroid, run, start, Aparcar, back_distance
     update_camera()
-
+    M.avance()
     if magenta_centroid < 213:
         M.movement(1, -1, False)
         while magenta_area > 0:
@@ -53,6 +53,7 @@ def aparcar():
             M.movement(-1, 1, False)
     else:
         M.movement(1, 1, False)
+        evitate_avance = False
         while magenta_area > 0:
             update_camera()
             M.movement(1, 0, False)
@@ -60,7 +61,7 @@ def aparcar():
         while back_distance > 2:
             update_distances()
             M.movement(-1, -1, False)
-
+    
     M.movement(0, 0, True)
     run = False
     start = False
@@ -68,6 +69,7 @@ def aparcar():
     print("CAR STOPPED")
 
 while run:
+    M.avance()
     if not B.button_state():
         start = True
         print("BOTON PULSADO")
