@@ -36,7 +36,7 @@ def update_variables():
   print(f"left_distance = {left_distance}")
   back_distance = US.measure_distance(3)
   print(f"back_distance = {back_distance}")
-  green_area, red_area, magenta_area, green_centroid, red_centroid, magenta_centroid = 0, 0, 0, 0, 0, 0 #cam.obtener_centroides()
+  green_area, red_area, magenta_area, green_centroid, red_centroid, magenta_centroid = cam.obtener_centroides() #0, 0, 0, 0, 0, 0 #
   print(f"green_area = {green_area}, red_area = {red_area}, magenta_area = {magenta_area}")
   print(f"green_centroid = {green_centroid}, red_centroid = {red_centroid}, magenta_centroid = {magenta_centroid}")
 
