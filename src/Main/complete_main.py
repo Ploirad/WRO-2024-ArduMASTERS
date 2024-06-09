@@ -31,6 +31,7 @@ def update_distances():
     right_distance = US.measure_distance(2)
     left_distance = US.measure_distance(4)
     back_distance = US.measure_distance(3)
+    print(f"FD: {frontal_distance}; RD: {right_distance}; LD: {left_distance}; BD: {back_distance}")
 
 def update_camera():
     global green_area, red_area, magenta_area, green_centroid, red_centroid, magenta_centroid
