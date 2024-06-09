@@ -1,8 +1,9 @@
 import threading
-import Libraries.Motor as M            #movement(vel, dir, stop)
-import Libraries.Ultrasonidos as US    #measure_distance(position)  -> distance
-import Libraries.color_detector as cam #obtener_centroides()       -> green_area, red_area, magent_area, cv, cr, cm
-import Libraries.Boton as B            #button_state()             -> True/False
+import Libraries.Motor as M            # movement(vel, dir, stop)
+import Libraries.Ultrasonidos as US    # measure_distance(position) -> distance
+import Libraries.color_detector as cam # obtener_centroides() -> green_area, red_area, magent_area, cv, cr, cm
+import Libraries.Boton as B            # button_state() -> True/False
+import time
 
 # Variables
 start = False
@@ -41,6 +42,7 @@ def update_camera():
         green_area, red_area, magenta_area, green_centroid, red_centroid, magenta_centroid = cam.obtener_centroides()
         time.sleep(0.1)  # Pequeña pausa para evitar sobrecargar la CPU
 
+# Iniciar los threads
 sensor_thread = threading.Thread(target=update_sensors)
 camera_thread = threading.Thread(target=update_camera)
 
@@ -48,19 +50,23 @@ sensor_thread.start()
 camera_thread.start()
 
 def aparcar():
-    global frontal_distance, right_distance, left_distance, back_distance, magenta_area, magenta_centroid, run, start, Aparcar
+    global magenta_area, magenta_centroid, run, start, Aparcar
     
     if magenta_centroid < 213:
         M.movement(1, -1, False)
         while magenta_area > 0:
+            time.sleep(0.1)
             M.movement(1, 0, False)
         while back_distance > 2:
+            time.sleep(0.1)
             M.movement(-1, 1, False)
     else:
         M.movement(1, 1, False)
         while magenta_area > 0:
+            time.sleep(0.1)
             M.movement(1, 0, False)
         while back_distance > 2:
+            time.sleep(0.1)
             M.movement(-1, -1, False)
 
     M.movement(0, 0, True)
@@ -87,23 +93,28 @@ while run:
         elif frontal_distance > 10:
             if right_distance < 10:
                 while frontal_distance < 25:
+                    time.sleep(0.1)
                     M.movement(1, 1, False)
                     last_direction = 1
             elif left_distance < 10:
                 while frontal_distance < 25:
+                    time.sleep(0.1)
                     M.movement(1, -1, False)
                     last_direction = -1
             else:
                 while frontal_distance < 25:
+                    time.sleep(0.1)
                     M.movement(1, -1, False)
         else:
             while frontal_distance < 10:
                 if right_distance > left_distance:
                     while frontal_distance < 8:
+                        time.sleep(0.1)
                         M.movement(-1, -1, False)
                     M.movement(1, 1, False)
                 else:
                     while frontal_distance < 8:
+                        time.sleep(0.1)
                         M.movement(-1, 1, False)
                     M.movement(1, -1, False)
             M.movement(1, 0, False)
