@@ -4,7 +4,7 @@ import Libraries.color_detector as cam # obtener_centroides() -> green_area, red
 import Libraries.Boton as B            # button_state() -> True/False
 
 # Variables
-start = False
+start = not False
 run = True
 Aparcar = False
 vueltas = 0
