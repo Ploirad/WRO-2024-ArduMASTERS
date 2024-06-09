@@ -73,61 +73,61 @@ while run:
         print("BOTON PULSADO")
     
     if start:
-        update_distances()
-
-        if frontal_distance > 30:
-            if right_distance < 10:
-                M.movement(1, 1, False)
-                last_direction = 1
-            elif left_distance < 10:
-                M.movement(1, -1, False)
-                last_direction = -1
+        update_camera()
+        if green_area > 4 or red_area > 1200:
+            if green_area > red_area:
+                if green_area > 4:
+                    M.movement(1, -1, False)
+                    print("V>R")
             else:
-                M.movement(1, 0, False)
-        elif frontal_distance > 10:
-            if right_distance < 10:
-                while frontal_distance < 25:
-                    update_distances()
+                if red_area > 1200:
+                    M.movement(1, 1, False)
+                    print("R>V")
+        else:
+            update_distances()
+            if frontal_distance > 30:
+                if right_distance < 10:
                     M.movement(1, 1, False)
                     last_direction = 1
-            elif left_distance < 10:
-                while frontal_distance < 25:
-                    update_distances()
+                elif left_distance < 10:
                     M.movement(1, -1, False)
                     last_direction = -1
-            else:
-                while frontal_distance < 25:
-                    update_distances()
-                    M.movement(1, -1, False)
-        else:
-            while frontal_distance < 10:
-                update_distances()
-                if right_distance > left_distance:
-                    while frontal_distance < 8:
-                        update_distances()
-                        M.movement(-1, -1, False)
-                    M.movement(1, 1, False)
                 else:
-                    while frontal_distance < 8:
+                    M.movement(1, 0, False)
+            elif frontal_distance > 10:
+                if right_distance < 10:
+                    while frontal_distance < 25:
                         update_distances()
-                        M.movement(-1, 1, False)
-                    M.movement(1, -1, False)
-            M.movement(1, 0, False)
-
-        if right_distance < 6:
-            M.movement(1, -1, False)
-        if left_distance < 6:
-            M.movement(1, 1, False)
-
-        update_camera()
-        if green_area > red_area:
-            if green_area > 4:
+                        M.movement(1, 1, False)
+                        last_direction = 1
+                elif left_distance < 10:
+                    while frontal_distance < 25:
+                        update_distances()
+                        M.movement(1, -1, False)
+                        last_direction = -1
+                else:
+                    while frontal_distance < 25:
+                        update_distances()
+                        M.movement(1, -1, False)
+            else:
+                while frontal_distance < 10:
+                    update_distances()
+                    if right_distance > left_distance:
+                        while frontal_distance < 8:
+                            update_distances()
+                            M.movement(-1, -1, False)
+                        M.movement(1, 1, False)
+                    else:
+                        while frontal_distance < 8:
+                            update_distances()
+                            M.movement(-1, 1, False)
+                        M.movement(1, -1, False)
+                M.movement(1, 0, False)
+    
+            if right_distance < 6:
                 M.movement(1, -1, False)
-                print("V>R")
-        else:
-            if red_area > 1200:
+            if left_distance < 6:
                 M.movement(1, 1, False)
-                print("R>V")
 
         if vueltas >= 3 and magenta_area > 10000:
             Aparcar = True
