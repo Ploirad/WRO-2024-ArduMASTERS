@@ -12,21 +12,17 @@ def detectar_color(frame):
     M_alto = np.array([167, 185, 255])
 
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    mask_r = cv2.inRange(hsv, R_bajo, R_alto)
-    mask_v = cv2.inRange(hsv, V_bajo, V_alto)
-    mask_m = cv2.inRange(hsv, M_bajo, M_alto)
+    masks = {
+        'red': cv2.inRange(hsv, R_bajo, R_alto),
+        'green': cv2.inRange(hsv, V_bajo, V_alto),
+        'magenta': cv2.inRange(hsv, M_bajo, M_alto)
+    }
     
-    # Calcular el área para cada color
-    red_area = cv2.countNonZero(mask_r)
-    green_area = cv2.countNonZero(mask_v)
-    magent_area = cv2.countNonZero(mask_m)
+    areas = {color: cv2.countNonZero(mask) for color, mask in masks.items()}
+    centroids = {color: calcular_centroide(mask) for color, mask in masks.items()}
     
-    # Calcular el centroide para cada color
-    cr = calcular_centroide(mask_r)
-    cv = calcular_centroide(mask_v)
-    cm = calcular_centroide(mask_m)
-    
-    return green_area, red_area, magent_area, cv, cr, cm
+    return areas['green'], areas['red'], areas['magenta'], centroids['green'], centroids['red'], centroids['magenta']
+
 
 def calcular_centroide(mask):
     M = cv2.moments(mask)
@@ -37,7 +33,7 @@ def calcular_centroide(mask):
     else:
         return None, None
 
-def obtener_centroides(resolution=(640, 480)):
+def obtener_centroides(resolution=(320, 240)):
     with picamera.PiCamera() as camera:
         with picamera.array.PiRGBArray(camera) as stream:
             camera.resolution = resolution
