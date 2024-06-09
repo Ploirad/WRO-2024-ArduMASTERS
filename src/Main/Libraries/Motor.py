@@ -33,3 +33,6 @@ def movement(vel, dir, stop):
     else:
         Motor.stop()
         Direccion.start(7.5)
+
+def avance():
+    Motor.start(12.5)
