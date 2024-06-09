@@ -34,6 +34,5 @@ def movement(vel, dir, stop):
         Motor.stop()
         Direccion.start(7.5)
 
-def avance(evitate):
-    if not evitate:
-        Motor.start(12.5)
+def avance():
+    Motor.start(12.5)
