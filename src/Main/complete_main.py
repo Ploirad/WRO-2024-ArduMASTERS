@@ -1,149 +1,142 @@
-#Special Libraries                             #Functions
 import Libraries.Motor as M            #movement(vel, dir, stop)
 import Libraries.Ultrasonidos as US    #measure_distance(position)  -> distance
-import Libraries.color_detector as cam #obtener_centroides()           -> green_area, red_area, magent_area, cv, cr, cm
-import Libraries.Boton as B            #button_state()              -> True/False
+import Libraries.color_detector as cam #obtener_centroides()       -> green_area, red_area, magent_area, cv, cr, cm
+import Libraries.Boton as B            #button_state()             -> True/False
+import threading
 
-#Variables
+# Variables
 start = False
 run = True
 Aparcar = False
 vueltas = 0
 
-#This distances are the distances of the ultrasounds sensors
+# Distancias de los sensores ultrasónicos
 frontal_distance = 0.0
 right_distance = 0.0
 left_distance = 0.0
 back_distance = 0.0
 
-#The areas detected by the camera
+# Áreas detectadas por la cámara
 green_area = 0
 red_area = 0
 magenta_area = 0
 
-#The position in the X edge of the centroids of the colors detected by the camera
+# Posición en el eje X de los centroides de los colores detectados por la cámara
 green_centroid = 0
 red_centroid = 0
 magenta_centroid = 0
 
-def update_variables():
-  global frontal_distance, right_distance, left_distance, back_distance, green_area, red_area, magenta_area, green_centroid, red_centroid, magenta_centroid
-  frontal_distance = US.measure_distance(1)
-  print(f"frontal_distance = {frontal_distance}")
-  right_distance = US.measure_distance(2)
-  print(f"right_distance = {right_distance}")
-  left_distance = US.measure_distance(4)
-  print(f"left_distance = {left_distance}")
-  back_distance = US.measure_distance(3)
-  print(f"back_distance = {back_distance}")
-  green_area, red_area, magenta_area, green_centroid, red_centroid, magenta_centroid = cam.obtener_centroides() #0, 0, 0, 0, 0, 0 #
-  print(f"green_area = {green_area}, red_area = {red_area}, magenta_area = {magenta_area}")
-  print(f"green_centroid = {green_centroid}, red_centroid = {red_centroid}, magenta_centroid = {magenta_centroid}")
+def update_sensors():
+    global frontal_distance, right_distance, left_distance, back_distance
+    while run:
+        frontal_distance = US.measure_distance(1)
+        right_distance = US.measure_distance(2)
+        left_distance = US.measure_distance(4)
+        back_distance = US.measure_distance(3)
 
-#640 _> 0-213-427-640
+def update_camera():
+    global green_area, red_area, magenta_area, green_centroid, red_centroid, magenta_centroid
+    while run:
+        green_area, red_area, magenta_area, green_centroid, red_centroid, magenta_centroid = cam.obtener_centroides()
+
+sensor_thread = threading.Thread(target=update_sensors)
+camera_thread = threading.Thread(target=update_camera)
+
+sensor_thread.start()
+camera_thread.start()
+
 def aparcar():
-  global frontal_distance, right_distance, left_distance, back_distance, magenta_area, magenta_centroid, run, start, Aparcar
-  update_variables()
-
-  if magenta_centroid < 213:
-    M.movement(1, -1, False)
-    while magenta_area > 0:
-      update_variables()
-      M.movement(1, 0, False)
-    while back_distance > 2:
-      update_variables()
-      M.movement(-1, 1, False)
-  
-  else:
-    M.movement(1, 1, False)
-    while magenta_area > 0:
-      update_variables()
-      M.movement(1, 0, False)
-    while back_distance > 2:
-      update_variables()
-      M.movement(-1, -1, False)
-
-  M.movement(0, 0, True)
-  run = False
-  start = False
-  Aparcar = False
-  print("CAR STOPPED")
-
-while run:
-  if not B.button_state():
-    start = True
-    print("BOTON PULSADO")
-  
-  if start:
-    update_variables()
-
-    if frontal_distance > 30:
-      if right_distance < 10:
-        M.movement(1, 1, False)
-        last_direction = 1
-        M.movement(1, 0, False)
-      elif left_distance < 10:
-        M.movement(1, -1, False)
-        last_direction = -1
-        M.movement(1, 0, False)
-      else:
-        M.movement(1, 0, False)
-
-    elif frontal_distance > 10:
-      if right_distance < 10:
-        while frontal_distance < 25:
-          update_variables()
-          M.movement(1, 1, False)
-          last_direction = 1
-        M.movement(1, 0, False)
-
-      elif left_distance < 10:
-        while frontal_distance < 25:
-          update_variables()
-          M.movement(1, -1, False)
-          last_direction = -1
-        M.movement(1, 0, False)
-      else:
-        while frontal_distance < 25:
-          update_variables()
-          M.movement(1, -1, False)
-        M.movement(1, 0, False)
+    global frontal_distance, right_distance, left_distance, back_distance, magenta_area, magenta_centroid, run, start, Aparcar
     
-    else:
-      while frontal_distance < 10:
-        update_variables()
-        if right_distance > left_distance:
-          while frontal_distance < 8:
+    if magenta_centroid < 213:
+        M.movement(1, -1, False)
+        while magenta_area > 0:
             update_variables()
-            M.movement(-1, -1, False)
-          M.movement(1, 1, False)
-        else:
-          while frontal_distance < 8:
+            M.movement(1, 0, False)
+        while back_distance > 2:
             update_variables()
             M.movement(-1, 1, False)
-          M.movement(1, -1, False)
-      M.movement(1, 0, False)
-
-    if right_distance < 6:
-      M.movement(1, -1, False)
-    if left_distance < 6:
-      M.movement(1, 1, False)
-    
-    if green_area > red_area:
-      if green_area > 4: #1200:
-        M.movement(1, -1, False)
-        print("V>R")
-    
     else:
-      if red_area > 1200:
         M.movement(1, 1, False)
-        print("R>V")
+        while magenta_area > 0:
+            update_variables()
+            M.movement(1, 0, False)
+        while back_distance > 2:
+            update_variables()
+            M.movement(-1, -1, False)
 
-    #AÑADIR AQUÍ EL DETECTOR TCS PARA SABER SI HEMOS DADO UNA VUELTA
+    M.movement(0, 0, True)
+    run = False
+    start = False
+    Aparcar = False
+    print("CAR STOPPED")
 
-    if vueltas == 3:
-      if magenta_area > 10000:
-        Aparcar = True
-  
-    while Aparcar:
-        aparcar()
+while run:
+    if not B.button_state():
+        start = True
+        print("BOTON PULSADO")
+    
+    if start:
+        if frontal_distance > 30:
+            if right_distance < 10:
+                M.movement(1, 1, False)
+                last_direction = 1
+            elif left_distance < 10:
+                M.movement(1, -1, False)
+                last_direction = -1
+            else:
+                M.movement(1, 0, False)
+        elif frontal_distance > 10:
+            if right_distance < 10:
+                while frontal_distance < 25:
+                    update_variables()
+                    M.movement(1, 1, False)
+                    last_direction = 1
+            elif left_distance < 10:
+                while frontal_distance < 25:
+                    update_variables()
+                    M.movement(1, -1, False)
+                    last_direction = -1
+            else:
+                while frontal_distance < 25:
+                    update_variables()
+                    M.movement(1, -1, False)
+        else:
+            while frontal_distance < 10:
+                update_variables()
+                if right_distance > left_distance:
+                    while frontal_distance < 8:
+                        update_variables()
+                        M.movement(-1, -1, False)
+                    M.movement(1, 1, False)
+                else:
+                    while frontal_distance < 8:
+                        update_variables()
+                        M.movement(-1, 1, False)
+                    M.movement(1, -1, False)
+            M.movement(1, 0, False)
+
+        if right_distance < 6:
+            M.movement(1, -1, False)
+        if left_distance < 6:
+            M.movement(1, 1, False)
+        
+        if green_area > red_area:
+            if green_area > 4:
+                M.movement(1, -1, False)
+                print("V>R")
+        else:
+            if red_area > 1200:
+                M.movement(1, 1, False)
+                print("R>V")
+
+        if vueltas == 3 and magenta_area > 10000:
+            Aparcar = True
+        
+        while Aparcar:
+            aparcar()
+
+# Detener los threads al finalizar el programa
+run = False
+sensor_thread.join()
+camera_thread.join()
