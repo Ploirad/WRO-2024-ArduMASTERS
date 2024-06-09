@@ -36,6 +36,7 @@ def update_distances():
 def update_camera():
     global green_area, red_area, magenta_area, green_centroid, red_centroid, magenta_centroid
     green_area, red_area, magenta_area, green_centroid, red_centroid, magenta_centroid = cam.obtener_centroides()
+    print(f"GA: {green_area}; RA: {red_area}; MA: {magenta_area}; GC: {green_centroid}; RC: {red_centroid}; MC: {magenta_centroid}")
 
 def aparcar():
     global magenta_area, magenta_centroid, run, start, Aparcar, back_distance
