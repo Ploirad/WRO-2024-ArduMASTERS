@@ -1,25 +1,27 @@
 #BASIC LIBRARIES
 from picamera import PiCamera
 from picamera.array import PiRGBArray
-import time
 
 #OUR LIBRARIES                                     # FUNCTIONS THAT WE ARE GOING TO USE
-from Libraries import Boton as B                   #button_state()
-from Libraries import Motor as M                   #movement(vel, dir, stop)
-from Libraries import Ultrasonidos as HC           #measure_distance(position) 1 Front; 2 Right; 3 Back; 4 Left
-from Libraries import New_color_detector as CAM    #detect_green(frame)    detect_red(frame)   detect_magenta(frame)
+from Libraries import Boton as B                   # B.button_state()
+from Libraries import Motor as M                   # M.movement(vel, dir, stop)
+from Libraries import Ultrasonidos as HC           # HC.measure_distance(position) 1 Front; 2 Right; 3 Back; 4 Left
+from Libraries import New_color_detector as CAM    # CAM.detect_green(frame)    CAM.detect_red(frame)   CAM.detect_magenta(frame)
 
-# Initialize the camera 
+# Initialize the camera as a picamera
 camera = PiCamera()
+# With a reslution of 640*480 px 
 camera.resolution = (640, 480)
 raw_capture = PiRGBArray(camera, size=(640, 480))
 
 #Create the global variables
+#Variables for HC
 front_distance = 0
 right_distance = 0
 left_distance = 0
 back_distance = 0
 
+#Variables for CAM
 green_centroid = None
 red_centroid = None
 magenta_centroid = None
@@ -27,16 +29,20 @@ green_area = None
 red_area = None
 magenta_area = None
 
+#Variables for M
 direction = 0
 traction = 0
-start = False
 go = False
 
-# Take the frames continuously
+#Variable for B
+start = False
+
+# Take the frames continuously (without stop)
 for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port=True):
     image = frame.array
 
-    if start:
+    # PRINCIPAL LOGIC
+    if start:   # If the button has been pressed
         # Detect the centroids of the colors
         green_centroid, green_area = CAM.detect_green(image)
         red_centroid, red_area = CAM.detect_red(image)
@@ -48,7 +54,6 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
         left_distance = HC.measure_distance(4)
         back_distance = HC.measure_distance(3)
 
-        # Principal logic
         if green_area is None and red_area is None:
             if front_distance > 30:
                 traction = 1
