@@ -135,26 +135,19 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
 
             # Then we comprobate what is the nearest pillar
             # If is the green
-            if green_area > red_area and green_area > 10:
+            if green_area > red_area:
                 # We overtake the green pillar by the right
                 direction = 1
                 print("Green detected, overtaking by the right")
             
             # Else if is red
-            elif green_area < red_area and red_area > 10:
+            else:
                 # We overtake the red pillar by the left
                 direction = -1
                 print("Red detected, overtaking by the left")
 
-            # If there is not any pillar
-            else:
-                # We go straight
-                direction = 0
-                print("Going ahead, waiting to the color get bigger")
-
         # Move the car depending the desitions thet are taken about the movement of the car
         M.movement(traction, direction, go)
-
         print(f"Traction: {traction}; Direction: {direction}")
 
     # Then if the button has not been pressed
@@ -165,6 +158,8 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
             print("Button pressed")
             start = True
 
+    print("")
+    
     # Clean the stream for the next frame
     raw_capture.truncate(0)
 
