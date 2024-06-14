@@ -36,7 +36,7 @@ def detect_color(frame, color_low, color_high):
     # Compute the center and area of the largest contour
     M = cv2.moments(largest_contour)
     if M["m00"] == 0:
-        return None, None
+        return None, 0
     cX = int(M["m10"] / M["m00"])
     area = cv2.contourArea(largest_contour)
 
