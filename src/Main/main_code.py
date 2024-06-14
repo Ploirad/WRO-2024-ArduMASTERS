@@ -65,7 +65,7 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
 
 
         # If we aren't seeing none color of the second round
-        if (green_area is None and red_area is None) or (green_area < 10) or (red_area < 10):
+        if (green_area < 10) and (red_area < 10):
             print("No color detected")
 
             # We comprobate if we can go forward without knock
@@ -135,13 +135,13 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
 
             # Then we comprobate what is the nearest pillar
             # If is the green
-            if ((green_area is not None and red_area is None) or (green_area > red_area)) and green_area > 10:
+            if green_area > red_area and green_area > 10:
                 # We overtake the green pillar by the right
                 direction = 1
                 print("Green detected, overtaking by the right")
             
             # Else if is red
-            elif ((green_area is None and red_area is not None) or (green_area < red_area)) and red_area > 10:
+            elif green_area < red_area and red_area > 10:
                 # We overtake the red pillar by the left
                 direction = -1
                 print("Red detected, overtaking by the left")
