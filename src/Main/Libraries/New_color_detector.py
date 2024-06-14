@@ -28,7 +28,7 @@ def detect_color(frame, color_low, color_high):
 
     # If no contours are found, return None
     if not contours:
-        return None, None
+        return None, 0
 
     # Find the largest contour
     largest_contour = max(contours, key=cv2.contourArea)
