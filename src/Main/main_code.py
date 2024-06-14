@@ -11,8 +11,8 @@ from Libraries import New_color_detector as CAM    # CAM.detect_green(frame)    
 # Initialize the camera as a picamera
 camera = PiCamera()
 
-# With a reslution of 640*480 px 
-camera.resolution = (640, 480)
+# With a reslution of 320*240 px 
+camera.resolution = (320, 240)
 raw_capture = PiRGBArray(camera, size=(640, 480))
 
 #Create the global variables
