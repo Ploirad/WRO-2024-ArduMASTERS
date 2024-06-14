@@ -26,9 +26,9 @@ back_distance = 0
 green_centroid = None
 red_centroid = None
 magenta_centroid = None
-green_area = None
-red_area = None
-magenta_area = None
+green_area = 0
+red_area = 0
+magenta_area = 0
 
 #Variables for M
 direction = 0
