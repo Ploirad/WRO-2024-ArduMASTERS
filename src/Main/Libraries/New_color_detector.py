@@ -24,7 +24,7 @@ def detect_color(frame, color_low, color_high):
     mask = cv2.inRange(hsv, color_low, color_high)
 
     # Find contours in the mask
-    contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    _, contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     # If no contours are found, return None
     if not contours:
