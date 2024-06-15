@@ -1,6 +1,7 @@
 #BASIC LIBRARIES
 from picamera import PiCamera
 from picamera.array import PiRGBArray
+from time import sleep
 
 #OUR LIBRARIES                                     # FUNCTIONS THAT WE ARE GOING TO USE
 from Libraries import Boton as B                   # B.button_state()
@@ -157,6 +158,8 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
         if B.button_state():
             #print("Button pressed")
             start = True
+
+    sleep(0.05)
 
     #print("")
 
