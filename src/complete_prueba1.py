@@ -13,11 +13,9 @@ ECHO_PIN_DERECHA = 6
 servo_pin_direccion = 2
 servo_pin_traccion = 3
 button_pin = 9
-IRsensor = 8
 
 # Define variables
 tiempo_de_giro_linea = 1
-numberlinea = 0
 vueltas = 0
 empezado = 0
 distancia_delante = 0
@@ -28,18 +26,19 @@ distancia_izquierda = 0
 distancia_derecha = 0
 distancia_comienzo_derecha = 0
 distancia_comienzo_izquierda = 0
-DISTANCIA_de_ACCION = {"MENOR QUE": 25, "MAYOR QUE": 24}
+DISTANCIA_de_ACCION = {"MENOR QUE": 20, "MAYOR QUE": 19}
 TAvance = 12.5
 TAtras = 2.5
-GDer = 4.5
-GIzq = 10.5
-GCent = 5.9
+GDer = 2.5
+GIzq = 12.5
+GCent = 9.5#5.9
 valor_d = GCent
 valor_t = TAvance
 pulse_end = 0
 v = 0
 girando = 0
 x = 4
+arrancar = False
 numero_de_giros_para_acabar = x * 3
 
 # Configura los pines GPIO
@@ -55,7 +54,6 @@ GPIO.setup(ECHO_PIN_IZQUIERDA, GPIO.IN)
 GPIO.setup(TRIG_PIN_DERECHA, GPIO.OUT)
 GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN)
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-GPIO.setup(IRsensor, GPIO.IN)
 
 #Iniciar servos
 pwm_d = GPIO.PWM(servo_pin_direccion, 50) # Frecuencia de PWM: 50Hz (estándar para servos)
@@ -110,7 +108,12 @@ def giro_tras(valor_t, valor_d):
     elif valor_d == GDer:
         valor_d = GIzq
     else:
-        valor_d = GCent
+        if distancia_izquierda > distancia_derecha:
+            valor_d = GIzq
+        elif distancia_izquierda < distancia_derecha:
+            valor_d = GDer
+        else:
+            valor_d = GCent
     pwm_t.start(valor_t)
     pwm_d.start(valor_d)
     time.sleep(2)
@@ -119,28 +122,29 @@ def giro_tras(valor_t, valor_d):
     pwm_t.start(valor_t)
     pwm_d.start(valor_d)
 
-while True:
-    # Lee el estado del botón
+while True:   
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(servo_pin_direccion, GPIO.OUT)
+    GPIO.setup(servo_pin_traccion, GPIO.OUT)
+    GPIO.setup(TRIG_PIN_DELANTE, GPIO.OUT)
+    GPIO.setup(ECHO_PIN_DELANTE, GPIO.IN)
+    GPIO.setup(TRIG_PIN_ATRAS, GPIO.OUT)
+    GPIO.setup(ECHO_PIN_ATRAS, GPIO.IN)
+    GPIO.setup(TRIG_PIN_IZQUIERDA, GPIO.OUT)
+    GPIO.setup(ECHO_PIN_IZQUIERDA, GPIO.IN)
+    GPIO.setup(TRIG_PIN_DERECHA, GPIO.OUT)
+    GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN)
+    GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
     button_state = GPIO.input(button_pin)
     pwm_d.start(valor_d)
     
     if button_state == GPIO.HIGH:
         print("Botón presionado")
-        if v == 0:
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setup(servo_pin_direccion, GPIO.OUT)
-            GPIO.setup(servo_pin_traccion, GPIO.OUT)
-            GPIO.setup(TRIG_PIN_DELANTE, GPIO.OUT)
-            GPIO.setup(ECHO_PIN_DELANTE, GPIO.IN)
-            GPIO.setup(TRIG_PIN_ATRAS, GPIO.OUT)
-            GPIO.setup(ECHO_PIN_ATRAS, GPIO.IN)
-            GPIO.setup(TRIG_PIN_IZQUIERDA, GPIO.OUT)
-            GPIO.setup(ECHO_PIN_IZQUIERDA, GPIO.IN)
-            GPIO.setup(TRIG_PIN_DERECHA, GPIO.OUT)
-            GPIO.setup(ECHO_PIN_DERECHA, GPIO.IN)
-            GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-            GPIO.setup(IRsensor, GPIO.IN)
+        arrancar = True
+
+    if button_state == GPIO.LOW and arrancar:
         v = 1
+        arrancar = False
 
     try:
         if v == 1:
@@ -158,6 +162,7 @@ while True:
                         girando = 1
                         vueltas += 1
                         giro_linea(valor_t, valor_d)
+                        valor_d = GCent
                     elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_izquierda > distancia_derecha:
                         #IZQUIERDA
                         valor_t = TAvance
@@ -165,6 +170,7 @@ while True:
                         girando = 1
                         vueltas += 1
                         giro_linea(valor_t, valor_d)
+                        valor_d = GCent
                 elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
                     #AVANCE
                     valor_t = TAvance
@@ -176,24 +182,25 @@ while True:
                     valor_t = TAvance
                     valor_d = GDer
                     giro_linea(valor_t, valor_d)
+                    valor_d = GCent
                 
                 if distancia_derecha < 6:
                     #IZQUIERDA
                     valor_t = TAvance
                     valor_d = GIzq
                     giro_linea(valor_t, valor_d)
-        
+                    valor_d = GCent
                 if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
                     valor_t = TAvance
                 else:
                     if distancia_delante < 5:
                         giro_tras(valor_t, valor_d)
 
-                if ant_d_d == distancia_delante:
-                    vueltas_e += 1
-                    if vueltas_e == 1:
-                        giro_tras(valor_t, valor_d)
-                        e = 0
+                #if ant_d_d == distancia_delante:
+                #    vueltas_e += 1
+                #    if vueltas_e == 1:
+                #        giro_tras(valor_t, valor_d)
+                #        e = 0
             # Muestra las distancias
             print(f"Distancia hacia delante: {distancia_delante} cm")
             print(f"Distancia hacia atras: {distancia_atras} cm")
@@ -204,22 +211,24 @@ while True:
             pwm_d.start(valor_d)
             if valor_t > 8:
                 print("avanti")
+                valor_t = TAvance
             elif valor_t < 6:
                 print("back")
+                valor_t = TAtras
             else:
                 print("stop")
             if valor_d > 11:
                 print("izquierda")
+                valor_d = GIzq
             elif valor_d < 4:
                 print("derecha")
+                valor_d = GDer
             else:
-                print("centro")            
-            linea = GPIO.input(IRsensor)
+                print("centro")
+                valor_d = GCent
             if vueltas == numero_de_giros_para_acabar:
                 v = 0
                 GPIO.cleanup()
-            print(f"NumberLinea:{numberlinea}")
-            print(f"Linea:{linea}")
             print(f"Vueltas:{float(vueltas/x)} es decir {vueltas} giros")
     except KeyboardInterrupt:
         GPIO.cleanup()

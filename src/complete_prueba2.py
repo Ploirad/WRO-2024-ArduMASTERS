@@ -60,7 +60,7 @@ pulse_end = 0
 v = 0
 girando = 0
 x = 4
-
+comprobar_morado = False
 numero_de_giros_para_acabar = x * 3
 camera = PiCamera()
 camera.resolution = (640, 480)
@@ -129,11 +129,11 @@ def detect_colors(frame):
     hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     # 238, 39, 55 ///  68, 214, 44 /// 255, 0, 255
     # Nuevos rangos de color
-    lower_red = np.array([174, 175, 90])
+    lower_red = np.array([175, 126, 68])
     upper_red = np.array([176, 212, 255])
-    lower_green = np.array([57, 104, 90])
+    lower_green = np.array([62, 147, 49])
     upper_green = np.array([65, 156, 255])
-    lower_magenta = np.array([164, 148, 90])
+    lower_magenta = np.array([138, 87, 25])
     upper_magenta = np.array([167, 185, 255])
 
     # Detección de colores
@@ -201,191 +201,229 @@ def detect_colors(frame):
 
     return [mask_red, mask_green, mask_magenta], [cx_r, cx_v, cx_m], [dimensions_red, dimensions_green, dimensions_magenta], [Ar, Av, Am]
 
+AmV = True
+z = True
+def compM(Am):
+    global cx_m, distancia_derecha, distancia_izquierda, distancia_atras, distancia_delante, AmV
+    p = 0
+    print(f"p = {p}; AmV = {AmV}")
+    if AmV == False:
+        if cx_m < 266:
+            print(f"M a la IZQ y {mf}")
+            p = 1
+        elif cx_m > 266 and cx_m < 374:
+            print(f"M al CENT y {mf}")
+            if distancia_derecha >= distancia_izquierda:
+                p = 2
+            elif distancia_derecha < distancia_izquierda:
+                p = 1
+        else:
+            print(f"M a la DER y {mf}")
+            p = 2
+    if p != 0:
+        pwm_t.start(TAvance)
+        pwm_d.start(GCent)
+        time.sleep(3.5)
+        if p == 1:
+            while distancia_atras > 5 or distancia_delante > 5:
+                pwm_t.start(TAtras)
+                pwm_d.start(GIzq)
+            if distancia_atras <= 5 or distancia_delante <= 5:
+                v = 0
+                z = False
+        if p == 2:
+            while distancia_atras > 5 or distancia_delante > 5:
+                pwm_t.start(TAtras)
+                pwm_d.start(GDer)
+            if distancia_atras <= 5 or distancia_delante <= 5:
+                v = 0
+                z = False
+        
 # Bucle principal
-try:
-    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-        # Captura de imagen
-        image = frame.array
-
-        # Detección de colores y análisis de imagen
-        masks, cx, dimensions, A = detect_colors(image)
-
-        # Mostrar las máscaras de color y la imagen original en ventanas separadas con tamaños personalizados
-        cv2.namedWindow("Original", cv2.WINDOW_NORMAL)
-        cv2.resizeWindow("Original", 200, 150)
-        cv2.imshow("Original", image)
-
-        cv2.namedWindow("Red Mask", cv2.WINDOW_NORMAL)
-        cv2.resizeWindow("Red Mask", 200, 150)
-        cv2.imshow("Red Mask", masks[0])
-
-        cv2.namedWindow("Green Mask", cv2.WINDOW_NORMAL)
-        cv2.resizeWindow("Green Mask", 200, 150)
-        cv2.imshow("Green Mask", masks[1])
-
-        cv2.namedWindow("Magenta Mask", cv2.WINDOW_NORMAL)
-        cv2.resizeWindow("Magenta Mask", 200, 150)
-        cv2.imshow("Magenta Mask", masks[2])
-
-        # Lee el estado del botón
-        button_state = GPIO.input(button_pin)
-        pwm_d.start(valor_d)
-
-        if button_state == GPIO.HIGH:
-            print("Botón presionado")
-            v = 1
-
-        if v == 1:
-            pwm_t.start(valor_t)
+while z:
+    try:
+        for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
             update_distances()
-            if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]:
-                    valor_t = TAtras
-                    valor_d = GCent
-            else:
-                if girando == 0:
-                    if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_derecha > distancia_izquierda:
+            # Captura de imagen
+            image = frame.array
+    
+            # Detección de colores y análisis de imagen
+            masks, cx, dimensions, A = detect_colors(image)
+    
+            # Mostrar las máscaras de color y la imagen original en ventanas separadas con tamaños personalizados
+            #cv2.namedWindow("Original", cv2.WINDOW_NORMAL)
+            #cv2.resizeWindow("Original", 200, 150)
+            #cv2.imshow("Original", image)
+    
+            #cv2.namedWindow("Red Mask", cv2.WINDOW_NORMAL)
+            #cv2.resizeWindow("Red Mask", 200, 150)
+            #cv2.imshow("Red Mask", masks[0])
+    
+            #cv2.namedWindow("Green Mask", cv2.WINDOW_NORMAL)
+            #cv2.resizeWindow("Green Mask", 200, 150)
+            #cv2.imshow("Green Mask", masks[1])
+    
+            #cv2.namedWindow("Magenta Mask", cv2.WINDOW_NORMAL)
+            #cv2.resizeWindow("Magenta Mask", 200, 150)
+            #cv2.imshow("Magenta Mask", masks[2])
+    
+            # Lee el estado del botón
+            button_state = GPIO.input(button_pin)
+            pwm_d.start(valor_d)
+    
+            if button_state == GPIO.HIGH:
+                print("Botón presionado")
+                v = 1
+    
+            if v == 1:
+                pwm_t.start(valor_t)
+                if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha < DISTANCIA_de_ACCION["MENOR QUE"]:
+                        valor_t = TAtras
+                        valor_d = GCent
+                else:
+                    if girando == 0:
+                        if distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_derecha > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_derecha > distancia_izquierda:
+                            # DERECHA
+                            valor_t = TAvance
+                            valor_d = GDer
+                            girando = 1
+                            vueltas += 1
+                            giro_linea(valor_t, valor_d)
+                        elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_izquierda > distancia_derecha:
+                            # IZQUIERDA
+                            valor_t = TAvance
+                            valor_d = GIzq
+                            girando = 1
+                            vueltas += 1
+                            giro_linea(valor_t, valor_d)
+                    elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
+                        # AVANCE
+                        valor_t = TAvance
+                        valor_d = GCent
+                        girando = 0
+    
+                    if distancia_izquierda < 6:
                         # DERECHA
                         valor_t = TAvance
                         valor_d = GDer
-                        girando = 1
-                        vueltas += 1
                         giro_linea(valor_t, valor_d)
-                    elif distancia_delante < DISTANCIA_de_ACCION["MENOR QUE"] and distancia_izquierda > DISTANCIA_de_ACCION["MAYOR QUE"] and distancia_izquierda > distancia_derecha:
+    
+                    if distancia_derecha < 6:
                         # IZQUIERDA
                         valor_t = TAvance
                         valor_d = GIzq
-                        girando = 1
-                        vueltas += 1
                         giro_linea(valor_t, valor_d)
-                elif distancia_delante > DISTANCIA_de_ACCION["MAYOR QUE"]:
-                    # AVANCE
-                    valor_t = TAvance
-                    valor_d = GCent
-                    girando = 0
-
-                if distancia_izquierda < 6:
-                    # DERECHA
-                    valor_t = TAvance
-                    valor_d = GDer
-                    giro_linea(valor_t, valor_d)
-
-                if distancia_derecha < 6:
-                    # IZQUIERDA
-                    valor_t = TAvance
-                    valor_d = GIzq
-                    giro_linea(valor_t, valor_d)
-
-                if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
-                    valor_t = TAvance
+    
+                    if distancia_atras < DISTANCIA_de_ACCION["MAYOR QUE"]:
+                        valor_t = TAvance
+                    else:
+                        if distancia_delante < 5:
+                            giro_tras(valor_t, valor_d)
+    
+                    if ant_d_d == distancia_delante:
+                        vueltas_e += 1
+                        if vueltas_e == 1:
+                            giro_tras(valor_t, valor_d)
+                            vueltas_e = 0
+                # Muestra las distancias
+                print(f"Distancia hacia delante: {distancia_delante} cm")
+                print(f"Distancia hacia atras: {distancia_atras} cm")
+                print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
+                print(f"Distancia hacia derecha: {distancia_derecha} cm")
+                print("")
+                pwm_t.start(valor_t)
+                pwm_d.start(valor_d)
+                if valor_t > 8:
+                    print("avanti")
+                elif valor_t < 6:
+                    print("back")
                 else:
-                    if distancia_delante < 5:
-                        giro_tras(valor_t, valor_d)
-
-                if ant_d_d == distancia_delante:
-                    vueltas_e += 1
-                    if vueltas_e == 1:
-                        giro_tras(valor_t, valor_d)
-                        vueltas_e = 0
-            # Muestra las distancias
-            print(f"Distancia hacia delante: {distancia_delante} cm")
-            print(f"Distancia hacia atras: {distancia_atras} cm")
-            print(f"Distancia hacia izquierda: {distancia_izquierda} cm")
-            print(f"Distancia hacia derecha: {distancia_derecha} cm")
-            print("")
-            pwm_t.start(valor_t)
-            pwm_d.start(valor_d)
-            if valor_t > 8:
-                print("avanti")
-            elif valor_t < 6:
-                print("back")
+                    print("stop")
+                if valor_d > 11:
+                    print("izquierda")
+                elif valor_d < 4:
+                    print("derecha")
+                else:
+                    print("centro")
+                if vueltas == 9:
+                    comprobar_morado = True
+                if vueltas == numero_de_giros_para_acabar:
+                    v = 0
+                    GPIO.cleanup()
+                print(f"NumberLinea:{numberlinea}")
+                print(f"Vueltas:{float(vueltas/x)} es decir {vueltas} giros")
+    
+            Am, Ar, Av = A[2], A[0], A[1]  # Cambiar el orden
+            if Am is None:
+                AmV = True
+                Am = 0
             else:
-                print("stop")
-            if valor_d > 11:
-                print("izquierda")
-            elif valor_d < 4:
-                print("derecha")
+                AmV = False
+            if Ar is None:
+                Ar = 0
+            if Av is None:
+                Av = 0
+    
+            cx_v, cx_r, cx_m = cx[1], cx[0], cx[2]
+            if cx_v is None:
+                cx_v = 320
+                vf = True
             else:
-                print("centro")
-            # No se define el sensor IR en el código original
-            # linea = GPIO.input(IRsensor)
-            if vueltas == numero_de_giros_para_acabar:
-                v = 0
-                GPIO.cleanup()
-            print(f"NumberLinea:{numberlinea}")
-            print(f"Vueltas:{float(vueltas/x)} es decir {vueltas} giros")
-
-        Am, Ar, Av = A[2], A[0], A[1]  # Cambiar el orden
-        if Am is None:
-            Am = 0
-        if Ar is None:
-            Ar = 0
-        if Av is None:
-            Av = 0
-
-        cx_v, cx_r, cx_m = cx[1], cx[0], cx[2]
-        if cx_v is None:
-            cx_v = 320
-            vf = True
-        else:
-            vf = False
-        if cx_r is None:
-            cx_r = 320
-            rf = True
-        else:
-            rf = False
-        if cx_m is None:
-            cx_m = 320
-            mf = True
-        else:
-            mf = False
-
-        print(f"C: R:{cx_r}, V:{cx_v}, M:{cx_m}")
-        print(f"D: R:{Ar}, V:{Av}, M:{Am}")
-        # Limpiar el búfer de captura para la siguiente imagen
-        rawCapture.truncate(0)
-        if cx_v < 266:
-            print("V a la IZQ")
-            if (not vf) and v == 1:
-                valor_d = GCent
+                vf = False
+            if cx_r is None:
+                cx_r = 320
+                rf = True
+            else:
+                rf = False
+            if cx_m is None:
+                cx_m = 320
+                mf = True
+            else:
+                mf = False
+    
+            print(f"C: R:{cx_r}, V:{cx_v}, M:{cx_m}")
+            print(f"D: R:{Ar}, V:{Av}, M:{Am}")
+            # Limpiar el búfer de captura para la siguiente imagen
+            rawCapture.truncate(0)
+            if cx_v < 266:
+                print("V a la IZQ")
+                if (not vf) and v == 1:
+                    valor_d = GCent
+                    
+            elif cx_v > 266 and cx_v < 374:
+                print("V al CENT")
+                if (not vf) and v == 1:
+                    valor_d = GIzq
                 
-        elif cx_v > 266 and cx_v < 374:
-            print("V al CENT")
-            if (not vf) and v == 1:
-                valor_d = GIzq
-            
-        else:
-            print("V a la DER")
-            if (not vf) and v == 1:
-                valor_d = GIzq
-            
-        if cx_r < 266:
-            print("R a la IZQ")
-            if (not rf) and v == 1:
-                valor_d = GDer
-            
-        elif cx_r > 266 and cx_r < 374:
-            print("R al CENT")
-            if (not rf) and v == 1:
-                valor_d = GCent
-            
-        else:
-            print("R a la DER")
-            if (not rf) and v == 1:
-                valor_d = GDer
-            
-        if cx_m < 266:
-            print(f"M a la IZQ y {mf}")
-        elif cx_m > 266 and cx_m < 374:
-            print(f"M al CENT y {mf}")
-        else:
-            print(f"M a la DER y {mf}")
-        # Esperar una tecla para salir (salida si se presiona 'q')
-        key = cv2.waitKey(1) & 0xFF
-        if key == ord("q"):
-            break
-
-except KeyboardInterrupt:
-    pass
+            else:
+                print("V a la DER")
+                if (not vf) and v == 1:
+                    valor_d = GIzq
+                
+            if cx_r < 266:
+                print("R a la IZQ")
+                if (not rf) and v == 1:
+                    valor_d = GDer
+                
+            elif cx_r > 266 and cx_r < 374:
+                print("R al CENT")
+                if (not rf) and v == 1:
+                    valor_d = GCent
+                
+            else:
+                print("R a la DER")
+                if (not rf) and v == 1:
+                    valor_d = GDer
+            if comprobar_morado:   
+                compM(Am)
+            # Esperar una tecla para salir (salida si se presiona 'q')
+            key = cv2.waitKey(1) & 0xFF
+            if key == ord("q"):
+                z = False
+                break
+    
+    except KeyboardInterrupt:
+        pass
 
 # Limpiar y cerrar las ventanas
 cv2.destroyAllWindows()
