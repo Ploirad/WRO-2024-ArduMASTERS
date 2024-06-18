@@ -17,7 +17,7 @@
 # [other](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/other)  
   In this folder we got our logo and anything more
 # [schemes](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/schemes)
-
+  In this folder we got the electric scheme made in Fritzing
 # [src](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/src)
   In this folder we got all the source codes of the team.
 # [t-photos](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/t-photos)
