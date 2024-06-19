@@ -1,8 +1,6 @@
 import cv2
-#import serial
-import numpy as np
 
-#ser = serial.Serial('/dev/ttyACM0', 9600)
+import numpy as np
 
 def detectar_color(frame):
 	#1ro = oscuro y el 2do = claro
@@ -18,9 +16,7 @@ def detectar_color(frame):
 		lower = np.array(lower, dtype=np.uint8)
 		upper = np.array(upper, dtype=np.uint8)
 
-		#frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 		mask = cv2.inRange(frame, lower, upper)
-		#mask = np.all(np.logical_and(frame_hsv >= lower, frame_hsv <= upper), axis=-1)
 		if cv2.countNonZero(mask) > 1000:
 			return color
 	return None
@@ -34,11 +30,7 @@ while True:
 
 	if color_detectado:
 		print("color detectado: {}".format(color_detectado))
-	#	ser.write(str(color_detectado).encode())
-
-	#if color_detectado == "rojo":
-	#	ser.write(b'1')
-
+	
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
 
