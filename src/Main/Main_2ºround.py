@@ -1,6 +1,6 @@
 import Libraries.Motor as M
 import Libraries.Ultrasonidos as HC
-import Libraries.Camera as cam
+import Libraries.Camara as cam
 import Libraries.tsc34725 as tsc
 import RPi.GPIO as GPIO
 from picam import Picam
