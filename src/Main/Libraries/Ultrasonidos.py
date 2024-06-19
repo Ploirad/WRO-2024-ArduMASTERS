@@ -15,16 +15,16 @@ GPIO.setup(10, GPIO.IN)
 def measure_distance(position):
     
     # Declare wich pins are going to be used depending on the position requested
-    if position == 1: # Front
+    if position == "front":
         GPIO_TRIGGER = 23
         GPIO_ECHO = 24
-    elif position == 2: # Right
+    elif position == "right" or "red": # RED sings will be at the RIGHT
         GPIO_TRIGGER = 5
         GPIO_ECHO = 6
-    elif position == 3: # Back
+    elif position == "back":
         GPIO_TRIGGER = 17
         GPIO_ECHO = 27
-    elif position == 4: # Left
+    elif position == "left" or "green":# GREEN sings will be at the LEFT
         GPIO_TRIGGER = 22
         GPIO_ECHO = 10
 
@@ -50,4 +50,3 @@ def measure_distance(position):
     distance = (elapsed_time * 34300) / 2
 
     return distance
-

@@ -1,86 +1,82 @@
 import Libraries.Motor as M
 import Libraries.Ultrasonidos as HC
-import Libraries.Camera as cam
+import Libraries.Camera as C
 import Libraries.tsc34725 as tsc
-import RPi.GPIO as GPIO
-from picam import Picam
-from picam.array import PiRGBArray
 import time
 import cv2
 import numpy as np
 
-GPIO.setmode(GPIO.BCM)
-
-# Define range of HSV for RED
-R_min = np.array([ ,  ,  ], np.uint8)
-R_max = np.array([ ,  ,  ], np.uint8)
-# Define range of HSV for GREEN
-G_min = np.array([ ,  ,  ], np.uint8)
-G_max = np.array([ ,  ,  ], np.uint8)
-# Define range of HSV for PURPLE
-P_min = np.array([ ,  ,  ], np.uint8)
-P_max = np.array([ ,  ,  ], np.uint8)
-
 # Define global variables
 turns = 0
 laps = 0
+prev_distance = 0
+var_distance = 0
+fps = 5
 
-for frame in cam.capture_continuous(cam.rawCapture, format="bgr", use_video_port=True).array:
+def main():
+    time.sleep(1/fps)
     
-    # Capture umbral segmented frame for all colors
-    FR = cam.testColor(frame,R_min,R_max)[1]
-    FV = cam.testColor(frame,G_min,G_max)[1]
-    FM = cam.testColor(frame,P_min,P_max)[1]
+    if C.BM(5) >= 300 : # If detected rectangle is big enought
+        target = C.BM(4)
+        var_distance = HC.measure_distance(target) - prev_distance
+        prev_distance = HC.measure_distance(target)
+
+        if target == "green":
+            
+            while var_distance >= 30:
+                time.sleep(0.1)
+                var_distance = HC.measure_distance(target) - prev_distance
+                prev_distance = HC.measure_distance(target)
+                if C.BM(0) < 100: # If it's on the left side
+                    M.movement(1,90) # Forward
+                else:
+                    M.movement(1,0) # Turn left
+            
+            else:
+                last_color = target
+        
+        elif target == "red":
+           
+            while var_distance >= 30:
+                time.sleep(1/fps)
+                var_distance = HC.measure_distance(target) - prev_distance
+                prev_distance = HC.measure_distance(target)
+                if C.BM(0) > 540: # If it's on the left side
+                    M.movement(1,90) # Forward
+                else:
+                        M.movement(1,180) # Turn right
+            
+            else:
+                last_color = target
     
-    # Define a bounding box in the segmented frame
-    BR = cv2.boundingRect(FR)
-    BV = cv2.boundingRect(FV)
-    BM = cv2.boundingRect(FM)
-    
-    # Compare boxes and set the biggest as main
-    if BR[2]*BR[3] > BV[2]*BV[3]:
-        BM = BR
-        side = "izq" # Si es rojo se rebasa por la izquierda
     else:
-        BM = BV
-        side = "der" # Si si es verde se rebasa por la derecha
-    
-    if BM[2]*BM[3] >= 300 :
-        
-        if side == "der":
-            if BM[0] < 140:
-                M.movement(1,90)
+        # If total distance to the walls is less than 1'5m
+        if HC.measure_distance(2) + HC.measure_distance(4) <=150: 
+            # If to much to the right
+            if HC.measure_distance(2) <= (HC.measure_distance(2) + HC.measure_distance(4))/2-10: 
+                M.movement(1,180) # Turn left
+            # If to much to the left
+            elif HC.measure_distance(4) <= (HC.measure_distance(2) + HC.measure_distance(4))/2-10: 
+                M.movement(1,0) # Turn right
             else:
-                M.movement(1,0)
+                M.movement(1,90) # Continue forward
+                
         else:
-            if BM[0] > 500:
-                M.movement(1,90)
-            else:
-                M.movement(1,180)
-    
-    elif HC.measure_distance(2) + HC.measure_distance(4) <=100:
-        
-        if HC.measure_distance(2) <= 40: 
-            M.movement(1,180)
-    
-        elif HC.measure_distance(4) <= 40: 
-            M.movement(1,0)
-        else:
-            M.movement(1,90)
-    
-    # 2: distnace to the right  4: distance to the left
-    elif HC.measure_distance(2) > HC.measure_distance(4): 
-        prev_front = HC.measure_distance(1)
-        M.movement(1,0)
-        while not HC.measure_distance(4) <= prev_front:  time.sleep(.25)
-        M.movement(1,90)
-        while HC.measure_distance(2) + HC.measure_distance(4) >= 120: time.sleep(.25)
-        turns += 1
-    
-    elif HC.measure_distance(2) < HC.measure_distance(4): 
-        prev_front = HC.measure_distance(1)
-        M.movement(1,180)
-        while not HC.measure_distance(4) <= prev_front:  time.sleep(.25)
-        M.movement(1,90)
-        while HC.measure_distance(2) + HC.measure_distance(4) >= 120: time.sleep(.25)
-        turns += 1
+            # If there is more distance to the right than the left
+            if HC.measure_distance(2) > HC.measure_distance(4): 
+                prev_front = HC.measure_distance(1) # Save distance to front walls
+                M.movement(1,0) # Turn to right until the front walls it's at the left
+                while not HC.measure_distance(4) == range(prev_front-30,prev_front):  time.sleep(.25)
+                M.movement(1,90) # Continue forward until abandoning the corner
+                while HC.measure_distance(2) + HC.measure_distance(4) >= 150: time.sleep(.25)
+                turns += 1
+                
+            # If there is more distance to the left than the right
+            elif HC.measure_distance(2) < HC.measure_distance(4): 
+                prev_front = HC.measure_distance(1) # Save distance to front walls
+                M.movement(1,180) # Turn to right until the front walls it's at the right
+                while not HC.measure_distance(4) <= prev_front:  time.sleep(.25)
+                M.movement(1,90) # Continue forward until abandoning the corner
+                while HC.measure_distance(2) + HC.measure_distance(4) >= 150: time.sleep(.25)
+                turns += 1
+    main()

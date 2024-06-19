@@ -1,62 +1,42 @@
-import Motor as M
-import Ultrasonidos as HC
-import Camara
-import RPi.GPIO as GPIO
-from picamera import PiCamera
-from picamera.array import PiRGBArray
+import Libraries.Motor as M
+import Libraries.Ultrasonidos as HC
 import time
 import cv2
 import numpy as np
 
-GPIO.setmode(GPIO.BCM)
-
-#Definir rangos de color ROJO
-R_bajo = np.array([ ,  ,  ], np.uint8)
-R_alto = np.array([ ,  ,  ], np.uint8)
-#Definir rangos de color VERDE
-V_bajo = np.array([ ,  ,  ], np.uint8)
-V_alto = np.array([ ,  ,  ], np.uint8)
-#Definir rangos de color MORADO
-M_bajo = np.array([ ,  ,  ], np.uint8)
-M_alto = np.array([ ,  ,  ], np.uint8)
-
-#Dfinir camara y resolucion
-resolucion = (640,480)
-
-camera = PiCamera()
-camera.resolution = resolucion
-rawCapture = PiRGBArray(camera, size=resolucion)
-time.sleep(0.5)
-
-for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True).array:
-    
-    #Capturar frame segmentado por umbral de todos los colores
-    FR = Camara.testColor(frame,R_bajo,R_alto)[1]
-    FV = Camara.testColor(frame,V_bajo,V_alto)[1]
-    FM = Camara.testColor(frame,M_bajo,M_alto)[1]
-    
-    #Definir una bounding box al frame segmentado
-    BR = cv2.boundingRect(FR)
-    BV = cv2.boundingRect(FV)
-    BM = cv2.boundingRect(FM)
-    
-    #Comparar restangulos y definir el mas grande como pincipal
-    if BR[2]*BR[3] > BV[2]*BV[3]:
-        BP = BR
-        side = "izq" #Si es rojo se rebasa por la izquierda
-    else:
-        BP = BV
-        side = "der" #Si si es verde se rebasa por la derecha
-
-    if side == "der":
-        cx = BP[0] + 40
-        if cx < 210:
-            M.movimiento(1,90,0)
+def main():
+    turns = turns
+    # If total distance to the walls is less than 1'5m
+    if HC.measure_distance(2) + HC.measure_distance(4) <=150: 
+        # If to much to the right
+        if HC.measure_distance(2) <= (HC.measure_distance(2) + HC.measure_distance(4))/2-10: 
+            M.movement(1,180) # Turn left
+        # If to much to the left
+        elif HC.measure_distance(4) <= (HC.measure_distance(2) + HC.measure_distance(4))/2-10: 
+            M.movement(1,0) # Turn right
         else:
-            M.movimiento(1,0,0)
+            M.movement(1,90) # Continue forward
+
     else:
-        cx = BP[0] - 40
-        if cx > 420:
-            M.movimiento(1,90,0)
-        else:
-            M.movimiento(1,180,0)
+        # If there is more distance to the right than the left
+        if HC.measure_distance(2) > HC.measure_distance(4): 
+            prev_front = HC.measure_distance(1) # Save distance to front walls
+            M.movement(1,0) # Turn to right until the front walls it's at the left
+            while not HC.measure_distance(4) == range(prev_front-30,prev_front):  time.sleep(.25)
+            M.movement(1,90) # Continue forward until abandoning the corner
+            while HC.measure_distance(2) + HC.measure_distance(4) >= 150: time.sleep(.25)
+            turns += 1
+
+         # If there is more distance to the left than the right
+        elif HC.measure_distance(2) < HC.measure_distance(4): 
+            prev_front = HC.measure_distance(1) # Save distance to front walls
+            M.movement(1,180) # Turn to right until the front walls it's at the right
+            while not HC.measure_distance(4) <= prev_front:  time.sleep(.25)
+            M.movement(1,90) # Continue forward until abandoning the corner
+            while HC.measure_distance(2) + HC.measure_distance(4) >= 150: time.sleep(.25)
+            turns += 1
+    
+    if turns < 12:
+        main()
+
+main()
