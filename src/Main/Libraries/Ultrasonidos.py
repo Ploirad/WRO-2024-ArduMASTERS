@@ -1,6 +1,10 @@
+#This code is a library for the ultrasonic sensors
+
+#Import the necessary libraries
 import RPi.GPIO as GPIO
 import time
 
+#Initialize the sensors
 GPIO.setmode(GPIO.BCM)
 
 GPIO.setup(23, GPIO.OUT)
@@ -12,6 +16,12 @@ GPIO.setup(27, GPIO.IN)
 GPIO.setup(22, GPIO.OUT)
 GPIO.setup(10, GPIO.IN)
 
+#This function is used to give the distances depending 1 variable that is the position and the variable can be:
+#1 for the front sensor
+#2 for the right sensor
+#3 for the back sensor
+#4 for the left sensor
+#And depending the positon and the distance detected by that sensor the function returns a float variable of the distance detected
 def measure_distance(position):
     trigger_echo = {
         1: (23, 24), # Front
