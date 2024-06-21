@@ -55,10 +55,6 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
         red_centroid, red_area = CAM.detect_red(image)
         magenta_centroid, magenta_area = CAM.detect_magenta(image)
 
-        # And print them
-        print(f"Green Area: {green_area}; Red Area: {red_area}; Magenta Area: {magenta_area}")
-        print(f"Green Centroid: {green_centroid}; Red Centroid: {red_centroid}; Magenta Centroid: {magenta_centroid}")
-
         # Detect the distances
         front_distance = HC.measure_distance(1)
         right_distance = HC.measure_distance(2)
@@ -66,7 +62,7 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
         #back_distance = HC.measure_distance(3)
 
         # And print them
-        print(f"Front Distance: {front_distance}; Right Distance: {right_distance}; Left Distance: {left_distance}; Back Distance: {back_distance}")
+        print(f"Front Distance: {front_distance}; Right Distance: {right_distance}; Left Distance: {left_distance}")#; Back Distance: {back_distance}")
 
 
         # If we aren't seeing none color of the second round
@@ -133,6 +129,8 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
 
         # If we see any color
         else:
+            print(f"Green Area: {green_area}; Red Area: {red_area}; Magenta Area: {magenta_area}")
+            print(f"Green Centroid: {green_centroid}; Red Centroid: {red_centroid}; Magenta Centroid: {magenta_centroid}")
             print("Color detected")
 
             # We go forward
