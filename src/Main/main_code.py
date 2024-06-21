@@ -43,10 +43,7 @@ tnew = time.time()
 
 # Take the frames continuously (without stop)
 for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port=True):
-    told = tnew
     tnew = time.time()
-    t = tnew - told
-    print(t)
 
     image = frame.array
 
@@ -172,6 +169,10 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
 
     # Clean the stream for the next frame
     raw_capture.truncate(0)
+
+    told = time.time()
+    t = tnew - told
+    print(t)
 
 print("ENDING CODE")
 # Close the camera
