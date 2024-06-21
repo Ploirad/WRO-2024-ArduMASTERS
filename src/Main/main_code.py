@@ -43,7 +43,7 @@ tnew = time.time()
 
 # Take the frames continuously (without stop)
 for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port=True):
-    tnew = time.time()
+    told = time.time()
 
     image = frame.array
 
@@ -170,7 +170,7 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
     # Clean the stream for the next frame
     raw_capture.truncate(0)
 
-    told = time.time()
+    tnew = time.time()
     t = tnew - told
     print(t)
 
