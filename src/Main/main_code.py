@@ -45,7 +45,7 @@ tnew = time.time()
 for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port=True):
     told = tnew
     tnew = time.time()
-    t = tnew - tnew
+    t = tnew - told
     print(t)
 
     image = frame.array
