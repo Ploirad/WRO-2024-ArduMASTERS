@@ -162,6 +162,10 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
             print("Button pressed")
             start = True
 
+    tnew = time.time()
+    t = tnew - told
+    print (f"Tiempo que tardan los IF's: {t}")
+
     #time.sleep(0.05)
 
     # Clean the stream for the next frame
@@ -169,7 +173,7 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
 
     tnew = time.time()
     t = tnew - told
-    print(t)
+    print(f"ULTIMA t: {t}")
     told = time.time()
     print("")
 
