@@ -42,8 +42,9 @@ start = False
 told = time.time()
 
 # Take the frames continuously (without stop)
-for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port=True):
-
+while True:
+    frame = next(camera.capture_continuous(raw_capture, format="bgr", use_video_port=True))
+    
     tnew = time.time()
     t = tnew - told
     print (f"Tiempo que tarda el frame: {t}")
