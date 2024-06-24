@@ -1,29 +1,29 @@
-#BASIC LIBRARIES
+# BASIC LIBRARIES
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 import time
 
-#OUR LIBRARIES                                     # FUNCTIONS THAT WE ARE GOING TO USE
+# OUR LIBRARIES
 from Libraries import Boton as B                   # B.button_state()
 from Libraries import Motor as M                   # M.movement(vel, dir, stop)
 from Libraries import Ultrasonidos as HC           # HC.measure_distance(position) 1 Front; 2 Right; 3 Back; 4 Left
 from Libraries import New_color_detector as CAM    # CAM.detect_green(frame)    CAM.detect_red(frame)   CAM.detect_magenta(frame)
 
-# Initialize the camera as a picamera
+# Initialize the camera
 camera = PiCamera()
 
-# With a reslution of 320*240 px 
+# With a resolution of 320x240 px
 camera.resolution = (320, 240)
 raw_capture = PiRGBArray(camera, size=(320, 240))
 
-#Create the global variables
-#Variables for HC
+# Create the global variables
+# Variables for HC
 front_distance = 0
 right_distance = 0
 left_distance = 0
 back_distance = 0
 
-#Variables for CAM
+# Variables for CAM
 green_centroid = None
 red_centroid = None
 magenta_centroid = None
@@ -31,12 +31,12 @@ green_area = 0
 red_area = 0
 magenta_area = 0
 
-#Variables for M
+# Variables for M
 direction = 0
 traction = 0
 go = False
 
-#Variable for B
+# Variable for B
 start = False
 
 told = time.time()
@@ -46,7 +46,7 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
 
     tnew = time.time()
     t = tnew - told
-    print (f"Tiempo que tarda el frame: {t}")
+    print(f"Tiempo que tarda el frame: {t}")
 
     image = frame.array
 
@@ -58,57 +58,56 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
         red_centroid, red_area = CAM.detect_red(image)
         magenta_centroid, magenta_area = CAM.detect_magenta(image)
 
-        # If we aren't seeing none color of the second round
-        if (green_area < 10) and (red_area < 10):
+        # If we aren't seeing any color of the second round
+        if green_area < 10 and red_area < 10:
             # Detect the distances
             front_distance = HC.measure_distance(1)
             right_distance = HC.measure_distance(2)
             left_distance = HC.measure_distance(4)
-            #back_distance = HC.measure_distance(3)
+            # back_distance = HC.measure_distance(3)
 
-            # And print them
-            print(f"Front Distance: {front_distance}; Right Distance: {right_distance}; Left Distance: {left_distance}")#; Back Distance: {back_distance}")
+            # Print the distances
+            print(f"Front Distance: {front_distance}; Right Distance: {right_distance}; Left Distance: {left_distance}") # ; Back Distance: {back_distance}")
             print("No color detected")
 
-            # We comprobate if we can go forward without knock
+            # Check if we can go forward without hitting something
             if front_distance > 30:
                 print("FD > 30")
 
-                # If we can we go forward
+                # Go forward
                 traction = 1
 
-                # We comprobate if we are very near to the walls
+                # Check if we are very near to the walls
                 if right_distance < 5:
-                    # If we are very near to the right wall we go to the left
+                    # If very near to the right wall, go to the left
                     direction = -1
                     print("Going to the left")
 
                 elif left_distance < 5:
-                    # Else if we are very near to the left wall we go to the right
+                    # If very near to the left wall, go to the right
                     direction = 1
                     print("Going to the right")
 
                 else:
-                    # Else if we are not very near to none wall we go straight
+                    # If not very near to any wall, go straight
                     direction = 0
                     print("Going straight")
 
-            # Then if we can't go ahead too much time we turn the direction to the right or left
+            # If we can't go ahead too much, turn direction to the right or left
             elif front_distance > 10:
                 print("10 < FD < 30")
 
-                # We start going forward
+                # Start going forward
                 traction = 1
 
                 # If the right distance is bigger than the left distance
                 if right_distance > left_distance:
-                    # We go to the right
+                    # Go to the right
                     direction = 1
                     print("Going to the right")
 
-                # Else if the left is bigger than the right distance
                 else:
-                    # We go to the left
+                    # Go to the left
                     direction = -1
                     print("Going to the left")
 
@@ -116,10 +115,10 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
             else:
                 print("FD < 10")
 
-                # We go backward
+                # Go backward
                 traction = -1
 
-                # Then we decide if we can go to the right or to the left depending what is the bigest distance
+                # Decide if we can go to the right or to the left depending on the biggest distance
                 if right_distance > left_distance:
                     direction = -1
                     print("Backward + Right")
@@ -134,29 +133,27 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
             print(f"Green Centroid: {green_centroid}; Red Centroid: {red_centroid}; Magenta Centroid: {magenta_centroid}")
             print("Color detected")
 
-            # We go forward
+            # Go forward
             traction = 1
 
-            # Then we comprobate what is the nearest pillar
-            # If is the green
+            # Check what is the nearest pillar
             if green_area > red_area:
-                # We overtake the green pillar by the right
+                # Overtake the green pillar by the right
                 direction = 1
                 print("Green detected, overtaking by the right")
             
-            # Else if is red
             else:
-                # We overtake the red pillar by the left
+                # Overtake the red pillar by the left
                 direction = -1
                 print("Red detected, overtaking by the left")
 
-        # Move the car depending the desitions thet are taken about the movement of the car
+        # Move the car depending on the decisions taken about the movement of the car
         M.movement(traction, direction, go)
         print(f"Traction: {traction}; Direction: {direction}")
 
-    # Then if the button has not been pressed
+    # If the button has not been pressed
     else:
-        # We wait for the button to be pressed
+        # Wait for the button to be pressed
         print("Waiting for the button")
         if B.button_state():
             print("Button pressed")
@@ -164,9 +161,7 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
 
     tnew = time.time()
     t = tnew - told
-    print (f"Tiempo que tardan los IF's: {t}")
-
-    #time.sleep(0.05)
+    print(f"Tiempo que tardan los IF's: {t}")
 
     # Clean the stream for the next frame
     raw_capture.truncate(0)
