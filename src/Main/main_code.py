@@ -11,7 +11,7 @@ from Libraries import New_color_detector as CAM    # CAM.detect_green(frame)    
 
 # Initialize the camera as a picamera
 camera = PiCamera()
-camera.framerate = 55
+camera.framerate = 58
 
 # With a reslution of 320*240 px 
 camera.resolution = (320, 240)
