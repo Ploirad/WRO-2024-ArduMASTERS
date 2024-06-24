@@ -58,92 +58,58 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
         red_centroid, red_area = CAM.detect_red(image)
         magenta_centroid, magenta_area = CAM.detect_magenta(image)
 
+        # Detect the distances
+        front_distance = HC.measure_distance(1)
+        right_distance = HC.measure_distance(2)
+        left_distance = HC.measure_distance(4)
+        # back_distance = HC.measure_distance(3)
+
+        # Print distances
+        print(f"Front Distance: {front_distance}; Right Distance: {right_distance}; Left Distance: {left_distance}")
+        
         # If we aren't seeing any color of the second round
         if green_area < 10 and red_area < 10:
-            # Detect the distances
-            front_distance = HC.measure_distance(1)
-            right_distance = HC.measure_distance(2)
-            left_distance = HC.measure_distance(4)
-            # back_distance = HC.measure_distance(3)
-
-            # Print the distances
-            print(f"Front Distance: {front_distance}; Right Distance: {right_distance}; Left Distance: {left_distance}") # ; Back Distance: {back_distance}")
             print("No color detected")
-
             # Check if we can go forward without hitting something
             if front_distance > 30:
                 print("FD > 30")
-
-                # Go forward
                 traction = 1
-
-                # Check if we are very near to the walls
                 if right_distance < 5:
-                    # If very near to the right wall, go to the left
                     direction = -1
                     print("Going to the left")
-
                 elif left_distance < 5:
-                    # If very near to the left wall, go to the right
                     direction = 1
                     print("Going to the right")
-
                 else:
-                    # If not very near to any wall, go straight
                     direction = 0
                     print("Going straight")
-
-            # If we can't go ahead too much, turn direction to the right or left
             elif front_distance > 10:
                 print("10 < FD < 30")
-
-                # Start going forward
                 traction = 1
-
-                # If the right distance is bigger than the left distance
                 if right_distance > left_distance:
-                    # Go to the right
                     direction = 1
                     print("Going to the right")
-
                 else:
-                    # Go to the left
                     direction = -1
                     print("Going to the left")
-
-            # If we can't go ahead
             else:
                 print("FD < 10")
-
-                # Go backward
                 traction = -1
-
-                # Decide if we can go to the right or to the left depending on the biggest distance
                 if right_distance > left_distance:
                     direction = -1
                     print("Backward + Right")
-                
                 else:
                     direction = 1
                     print("Backward + Left")
-
-        # If we see any color
         else:
             print(f"Green Area: {green_area}; Red Area: {red_area}; Magenta Area: {magenta_area}")
             print(f"Green Centroid: {green_centroid}; Red Centroid: {red_centroid}; Magenta Centroid: {magenta_centroid}")
             print("Color detected")
-
-            # Go forward
             traction = 1
-
-            # Check what is the nearest pillar
             if green_area > red_area:
-                # Overtake the green pillar by the right
                 direction = 1
                 print("Green detected, overtaking by the right")
-            
             else:
-                # Overtake the red pillar by the left
                 direction = -1
                 print("Red detected, overtaking by the left")
 
@@ -151,7 +117,6 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
         M.movement(traction, direction, go)
         print(f"Traction: {traction}; Direction: {direction}")
 
-    # If the button has not been pressed
     else:
         # Wait for the button to be pressed
         print("Waiting for the button")
