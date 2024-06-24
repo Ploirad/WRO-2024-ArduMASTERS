@@ -32,27 +32,34 @@ def detect_magenta(frame):
 #This function is used to take the centroid and the area of the color gived (color_low, color_high) in the respective frame
 def detect_color(frame, color_low, color_high):
     t1 = time.time()
-    # Convert the frame to the HSV color space
+    # Obtener las dimensiones del frame
+    height, width, _ = frame.shape
+
+    # Cubrir la mitad superior del frame con negro
+    frame[:height//2, :] = 0
+
+    # Convertir el frame a espacio de color HSV
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    # Create a mask for the specified color range
+    # Crear una máscara para el rango de color especificado
     mask = cv2.inRange(hsv, color_low, color_high)
 
-    # Find contours in the mask
-    _, contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    # Encontrar contornos en la máscara
+    contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-    # If no contours are found, return None
+    # Si no se encuentran contornos, devolver None
     if not contours:
         return None, 0
 
-    # Find the largest contour
+    # Encontrar el contorno más grande
     largest_contour = max(contours, key=cv2.contourArea)
 
-    # Compute the center and area of the largest contour
+    # Calcular el centro y el área del contorno más grande
     M = cv2.moments(largest_contour)
     if M["m00"] == 0:
         return None, 0
     cX = int(M["m10"] / M["m00"])
     area = cv2.contourArea(largest_contour)
     print(f"Camara: detect_color(): {time.time()-t1}")
+    
     return cX, area
