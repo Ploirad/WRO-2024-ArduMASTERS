@@ -35,8 +35,8 @@ def detect_color(frame, color_low, color_high):
     # Obtener las dimensiones del frame
     height, width, _ = frame.shape
 
-    # Cubrir la mitad superior del frame con negro
-    frame[:height//2, :] = 0
+    ## Cubrir la mitad superior del frame con negro
+    #frame[:height//2, :] = 0
 
     # Convertir el frame a espacio de color HSV
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
