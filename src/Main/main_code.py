@@ -11,6 +11,8 @@ from Libraries import New_color_detector as CAM    # CAM.detect_green(frame)    
 
 # Initialize the camera as a picamera
 camera = PiCamera()
+camera.resolution = (640, 480)
+camera.framerate = 10 # FPS
 
 # With a reslution of 320*240 px 
 camera.resolution = (320, 240)
@@ -44,7 +46,7 @@ told = time.time()
 # Take the frames continuously (without stop)
 while True:
     frame = next(camera.capture_continuous(raw_capture, format="bgr", use_video_port=True))
-    
+
     tnew = time.time()
     t = tnew - told
     print (f"Tiempo que tarda el frame: {t}")
