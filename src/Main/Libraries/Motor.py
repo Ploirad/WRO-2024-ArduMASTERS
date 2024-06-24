@@ -19,28 +19,18 @@ Direccion = GPIO.PWM(2, 50)
 #   stop:Say if the car is going to move (True) or is going to stop (False)
 #And depending the variables the car will move in all directions
 def movement(vel, dir, stop):
-    # Convert input into usable value
-    if vel == 1:
-        # Max velocity forward 
-        vel = 12.5
-    elif vel == -1: 
-        # Max velocity backward
-        vel = 2.5
-    else:
-        # If null is introduced stop car
-        stop = 1
-
-    if not stop:
-        Motor.start(vel)
-        if dir == 0:
-            Direccion.start(6.8)
-        elif dir <= -1:
-            Direccion.start(12.5)
-        else:
-            Direccion.start(2.5)
-    else:
+    # Convert input into usable value with the mathematic function: 7.5x^2 + 5x
+    v = (7.5 * pow(vel, 2)) + (5 * vel)
+    if v == 0 or stop:
         Motor.stop()
-        Direccion.start(7.5)
+        Direccion.start(6.8)
+    
+    else:
+        Motor.start(v)
+
+        # Convert input into usable value with the mathematic function: 0.7x^2 − 5x + 6.8 
+        d = ((0.7 * pow(dir, 2)) - (5 * dir) + 6.8)
+        Direccion.start(d)
 
 #This function is used to move the car only forward
 def avance():

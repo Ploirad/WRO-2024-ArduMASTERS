@@ -162,8 +162,6 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
             print("Button pressed")
             start = True
 
-    #time.sleep(0.05)
-
     # Clean the stream for the next frame
     raw_capture.truncate(0)
 
