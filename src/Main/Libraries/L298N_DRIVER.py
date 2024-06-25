@@ -53,8 +53,8 @@ def move(percent):
         MB2.ChangeDutyCycle(0)
 
 try:
+    perc = int(input("Percent (-100 to 100, 999 to exit): "))    
     while True:
-        perc = int(input("Percent (-100 to 100, 999 to exit): "))
         if perc == 999:
             break
         move(perc)
