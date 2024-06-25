@@ -62,9 +62,6 @@ p2MB = 20
 cicloTrabajo = 0
 frecuencia = 1000
 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
-
 GPIO.setup(p1MA, GPIO.OUT)
 GPIO.setup(p2MA, GPIO.OUT)
 GPIO.setup(p1MB, GPIO.OUT)
