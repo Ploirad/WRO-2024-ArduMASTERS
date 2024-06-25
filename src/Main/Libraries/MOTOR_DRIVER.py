@@ -16,12 +16,14 @@ GPIO.setup(p1MA, GPIO.OUT)
 GPIO.setup(p2MA, GPIO.OUT)
 GPIO.setup(p1MB, GPIO.OUT)
 GPIO.setup(p2MB, GPIO.OUT)
+GPIO.setup(2, GPIO.OUT)
 
 # Set up PWM on the motor pins
 MA1 = GPIO.PWM(p1MA, frecuencia)
 MA2 = GPIO.PWM(p2MA, frecuencia)
 MB1 = GPIO.PWM(p1MB, frecuencia)
 MB2 = GPIO.PWM(p2MB, frecuencia)
+Direccion = GPIO.PWM(2, 50)
 
 # Start PWM with 0% duty cycle
 MA1.start(cicloTrabajo)
@@ -30,17 +32,21 @@ MB1.start(cicloTrabajo)
 MB2.start(cicloTrabajo)
 
 # Define the move function
-def move(percent):
-    if percent > 0:
+# Both values (percent_vel and percent_dir) go by -100% to 100%
+def move(percent_vel, percent_dir):
+    d = ((0.7 * pow((percent_dir/100), 2)) - (5 * (percent_dir/100)) + 6.8) #FORMULA QUE SE DEBE CAMBIAR SEGUN CUAL SEA EL CENTRO
+    Direccion.start(d)
+
+    if percent_vel > 0:
         print("AVANCE")
-        duty_cycle = percent
+        duty_cycle = percent_vel
         MA1.ChangeDutyCycle(0)
         MA2.ChangeDutyCycle(duty_cycle)
         MB1.ChangeDutyCycle(0)
         MB2.ChangeDutyCycle(duty_cycle)
-    elif percent < 0:
+    elif percent_vel < 0:
         print("RETROCESO")
-        duty_cycle = abs(percent)
+        duty_cycle = abs(percent_vel)
         MA1.ChangeDutyCycle(duty_cycle)
         MA2.ChangeDutyCycle(0)
         MB1.ChangeDutyCycle(duty_cycle)
@@ -51,17 +57,3 @@ def move(percent):
         MA2.ChangeDutyCycle(0)
         MB1.ChangeDutyCycle(0)
         MB2.ChangeDutyCycle(0)
-
-try:
-    perc = int(input("Percent (-100 to 100, 999 to exit): "))    
-    while True:
-        if perc == 999:
-            break
-        move(perc)
-finally:
-    MA1.stop()
-    MA2.stop()
-    MB1.stop()
-    MB2.stop()
-    GPIO.cleanup()
-    print("GPIO cleanup and program end.")
