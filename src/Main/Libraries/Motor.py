@@ -77,4 +77,6 @@ MA2.start(cicloTrabajo)
 MB1.start(cicloTrabajo)
 MB2.start(cicloTrabajo)
 
-move(int(input("Percent: ")))
+perc = int(input("Percent: "))
+while True:
+    move(perc)
