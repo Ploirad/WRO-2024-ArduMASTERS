@@ -55,10 +55,10 @@ def move(percent):
         MB1.ChangeDutyCycle(0)
         MB2.ChangeDutyCycle(0)
 
-p1MA = 12
-p2MA = 32
-p1MB = 33
-p2MB = 35
+p1MA = 26
+p2MA = 21
+p1MB = 19
+p2MB = 20
 cicloTrabajo = 0
 frecuencia = 1000
 
