@@ -62,9 +62,9 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
         if (green_area < 10) and (red_area < 10):
             # Detect the distances
             front_distance = HC.measure_distance(1)
-            right_distance = HC.measure_distance(2)
-            left_distance = HC.measure_distance(4)
-            #back_distance = HC.measure_distance(3)
+            right_distance = 20#HC.measure_distance(2)
+            left_distance = 20#HC.measure_distance(4)
+            ##back_distance = HC.measure_distance(3)
 
             # And print them
             print(f"Front Distance: {front_distance}; Right Distance: {right_distance}; Left Distance: {left_distance}")#; Back Distance: {back_distance}")
