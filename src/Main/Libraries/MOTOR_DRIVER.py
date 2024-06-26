@@ -58,4 +58,5 @@ def move(percent_vel, percent_dir):
         MB1.ChangeDutyCycle(0)
         MB2.ChangeDutyCycle(0)
 
-move(100, 100)
+while True:
+    move(100, 100)
