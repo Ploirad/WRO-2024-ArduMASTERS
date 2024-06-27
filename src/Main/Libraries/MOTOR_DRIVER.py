@@ -49,6 +49,9 @@ def move(percent_vel, percent_dir):
             d = (percent_dir/100)*5 + 7.5
             Direccion.ChangeDutyCycle(d)
 
+        print(last_direction)
+        print(d)
+
         if percent_vel > 0:
             print("AVANCE")
             duty_cycle = percent_vel
