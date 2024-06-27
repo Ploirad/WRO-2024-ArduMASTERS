@@ -67,18 +67,3 @@ def move(percent_vel, percent_dir):
         GPIO.output(IN4, GPIO.LOW)
         pwmENA.ChangeDutyCycle(0)
         pwmENB.ChangeDutyCycle(0)
-
-# Ejemplo de uso:
-try:
-    while True:
-        move(50, 0)  # Ejemplo: avanza al 50% sin dirección
-        time.sleep(2)
-        move(0, -50)  # Ejemplo: retrocede al 50% a la izquierda
-        time.sleep(2)
-        move(0, 50)  # Ejemplo: retrocede al 50% a la derecha
-        time.sleep(2)
-except KeyboardInterrupt:
-    pwmENA.stop()
-    pwmENB.stop()
-    Direccion.stop()
-    GPIO.cleanup()
