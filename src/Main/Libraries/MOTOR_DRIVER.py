@@ -53,7 +53,7 @@ def move(percent_vel, percent_dir):
             GPIO.output(IN3, GPIO.HIGH)
             GPIO.output(IN4, GPIO.LOW)
             pwmENA.ChangeDutyCycle(duty_cycle)
-            pwmENB.ChangeDutyCycle(duty_cycle-15)
+            pwmENB.ChangeDutyCycle(duty_cycle-20)
         elif percent_vel < 0:
             print("RETROCESO")
             duty_cycle = abs(percent_vel)
@@ -62,7 +62,7 @@ def move(percent_vel, percent_dir):
             GPIO.output(IN3, GPIO.LOW)
             GPIO.output(IN4, GPIO.HIGH)
             pwmENA.ChangeDutyCycle(duty_cycle)
-            pwmENB.ChangeDutyCycle(duty_cycle-15)
+            pwmENB.ChangeDutyCycle(duty_cycle-20)
         else:
             print("STOP")
             GPIO.output(IN1, GPIO.LOW)
@@ -72,5 +72,9 @@ def move(percent_vel, percent_dir):
             pwmENA.ChangeDutyCycle(0)
             pwmENB.ChangeDutyCycle(0)
     except KeyboardInterrupt:
-        pwmENA.stop()
-        pwmENB.stop()
+        GPIO.output(IN1, GPIO.LOW)
+        GPIO.output(IN2, GPIO.LOW)
+        GPIO.output(IN3, GPIO.LOW)
+        GPIO.output(IN4, GPIO.LOW)
+        pwmENA.ChangeDutyCycle(0)
+        pwmENB.ChangeDutyCycle(0)
