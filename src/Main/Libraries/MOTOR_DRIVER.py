@@ -16,14 +16,14 @@ GPIO.setup(p1MA, GPIO.OUT)
 GPIO.setup(p2MA, GPIO.OUT)
 GPIO.setup(p1MB, GPIO.OUT)
 GPIO.setup(p2MB, GPIO.OUT)
-GPIO.setup(2, GPIO.OUT)
+GPIO.setup(18, GPIO.OUT)
 
 # Set up PWM on the motor pins
 MA1 = GPIO.PWM(p1MA, frecuencia)
 MA2 = GPIO.PWM(p2MA, frecuencia)
 MB1 = GPIO.PWM(p1MB, frecuencia)
 MB2 = GPIO.PWM(p2MB, frecuencia)
-Direccion = GPIO.PWM(2, 50)
+Direccion = GPIO.PWM(18, 50)
 
 # Start PWM with 0% duty cycle
 MA1.start(cicloTrabajo)

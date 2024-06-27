@@ -9,8 +9,8 @@ GPIO.setmode(GPIO.BCM)
 
 GPIO.setup(23, GPIO.OUT)
 GPIO.setup(24, GPIO.IN)
-GPIO.setup(5, GPIO.OUT)
-GPIO.setup(6, GPIO.IN)
+GPIO.setup(8, GPIO.OUT)
+GPIO.setup(7, GPIO.IN)
 GPIO.setup(17, GPIO.OUT)
 GPIO.setup(27, GPIO.IN)
 GPIO.setup(22, GPIO.OUT)
@@ -25,7 +25,7 @@ GPIO.setup(10, GPIO.IN)
 def measure_distance(position):
     trigger_echo = {
         1: (23, 24), # Front
-        2: (5, 6),   # Right
+        2: (8, 7),   # Right
         3: (17, 27), # Back
         4: (22, 10)  # Left
     }
