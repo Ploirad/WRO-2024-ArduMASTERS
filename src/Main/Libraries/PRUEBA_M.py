@@ -2,6 +2,8 @@
 import time
 import MOTOR_DRIVER as MD
 
+vel = int(input("PERCENT VEL: "))
+dir = int(input("PERCENT DIR: "))
+
 while True:
-    MD.move(int(input("PERCENT VEL: ")), int(input("PERCENT DIR")))
-    time.sleep(int(input("SLEEP: ")))
+    MD.move(vel, dir)
