@@ -1,7 +1,7 @@
 #PRUEBA_M.py
 import time
-import Motor as M
+import MOTOR_DRIVER as MD
 
 while True:
-    M.movement(1, 0, False)
-    time.sleep(1)
+    MD.move(int(input("PERCENT VEL: ")), int(input("PERCENT DIR")))
+    time.sleep(int(input("SLEEP: ")))
