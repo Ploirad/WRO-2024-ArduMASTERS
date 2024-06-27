@@ -34,16 +34,20 @@ pwmENB.start(0)
 Direccion = GPIO.PWM(SERVO_PIN, 50)
 Direccion.start(0)
 
+last_direction = 0
+
 # Define la función de movimiento
 def move(percent_vel, percent_dir):
+    global last_direction
     try:
         # Ajusta aquí la fórmula para el servo
         # 'd' debe estar en el rango adecuado para tu servo
         #d = ((0.7 * pow((percent_dir/100), 2)) - (5 * (percent_dir/100)) + 6.8)
 
-        d = (percent_dir/100)*5 + 7.5
-
-        Direccion.ChangeDutyCycle(d)
+        if last_direction != percent_dir:
+            last_direction = percent_dir
+            d = (percent_dir/100)*5 + 7.5
+            Direccion.ChangeDutyCycle(d)
 
         if percent_vel > 0:
             print("AVANCE")
