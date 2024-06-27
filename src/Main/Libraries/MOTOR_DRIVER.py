@@ -35,10 +35,11 @@ Direccion = GPIO.PWM(SERVO_PIN, 50)
 Direccion.start(0)
 
 last_direction = 0
+d = 7.5
 
 # Define la función de movimiento
 def move(percent_vel, percent_dir):
-    global last_direction
+    global last_direction, d
     try:
         # Ajusta aquí la fórmula para el servo
         # 'd' debe estar en el rango adecuado para tu servo
