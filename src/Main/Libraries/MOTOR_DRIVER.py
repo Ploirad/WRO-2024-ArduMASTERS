@@ -1,59 +1,66 @@
 import RPi.GPIO as GPIO
 
-# Initialize the motors
+# Inicializa la librería GPIO
 GPIO.setmode(GPIO.BCM)
 
-# Define the motor pins
-p1MA = 26
-p2MA = 21
-p1MB = 19
-p2MB = 20
+# Define los pines del motor
+ENA = 26
+IN1 = 19
+IN2 = 13
+IN3 = 6
+IN4 = 5
+ENB = 27
 cicloTrabajo = 0
 frecuencia = 1000
 
-# Set up the motor pins as output
-GPIO.setup(p1MA, GPIO.OUT)
-GPIO.setup(p2MA, GPIO.OUT)
-GPIO.setup(p1MB, GPIO.OUT)
-GPIO.setup(p2MB, GPIO.OUT)
+# Configura los pines del motor como salida
+GPIO.setup(ENA, GPIO.OUT)
+GPIO.setup(IN1, GPIO.OUT)
+GPIO.setup(IN2, GPIO.OUT)
+GPIO.setup(IN3, GPIO.OUT)
+GPIO.setup(IN4, GPIO.OUT)
+GPIO.setup(ENB, GPIO.OUT)
 GPIO.setup(18, GPIO.OUT)
 
-# Set up PWM on the motor pins
-MA1 = GPIO.PWM(p1MA, frecuencia)
-MA2 = GPIO.PWM(p2MA, frecuencia)
-MB1 = GPIO.PWM(p1MB, frecuencia)
-MB2 = GPIO.PWM(p2MB, frecuencia)
+# Configura PWM en los pines ENA y ENB
+pwmENA = GPIO.PWM(ENA, frecuencia)
+pwmENB = GPIO.PWM(ENB, frecuencia)
+
+# Inicializa PWM con un ciclo de trabajo de 0%
+pwmENA.start(cicloTrabajo)
+pwmENB.start(cicloTrabajo)
+
 Direccion = GPIO.PWM(18, 50)
 
-# Start PWM with 0% duty cycle
-MA1.start(cicloTrabajo)
-MA2.start(cicloTrabajo)
-MB1.start(cicloTrabajo)
-MB2.start(cicloTrabajo)
-
-# Define the move function
-# Both values (percent_vel and percent_dir) go by -100% to 100%
+# Define la función de movimiento
+# Ambos valores (percent_vel y percent_dir) van de -100% a 100%
 def move(percent_vel, percent_dir):
-    d = ((0.7 * pow((percent_dir/100), 2)) - (5 * (percent_dir/100)) + 6.8) #FORMULA QUE SE DEBE CAMBIAR SEGUN CUAL SEA EL CENTRO
+    d = ((0.7 * pow((percent_dir/100), 2)) - (5 * (percent_dir/100)) + 6.8) # Fórmula que se debe cambiar según cual sea el centro
     Direccion.start(d)
 
     if percent_vel > 0:
         print("AVANCE")
         duty_cycle = percent_vel
-        MA1.ChangeDutyCycle(0)
-        MA2.ChangeDutyCycle(duty_cycle)
-        MB1.ChangeDutyCycle(0)
-        MB2.ChangeDutyCycle(duty_cycle)
+        GPIO.output(IN1, GPIO.HIGH)
+        GPIO.output(IN2, GPIO.LOW)
+        GPIO.output(IN3, GPIO.HIGH)
+        GPIO.output(IN4, GPIO.LOW)
+        pwmENA.ChangeDutyCycle(duty_cycle)
+        pwmENB.ChangeDutyCycle(duty_cycle)
     elif percent_vel < 0:
         print("RETROCESO")
         duty_cycle = abs(percent_vel)
-        MA1.ChangeDutyCycle(duty_cycle)
-        MA2.ChangeDutyCycle(0)
-        MB1.ChangeDutyCycle(duty_cycle)
-        MB2.ChangeDutyCycle(0)
+        GPIO.output(IN1, GPIO.LOW)
+        GPIO.output(IN2, GPIO.HIGH)
+        GPIO.output(IN3, GPIO.LOW)
+        GPIO.output(IN4, GPIO.HIGH)
+        pwmENA.ChangeDutyCycle(duty_cycle)
+        pwmENB.ChangeDutyCycle(duty_cycle)
     else:
         print("STOP")
-        MA1.ChangeDutyCycle(0)
-        MA2.ChangeDutyCycle(0)
-        MB1.ChangeDutyCycle(0)
-        MB2.ChangeDutyCycle(0)
+        GPIO.output(IN1, GPIO.LOW)
+        GPIO.output(IN2, GPIO.LOW)
+        GPIO.output(IN3, GPIO.LOW)
+        GPIO.output(IN4, GPIO.LOW)
+        pwmENA.ChangeDutyCycle(0)
+        pwmENB.ChangeDutyCycle(0)
