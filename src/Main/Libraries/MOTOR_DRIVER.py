@@ -10,7 +10,7 @@ IN1 = 19
 IN2 = 13
 IN3 = 6
 IN4 = 5
-ENB = 27
+ENB = 11
 SERVO_PIN = 18
 
 # Configura los pines como salida
