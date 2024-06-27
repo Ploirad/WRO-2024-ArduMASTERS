@@ -16,7 +16,7 @@ from Libraries import parking as P                 # parking()
 
 # Initialize the camera as a picamera
 camera = PiCamera()
-camera.framerate = 70 #65
+camera.framerate = 30 #65
 
 # With a reslution of 320*240 px 
 camera.resolution = (320, 240)
