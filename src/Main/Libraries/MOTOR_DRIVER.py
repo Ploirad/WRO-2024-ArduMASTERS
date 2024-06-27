@@ -1,42 +1,45 @@
 import RPi.GPIO as GPIO
+import time
 
 # Inicializa la librería GPIO
 GPIO.setmode(GPIO.BCM)
 
-# Define los pines del motor
+# Define los pines del motor y del servo
 ENA = 26
 IN1 = 19
 IN2 = 13
 IN3 = 6
 IN4 = 5
 ENB = 27
-cicloTrabajo = 0
-frecuencia = 1000
+SERVO_PIN = 18
 
-# Configura los pines del motor como salida
+# Configura los pines como salida
 GPIO.setup(ENA, GPIO.OUT)
 GPIO.setup(IN1, GPIO.OUT)
 GPIO.setup(IN2, GPIO.OUT)
 GPIO.setup(IN3, GPIO.OUT)
 GPIO.setup(IN4, GPIO.OUT)
 GPIO.setup(ENB, GPIO.OUT)
-GPIO.setup(18, GPIO.OUT)
+GPIO.setup(SERVO_PIN, GPIO.OUT)
 
 # Configura PWM en los pines ENA y ENB
-pwmENA = GPIO.PWM(ENA, frecuencia)
-pwmENB = GPIO.PWM(ENB, frecuencia)
+pwmENA = GPIO.PWM(ENA, 1000)
+pwmENB = GPIO.PWM(ENB, 1000)
 
 # Inicializa PWM con un ciclo de trabajo de 0%
-pwmENA.start(cicloTrabajo)
-pwmENB.start(cicloTrabajo)
+pwmENA.start(0)
+pwmENB.start(0)
 
-Direccion = GPIO.PWM(18, 50)
+# Inicializa PWM para el servo
+Direccion = GPIO.PWM(SERVO_PIN, 50)
+Direccion.start(0)
 
 # Define la función de movimiento
-# Ambos valores (percent_vel y percent_dir) van de -100% a 100%
 def move(percent_vel, percent_dir):
-    d = ((0.7 * pow((percent_dir/100), 2)) - (5 * (percent_dir/100)) + 6.8) # Fórmula que se debe cambiar según cual sea el centro
-    Direccion.start(d)
+    # Ajusta aquí la fórmula para el servo
+    # 'd' debe estar en el rango adecuado para tu servo
+    d = ((0.7 * pow((percent_dir/100), 2)) - (5 * (percent_dir/100)) + 6.8)
+    Direccion.ChangeDutyCycle(d)
 
     if percent_vel > 0:
         print("AVANCE")
@@ -64,3 +67,18 @@ def move(percent_vel, percent_dir):
         GPIO.output(IN4, GPIO.LOW)
         pwmENA.ChangeDutyCycle(0)
         pwmENB.ChangeDutyCycle(0)
+
+# Ejemplo de uso:
+try:
+    while True:
+        move(50, 0)  # Ejemplo: avanza al 50% sin dirección
+        time.sleep(2)
+        move(0, -50)  # Ejemplo: retrocede al 50% a la izquierda
+        time.sleep(2)
+        move(0, 50)  # Ejemplo: retrocede al 50% a la derecha
+        time.sleep(2)
+except KeyboardInterrupt:
+    pwmENA.stop()
+    pwmENB.stop()
+    Direccion.stop()
+    GPIO.cleanup()
