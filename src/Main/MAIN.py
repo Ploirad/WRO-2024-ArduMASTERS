@@ -19,8 +19,8 @@ camera = PiCamera()
 camera.framerate = 30 #65
 
 # With a reslution of 320*240 px 
-camera.resolution = (320, 240)
-raw_capture = PiRGBArray(camera, size=(320, 240))
+camera.resolution = (640, 480)
+raw_capture = PiRGBArray(camera, size=(640, 480))
 
 #Create the global variables
 #Variables for HC
