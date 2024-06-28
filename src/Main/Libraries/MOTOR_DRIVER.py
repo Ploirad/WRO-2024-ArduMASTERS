@@ -43,10 +43,9 @@ def move(percent_vel, percent_dir):
     try:
         # Ajusta aquí la fórmula para el servo
         # 'd' debe estar en el rango adecuado para tu servo
-        if last_direction != percent_dir:
-            last_direction = percent_dir
-            d = ((-1/4000)*pow(percent_dir, 2))+((1/20)*percent_dir)+9.5
-            Direccion.start(d)
+        last_direction = percent_dir
+        d = ((-1/4000)*pow(percent_dir, 2))+((1/20)*percent_dir)+9.5
+        Direccion.start(d)
             # 2-12, 9.5
 
         print(last_direction)
