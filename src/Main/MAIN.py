@@ -112,7 +112,7 @@ try:
                         print("FD > 30")
 
                         # If we can we go forward
-                        traction = 100
+                        traction = 50
 
                         # We comprobate if we are very near to the walls
                         if right_distance < 5:
@@ -135,7 +135,7 @@ try:
                         print("10 < FD < 30")
 
                         # We start going forward
-                        traction = 100
+                        traction = 50
 
                         # If the right distance is bigger than the left distance
                         if right_distance > left_distance:
@@ -162,7 +162,7 @@ try:
                         print("FD < 10")
 
                         # We go backward
-                        traction = -100
+                        traction = -50
 
                         # Then we decide if we can go to the right or to the left depending what is the bigest distance
                         if right_distance > left_distance:
@@ -191,7 +191,7 @@ try:
                     print("Color detected")
 
                     # We go forward
-                    traction = 100
+                    traction = 50
 
                     # Then we comprobate what is the nearest pillar
                     # If is the green
