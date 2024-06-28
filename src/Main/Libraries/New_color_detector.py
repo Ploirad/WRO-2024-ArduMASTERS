@@ -16,12 +16,12 @@ def detect_green(frame):
     return detect_color(frame, G_bajo, G_alto)
 
 def detect_red(frame):
-    R_bajo = np.array([200, 20, 10])
+    R_bajo = np.array([150, 20, 10])
     R_alto = np.array([255, 200, 200])
     return detect_color(frame, R_bajo, R_alto)
 
 def detect_magenta(frame):
-    M_bajo = np.array([125, 0, 125])
+    M_bajo = np.array([150, 0, 150])
     M_alto = np.array([255, 250, 255])
     return detect_color(frame, M_bajo, M_alto)
 
