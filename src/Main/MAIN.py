@@ -56,9 +56,10 @@ stop = False
 
 told = time.time()
 
-
 # If we aren't finished running
 if not stop:
+    raw_capture.truncate(0)
+    
     # Take the frames continuously (without stop)
     for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port=True):
 
