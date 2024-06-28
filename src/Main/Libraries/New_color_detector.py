@@ -31,8 +31,12 @@ def detect_magenta(frame):
     M_bajo = np.array([138, 87, 25])
     M_alto = np.array([167, 185, 255])
     #print(f"Camara: detect_magenta(): {time.time()-t1m}")
-    return detect_color(frame, M_bajo, M_alto)
-
+    cm, am = detect_color(frame, M_bajo, M_alto)
+    cr, ar = detect_red(frame, np.array([175, 126, 68]), np.array([176, 212, 255]))
+    if ar > am:
+        return None, 0
+    else:
+        return cm, am
 #This function is used to take the centroid and the area of the color gived (color_low, color_high) in the respective frame
 def detect_color(frame, color_low, color_high):
     #t1 = time.time()
