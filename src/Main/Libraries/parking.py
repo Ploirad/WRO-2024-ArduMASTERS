@@ -49,12 +49,12 @@ def run_until_magenta_detected():
             # Detect the centroid and area of the magenta
             magenta_centroid, magenta_area = CAM.detect_magenta(image)
 
-            if magenta_centroid is None:
+            if magenta_area < 6000:
                 # Detecte the centroids and areas of the rest of colors    
                 red_centroid, red_area = CAM.detect_red(image)
                 green_centroid, green_area = CAM.detect_green(image)
                 # If we aren't seeing none color of the second round
-                if (green_area < 10) and (red_area < 10):
+                if (green_area < 15000) and (red_area < 550):
                     # Detect the distances
                     front_distance = HC.measure_distance(1)
                     right_distance = HC.measure_distance(2)
@@ -133,13 +133,13 @@ def run_until_magenta_detected():
 
                     # Then we comprobate what is the nearest pillar
                     # If is the green
-                    if green_area > red_area:
+                    if green_area > red_area and green_area > 15000:
                         # We overtake the green pillar by the right
                         direction = 100
                         print("Green detected, overtaking by the right")
                     
                     # Else if is red
-                    else:
+                    elif red_area > green_area and red_area > 550:
                         # We overtake the red pillar by the left
                         direction = -100
                         print("Red detected, overtaking by the left")
