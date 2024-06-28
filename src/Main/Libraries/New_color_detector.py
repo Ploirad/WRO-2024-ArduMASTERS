@@ -84,3 +84,4 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
     print(f"Green Area: {green_area}; Red Area: {red_area}; Magenta Area: {magenta_area}")
     print(f"Green Centroid: {green_centroid}; Red Centroid: {red_centroid}; Magenta Centroid: {magenta_centroid}")
     print("")
+    raw_capture.truncate(0)  # Limpiar el búfer para la siguiente captura
