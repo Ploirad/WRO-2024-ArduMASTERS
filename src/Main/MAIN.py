@@ -47,6 +47,7 @@ start = False
 #Variables for count the turns
 vertex_turns = 0
 turns = 0
+count_turns = True
 first_color_detected = None
 delay = False
 
