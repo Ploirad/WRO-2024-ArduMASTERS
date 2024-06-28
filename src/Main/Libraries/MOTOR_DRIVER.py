@@ -49,7 +49,7 @@ def move(percent_vel, percent_dir):
         #    last_direction = percent_dir
         #    d = (percent_dir/100)*5 + 7.5
         #    Direccion.start(d)
-
+        # 2-12
         Direccion.start(percent_dir)
 
         print(last_direction)

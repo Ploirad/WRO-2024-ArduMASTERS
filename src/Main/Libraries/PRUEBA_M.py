@@ -2,8 +2,8 @@
 import time
 import MOTOR_DRIVER as MD
 
-vel = int(input("PERCENT VEL: "))
-dir = int(input("PERCENT DIR: "))
+vel = float(input("PERCENT VEL: "))
+dir = float(input("PERCENT DIR: "))
 
 while True:
     MD.move(vel, dir)
