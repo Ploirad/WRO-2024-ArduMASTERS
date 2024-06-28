@@ -1,71 +1,104 @@
 #This code is a library for the camera to take the color centroid and area of a specific frame given
 
+#Import the necessary libraries
 import cv2
 import numpy as np
+import time
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 
 camera = PiCamera()
 
-# Función para detectar el color rojo en un cuadro
-def detect_red(frame):
-    mask = (frame[:, :, 2] > 100) & (frame[:, :, 1] < frame[:, :, 2]) & (frame[:, :, 0] < frame[:, :, 2])
-    return get_color_centroid_and_area(frame, mask)
 
-# Función para detectar el color verde en un cuadro
+cr = None
+ar = 0
+#This function is used to take the green centroid respect to the X edge and the green area all about the frame gived and they are integer variables
 def detect_green(frame):
-    mask = (frame[:, :, 1] > 100) & (frame[:, :, 0] < frame[:, :, 1]) & (frame[:, :, 2] < frame[:, :, 1])
-    return get_color_centroid_and_area(frame, mask)
+    #t1g = time.time()
+    V_bajo = np.array([130, 255, 120])#([31, 147, 66])
+    V_alto = np.array([120, 175, 255])#([35, 255, 255])
+    #print(f"Camara: detect_green(): {time.time()-t1g}")
+    return detect_color(frame, V_bajo, V_alto)
 
-# Función para detectar el color magenta en un cuadro
+#This function is used to take the red centroid respect to the X edge and the red area all about the frame gived
+def detect_red(frame):
+    #t1r = time.time()
+    R_bajo = np.array([175, 126, 68])
+    R_alto = np.array([176, 212, 255])
+    #print(f"Camara: detect_red(): {time.time()-t1r}")
+    return detect_color(frame, R_bajo, R_alto)
+
+#This function is used to take the magenta centroid respect to the X edge and the magenta area all about the frame gived
 def detect_magenta(frame):
-    mask = (frame[:, :, 2] > 100) & (frame[:, :, 0] > 100) & (frame[:, :, 1] < frame[:, :, 2]) & (frame[:, :, 1] < frame[:, :, 0])
-    return get_color_centroid_and_area(frame, mask)
+    global cr, ar
+    #t1m = time.time()
+    M_bajo = np.array([138, 87, 25])
+    M_alto = np.array([167, 185, 255])
+    #print(f"Camara: detect_magenta(): {time.time()-t1m}")
+    return detect_color(frame, M_bajo, M_alto)
 
-# Función para obtener el centroide y el área de la máscara de color
-def get_color_centroid_and_area(frame, mask):
-    # Convertir la máscara booleana a uint8
-    mask = mask.astype(np.uint8) * 255
+#This function is used to take the centroid and the area of the color gived (color_low, color_high) in the respective frame
+def detect_color(frame, color_low, color_high):
+    #t1 = time.time()
+    # Convert the frame to the HSV color space
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    # Encontrar contornos en la máscara
-    contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    # Create a mask for the specified color range
+    mask = cv2.inRange(hsv, color_low, color_high)
 
-    # Si no se encuentran contornos, devolver None y área 0
+    # Find contours in the mask
+    _, contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+    # If no contours are found, return None
     if not contours:
         return None, 0
 
-    # Encontrar el contorno más grande
+    # Find the largest contour
     largest_contour = max(contours, key=cv2.contourArea)
 
-    # Calcular el centro y el área del contorno más grande
+    # Compute the center and area of the largest contour
     M = cv2.moments(largest_contour)
     if M["m00"] == 0:
         return None, 0
     cX = int(M["m10"] / M["m00"])
-    cY = int(M["m01"] / M["m00"])
     area = cv2.contourArea(largest_contour)
-    return (cX, cY), area
+    #print(f"Camara: detect_color(): {time.time()-t1}")
+    return cX, area
 
-# Configuración de la cámara
+
+def detect_dominant_color(frame):
+    height, width, _ = frame.shape
+    # Coordenadas del centro del cuadro
+    center_x = width // 2
+    center_y = height // 2
+    # Color en el centro del cuadro
+    center_color_bgr = frame[center_y, center_x]
+    # Convertir de BGR a RGB
+    center_color_rgb = center_color_bgr[::-1]
+    return center_color_rgb
+
+#EXAMPLE
+green_centroid = None
+red_centroid = None
+magenta_centroid = None
+green_area = 0
+red_area = 0
+magenta_area = 0
+camera.framerate = 30 #65
 camera.resolution = (640, 480)
-camera.framerate = 30
 raw_capture = PiRGBArray(camera, size=(640, 480))
 
-# Captura y procesamiento de imágenes continuo
+raw_capture.truncate(0)
 for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port=True):
     image = frame.array
     height, width = image.shape[:2]
     lower_half = image[height//2:, :]
-
-    # Detectar el color rojo, verde y magenta en la parte inferior del cuadro
-    red_centroid, red_area = detect_red(lower_half)
     green_centroid, green_area = detect_green(lower_half)
+    red_centroid, red_area = detect_red(lower_half)
     magenta_centroid, magenta_area = detect_magenta(lower_half)
-
-    # Mostrar resultados
-    print(f"Red Area: {red_area}, Red Centroid: {red_centroid}")
-    print(f"Green Area: {green_area}, Green Centroid: {green_centroid}")
-    print(f"Magenta Area: {magenta_area}, Magenta Centroid: {magenta_centroid}")
-
-    # Limpiar el búfer para la siguiente captura
-    raw_capture.truncate(0)
+    dom_col = detect_dominant_color(lower_half)
+    print(f"Green Area: {green_area}; Red Area: {red_area}; Magenta Area: {magenta_area}")
+    print(f"Green Centroid: {green_centroid}; Red Centroid: {red_centroid}; Magenta Centroid: {magenta_centroid}")
+    print(f"Dominante color: {dom_col}")
+    print("")
+    raw_capture.truncate(0)  # Limpiar el búfer para la siguiente captura
