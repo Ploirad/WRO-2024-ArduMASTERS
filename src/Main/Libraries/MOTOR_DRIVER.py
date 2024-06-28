@@ -44,7 +44,8 @@ def move(percent_vel, percent_dir):
         # Ajusta aquí la fórmula para el servo
         # 'd' debe estar en el rango adecuado para tu servo
         last_direction = percent_dir
-        center = float(input("center: "))
+        #center = float(input("center: "))
+        center = 8
         d = (((7-center)/10000)*pow(percent_dir, 2))+((1/20)*percent_dir)+center
         Direccion.start(d)
             # 2-12, 9.5
