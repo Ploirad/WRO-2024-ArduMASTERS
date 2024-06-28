@@ -68,40 +68,15 @@ def detect_color(frame, color_low, color_high):
 
 
 def detect_dominant_color(frame):
-    # Convertir el cuadro a espacio de color HSV
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-
-    # Definir los límites bajos y altos para la detección de colores
-    lower_bound = np.array([0, 50, 50])  # Bajos valores de H, S, V
-    upper_bound = np.array([179, 255, 255])  # Altos valores de H, S, V
-
-    # Crear una máscara para los colores dentro del rango especificado
-    mask = cv2.inRange(hsv, lower_bound, upper_bound)
-
-    # Encontrar contornos en la máscara
-    _, contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-
-    # Inicializar variables para el color dominante y el área máxima
-    dominant_color = None
-    max_area = 0
-
-    # Iterar sobre todos los contornos encontrados
-    for contour in contours:
-        # Calcular el área del contorno actual
-        area = cv2.contourArea(contour)
-
-        # Si el área actual es mayor que el área máxima encontrada hasta ahora
-        if area > max_area:
-            max_area = area
-            # Calcular el centroide del contorno para obtener el color dominante
-            M = cv2.moments(contour)
-            if M["m00"] != 0:
-                cX = int(M["m10"] / M["m00"])
-                cY = int(M["m01"] / M["m00"])
-                # Convertir el color dominante a RGB
-                dominant_color = cv2.cvtColor(np.uint8([[hsv[cY, cX]]]), cv2.COLOR_HSV2RGB)[0][0]
-
-    return dominant_color
+    height, width, _ = frame.shape
+    # Coordenadas del centro del cuadro
+    center_x = width // 2
+    center_y = height // 2
+    # Color en el centro del cuadro
+    center_color_bgr = frame[center_y, center_x]
+    # Convertir de BGR a RGB
+    center_color_rgb = center_color_bgr[::-1]
+    return center_color_rgb
 
 #EXAMPLE
 green_centroid = None
