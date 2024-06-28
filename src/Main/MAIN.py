@@ -251,7 +251,7 @@ try:
     print("CODE ENDED")
     print("Congratulations you win in {time_all_code}")
 
-except KeyboardInterrupt:
+except:
     MD.GPIO.cleanup()
     HC.GPIO.cleanup()
     B.GPIO.cleanup()
