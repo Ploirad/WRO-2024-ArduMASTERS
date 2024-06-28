@@ -15,7 +15,7 @@ from Libraries import tsc34725 as tcs              # get_color()
 from Libraries import parking as P                 # parking()
 
 # Initialize the camera as a picamera
-camera = P.camera
+camera = CAM.camera
 camera.framerate = 30 #65
 
 # With a reslution of 320*240 px 
