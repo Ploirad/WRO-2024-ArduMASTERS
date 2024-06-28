@@ -22,7 +22,7 @@ def detect_red(frame):
 
 def detect_magenta(frame):
     M_bajo = np.array([125, 0, 125])
-    M_alto = np.array([255, 100, 255])
+    M_alto = np.array([255, 250, 255])
     return detect_color(frame, M_bajo, M_alto)
 
 #This function is used to take the centroid and the area of the color gived (color_low, color_high) in the respective frame
