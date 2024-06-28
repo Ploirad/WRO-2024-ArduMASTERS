@@ -35,7 +35,7 @@ def detect_magenta(frame):
 
 #This function is used to take the centroid and the area of the color gived (color_low, color_high) in the respective frame
 def detect_color(frame, color_low, color_high):
-    t1 = time.time()
+    #t1 = time.time()
     # Convert the frame to the HSV color space
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
@@ -58,7 +58,7 @@ def detect_color(frame, color_low, color_high):
         return None, 0
     cX = int(M["m10"] / M["m00"])
     area = cv2.contourArea(largest_contour)
-    print(f"Camara: detect_color(): {time.time()-t1}")
+    #print(f"Camara: detect_color(): {time.time()-t1}")
     return cX, area
 
 
