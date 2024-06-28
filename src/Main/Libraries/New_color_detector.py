@@ -60,3 +60,27 @@ def detect_color(frame, color_low, color_high):
     area = cv2.contourArea(largest_contour)
     print(f"Camara: detect_color(): {time.time()-t1}")
     return cX, area
+
+
+#EXAMPLE
+green_centroid = None
+red_centroid = None
+magenta_centroid = None
+green_area = 0
+red_area = 0
+magenta_area = 0
+camera.framerate = 30 #65
+camera.resolution = (640, 480)
+raw_capture = PiRGBArray(camera, size=(640, 480))
+
+raw_capture.truncate(0)
+for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port=True):
+    image = frame.array
+    height, width = image.shape[:2]
+    lower_half = image[height//2:, :]
+    green_centroid, green_area = detect_green(lower_half)
+    red_centroid, red_area = detect_red(lower_half)
+    magenta_centroid, magenta_area = detect_magenta(lower_half)
+    print(f"Green Area: {green_area}; Red Area: {red_area}; Magenta Area: {magenta_area}")
+    print(f"Green Centroid: {green_centroid}; Red Centroid: {red_centroid}; Magenta Centroid: {magenta_centroid}")
+    print("")

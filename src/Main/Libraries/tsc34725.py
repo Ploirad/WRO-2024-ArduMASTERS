@@ -44,3 +44,6 @@ def get_color():
     except Exception as e:
         print(f"Error: {str(e)}")
         return None
+
+while True:
+    print(get_color())
