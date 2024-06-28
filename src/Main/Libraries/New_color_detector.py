@@ -9,6 +9,9 @@ from picamera.array import PiRGBArray
 
 camera = PiCamera()
 
+
+cr = None
+ar = 0
 #This function is used to take the green centroid respect to the X edge and the green area all about the frame gived and they are integer variables
 def detect_green(frame):
     #t1g = time.time()
@@ -23,16 +26,17 @@ def detect_red(frame):
     R_bajo = np.array([175, 126, 68])
     R_alto = np.array([176, 212, 255])
     #print(f"Camara: detect_red(): {time.time()-t1r}")
-    return detect_color(frame, R_bajo, R_alto)
+    cr, ar = detect_color(frame, R_bajo, R_alto)
+    return cr, ar
 
 #This function is used to take the magenta centroid respect to the X edge and the magenta area all about the frame gived
 def detect_magenta(frame):
+    global cr, ar
     #t1m = time.time()
     M_bajo = np.array([138, 87, 25])
     M_alto = np.array([167, 185, 255])
     #print(f"Camara: detect_magenta(): {time.time()-t1m}")
     cm, am = detect_color(frame, M_bajo, M_alto)
-    cr, ar = detect_red(frame, np.array([175, 126, 68]), np.array([176, 212, 255]))
     if ar > am:
         return None, 0
     else:
