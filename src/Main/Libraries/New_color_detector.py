@@ -4,6 +4,10 @@
 import cv2
 import numpy as np
 import time
+from picamera import PiCamera
+from picamera.array import PiRGBArray
+
+camera = PiCamera()
 
 #This function is used to take the green centroid respect to the X edge and the green area all about the frame gived and they are integer variables
 def detect_green(frame):
