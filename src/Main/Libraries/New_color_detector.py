@@ -11,26 +11,26 @@ camera = PiCamera()
 
 #This function is used to take the green centroid respect to the X edge and the green area all about the frame gived and they are integer variables
 def detect_green(frame):
-    t1g = time.time()
+    #t1g = time.time()
     V_bajo = np.array([31, 147, 66])
     V_alto = np.array([35, 255, 255])
-    print(f"Camara: detect_green(): {time.time()-t1g}")
+    #print(f"Camara: detect_green(): {time.time()-t1g}")
     return detect_color(frame, V_bajo, V_alto)
 
 #This function is used to take the red centroid respect to the X edge and the red area all about the frame gived
 def detect_red(frame):
-    t1r = time.time()
+    #t1r = time.time()
     R_bajo = np.array([175, 126, 68])
     R_alto = np.array([176, 212, 255])
-    print(f"Camara: detect_red(): {time.time()-t1r}")
+    #print(f"Camara: detect_red(): {time.time()-t1r}")
     return detect_color(frame, R_bajo, R_alto)
 
 #This function is used to take the magenta centroid respect to the X edge and the magenta area all about the frame gived
 def detect_magenta(frame):
-    t1m = time.time()
+    #t1m = time.time()
     M_bajo = np.array([138, 87, 25])
     M_alto = np.array([167, 185, 255])
-    print(f"Camara: detect_magenta(): {time.time()-t1m}")
+    #print(f"Camara: detect_magenta(): {time.time()-t1m}")
     return detect_color(frame, M_bajo, M_alto)
 
 #This function is used to take the centroid and the area of the color gived (color_low, color_high) in the respective frame
