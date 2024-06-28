@@ -58,9 +58,10 @@ def measure_distance(position):
     return distance
 
 
-while True:
-    front_distance = measure_distance(1)
-    right_distance = measure_distance(2)
-    left_distance = measure_distance(4)
-    back_distance = measure_distance(3)
-    print(f"Front Distance: {front_distance}; Right Distance: {right_distance}; Left Distance: {left_distance}; Back Distance: {back_distance}")
+##Code to try the ultrasonic sensors
+#while True:
+#    front_distance = measure_distance(1)
+#    right_distance = measure_distance(2)
+#    left_distance = measure_distance(4)
+#    back_distance = measure_distance(3)
+#    print(f"Front Distance: {front_distance}; Right Distance: {right_distance}; Left Distance: {left_distance}; Back Distance: {back_distance}")

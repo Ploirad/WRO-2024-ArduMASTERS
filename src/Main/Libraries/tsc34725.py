@@ -45,5 +45,7 @@ def get_color():
         print(f"Error: {str(e)}")
         return None
 
-while True:
-    print(get_color())
+
+##Code to try the tcs
+#while True:
+#    print(get_color())
