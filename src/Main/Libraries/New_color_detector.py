@@ -15,7 +15,7 @@ ar = 0
 #This function is used to take the green centroid respect to the X edge and the green area all about the frame gived and they are integer variables
 def detect_green(frame):
     #t1g = time.time()
-    V_bajo = np.array([150, 255, 120])#([31, 147, 66])
+    V_bajo = np.array([130, 255, 120])#([31, 147, 66])
     V_alto = np.array([128, 205, 255])#([35, 255, 255])
     #print(f"Camara: detect_green(): {time.time()-t1g}")
     return detect_color(frame, V_bajo, V_alto)
