@@ -36,7 +36,3 @@ def get_color():
         return "Cyan"
     else:
         return "Unknown"
-
-# Example usage
-detected_color = get_color()
-print("Color detectado:", detected_color)

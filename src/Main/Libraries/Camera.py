@@ -4,16 +4,6 @@ import time
 import cv2
 import numpy as np
 
-# Define range of HSV for RED
-R_min = np.array([0 ,0  ,0 ], np.uint8)
-R_max = np.array([0 ,0  ,0 ], np.uint8)
-# Define range of HSV for GREEN
-G_min = np.array([0 ,0  ,0 ], np.uint8)
-G_max = np.array([0 ,0  ,0 ], np.uint8)
-# Define range of HSV for PURPLE
-P_min = np.array([0 ,0  ,0 ], np.uint8)
-P_max = np.array([0 ,0  ,0 ], np.uint8)
-
 # Define resolution
 resolucion = (640,480)
 
@@ -46,30 +36,3 @@ def obtenerCentroide(imgBin):
         pass
     
     return cx, cy
-
-def BM(index):
-    frame = camera.capture_continuous(rawCapture, format="bgr", use_video_port=True).array
-        
-    # Capture umbral segmented frame for all colors
-    FR = testColor(frame,R_min,R_max)[1]
-    FG = testColor(frame,G_min,G_max)[1]
-    FP = testColor(frame,P_min,P_max)[1]
-        
-    # Define a bounding box in the segmented frame
-    BR = cv2.boundingRect(FR)
-    BG = cv2.boundingRect(FG)
-    BP = cv2.boundingRect(FP)
-
-    # Compare boxes and set the biggest as main and add color info, index 4
-    if BR[2]*BR[3] > BG[2]*BG[3]:
-        BM = BR + "red"
-    else:
-        BM = BG + "green"
-    # Move xy coords to centroid coords
-    BM[0] = BM[0] + BM[2]/2 # x coords 
-    BM[1] = BM[1] + BM[3]/2 # y coords
-
-    # Add area info, index 5
-    BM = BM + BM[2]*BM[3]    
-
-    return BM[index]
