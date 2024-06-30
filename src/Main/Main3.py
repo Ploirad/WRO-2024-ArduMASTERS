@@ -19,7 +19,7 @@ import threading as thr
 GPIO.setmode(GPIO.BCM)
 
 # Declare servo pin
-GPIO.setup(14, GPIO.OUT)
+GPIO.setup(18, GPIO.OUT)
 
 # Declare L298N pins
 GPIO.setup(26, GPIO.OUT)
