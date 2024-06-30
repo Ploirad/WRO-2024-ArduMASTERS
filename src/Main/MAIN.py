@@ -115,12 +115,12 @@ try:
                         traction = 25
 
                         # We comprobate if we are very near to the walls
-                        if right_distance < 5:
+                        if right_distance < 10:
                             # If we are very near to the right wall we go to the left
                             direction = -100
                             print("Going to the left")
 
-                        elif left_distance < 5:
+                        elif left_distance < 10:
                             # Else if we are very near to the left wall we go to the right
                             direction = 100
                             print("Going to the right")
