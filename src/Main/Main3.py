@@ -32,7 +32,7 @@ GPIO.setup(0, GPIO.OUT)
 # Declare the PWM pins
 ENA = GPIO.PWM(26,50)
 ENB = GPIO.PWM(0,50)
-Direction = GPIO.PWM(14,50)
+Direction = GPIO.PWM(18,50)
 
 # Start PWM pins
 
@@ -44,12 +44,12 @@ ENB.start(0)
 Direction.start(0)
 
 # Create funcion for stopping servo in auxiliary thread
-Servo_stop = thr.Timer(0.1,lambda:[Direction.ChangeDutyCycle(0), GPIO.output(14,False)])
+Servo_stop = thr.Timer(0.1,lambda:[Direction.ChangeDutyCycle(0), GPIO.output(18,False)])
 
 # Inputs of the function are VELocity and DIRection
 def movement(vel,dir):
     # Set direction as desired
-    GPIO.output(14,True)
+    GPIO.output(18,True)
     Direction.ChangeDutyCycle(dir/18+2)
     Servo_stop.start()
     
