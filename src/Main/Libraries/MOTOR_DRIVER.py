@@ -41,52 +41,38 @@ center = float(input("center: "))
 # Define la función de movimiento
 def move(percent_vel, percent_dir):
     global d, center
-    try:
-        #center = 8
-        #d = (((7-center)/10000)*pow(percent_dir, 2))+((1/20)*percent_dir)+center
-        if percent_dir > 0:
-            d = 12
-        elif percent_dir < 0:
-            d = 2
-        else:
-            d = 7
-        Direccion.start(d)
-        # 2-12, 9.5
-        print(d)
+    #center = 8
+    #d = (((7-center)/10000)*pow(percent_dir, 2))+((1/20)*percent_dir)+center
+    if percent_dir > 0:
+        d = 12
+    elif percent_dir < 0:
+        d = 2
+    else:
+        d = center
+    Direccion.start(d)
+    # 2-12, 9.5
+    print(d)
 
-        if percent_vel > 0:
-            print("AVANCE")
-            duty_cycle = percent_vel
-            GPIO.output(IN1, GPIO.HIGH)
-            GPIO.output(IN2, GPIO.LOW)
-            GPIO.output(IN3, GPIO.HIGH)
-            GPIO.output(IN4, GPIO.LOW)
-            pwmENA.ChangeDutyCycle(duty_cycle)
-            pwmENB.ChangeDutyCycle(duty_cycle)
-        elif percent_vel < 0:
-            print("RETROCESO")
-            duty_cycle = abs(percent_vel)
-            GPIO.output(IN1, GPIO.LOW)
-            GPIO.output(IN2, GPIO.HIGH)
-            GPIO.output(IN3, GPIO.LOW)
-            GPIO.output(IN4, GPIO.HIGH)
-            pwmENA.ChangeDutyCycle(duty_cycle)
-            pwmENB.ChangeDutyCycle(duty_cycle)
-        else:
-            print("STOP")
-            GPIO.output(IN1, GPIO.LOW)
-            GPIO.output(IN2, GPIO.LOW)
-            GPIO.output(IN3, GPIO.LOW)
-            GPIO.output(IN4, GPIO.LOW)
-            pwmENA.ChangeDutyCycle(0)
-            pwmENB.ChangeDutyCycle(0)
-    except KeyboardInterrupt:
+    if percent_vel > 0:
+        print("AVANCE")
+        duty_cycle = percent_vel
         GPIO.output(IN1, GPIO.HIGH)
-        GPIO.output(IN2, GPIO.HIGH)
+        GPIO.output(IN2, GPIO.LOW)
         GPIO.output(IN3, GPIO.HIGH)
+        GPIO.output(IN4, GPIO.LOW)
+        pwmENA.ChangeDutyCycle(duty_cycle)
+        pwmENB.ChangeDutyCycle(duty_cycle)
+    elif percent_vel < 0:
+        print("RETROCESO")
+        duty_cycle = abs(percent_vel)
+        GPIO.output(IN1, GPIO.LOW)
+        GPIO.output(IN2, GPIO.HIGH)
+        GPIO.output(IN3, GPIO.LOW)
         GPIO.output(IN4, GPIO.HIGH)
-        pwmENA.ChangeDutyCycle(0)
-        pwmENB.ChangeDutyCycle(0)
+        pwmENA.ChangeDutyCycle(duty_cycle)
+        pwmENB.ChangeDutyCycle(duty_cycle)
+    else:
+        print("STOP")
         GPIO.output(IN1, GPIO.LOW)
         GPIO.output(IN2, GPIO.LOW)
         GPIO.output(IN3, GPIO.LOW)
