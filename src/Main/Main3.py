@@ -38,7 +38,7 @@ Direction = GPIO.PWM(18,50)
 
 GPIO.output(26,True)
 GPIO.output(0,True)
-GPIO.output(14,True)
+GPIO.output(18,True)
 ENA.start(0)
 ENB.start(0)
 Direction.start(0)
