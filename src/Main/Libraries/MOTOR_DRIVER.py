@@ -34,23 +34,22 @@ pwmENB.start(0)
 Direccion = GPIO.PWM(SERVO_PIN, 50)
 Direccion.start(0)
 
-last_direction = 0
 d = 7.5
+
+center = int(input("center: "))
 
 # Define la función de movimiento
 def move(percent_vel, percent_dir):
-    global last_direction, d
+    global d, center
     try:
         # Ajusta aquí la fórmula para el servo
         # 'd' debe estar en el rango adecuado para tu servo
         last_direction = percent_dir
         #center = float(input("center: "))
-        center = 8
+        #center = 8
         d = (((7-center)/10000)*pow(percent_dir, 2))+((1/20)*percent_dir)+center
         Direccion.start(d)
-            # 2-12, 9.5
-
-        print(last_direction)
+        # 2-12, 9.5
         print(d)
 
         if percent_vel > 0:
