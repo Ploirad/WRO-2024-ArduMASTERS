@@ -7,3 +7,4 @@ dir = float(input("PERCENT DIR: "))
 
 while True:
     MD.move(vel, dir)
+    time.sleep(1)
