@@ -11,7 +11,7 @@ from Libraries import Boton as B                   # B.button_state()
 from Libraries import Ultrasonidos as HC           # HC.measure_distance(position) 1 Front; 2 Right; 3 Back; 4 Left
 from Libraries import New_color_detector as CAM    # CAM.detect_green(frame)    CAM.detect_red(frame)   CAM.detect_magenta(frame)
 from Libraries import tsc34725 as tcs              # get_color()
-from Libraries import parking as P                 # parking()
+#from Libraries import parking as P                 # parking()
 
 import RPi.GPIO as GPIO
 import threading as thr
@@ -288,9 +288,11 @@ try:
             if turns >= 3:
                 count_turns = False
                 if pillar_has_been_detected:
-                    parked = P.run_until_magenta_detected()
-                    stop = parked
-                    start = not parked
+                    #parked = P.run_until_magenta_detected()
+                    #stop = parked
+                    #start = not parked
+                    stop = True
+                    start = False
                 else:
                     start = False
                     stop = True
@@ -313,6 +315,6 @@ try:
     print("Congratulations you win in {time_all_code}")
 
 except:
-    MD.GPIO.cleanup()
+    #MD.GPIO.cleanup()
     HC.GPIO.cleanup()
     B.GPIO.cleanup()
