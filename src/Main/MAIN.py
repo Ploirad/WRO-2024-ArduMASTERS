@@ -207,6 +207,7 @@ try:
                         print("Red detected, overtaking by the left")
 
                 # Move the car depending the desitions thet are taken about the movement of the car
+                print(f"Traction: {traction}; Direction: {direction}")
                 MD.move(traction, direction)
                 print(f"Traction: {traction}; Direction: {direction}")
 
