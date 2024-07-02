@@ -23,6 +23,15 @@ GPIO.setup(ENB, GPIO.OUT)
 GPIO.setup(SERVO_PIN, GPIO.OUT)
 GPIO.cleanup()
 
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(ENA, GPIO.OUT)
+GPIO.setup(IN1, GPIO.OUT)
+GPIO.setup(IN2, GPIO.OUT)
+GPIO.setup(IN3, GPIO.OUT)
+GPIO.setup(IN4, GPIO.OUT)
+GPIO.setup(ENB, GPIO.OUT)
+GPIO.setup(SERVO_PIN, GPIO.OUT)
+
 # Configura PWM en los pines ENA y ENB
 pwmENA = GPIO.PWM(ENA, 1000)
 pwmENB = GPIO.PWM(ENB, 1000)
