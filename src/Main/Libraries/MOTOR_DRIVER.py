@@ -21,16 +21,6 @@ GPIO.setup(IN3, GPIO.OUT)
 GPIO.setup(IN4, GPIO.OUT)
 GPIO.setup(ENB, GPIO.OUT)
 GPIO.setup(SERVO_PIN, GPIO.OUT)
-GPIO.cleanup()
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(ENA, GPIO.OUT)
-GPIO.setup(IN1, GPIO.OUT)
-GPIO.setup(IN2, GPIO.OUT)
-GPIO.setup(IN3, GPIO.OUT)
-GPIO.setup(IN4, GPIO.OUT)
-GPIO.setup(ENB, GPIO.OUT)
-GPIO.setup(SERVO_PIN, GPIO.OUT)
 
 # Configura PWM en los pines ENA y ENB
 pwmENA = GPIO.PWM(ENA, 1000)
@@ -45,6 +35,13 @@ Direccion = GPIO.PWM(SERVO_PIN, 50)
 Direccion.start(0)
 
 d = 7.5
+
+GPIO.output(IN1, GPIO.LOW)
+GPIO.output(IN2, GPIO.LOW)
+GPIO.output(IN3, GPIO.LOW)
+GPIO.output(IN4, GPIO.LOW)
+pwmENA.ChangeDutyCycle(0)
+pwmENB.ChangeDutyCycle(0)
 
 # Define la función de movimiento
 def move(percent_vel, percent_dir):
