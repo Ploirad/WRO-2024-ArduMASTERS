@@ -8,4 +8,4 @@
 <h1>Summary:
   </h1><b/>
   
-In this folder we got our logo 
+In this folder we got our logo and a log book
