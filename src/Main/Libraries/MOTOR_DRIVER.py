@@ -3,7 +3,6 @@ import time
 
 # Inicializa la librería GPIO
 GPIO.setmode(GPIO.BCM)
-GPIO.cleanup()
 
 # Define los pines del motor y del servo
 ENA = 26
@@ -22,6 +21,7 @@ GPIO.setup(IN3, GPIO.OUT)
 GPIO.setup(IN4, GPIO.OUT)
 GPIO.setup(ENB, GPIO.OUT)
 GPIO.setup(SERVO_PIN, GPIO.OUT)
+GPIO.cleanup()
 
 # Configura PWM en los pines ENA y ENB
 pwmENA = GPIO.PWM(ENA, 1000)
