@@ -44,11 +44,11 @@ def move(percent_vel, percent_dir):
     #center = 8
     #d = (((7-center)/10000)*pow(percent_dir, 2))+((1/20)*percent_dir)+center
     if percent_dir > 0:
-        d = 10
+        d = 8
     elif percent_dir < 0:
-        d = 4
+        d = 6
     else:
-        d = center
+        d = 7 #center
     Direccion.start(d)
     # 2-12, 9.5
     print(d)
