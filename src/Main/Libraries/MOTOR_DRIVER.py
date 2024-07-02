@@ -36,8 +36,6 @@ Direccion.start(0)
 
 d = 7.5
 
-center = float(input("center: "))
-
 # Define la función de movimiento
 def move(percent_vel, percent_dir):
     global d, center
