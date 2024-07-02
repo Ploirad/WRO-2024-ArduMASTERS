@@ -8,11 +8,8 @@ started_time = time.time()
 
 #OUR LIBRARIES                                     # FUNCTIONS THAT WE ARE GOING TO USE
 from Libraries import Boton as B                   # B.button_state()
-B.GPIO.cleanup()
 from Libraries import MOTOR_DRIVER as MD           # MD.move(percent_vel, percent_dir)
-MD.GPIO.cleanup()
 from Libraries import Ultrasonidos as HC           # HC.measure_distance(position) 1 Front; 2 Right; 3 Back; 4 Left
-HC.GPIO.cleanup()
 from Libraries import New_color_detector as CAM    # CAM.detect_green(frame)    CAM.detect_red(frame)   CAM.detect_magenta(frame)
 from Libraries import tsc34725 as tcs              # get_color()
 from Libraries import parking as P                 # parking()

@@ -3,6 +3,7 @@ import time
 
 # Inicializa la librería GPIO
 GPIO.setmode(GPIO.BCM)
+GPIO.cleanup()
 
 # Define los pines del motor y del servo
 ENA = 26
