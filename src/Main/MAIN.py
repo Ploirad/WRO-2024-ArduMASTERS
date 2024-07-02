@@ -14,7 +14,7 @@ from Libraries import New_color_detector as CAM    # CAM.detect_green(frame)    
 from Libraries import tsc34725 as tcs              # get_color()
 from Libraries import parking as P                 # parking()
 
-B.GPIO.Cleanup()
+B.GPIO.cleanup()
 MD.GPIO.cleanup()
 HC.GPIO.cleanup()
 
