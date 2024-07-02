@@ -14,6 +14,10 @@ from Libraries import New_color_detector as CAM    # CAM.detect_green(frame)    
 from Libraries import tsc34725 as tcs              # get_color()
 from Libraries import parking as P                 # parking()
 
+B.GPIO.Cleanup()
+MD.GPIO.cleanup()
+HC.GPIO.cleanup()
+
 # Initialize the camera as a picamera
 camera = CAM.camera
 camera.framerate = 30 #65
