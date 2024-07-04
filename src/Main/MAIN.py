@@ -15,6 +15,8 @@ from Libraries import tsc34725 as tcs              # get_color()
 from Libraries import parking as P                 # parking()
 from Libraries import Extra_Functions as F         # backward(initial_direction)
 
+MD.GPIO.cleanup()
+
 # Initialize the camera as a picamera
 camera = CAM.camera
 camera.framerate = 30 #65
