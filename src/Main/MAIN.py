@@ -86,6 +86,9 @@ try:
                 red_centroid, red_area = CAM.detect_red(lower_half)
                 magenta_centroid, magenta_area = CAM.detect_magenta(lower_half)
 
+                print(f"Green Area: {green_area}; Red Area: {red_area}; Magenta Area: {magenta_area}")
+                print(f"Green Centroid: {green_centroid}; Red Centroid: {red_centroid}; Magenta Centroid: {magenta_centroid}")
+
                 # If we need detect the lines:
                 if count_turns:
                     # Take the color of the floor lines as a string
@@ -184,8 +187,6 @@ try:
                     # We say that we detected a color least 1 time
                     pillar_has_been_detected = True
 
-                    print(f"Green Area: {green_area}; Red Area: {red_area}; Magenta Area: {magenta_area}")
-                    print(f"Green Centroid: {green_centroid}; Red Centroid: {red_centroid}; Magenta Centroid: {magenta_centroid}")
                     print("Color detected")
 
                     # We go forward
