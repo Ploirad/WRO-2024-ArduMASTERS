@@ -1,6 +1,6 @@
 # General Libraries of we:
-#import MOTOR_DRIVER as MD
-import Ultrasonidos as HC
+from Libraries import MOTOR_DRIVER as MD           # MD.move(percent_vel, percent_dir)
+from Libraries import Ultrasonidos as HC
 
 def backward(traction, initial_direction):
     traction = abs(traction)
