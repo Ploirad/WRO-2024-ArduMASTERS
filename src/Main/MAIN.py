@@ -13,9 +13,7 @@ from Libraries import Ultrasonidos as HC           # HC.measure_distance(positio
 from Libraries import New_color_detector as CAM    # CAM.detect_green(frame)    CAM.detect_red(frame)   CAM.detect_magenta(frame)
 from Libraries import tsc34725 as tcs              # get_color()
 from Libraries import parking as P                 # parking()
-from Libraries import Extra_Functions as F         # backward(initial_direction)
-
-MD.GPIO.cleanup()
+from Libraries import Extra_Functions as F         # backward(traction, initial_direction)
 
 # Initialize the camera as a picamera
 camera = CAM.camera
@@ -118,7 +116,7 @@ try:
                         print("FD > 30")
 
                         # If we can we go forward
-                        traction = 10
+                        traction = 15
 
                         # We comprobate if we are very near to the walls
                         if right_distance < 10:
@@ -141,7 +139,7 @@ try:
                         print("10 < FD < 30")
 
                         # We start going forward
-                        traction = 10
+                        traction = 15
 
                         # If the right distance is bigger than the left distance
                         if right_distance > left_distance:
@@ -169,7 +167,7 @@ try:
 
                         # Then we decide if we can go to the right or to the left depending what is the bigest distance
                         if right_distance > left_distance:
-                            F.backward(10, 100)
+                            F.backward(15, 100)
                             print("Backward + Right")
                             if color == "Blue" and (first_color_detected == None or first_color_detected == "Blue") and not delay and count_turns:
                                 vertex_turns += 1
@@ -177,7 +175,7 @@ try:
                                 delay = True
                         
                         else:
-                            F.backward(10, -100)
+                            F.backward(15, -100)
                             print("Backward + Left")
                             if color == "Orange" and (first_color_detected == None or first_color_detected == "Orange") and not delay and count_turns:
                                 vertex_turns += 1
@@ -192,7 +190,7 @@ try:
                     print("Color detected")
 
                     # We go forward
-                    traction = 10
+                    traction = 15
 
                     # Then we comprobate what is the nearest pillar
                     # If is the green
