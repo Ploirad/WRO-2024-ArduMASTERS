@@ -250,7 +250,5 @@ try:
     print("CODE ENDED")
     print("Congratulations you win in {time_all_code}")
 
-except:
-    MD.GPIO.cleanup()
-    HC.GPIO.cleanup()
-    B.GPIO.cleanup()
+except Exception as e:
+    print(e)
