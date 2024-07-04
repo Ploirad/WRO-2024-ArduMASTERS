@@ -167,7 +167,8 @@ try:
 
                         # Then we decide if we can go to the right or to the left depending what is the bigest distance
                         if right_distance > left_distance:
-                            F.backward(25, 100)
+                            traction = -25 #F.backward(25, 100)
+                            direction = 100
                             print("Backward + Right")
                             if color == "Blue" and (first_color_detected == None or first_color_detected == "Blue") and not delay and count_turns:
                                 vertex_turns += 1
@@ -175,7 +176,8 @@ try:
                                 delay = True
                         
                         else:
-                            F.backward(25, -100)
+                            traction = -25 #F.backward(25, -100)
+                            direction = -100
                             print("Backward + Left")
                             if color == "Orange" and (first_color_detected == None or first_color_detected == "Orange") and not delay and count_turns:
                                 vertex_turns += 1
