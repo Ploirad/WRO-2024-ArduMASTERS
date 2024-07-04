@@ -41,8 +41,8 @@ GPIO.output(IN4, GPIO.LOW)
 pwmENA.ChangeDutyCycle(0)
 pwmENB.ChangeDutyCycle(0)
 
-amplitud = float(input("AMPLITUD: "))
-center = float(input("Center: "))
+amplitud = 2 #float(input("AMPLITUD: "))
+center = 7 #float(input("Center: "))
 d = 6
 
 # Define la función de movimiento
