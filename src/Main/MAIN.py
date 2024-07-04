@@ -13,7 +13,7 @@ from Libraries import Ultrasonidos as HC           # HC.measure_distance(positio
 from Libraries import New_color_detector as CAM    # CAM.detect_green(frame)    CAM.detect_red(frame)   CAM.detect_magenta(frame)
 from Libraries import tsc34725 as tcs              # get_color()
 from Libraries import parking as P                 # parking()
-from Libraries import Extra_Functions as F         # backward(initial_direction)
+#from Libraries import Extra_Functions as F         # backward(initial_direction)
 
 # Initialize the camera as a picamera
 camera = CAM.camera
@@ -164,7 +164,7 @@ try:
 
                         # Then we decide if we can go to the right or to the left depending what is the bigest distance
                         if right_distance > left_distance:
-                            F.backward(25, 100)
+                            #F.backward(25, 100)
                             print("Backward + Right")
                             if color == "Blue" and (first_color_detected == None or first_color_detected == "Blue") and not delay and count_turns:
                                 vertex_turns += 1
@@ -172,7 +172,7 @@ try:
                                 delay = True
                         
                         else:
-                            F.backward(25, -100)
+                            #F.backward(25, -100)
                             print("Backward + Left")
                             if color == "Orange" and (first_color_detected == None or first_color_detected == "Orange") and not delay and count_turns:
                                 vertex_turns += 1
