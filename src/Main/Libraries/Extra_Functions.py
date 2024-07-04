@@ -1,5 +1,5 @@
 # General Libraries of we:
-import MOTOR_DRIVER as MD
+#import MOTOR_DRIVER as MD
 import Ultrasonidos as HC
 
 def backward(traction, initial_direction):
