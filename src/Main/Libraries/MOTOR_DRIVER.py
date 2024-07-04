@@ -34,8 +34,6 @@ pwmENB.start(0)
 Direccion = GPIO.PWM(SERVO_PIN, 50)
 Direccion.start(0)
 
-d = 7.5
-
 GPIO.output(IN1, GPIO.LOW)
 GPIO.output(IN2, GPIO.LOW)
 GPIO.output(IN3, GPIO.LOW)
@@ -44,6 +42,8 @@ pwmENA.ChangeDutyCycle(0)
 pwmENB.ChangeDutyCycle(0)
 
 amplitud = int(input("AMPLITUD: "))
+center = 6
+d = 6
 
 # Define la función de movimiento
 def move(percent_vel, percent_dir):
