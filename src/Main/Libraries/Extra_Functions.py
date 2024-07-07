@@ -6,7 +6,7 @@ def backward(traction, initial_direction):
     print("BACKWARD STARTED")
     traction = abs(traction)
     front_distance = HC.measure_distance(1)
-    while front_distance < 30:
+    while front_distance < 25:
         print(f"bkwrd: t:{-traction} and d:{-initial_direction}")
         MD.move(-traction, -initial_direction)
         front_distance = HC.measure_distance(1)
