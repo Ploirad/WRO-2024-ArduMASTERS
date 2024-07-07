@@ -112,19 +112,19 @@ try:
                     print("No color detected")
 
                     # We comprobate if we can go forward without knock
-                    if front_distance > 30:
-                        print("FD > 30")
+                    if front_distance > 70:
+                        print("FD > 70")
 
                         # If we can we go forward
                         traction = 25
 
                         # We comprobate if we are very near to the walls
-                        if right_distance < 10:
+                        if right_distance < 15:
                             # If we are very near to the right wall we go to the left
                             direction = -100
                             print("Going to the left")
 
-                        elif left_distance < 10:
+                        elif left_distance < 15:
                             # Else if we are very near to the left wall we go to the right
                             direction = 100
                             print("Going to the right")
@@ -135,8 +135,8 @@ try:
                             print("Going straight")
 
                     # Then if we can't go ahead too much time we turn the direction to the right or left
-                    elif front_distance > 10:
-                        print("10 < FD < 30")
+                    elif front_distance > 30:
+                        print("30 < FD < 70")
 
                         # We start going forward
                         traction = 25
@@ -163,12 +163,11 @@ try:
 
                     # If we can't go ahead
                     else:
-                        print("FD < 10")
+                        print("FD < 30")
 
                         # Then we decide if we can go to the right or to the left depending what is the bigest distance
                         if right_distance > left_distance:
-                            traction = -25 #F.backward(25, 100)
-                            direction = 100
+                            F.backward(25, 100)
                             print("Backward + Right")
                             if color == "Blue" and (first_color_detected == None or first_color_detected == "Blue") and not delay and count_turns:
                                 vertex_turns += 1
@@ -176,8 +175,7 @@ try:
                                 delay = True
                         
                         else:
-                            traction = -25 #F.backward(25, -100)
-                            direction = -100
+                            F.backward(25, -100)
                             print("Backward + Left")
                             if color == "Orange" and (first_color_detected == None or first_color_detected == "Orange") and not delay and count_turns:
                                 vertex_turns += 1
