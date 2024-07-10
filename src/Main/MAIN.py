@@ -201,9 +201,13 @@ try:
                     
                     # Else if is red
                     elif red_area > green_area and red_area > 550:
-                        # We overtake the red pillar by the left
-                        direction = -100
-                        print("Red detected, overtaking by the left")
+                        if turns == 3:
+                            print("Changing direction")
+                            F.change_direction()
+                        else:
+                            # We overtake the red pillar by the left
+                            direction = -100
+                            print("Red detected, overtaking by the left")
 
                 # Move the car depending the desitions thet are taken about the movement of the car
                 print(f"Traction: {traction}; Direction: {direction}")
