@@ -1,0 +1,60 @@
+import RPi.GPIO as GPIO
+import time
+import threading
+
+# Configuración de los pines GPIO para los sensores
+TRIG = [23, 24, 25, 26]
+ECHO = [27, 28, 29, 30]
+
+# Configuración de GPIO
+GPIO.setmode(GPIO.BCM)
+for i in range(4):
+    GPIO.setup(TRIG[i], GPIO.OUT)
+    GPIO.setup(ECHO[i], GPIO.IN)
+
+# Función para medir la distancia
+def medir_distancia(trig, echo):
+    GPIO.output(trig, False)
+    time.sleep(2)
+
+    while True:
+        GPIO.output(trig, True)
+        time.sleep(0.00001)
+        GPIO.output(trig, False)
+
+        while GPIO.input(echo) == 0:
+            pulse_start = time.time()
+
+        while GPIO.input(echo) == 1:
+            pulse_end = time.time()
+
+        pulse_duration = pulse_end - pulse_start
+        distance = pulse_duration * 17150
+        distance = round(distance, 2)
+        time.sleep(1)
+        yield distance
+
+# Función que ejecuta cada hilo
+def capturar_distancia(sensor_id):
+    archivo = f"/tmp/sensor_{sensor_id}.txt"
+    trig = TRIG[sensor_id]
+    echo = ECHO[sensor_id]
+
+    with open(archivo, "w") as f:
+        for distancia in medir_distancia(trig, echo):
+            f.write(f"{distancia}\n")
+            f.flush()
+
+# Crear y empezar los hilos
+threads = []
+for i in range(4):
+    t = threading.Thread(target=capturar_distancia, args=(i,))
+    t.start()
+    threads.append(t)
+
+# Esperar a que los hilos terminen (aunque en este caso, no terminarán)
+for t in threads:
+    t.join()
+
+# Limpiar los pines GPIO al finalizar
+GPIO.cleanup()
