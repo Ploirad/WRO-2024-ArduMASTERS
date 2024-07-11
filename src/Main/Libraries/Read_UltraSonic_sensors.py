@@ -1,5 +1,5 @@
-import threading
-import time
+from External_Libraries import threading
+from External_Libraries import time
 
 # Definir una función para leer las distancias desde los archivos
 def leer_distancias(sensor_id):
