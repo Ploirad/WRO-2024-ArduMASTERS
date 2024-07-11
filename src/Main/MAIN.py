@@ -57,12 +57,15 @@ pillar_has_been_detected = False
 stop = False
 
 told = time.time()
+tnew = time.time()
 
 try:
     # If we aren't finished running
     if not stop:
         raw_capture.truncate(0)
         
+        print(f"Try: {time.time()-tnew}")
+
         # Take the frames continuously (without stop)
         for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port=True):
 
@@ -78,7 +81,7 @@ try:
             # Cut the image to take the inferior half part of it
             lower_half = image[height//2:, :]
 
-            # PRINCIPAL LOGIC
+            # MAIN LOGIC
             # If the button has been pressed
             if start:
                 # Detect the centroids of the colors
