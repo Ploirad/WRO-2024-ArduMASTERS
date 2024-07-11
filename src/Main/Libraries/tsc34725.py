@@ -1,6 +1,6 @@
-import adafruit_tcs34725
-import busio
-import board
+from External_Libraries import adafruit_tcs34725
+from External_Libraries import busio
+from External_Libraries import board
 
 def get_color():
     try:

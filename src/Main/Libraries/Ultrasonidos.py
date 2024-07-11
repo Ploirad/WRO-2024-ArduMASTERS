@@ -1,8 +1,8 @@
 #This code is a library for the ultrasonic sensors
 
 #Import the necessary libraries
-import RPi.GPIO as GPIO
-import time
+from External_Libraries import GPIO
+from External_Libraries import time
 
 #Initialize the sensors
 GPIO.setmode(GPIO.BCM)

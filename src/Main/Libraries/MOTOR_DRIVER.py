@@ -1,5 +1,5 @@
-import RPi.GPIO as GPIO
-import time
+from External_Libraries import GPIO
+from External_Libraries import time
 
 # Inicializa la librería GPIO
 GPIO.setmode(GPIO.BCM)

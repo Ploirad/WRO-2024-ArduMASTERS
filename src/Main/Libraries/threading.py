@@ -1,10 +1,10 @@
-import RPi.GPIO as GPIO
-import time
-import threading
+from External_Libraries import GPIO
+from External_Libraries import time
+from External_Libraries import threading
 
 # Configuración de los pines GPIO para los sensores
-TRIG = [23, 24, 25, 26]
-ECHO = [27, 28, 29, 30]
+TRIG = [23, 8, 17, 22]
+ECHO = [24, 7, 27, 10]
 
 # Configuración de GPIO
 GPIO.setmode(GPIO.BCM)
@@ -47,14 +47,17 @@ def capturar_distancia(sensor_id):
 
 # Crear y empezar los hilos
 threads = []
-for i in range(4):
-    t = threading.Thread(target=capturar_distancia, args=(i,))
-    t.start()
-    threads.append(t)
-
-# Esperar a que los hilos terminen (aunque en este caso, no terminarán)
-for t in threads:
-    t.join()
-
-# Limpiar los pines GPIO al finalizar
-GPIO.cleanup()
+try:
+    while True:
+        for i in range(4):
+            t = threading.Thread(target=capturar_distancia, args=(i,))
+            t.start()
+            threads.append(t)
+except Exception as e:
+    print(e)
+finally:
+    # Esperar a que los hilos terminen (aunque en este caso, no terminarán)
+    for t in threads:
+        t.join()
+    # Limpiar los pines GPIO al finalizar
+    GPIO.cleanup()

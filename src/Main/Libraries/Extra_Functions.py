@@ -1,5 +1,5 @@
 # General Libraries
-import time
+from External_Libraries import time
 
 # Our general Libraries:
 from Libraries import MOTOR_DRIVER as MD           # MD.move(percent_vel, percent_dir)
