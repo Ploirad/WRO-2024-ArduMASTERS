@@ -53,11 +53,11 @@ try:
             t = threading.Thread(target=capturar_distancia, args=(i,))
             t.start()
             threads.append(t)
+        # Esperar a que los hilos terminen (aunque en este caso, no terminarán)
+        for t in threads:
+            t.join()
 except Exception as e:
-    print(e)
+    print(f"eWRITE = {e}")
 finally:
-    # Esperar a que los hilos terminen (aunque en este caso, no terminarán)
-    for t in threads:
-        t.join()
     # Limpiar los pines GPIO al finalizar
     GPIO.cleanup()
