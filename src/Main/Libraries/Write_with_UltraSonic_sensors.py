@@ -42,7 +42,7 @@ def capturar_distancia(sensor_id):
 
     with open(archivo, "w") as f:
         for distancia in medir_distancia(trig, echo):
-            f.write(f"{distancia}\n")
+            f.write(distancia)
             f.flush()
 
 # Crear y empezar los hilos
