@@ -1,6 +1,8 @@
 from External_Libraries import threading
 from External_Libraries import time
 
+distance = 0.0
+
 # Definir una función para leer las distancias desde los archivos
 def leer_distancias(sensor_id):
     archivo = f"/tmp/sensor_{sensor_id}.txt"
@@ -12,6 +14,7 @@ def leer_distancias(sensor_id):
                 if lineas:
                     ultima_distancia = lineas[-1].strip()
                     print(f"Sensor {sensor_id}: {ultima_distancia} cm")
+                    distance = ultima_distancia
         except FileNotFoundError:
             print(f"Archivo para el sensor {sensor_id} no encontrado.")
         except Exception as e:
@@ -21,6 +24,8 @@ def leer_distancias(sensor_id):
 threads = []
 for i in range(4):
     t = threading.Thread(target=leer_distancias, args=(i,))
+    print(f"t = {t}")
+    print(f"d = {distance}")
     t.start()
     threads.append(t)
 
