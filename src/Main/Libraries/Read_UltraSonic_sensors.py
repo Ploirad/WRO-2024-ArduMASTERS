@@ -16,7 +16,6 @@ def leer_distancias(sensor_id):
             print(f"Archivo para el sensor {sensor_id} no encontrado.")
         except Exception as e:
             print(f"eREAD = {e}")
-        print("")
 
 # Crear y empezar los hilos para leer las distancias
 threads = []
