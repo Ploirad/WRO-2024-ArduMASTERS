@@ -1,3 +1,6 @@
+# This library is for do the parking part
+
+# Imort the libraries
 from External_Libraries import PiCamera
 from External_Libraries import PiRGBArray
 from External_Libraries import time

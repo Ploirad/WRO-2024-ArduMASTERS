@@ -1,4 +1,3 @@
-#PRUEBA_M.py
 import time
 import MOTOR_DRIVER as MD
 

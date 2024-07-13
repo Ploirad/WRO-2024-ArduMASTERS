@@ -5,6 +5,7 @@ from External_Libraries import time
 from Libraries import MOTOR_DRIVER as MD           # MD.move(percent_vel, percent_dir)
 from Libraries import Ultrasonidos as HC
 
+# This function is for go backward in the MAIN code
 def backward(traction, initial_direction):
     print("BACKWARD STARTED")
     traction = abs(traction)
@@ -16,6 +17,7 @@ def backward(traction, initial_direction):
     MD.move(traction, initial_direction)
     print("BACKWARD ENDED")
 
+# This function is for turn 180 degrees the car
 def change_direction():
     print("Backward and right")
     MD.move(-100, 100)
