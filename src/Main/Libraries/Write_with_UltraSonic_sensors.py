@@ -35,7 +35,7 @@ def read_sensor_distance(trig, echo):
         distance = round(distance, 2)
         yield distance
 
-# This function id for write the distances in four archives
+# This function is for write the distances in four archives
 def write_distances(sensor_id):
     archive = f"/tmp/sensor_{sensor_id}.txt"
     trig = TRIG[sensor_id]
