@@ -1,19 +1,22 @@
+# This code is for write in text archives the distances of the sensors
+
+# First we import the libraries
 from External_Libraries import GPIO
 from External_Libraries import time
 from External_Libraries import threading
 
-# Configuración de los pines GPIO para los sensores
+# Second we create two lists of the pins
 TRIG = [23, 8, 17, 22]
 ECHO = [24, 7, 27, 10]
 
-# Configuración de GPIO
+# Third we configurate the GPIO
 GPIO.setmode(GPIO.BCM)
 for i in range(4):
     GPIO.setup(TRIG[i], GPIO.OUT)
     GPIO.setup(ECHO[i], GPIO.IN)
 
-# Función para medir la distancia
-def medir_distancia(trig, echo):
+# This function is for read the distances of the pins specified
+def read_sensor_distance(trig, echo):
     GPIO.output(trig, False)
     
     while True:
@@ -32,29 +35,30 @@ def medir_distancia(trig, echo):
         distance = round(distance, 2)
         yield distance
 
-# Función que ejecuta cada hilo
-def capturar_distancia(sensor_id):
-    archivo = f"/tmp/sensor_{sensor_id}.txt"
+# This function id for write the distances in four archives
+def write_distances(sensor_id):
+    archive = f"/tmp/sensor_{sensor_id}.txt"
     trig = TRIG[sensor_id]
     echo = ECHO[sensor_id]
 
-    with open(archivo, "w") as f:
-        for distancia in medir_distancia(trig, echo):
-            f.write(distancia)
+    with open(archive, "w") as f:
+        for d in read_sensor_distance(trig, echo):
+            f.write(d)
 
-# Crear y empezar los hilos
+# Create and start the threats
 threads = []
 try:
     while True:
         for i in range(4):
-            t = threading.Thread(target=capturar_distancia, args=(i,))
+            t = threading.Thread(target=write_distances, args=(i,))
             t.start()
             threads.append(t)
-        # Esperar a que los hilos terminen (aunque en este caso, no terminarán)
+        # Wait for the end of the threats (in this case it doesn't happen)
         for t in threads:
             t.join()
+
 except Exception as e:
     print(f"eWRITE = {e}")
 finally:
-    # Limpiar los pines GPIO al finalizar
+    # Clean the GPIO at the end
     GPIO.cleanup()
