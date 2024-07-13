@@ -15,8 +15,7 @@ for i in range(4):
 # Función para medir la distancia
 def medir_distancia(trig, echo):
     GPIO.output(trig, False)
-    time.sleep(2)
-
+    
     while True:
         GPIO.output(trig, True)
         time.sleep(0.00001)
@@ -31,7 +30,6 @@ def medir_distancia(trig, echo):
         pulse_duration = pulse_end - pulse_start
         distance = pulse_duration * 17150
         distance = round(distance, 2)
-        time.sleep(1)
         yield distance
 
 # Función que ejecuta cada hilo
