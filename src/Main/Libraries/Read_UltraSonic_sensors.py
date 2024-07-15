@@ -45,3 +45,5 @@ while True:
     for i in range(4):
         distance = read_HC(i)
         print(f"distance{i}: {distance}")
+    print("")
+    time.sleep(1)
