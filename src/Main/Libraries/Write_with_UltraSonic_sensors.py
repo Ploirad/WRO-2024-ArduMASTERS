@@ -43,7 +43,7 @@ def write_distances(sensor_id):
 
     with open(archive, "w") as f:
         for d in read_sensor_distance(trig, echo):
-            f.write(d)
+            f.write(str(d))
 
 # Create and start the threats
 threads = []
