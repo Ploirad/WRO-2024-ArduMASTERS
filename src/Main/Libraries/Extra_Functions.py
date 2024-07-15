@@ -2,8 +2,8 @@
 import time
 
 # Our general Libraries:
-from Libraries import MOTOR_DRIVER as MD           # MD.move(percent_vel, percent_dir)
-from Libraries import Read_UltraSonic_sensors as RHC
+import MOTOR_DRIVER as MD           # MD.move(percent_vel, percent_dir)
+import Read_UltraSonic_sensors as RHC
 
 # This function is for go backward in the MAIN code
 def backward(traction, initial_direction):
