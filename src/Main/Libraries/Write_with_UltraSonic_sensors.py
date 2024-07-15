@@ -4,12 +4,14 @@
 from External_Libraries import GPIO
 from External_Libraries import time
 from External_Libraries import threading
+import signal
+import sys
 
 # Second we create two lists of the pins
 TRIG = [23, 8, 17, 22]
 ECHO = [24, 7, 27, 10]
 
-# Third we configurate the GPIO
+# Third we configure the GPIO
 GPIO.setmode(GPIO.BCM)
 for i in range(4):
     GPIO.setup(TRIG[i], GPIO.OUT)
@@ -36,26 +38,37 @@ def read_sensor_distance(trig, echo):
         yield distance
 
 # This function is for write the distances in four archives
-def write_distances(sensor_id):
+def write_distances(sensor_id, stop_event):
     archive = f"/tmp/sensor_{sensor_id}.txt"
     trig = TRIG[sensor_id]
     echo = ECHO[sensor_id]
 
     with open(archive, "w") as f:
         for d in read_sensor_distance(trig, echo):
-            f.write(str(d))
+            if stop_event.is_set():
+                break
+            f.write(str(d) + "\n")
+            time.sleep(0.1)  # Pausa para evitar uso excesivo de CPU
 
-# Create and start the threats
+# Handler for SIGINT to stop threads
+def signal_handler(sig, frame):
+    global stop_event
+    stop_event.set()
+
+# Create and start the threads
 threads = []
+stop_event = threading.Event()
+signal.signal(signal.SIGINT, signal_handler)
+
 try:
-    while True:
-        for i in range(4):
-            t = threading.Thread(target=write_distances, args=(i,))
-            t.start()
-            threads.append(t)
-        # Wait for the end of the threats (in this case it doesn't happen)
-        for t in threads:
-            t.join()
+    for i in range(4):
+        t = threading.Thread(target=write_distances, args=(i, stop_event))
+        t.start()
+        threads.append(t)
+
+    # Wait for the end of the threads (in this case it doesn't happen unless interrupted)
+    for t in threads:
+        t.join()
 
 except Exception as e:
     print(f"eWRITE = {e}")

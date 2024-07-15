@@ -1,18 +1,18 @@
 # This Library is for read the threads of the Ultrasonic sensors
 
-# This function
+import time
+import os
+
+# This function reads the distance from the specified sensor
 def read_HC(i):
-
-    # First we initialize and clear the list of distances
-    dists = []
-    dists.clear()
-
-    # Then we read the distance of the sensor
     file_path = f"/tmp/sensor_{i}.txt"
-        
-    with open(file_path, "r") as file:
-    # Then we save the content of the archive in the list
-        content = file.read()
-        return content
+    if os.path.exists(file_path):
+        with open(file_path, "r") as file:
+            content = file.read()
+            return content
+    else:
+        return ""
 
-print(read_HC(0))
+while True:
+    print(read_HC(0))
+    time.sleep(0.5)  # Pausa para evitar uso excesivo de CPU
