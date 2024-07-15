@@ -26,12 +26,5 @@ def read_HC():
 # Example of use:
 while True:
     d = read_HC()
-    front_distance = d[0]
-    right_distance = d[1]
-    back_distance = d[2]
-    left_distance = d[3]
-    print(f"Front Distance = {front_distance}")
-    print(f"Right Distance = {right_distance}")
-    print(f"Back Distance = {back_distance}")
-    print(f"Left Distance = {left_distance}")
+    print(f"D: {d}")
     print("")
