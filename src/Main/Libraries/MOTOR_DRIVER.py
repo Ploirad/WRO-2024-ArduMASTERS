@@ -1,7 +1,7 @@
 # This library is for controlate the direction and the traction
 
 # Import the libraries
-import RPi.GPIO as GPIO
+from External_Libraries import GPIO
 from External_Libraries import time
 
 # Inicializa la librería GPIO
