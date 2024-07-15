@@ -1,8 +1,8 @@
 # This Library is for reading the threads of the Ultrasonic sensors
 
 # This are the libraries used
-from External_Libraries import time
-from External_Libraries import os
+import time
+import os
 
 # This variables are for save the lasts distances read
 last_distance = 0
