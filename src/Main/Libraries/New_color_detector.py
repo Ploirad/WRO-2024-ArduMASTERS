@@ -1,11 +1,11 @@
 #This code is a library for the camera to take the color centroid and area of a specific frame given
 
 #Import the necessary libraries
-from External_Libraries import cv2
-from External_Libraries import np
-from External_Libraries import time
-from External_Libraries import PiCamera
-from External_Libraries import PiRGBArray
+import cv2
+import numpy as np
+import time
+from picamera import PiCamera
+from picamera.array import PiRGBArray
 
 camera = PiCamera()
 
