@@ -1,7 +1,7 @@
 #BASIC LIBRARIES
-from Libraries.External_Libraries import PiCamera
-from Libraries.External_Libraries import PiRGBArray
-from Libraries.External_Libraries import time
+from picamera import PiCamera
+from picamera.array import PiRGBArray
+import time
 
 # We start counting the time in that we do the race
 started_time = time.time()
