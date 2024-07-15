@@ -20,11 +20,11 @@ def backward(traction, initial_direction):
 # This function is for turn 180 degrees the car
 def change_direction():
     print("Backward and right")
-    MD.move(-100, 100)
+    MD.move(-100, 25)
     print("delay 5s")
     time.sleep(5)
     print("Forward and left")
-    MD.move(100, -100)
+    MD.move(100, -25)
     print("delay 2s")
     time.sleep(2)
     print("Direction changed")
