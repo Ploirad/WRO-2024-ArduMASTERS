@@ -1,8 +1,8 @@
 # This library is for controlate the direction and the traction
 
 # Import the libraries
-from External_Libraries import GPIO
-from External_Libraries import time
+import RPi.GPIO as GPIO
+import time
 
 # Inicializa la librería GPIO
 GPIO.setmode(GPIO.BCM)
