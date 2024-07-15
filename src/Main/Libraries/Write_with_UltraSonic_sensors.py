@@ -20,7 +20,7 @@ for i in range(4):
 # This function is for read the distances of the pins specified
 def read_sensor_distance(trig, echo):
     GPIO.output(trig, False)
-    
+    pulse_start = time.time()
     while True:
         GPIO.output(trig, True)
         time.sleep(0.00001)
