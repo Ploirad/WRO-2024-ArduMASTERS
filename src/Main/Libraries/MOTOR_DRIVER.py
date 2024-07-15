@@ -51,13 +51,13 @@ d = 6
 # Define la función de movimiento
 def move(percent_vel, percent_dir):
     global d, center, amplitud
-    d = center+((percent_dir/100)*amplitud)
-    #if percent_dir > 0:
-    #    d = 7
-    #elif percent_dir < 0:
-    #    d = 5
-    #else:
-    #    d = 6 #center
+    #d = center+((percent_dir/100)*amplitud)
+    if percent_dir > 0:
+        d = 7
+    elif percent_dir < 0:
+        d = 5
+    else:
+        d = 6 #center
     Direccion.start(d)
     # 2-12, 9.5
     print(d)
