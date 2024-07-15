@@ -14,6 +14,7 @@ def read_HC(i):
         return ""
 
 while True:
-    distance = read_HC(0)
-    print(distance)
+    for i in range(4):
+        distance = read_HC(i)
+        print(f"distance{i}: {distance}")
     time.sleep(0.5)  # Pausa para evitar uso excesivo de CPU
