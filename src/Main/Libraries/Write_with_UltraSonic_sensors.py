@@ -1,4 +1,4 @@
-# This code is for write in text archives the distances of the sensors
+# This code is for writing in text archives the distances of the sensors
 
 # First we import the libraries
 from External_Libraries import GPIO
@@ -37,18 +37,18 @@ def read_sensor_distance(trig, echo):
         distance = round(distance, 2)
         yield distance
 
-# This function is for write the distances in four archives
+# This function is for writing the distances in four archives
 def write_distances(sensor_id, stop_event):
     archive = f"/tmp/sensor_{sensor_id}.txt"
     trig = TRIG[sensor_id]
     echo = ECHO[sensor_id]
 
-    with open(archive, "w") as f:
-        for d in read_sensor_distance(trig, echo):
-            if stop_event.is_set():
-                break
+    for d in read_sensor_distance(trig, echo):
+        if stop_event.is_set():
+            break
+        with open(archive, "w") as f:
             f.write(str(d) + "\n")
-            time.sleep(0.1)  # Pausa para evitar uso excesivo de CPU
+        time.sleep(0.1)  # Pausa para evitar uso excesivo de CPU
 
 # Handler for SIGINT to stop threads
 def signal_handler(sig, frame):
