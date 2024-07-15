@@ -17,7 +17,7 @@ def read_HC():
             # Then we save the content of the archive in the list
             content = file.read()
             if content:
-                dists.append(float(content))
+                dists.append(content)
     
     # Finally we return the list
     return dists
