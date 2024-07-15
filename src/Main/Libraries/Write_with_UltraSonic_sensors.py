@@ -4,8 +4,8 @@
 from External_Libraries import GPIO
 from External_Libraries import time
 from External_Libraries import threading
-import signal
-import sys
+from External_Libraries import signal
+from External_Libraries import sys
 
 # Second we create two lists of the pins
 TRIG = [23, 8, 17, 22]

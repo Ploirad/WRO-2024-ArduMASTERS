@@ -19,6 +19,8 @@ import board
 
 # Write_with_UltraSonic_sensors.py Libraries
 import threading
+import signal
+import sys
 
 # Read_UltraSonic_sensors.py Libraries
 import os
