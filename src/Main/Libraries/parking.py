@@ -161,6 +161,7 @@ def run_until_magenta_detected():
 
 # This function is for the final part of the parking
 def parking():
+    global direction
     print("Parking mode")
     not_park = True
     not_parked = True
