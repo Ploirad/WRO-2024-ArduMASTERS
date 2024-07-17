@@ -208,8 +208,3 @@ def pass_wall(magenta_centroid):
         direction = -100
         print("Parking, turn left")
     return direction
-
-
-
-
-parking()
