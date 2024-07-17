@@ -180,7 +180,6 @@ def parking():
                 if magenta_centroid is not None and not_park:
                     direction = pass_wall(magenta_centroid)
                     MD.move(100, direction)
-                    
                 
                 else:
                     not_park = False
