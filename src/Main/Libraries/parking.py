@@ -9,13 +9,13 @@ import time
 started_time = time.time()
 
 #OUR LIBRARIES                                          # FUNCTIONS THAT WE ARE GOING TO USE
-from Libraries import Boton as B                        # B.button_state()
-from Libraries import MOTOR_DRIVER as MD                # MD.move(percent_vel, percent_dir)
-from Libraries import Read_UltraSonic_sensors as RHC    # RHC.read_HC(i); 0/1/2/3 = FD/RD/BD/LD
-from Libraries import New_color_detector as CAM         # CAM.detect_green(frame)    CAM.detect_red(frame)   CAM.detect_magenta(frame)
-from Libraries import tsc34725 as tcs                   # get_color()
-from Libraries import parking as P                      # parking()
-from Libraries import Extra_Functions as F              # backward(traction, initial_direction)
+import Boton as B                        # B.button_state()
+import MOTOR_DRIVER as MD                # MD.move(percent_vel, percent_dir)
+import Read_UltraSonic_sensors as RHC    # RHC.read_HC(i); 0/1/2/3 = FD/RD/BD/LD
+import New_color_detector as CAM         # CAM.detect_green(frame)    CAM.detect_red(frame)   CAM.detect_magenta(frame)
+import tsc34725 as tcs                   # get_color()
+import parking as P                      # parking()
+import Extra_Functions as F              # backward(traction, initial_direction)
 
 # Initialize the camera as a picamera
 camera = CAM.camera
@@ -209,3 +209,8 @@ def pass_wall(magenta_centroid):
         direction = -100
         print("Parking, turn left")
     return direction
+
+
+
+
+parking()
