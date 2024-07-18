@@ -1,7 +1,9 @@
 # This library is for do the parking part
 
 # Imort the libraries
-from Libraries.External_Libraries import *
+import time
+from picamera import PiCamera
+from picamera.array import PiRGBArray
 import Boton as B                        # B.button_state()
 import MOTOR_DRIVER as MD                # MD.move(percent_vel, percent_dir)
 import Read_UltraSonic_sensors as RHC    # RHC.read_HC(i); 0/1/2/3 = FD/RD/BD/LD

@@ -1,7 +1,11 @@
 # This code is for writing in text archives the distances of the sensors
 
 # First we import the libraries
-from External_Libraries import *
+import RPi.GPIO as GPIO
+import time
+import threading
+import signal
+import sys
 
 # Second we create two lists of the pins
 TRIG = [23, 8, 17, 22]

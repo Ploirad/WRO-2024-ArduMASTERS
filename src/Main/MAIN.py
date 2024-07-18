@@ -1,5 +1,7 @@
 # LIBRARIES
-from Libraries.External_Libraries import *
+import time
+from picamera import PiCamera
+from picamera.array import PiRGBArray
 from Libraries import Boton as B                        # B.button_state()
 from Libraries import MOTOR_DRIVER as MD                # MD.move(percent_vel, percent_dir)
 from Libraries import Read_UltraSonic_sensors as RHC    # RHC.read_HC(i); 0/1/2/3 = FD/RD/BD/LD

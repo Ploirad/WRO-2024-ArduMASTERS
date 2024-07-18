@@ -1,6 +1,7 @@
 # Libraries
-from External_Libraries import *
-from Our_Libraries import *
+import time
+import MOTOR_DRIVER as MD                # MD.move(percent_vel, percent_dir)
+import Read_UltraSonic_sensors as RHC    # RHC.read_HC(i); 0/1/2/3 = FD/RD/BD/LD
 
 # This function is for go backward in the MAIN code
 def backward(traction, initial_direction):

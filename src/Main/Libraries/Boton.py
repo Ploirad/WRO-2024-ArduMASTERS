@@ -1,7 +1,7 @@
 # This code is a library for the button to know if the button has been pressed or not
 
 # Libraries
-from External_Libraries import *
+import RPi.GPIO as GPIO
 
 # This function is used to give a boolean variable if the button has pressed (True) or not (False)
 def button_state():
