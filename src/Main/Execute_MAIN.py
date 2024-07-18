@@ -1,7 +1,7 @@
 # This code is for execute the codes
 
 # We import the libraries
-import subprocess
+from Libraries.External_Libraries import *
 
 # We define the commands
 cmd1 = "python3 Libraries/Write_with_UltraSonic_sensors.py"

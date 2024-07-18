@@ -1,9 +1,7 @@
 # This library is for read the color of the TCS34725
 
-# Import the libraries
-import adafruit_tcs34725
-import busio
-import board
+# Libraries
+from External_Libraries import *
 
 # This function is for get the color by the TCS34725
 def get_color():

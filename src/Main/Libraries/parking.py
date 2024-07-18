@@ -1,20 +1,11 @@
 # This library is for do the parking part
 
 # Imort the libraries
-from picamera import PiCamera
-from picamera.array import PiRGBArray
-import time
+from Libraries.External_Libraries import *
+from Libraries.Our_Libraries import *
 
 # We start counting the time in that we do the race
 started_time = time.time()
-
-#OUR LIBRARIES                                          # FUNCTIONS THAT WE ARE GOING TO USE
-import Boton as B                        # B.button_state()
-import MOTOR_DRIVER as MD                # MD.move(percent_vel, percent_dir)
-import Read_UltraSonic_sensors as RHC    # RHC.read_HC(i); 0/1/2/3 = FD/RD/BD/LD
-import New_color_detector as CAM         # CAM.detect_green(frame)    CAM.detect_red(frame)   CAM.detect_magenta(frame)
-import tsc34725 as tcs                   # get_color()
-import Extra_Functions as F              # backward(traction, initial_direction)
 
 # Initialize the camera as a picamera
 camera = CAM.camera
