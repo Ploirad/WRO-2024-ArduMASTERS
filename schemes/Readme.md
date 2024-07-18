@@ -3,5 +3,5 @@
 </p>
 
 <p align="center">
- <img width="700" height="400" src="https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/schemes/WRO car.jpg">
+ <img width="700" height="400" src="https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/francisco-y-mario/schemes/WRO Car.jpg">
 </p>
