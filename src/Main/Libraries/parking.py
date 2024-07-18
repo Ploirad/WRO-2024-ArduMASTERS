@@ -1,6 +1,6 @@
 # This library is for do the parking part
 
-# Imort the libraries
+# Import the libraries
 import time
 from picamera import PiCamera
 from picamera.array import PiRGBArray
