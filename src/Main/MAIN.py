@@ -39,7 +39,7 @@ magenta_area = 0
 #Variables for MD
 direction = 0
 traction = 0
-normal_traction = 30
+normal_traction = 100
 
 #Variable for B
 start = False
