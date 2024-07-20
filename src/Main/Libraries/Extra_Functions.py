@@ -12,7 +12,9 @@ def backward(traction, initial_direction):
         print(f"bkwrd: t:{-traction} and d:{-initial_direction}")
         MD.move(-traction, -initial_direction)
         front_distance = RHC.read_HC(0)
+    time.sleep(2)
     MD.move(traction, initial_direction)
+    time.sleep(2)
     print("BACKWARD ENDED")
 
 # This function is for turn 180 degrees the car
