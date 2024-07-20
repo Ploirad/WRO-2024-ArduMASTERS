@@ -39,7 +39,7 @@ magenta_area = 0
 #Variables for MD
 direction = 0
 traction = 0
-normal_traction = 100
+normal_traction = int(input("vel: "))
 
 #Variable for B
 start = False
