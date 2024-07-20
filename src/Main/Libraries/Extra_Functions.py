@@ -8,12 +8,15 @@ def backward(traction, initial_direction):
     print("BACKWARD STARTED")
     traction = abs(traction)
     front_distance = RHC.read_HC(0)
-    while front_distance < 25:
+    while front_distance < 30:
         print(f"bkwrd: t:{-traction} and d:{-initial_direction}")
-        MD.move(-traction, -initial_direction)
+        MD.move(-traction, -100)
         front_distance = RHC.read_HC(0)
     time.sleep(2)
-    MD.move(traction, initial_direction)
+    if front_distance >= 30:
+        MD.move(traction, 100)
+    else:
+        backward(traction, initial_direction)
     time.sleep(2)
     print("BACKWARD ENDED")
 
