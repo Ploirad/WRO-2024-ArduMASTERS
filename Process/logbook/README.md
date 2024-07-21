@@ -31,11 +31,13 @@ In January we made the connections and we alredy had the competition rules, so w
 ## February
 During February, we had learnt how to manage a readme, we created the first car model, we improve the engine script too, we create our logo.
 ## March
-In March, we 
+In March, we did some test such as GPIO, ultrasounds, servos, camera with the library PiCamera 2, that we later removed due to malfunction; we did the first attempt of the main code too, we also had updated the stl files of our car models and improved a little bit the Readme's.
 ## April
-
+During April, we essentially learnt how to work with Open CV due to the malfunction of the camera I had mentioned before.
 ## May
+In May, we created a camera version that finally works well, we done our first version of the parking, we improved the first version of the main code too and we clean the code making the main code able to access a new folder where we keep all the functions used in the main.
 
+At this time one mate joined to us but another one left us.
 ## June
-
+During June, we solved some bugs, created a new car model, we also added a tcs34725 (a color detector) and changed again the main codes according with the cleaner code system.
 ## July
