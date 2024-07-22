@@ -8,16 +8,32 @@ def backward(traction, initial_direction):
     print("BACKWARD STARTED")
     traction = abs(traction)
     front_distance = RHC.read_HC(0)
+    right_distance = RHC.read_HC(1)
+    left_distance = RHC.read_HC(3)
     while front_distance < 30:
         print(f"bkwrd: t:{-traction} and d:{-initial_direction}")
-        MD.move(-traction, -100)
+        if right_distance > left_distance:
+            direction = -100
+        else:
+            direction = 100
+        MD.move(-traction, direction)
         front_distance = RHC.read_HC(0)
-    #time.sleep(2)
-    if front_distance >= 30:
-        MD.move(traction, 100)
-    else:
-        backward(traction, initial_direction)
-    time.sleep(2)
+        right_distance = RHC.read_HC(1)
+        left_distance = RHC.read_HC(3)
+
+    MD.move(traction, 100)
+    time.sleep(1)
+    while True:
+        front_distance = RHC.read_HC(0)
+        right_distance = RHC.read_HC(1)
+        left_distance = RHC.read_HC(3)
+        if right_distance <= 85 and left_distance <= 85:
+            break
+        elif right_distance > 86:
+            MD.move(traction, -100)
+        else:
+            MD.move(traction, 100)
+    MD.move(traction, 0)
     print("BACKWARD ENDED")
 
 # This function is for turn 180 degrees the car
