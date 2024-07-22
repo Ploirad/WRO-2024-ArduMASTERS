@@ -8,4 +8,4 @@
 <h1>Summary:
   </h1><b/>
   
-In this folder we got our [logo](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Process/MASTERS.png), a [log book](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Process/logbook) of our progress and a [detailed guide](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Process/guide) in oreder to make yourself our car (not working yet).
+In this folder we got our [logo](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Process/MASTERS.png) and a [log book](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Process/logbook) of our progress.
