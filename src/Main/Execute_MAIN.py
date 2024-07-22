@@ -2,6 +2,7 @@
 
 # We import the libraries
 import subprocess
+import cv2
 
 # We define the commands
 cmd1 = "python3 Libraries/Write_with_UltraSonic_sensors.py"
@@ -12,3 +13,8 @@ proc1 = subprocess.Popen(cmd1, shell=True)
 
 # Finnaly we execute the second command
 proc2 = subprocess.run(cmd2, shell=True)
+
+while True:
+    key = cv2.waitKey(1) & 0xFF
+    if key == ord("q"):
+        break
