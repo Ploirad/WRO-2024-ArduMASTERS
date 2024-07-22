@@ -60,7 +60,6 @@ def move(percent_vel, percent_dir):
     else:
         d = 6 #center
     Direccion.start(d)
-    # 2-12, 9.5
     print(d)
 
     if percent_vel > 0:
