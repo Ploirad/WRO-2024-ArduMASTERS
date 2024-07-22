@@ -12,7 +12,7 @@ def backward(traction, initial_direction):
         print(f"bkwrd: t:{-traction} and d:{-initial_direction}")
         MD.move(-traction, -100)
         front_distance = RHC.read_HC(0)
-    time.sleep(2)
+    #time.sleep(2)
     if front_distance >= 30:
         MD.move(traction, 100)
     else:
