@@ -20,4 +20,6 @@ def calc(ultrasonic_measure):
     print(f"front_ultrasonic_measure_list: {front_ultrasonic_measure_list}")
     if len(front_ultrasonic_measure_list) > 4:
         front_deviation = np.std(front_ultrasonic_measure_list)
-    return front_deviation
+        return front_deviation
+    else:
+        return 10
