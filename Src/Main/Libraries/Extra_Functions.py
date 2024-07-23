@@ -17,9 +17,10 @@ def backward(traction, initial_direction, execute=False):
             MD.move(-traction, -initial_direction)
             front_distance = RHC.read_HC(0)
             back_distance = RHC.read_HC(2)
-            
+
             if execute and UD.calc(front_distance) < 10:
                 execute = False
+                time.sleep(2)
 
         MD.move(traction, initial_direction)
         time.sleep(1)
