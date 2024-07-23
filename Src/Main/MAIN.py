@@ -10,6 +10,7 @@ from Libraries import New_color_detector as CAM         # CAM.detect_green(frame
 from Libraries import tsc34725 as tcs                   # get_color()
 from Libraries import Extra_Functions as F              # backward(traction, initial_direction)
 from Libraries import parking as P
+from Libraries import Ultrasonic_deviation as UD
 
 # We start counting the time in that we do the race
 started_time = time.time()
@@ -59,24 +60,6 @@ stop = False
 told = time.time()
 tnew = time.time()
 
-front_ultrasonic_measure_list = []
-
-def ultrasonic_deviation(ultrasonic_measure, right, left):
-    global front_ultrasonic_measure_list
-    front_ultrasonic_measure_list.append(ultrasonic_measure)
-    if len(front_ultrasonic_measure_list) > 5:
-        front_ultrasonic_measure_list.pop(0)
-    print(f"front_ultrasonic_measure_list: {front_ultrasonic_measure_list}")
-    if len(front_ultrasonic_measure_list) > 4:
-        front_deviation = np.std(front_ultrasonic_measure_list)
-        print(f"front_deviation: {front_deviation}")
-        if front_deviation > 10:
-            if right > left:
-                F.backward(normal_traction, 100)
-            else:
-                F.backward(normal_traction, -100)
-    
-
 try:
     # If we aren't finished running
     if not stop:
@@ -123,7 +106,7 @@ try:
                     right_distance = RHC.read_HC(1)
                     left_distance = RHC.read_HC(3)
 
-                    ultrasonic_deviation(front_distance, right_distance, left_distance)
+                    UD.ultrasonic_deviation(front_distance, right_distance, left_distance, normal_traction)
 
                     if front_distance > 1199:
                         F.backward(normal_traction, 0)
