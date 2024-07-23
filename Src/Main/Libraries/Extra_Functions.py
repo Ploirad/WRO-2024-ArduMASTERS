@@ -18,7 +18,7 @@ def backward(traction, initial_direction, execute=False):
             front_distance = RHC.read_HC(0)
             back_distance = RHC.read_HC(2)
 
-            if execute and UD.calc(front_distance) < 10:
+            if execute and UD.calc(front_distance) < 15:
                 execute = False
                 time.sleep(2)
 
