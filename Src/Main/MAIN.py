@@ -66,8 +66,10 @@ def ultrasonic_deviation(ultrasonic_measure, right, left):
     front_ultrasonic_measure_list.append(ultrasonic_measure)
     if len(front_ultrasonic_measure_list) > 5:
         front_ultrasonic_measure_list.pop(0)
+    print(f"front_ultrasonic_measure_list: {front_ultrasonic_measure_list}")
     if len(front_ultrasonic_measure_list) > 4:
         front_deviation = np.std(front_ultrasonic_measure_list)
+        print(f"front_deviation: {front_deviation}")
         if front_deviation > 10:
             if right > left:
                 F.backward(normal_traction, 100)
