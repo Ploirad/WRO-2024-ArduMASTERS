@@ -106,7 +106,7 @@ try:
                     right_distance = RHC.read_HC(1)
                     left_distance = RHC.read_HC(3)
 
-                    UD.ultrasonic_deviation(front_distance, right_distance, left_distance, normal_traction)
+                    UD.ultrasonic_dev(front_distance, right_distance, left_distance, normal_traction)
 
                     if front_distance > 1199:
                         F.backward(normal_traction, 0)
