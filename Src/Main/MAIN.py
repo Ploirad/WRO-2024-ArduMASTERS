@@ -1,5 +1,6 @@
 # LIBRARIES
 import time
+import numpy as np
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 from Libraries import Boton as B                        # B.button_state()
@@ -58,6 +59,22 @@ stop = False
 told = time.time()
 tnew = time.time()
 
+front_ultrasonic_measure_list = []
+
+def ultrasonic_deviation(ultrasonic_measure, right, left):
+    global front_ultrasonic_measure_list
+    front_ultrasonic_measure_list.append(ultrasonic_measure)
+    if len(front_ultrasonic_measure_list) > 5:
+        front_ultrasonic_measure_list.pop(0)
+    if len(front_ultrasonic_measure_list) > 4:
+        front_deviation = np.std(front_ultrasonic_measure_list)
+        if front_deviation > 10:
+            if right > left:
+                F.backward(normal_traction, 100)
+            else:
+                F.backward(normal_traction, -100)
+    
+
 try:
     # If we aren't finished running
     if not stop:
@@ -103,6 +120,8 @@ try:
                     front_distance = RHC.read_HC(0)
                     right_distance = RHC.read_HC(1)
                     left_distance = RHC.read_HC(3)
+
+                    ultrasonic_deviation(front_distance, right_distance, left_distance)
 
                     if front_distance > 1199:
                         F.backward(normal_traction, 0)
