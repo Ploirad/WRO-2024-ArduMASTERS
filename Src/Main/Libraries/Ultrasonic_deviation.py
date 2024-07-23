@@ -6,7 +6,7 @@ front_ultrasonic_measure_list = []
 def ultrasonic_dev(ultrasonic_measure, right, left, normal_traction):
     front_deviation = calc(ultrasonic_measure)
     print(f"front_deviation: {front_deviation}")
-    if front_deviation > 10:
+    if front_deviation > 20:
         if right > left:
             F.backward(normal_traction, 100, True)
         else:
