@@ -29,7 +29,7 @@ def backward(traction, initial_direction):
         MD.move(traction, 0)
         time.sleep(2)
 
-        if front_distance > 150:
+        if front_distance > 100:
             break
 
 # This function is for turn 180 degrees the car
