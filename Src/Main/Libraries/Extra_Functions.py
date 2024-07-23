@@ -9,25 +9,15 @@ def backward(traction, initial_direction):
     traction = abs(traction)
     while True:
         front_distance = RHC.read_HC(0)
-        right_distance = RHC.read_HC(1)
-        left_distance = RHC.read_HC(3)
-        # back_distance = RHC.read_HC(2)
-        direction = 0
-
-        if right_distance > left_distance:
-            direction = 100
-        else:
-            direction = -100
-
-        MD.move(-traction, -direction)
-        time.sleep(2)
-
-        while front_distance > 1199:
+        #right_distance = RHC.read_HC(1)
+        #left_distance = RHC.read_HC(3)
+        back_distance = RHC.read_HC(2)
+        while front_distance < 40 or back_distance > 20:
+            MD.move(-traction, -initial_direction)
             front_distance = RHC.read_HC(0)
-            MD.move(-traction, -direction)
+            back_distance = RHC.read_HC(2)
 
         MD.move(traction, 0)
-        time.sleep(2)
 
         if front_distance > 100:
             break
