@@ -22,6 +22,10 @@ def backward(traction, initial_direction):
         MD.move(-traction, -direction)
         time.sleep(5)
 
+        while front_distance > 1199:
+            front_distance = RHC.read_HC(0)
+            MD.move(-traction, -direction)
+
         MD.move(traction, 0)
         time.sleep(2)
 
