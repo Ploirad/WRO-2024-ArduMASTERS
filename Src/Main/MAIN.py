@@ -104,6 +104,9 @@ try:
                     right_distance = RHC.read_HC(1)
                     left_distance = RHC.read_HC(3)
 
+                    if front_distance > 1199:
+                        F.backward(normal_traction, 0)
+
                     # If we detect that we aren't in the zone between orange and blue lines
                     if color == "Gray":
                         # We let the car incrementate vortex_turn in 1 unit when we detect a line in the floor
