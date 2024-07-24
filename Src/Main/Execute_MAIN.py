@@ -5,7 +5,7 @@ import subprocess
 import cv2
 
 # We define the commands
-cmd1 = "python3 Libraries/Movement.py"
+cmd1 = "python3 Movement.py"
 cmd2 = "python3 MAIN.py"
 
 # We execute the first command in background
