@@ -90,8 +90,8 @@ def move(stop_event):
             "HC1": hc1_distance,
             "HC2": hc2_distance,
             "HC3": hc3_distance,
-            "Traction": t,
-            "Direction": d
+            "TRACTION": t,
+            "DIRECTION": d
         }
         json.dump(data, j, indent=4)
 
