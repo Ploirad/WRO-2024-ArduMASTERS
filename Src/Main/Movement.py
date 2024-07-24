@@ -6,10 +6,7 @@ import time
 import threading
 import signal
 import sys
-
 import json
-from Libraries import MOTOR_DRIVER as MD
-from Libraries import Extra_Functions as F
 
 # Second we create two lists of the pins
 TRIG = [23, 8, 17, 22]
