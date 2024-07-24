@@ -185,6 +185,22 @@ try:
                                 vertex_turns += 1
                                 first_color_detected = "Orange"
                                 delay = True
+                        
+                        if first_color_detected:
+                            if color == first_color_detected:
+                                if color == "Orange":
+                                    direction = 100
+                                else:
+                                    direction = -100
+                        else:
+                            if color == "Orange":
+                                direction = 100
+                                first_color_detected = "Orange"
+                            elif color == "Blue":
+                                direction = -100
+                                first_color_detected = "Blue"
+                            else:
+                                print("????")
 
                 # If we see any color
                 else:
