@@ -91,6 +91,11 @@ def move(stop_event):
         HC2 = measure_distance(TRIG[2], ECHO[2])
         HC3 = measure_distance(TRIG[3], ECHO[3])
 
+        print(HC0)
+        print(HC1)
+        print(HC2)
+        print(HC3)
+
         # Check for None values to avoid writing invalid data
         if HC0 is None or HC1 is None or HC2 is None or HC3 is None:
             continue
