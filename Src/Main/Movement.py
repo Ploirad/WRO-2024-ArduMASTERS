@@ -17,6 +17,7 @@ GPIO.setmode(GPIO.BCM)
 for i in range(4):
     GPIO.setup(TRIG[i], GPIO.OUT)
     GPIO.setup(ECHO[i], GPIO.IN)
+    GPIO.output(TRIG[i], False)  # Ensure TRIG pins are low
 
 # Handler for SIGINT to stop threads
 def signal_handler(sig, frame):
@@ -52,20 +53,28 @@ def principal_logic(HC0, HC1, HC3):
 def measure_distance(GPIO_TRIGGER, GPIO_ECHO):
     # Assure the TRIG pin is clean
     GPIO.output(GPIO_TRIGGER, False)
-    time.sleep(0.000002)  # Reduce the delay here if possible
+    time.sleep(0.000002)  # Short delay to settle the TRIG pin
 
-    # Send a pulse of 10µs to trig the sensor
+    # Send a pulse of 10µs to trigger the sensor
     GPIO.output(GPIO_TRIGGER, True)
     time.sleep(0.00001)
     GPIO.output(GPIO_TRIGGER, False)
 
     # Save the start and end time of the pulse
-    start_time, stop_time = time.time(), time.time()
+    start_time = time.time()
+    stop_time = time.time()
+
+    # Wait for the echo start
     while GPIO.input(GPIO_ECHO) == 0:
         start_time = time.time()
+        if start_time - stop_time > 0.1:  # Timeout to avoid infinite loop
+            return None
 
+    # Wait for the echo end
     while GPIO.input(GPIO_ECHO) == 1:
         stop_time = time.time()
+        if stop_time - start_time > 0.1:  # Timeout to avoid infinite loop
+            return None
 
     # Calculate the duration of the pulse
     elapsed_time = stop_time - start_time
@@ -76,26 +85,31 @@ def measure_distance(GPIO_TRIGGER, GPIO_ECHO):
     return distance
 
 def move(stop_event):
-    while True:
-        if stop_event.is_set():
-            break
-
+    while not stop_event.is_set():
         HC0 = measure_distance(TRIG[0], ECHO[0])
         HC1 = measure_distance(TRIG[1], ECHO[1])
         HC2 = measure_distance(TRIG[2], ECHO[2])
         HC3 = measure_distance(TRIG[3], ECHO[3])
 
+        # Check for None values to avoid writing invalid data
+        if HC0 is None or HC1 is None or HC2 is None or HC3 is None:
+            continue
+
+        t, d = principal_logic(HC0, HC1, HC3)
+        data = {
+            "HC0": HC0,
+            "HC1": HC1,
+            "HC2": HC2,
+            "HC3": HC3,
+            "TRACTION": t,
+            "DIRECTION": d
+        }
+
         with open("Move.json", "w", encoding='utf-8') as j:
-            t, d = principal_logic(HC0, HC1, HC3)
-            data = {
-                "HC0": HC0,
-                "HC1": HC1,
-                "HC2": HC2,
-                "HC3": HC3,
-                "TRACTION": t,
-                "DIRECTION": d
-            }
             json.dump(data, j, indent=4)
+
+        # Optional sleep to reduce the frequency of measurements
+        time.sleep(0.1)
 
 # Create and start the threads
 threads = []
@@ -112,7 +126,7 @@ try:
         t.join()
 
 except Exception as e:
-    print(f"eWRITE = {e}")
+    print(f"Error: {e}")
 finally:
     # Clean the GPIO at the end
     GPIO.cleanup()
