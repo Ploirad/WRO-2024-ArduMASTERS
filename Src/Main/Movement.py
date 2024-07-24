@@ -70,30 +70,31 @@ def principal_logic(HC0, HC1, HC3):
     return traction, direction
 
 def move(stop_event):
-    if stop_event.is_set():
-        return None
+    while True:
+        if stop_event.is_set():
+            return None
 
-    HC0 = read_sensor_distance(TRIG[0], ECHO[0])
-    HC1 = read_sensor_distance(TRIG[1], ECHO[1])
-    HC2 = read_sensor_distance(TRIG[2], ECHO[2])
-    HC3 = read_sensor_distance(TRIG[3], ECHO[3])
+        HC0 = read_sensor_distance(TRIG[0], ECHO[0])
+        HC1 = read_sensor_distance(TRIG[1], ECHO[1])
+        HC2 = read_sensor_distance(TRIG[2], ECHO[2])
+        HC3 = read_sensor_distance(TRIG[3], ECHO[3])
 
-    hc0_distance = next(HC0)
-    hc1_distance = next(HC1)
-    hc2_distance = next(HC2)
-    hc3_distance = next(HC3)
+        hc0_distance = next(HC0)
+        hc1_distance = next(HC1)
+        hc2_distance = next(HC2)
+        hc3_distance = next(HC3)
 
-    with open("Move.json", "w", encoding='utf-8') as j:
-        t, d = principal_logic(hc0_distance, hc1_distance, hc3_distance)
-        data = {
-            "HC0": hc0_distance,
-            "HC1": hc1_distance,
-            "HC2": hc2_distance,
-            "HC3": hc3_distance,
-            "TRACTION": t,
-            "DIRECTION": d
-        }
-        json.dump(data, j, indent=4)
+        with open("Move.json", "w", encoding='utf-8') as j:
+            t, d = principal_logic(hc0_distance, hc1_distance, hc3_distance)
+            data = {
+                "HC0": hc0_distance,
+                "HC1": hc1_distance,
+                "HC2": hc2_distance,
+                "HC3": hc3_distance,
+                "TRACTION": t,
+                "DIRECTION": d
+            }
+            json.dump(data, j, indent=4)
 
 # Create and start the threads
 threads = []
