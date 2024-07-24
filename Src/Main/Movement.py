@@ -48,6 +48,13 @@ def principal_logic(HC0, HC1, HC3):
         else:
             direction = 100
 
+    if HC0 > 1200:
+        traction = -100
+        if HC1 > HC3:
+            direction = -100
+        else:
+            direction = 100
+
     return traction, direction
 
 def measure_distance(GPIO_TRIGGER, GPIO_ECHO):
