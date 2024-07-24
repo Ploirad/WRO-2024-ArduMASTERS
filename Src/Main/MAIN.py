@@ -10,7 +10,6 @@ from Libraries import New_color_detector as CAM         # CAM.detect_green(frame
 from Libraries import tsc34725 as tcs                   # get_color()
 from Libraries import Extra_Functions as F              # backward(traction, initial_direction)
 from Libraries import parking as P
-from Libraries import Ultrasonic_deviation as UD
 
 # We start counting the time in that we do the race
 started_time = time.time()
@@ -49,7 +48,7 @@ start = False
 #Variables for count the turns
 vertex_turns = 0
 turns = 0
-count_turns = True
+count_laps = True
 first_color_detected = None
 delay = False
 
@@ -94,7 +93,7 @@ try:
                 print(f"Green Centroid: {green_centroid}; Red Centroid: {red_centroid}; Magenta Centroid: {magenta_centroid}")
 
                 # If we need detect the lines:
-                if count_turns:
+                if count_laps:
                     # Take the color of the floor lines as a string
                     color = tcs.get_color()
                     print(color)
@@ -106,10 +105,6 @@ try:
                     right_distance = RHC.read_HC(1)
                     left_distance = RHC.read_HC(3)
 
-                    UD.ultrasonic_dev(front_distance, right_distance, left_distance, normal_traction)
-
-                    if front_distance > 1199:
-                        F.backward(normal_traction, 0)
 
                     # If we detect that we aren't in the zone between orange and blue lines
                     if color == "Gray":
@@ -153,22 +148,22 @@ try:
                         # If the right distance is bigger than the left distance
                         if right_distance > left_distance:
                             # We go to the right
-                            direction = 100
                             print("Going to the right")
-                            if color == "Orange" and (first_color_detected == None or first_color_detected == "Orange") and not delay and count_turns:
+                            if color == "Orange" and (first_color_detected == None or first_color_detected == "Orange") and not delay and count_laps:
                                 vertex_turns += 1
                                 first_color_detected = "Orange"
                                 delay = True
+                                direction = 100
 
                         # Else if the left is bigger than the right distance
                         else:
                             # We go to the left
-                            direction = -100
                             print("Going to the left")
-                            if color == "Blue" and (first_color_detected == None or first_color_detected == "Blue") and not delay and count_turns:
+                            if color == "Blue" and (first_color_detected == None or first_color_detected == "Blue") and not delay and count_laps:
                                 vertex_turns += 1
                                 first_color_detected = "Blue"
                                 delay = True
+                                direction = -100
 
                     # If we can't go ahead
                     else:
@@ -178,7 +173,7 @@ try:
                         if right_distance > left_distance:
                             F.backward(normal_traction, 100)
                             print("Backward + Right")
-                            if color == "Blue" and (first_color_detected == None or first_color_detected == "Blue") and not delay and count_turns:
+                            if color == "Blue" and (first_color_detected == None or first_color_detected == "Blue") and not delay and count_laps:
                                 vertex_turns += 1
                                 first_color_detected = "Blue"
                                 delay = True
@@ -186,7 +181,7 @@ try:
                         else:
                             F.backward(normal_traction, -100)
                             print("Backward + Left")
-                            if color == "Orange" and (first_color_detected == None or first_color_detected == "Orange") and not delay and count_turns:
+                            if color == "Orange" and (first_color_detected == None or first_color_detected == "Orange") and not delay and count_laps:
                                 vertex_turns += 1
                                 first_color_detected = "Orange"
                                 delay = True
@@ -238,7 +233,7 @@ try:
 
             # If we done the 3 turns we comprobate if we are in the first or in the second round
             if turns >= 3:
-                count_turns = False
+                count_laps = False
                 if pillar_has_been_detected:
                     parked = P.run_until_magenta_detected()
                     stop = parked

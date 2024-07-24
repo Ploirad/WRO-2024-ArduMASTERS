@@ -2,10 +2,9 @@
 import time
 from Libraries import MOTOR_DRIVER as MD                # MD.move(percent_vel, percent_dir)
 from Libraries import Read_UltraSonic_sensors as RHC    # RHC.read_HC(i); 0/1/2/3 = FD/RD/BD/LD
-from Libraries import Ultrasonic_deviation as UD
 
 # This function is for go backward in the MAIN code
-def backward(traction, initial_direction, execute=False):
+def backward(traction, initial_direction):
     print("BACKWARD STARTED")
     traction = abs(traction)
     while True:
@@ -13,15 +12,11 @@ def backward(traction, initial_direction, execute=False):
         #right_distance = RHC.read_HC(1)
         #left_distance = RHC.read_HC(3)
         back_distance = RHC.read_HC(2)
-        while front_distance < 40 or back_distance > 20 or execute:
+        while front_distance < 40 or back_distance > 20:
             MD.move(-traction, -initial_direction)
             front_distance = RHC.read_HC(0)
             back_distance = RHC.read_HC(2)
-
-            if execute and UD.calc(front_distance) < 15:
-                execute = False
-                time.sleep(2)
-
+            
         MD.move(traction, initial_direction)
         time.sleep(1)
         
