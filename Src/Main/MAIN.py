@@ -5,7 +5,7 @@ from Libraries import Boton
 
 can_start = False
 
-tim = int(input("Tim: "))
+tim = float(input("Tim: "))
 
 while True:
     try:
