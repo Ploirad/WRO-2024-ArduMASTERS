@@ -5,6 +5,8 @@ from Libraries import Boton
 
 can_start = False
 
+tim = int(input("Tim: "))
+
 while True:
     try:
         if can_start:
@@ -18,7 +20,7 @@ while True:
 
                     if traction < 0:
                         Motor.move(traction, direction)
-                        time.sleep(1)
+                        time.sleep(tim)
                     else:
                         Motor.move(traction, direction)
                 else:
