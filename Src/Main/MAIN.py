@@ -38,6 +38,16 @@ while True:
                             else:
                                 print("Invalid data format in JSON file")
 
+            with open("tcs_color_detection.json", "r", encoding='utf-8') as f:
+                tcs = json.load(f)
+                print(tcs)
+
+                laps = tcs["laps"]
+
+                if laps >= 3:
+                    print("OK")
+                    break
+
                 Motor.move(traction, direction)
                 if traction < 0:
                     time.sleep(tim)
