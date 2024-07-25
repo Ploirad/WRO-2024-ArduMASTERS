@@ -1,5 +1,5 @@
-from picamera import PiCamera
 from picamera.array import PiRGBArray
+from picamera import PiCamera
 import time
 import cv2
 import numpy as np
@@ -10,7 +10,8 @@ camera = PiCamera()
 camera.resolution = resolucion
 rawCapture = PiRGBArray(camera, size=resolucion)
 
-frame = camera.capture_continuous(rawCapture, format="bgr", use_video_port=True).array
+image = camera.capture_continuous(rawCapture, format="bgr", use_video_port=True)
+frame = image.array
 
 r = cv2.selectROI("frame", frame, fromCenter=False, showCrosshair=True)
 r = tuple(map(int,r))
