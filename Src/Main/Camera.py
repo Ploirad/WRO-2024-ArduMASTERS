@@ -86,6 +86,3 @@ try:
 
 except Exception as e:
     print(f"Error: {e}")
-finally:
-    # Clean the GPIO at the end
-    GPIO.cleanup()
