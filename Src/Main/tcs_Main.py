@@ -34,7 +34,7 @@ def color_detection(stop_event):
             turn_started = True
             turn_done = False
 
-        elif color_obteined == "Gray":
+        elif color_obteined == "Unknown":   #this should be Gray but this to make a test
             turn_started = False
 
         
