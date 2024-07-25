@@ -1,24 +1,33 @@
 import json
 import time
 from Libraries import MOTOR_DRIVER as Motor
+from Libraries import Boton
+
+can_start = False
 
 while True:
     try:
-        with open("Move.json", "r", encoding='utf-8') as f:
-            data = json.load(f)
-            print(data)
+        if can_start:
+            with open("Move.json", "r", encoding='utf-8') as f:
+                data = json.load(f)
+                print(data)
 
-            if "TRACTION" in data and "DIRECTION" in data:
-                traction = int(data["TRACTION"])
-                direction = int(data["DIRECTION"])
+                if "TRACTION" in data and "DIRECTION" in data:
+                    traction = int(data["TRACTION"])
+                    direction = int(data["DIRECTION"])
 
-                if traction < 0:
-                    Motor.move(traction, direction)
-                    time.sleep(1)
+                    if traction < 0:
+                        Motor.move(traction, direction)
+                        time.sleep(1)
+                    else:
+                        Motor.move(traction, direction)
                 else:
-                    Motor.move(traction, direction)
-            else:
-                print("Invalid data format in JSON file")
+                    print("Invalid data format in JSON file")
+
+        else:
+            print("Waiting for start signal")
+            if Boton.button_state():
+                can_start = True
 
     except FileNotFoundError:
         print("Move.json file not found. Make sure the file exists.")
