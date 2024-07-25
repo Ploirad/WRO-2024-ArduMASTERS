@@ -2,6 +2,7 @@ import json
 import time
 from Libraries import MOTOR_DRIVER as Motor
 from Libraries import Boton
+from Libraries import parking
 
 can_start = False
 
@@ -10,20 +11,36 @@ tim = float(input("Tim: "))
 while True:
     try:
         if can_start:
-            with open("Move.json", "r", encoding='utf-8') as f:
-                data = json.load(f)
-                print(data)
+            traction = 0
+            direction = 0
+            with open("CAM.json", "r", encoding='utf-8') as f:
+                CAM = json.load(f)
+                print(CAM)
 
-                if "TRACTION" in data and "DIRECTION" in data:
-                    traction = int(data["TRACTION"])
-                    direction = int(data["DIRECTION"])
+                if "TRACTION" in CAM and "DIRECTION" in CAM:
+                    traction = int(CAM["TRACTION"])
+                    direction = int(CAM["DIRECTION"])
 
-                    Motor.move(traction, direction)
-
-                    if traction < 0:
-                        time.sleep(tim)
+                if CAM["Parking"]:
+                    parking.parking()
+                
                 else:
-                    print("Invalid data format in JSON file")
+                    if CAM["Ignore"]:
+                        print("Ignore CAM")
+                        with open("Move.json", "r", encoding='utf-8') as f:
+                            Move = json.load(f)
+                            print(Move)
+
+                            if "TRACTION" in Move and "DIRECTION" in Move:
+                                traction = int(Move["TRACTION"])
+                                direction = int(Move["DIRECTION"])
+
+                            else:
+                                print("Invalid data format in JSON file")
+
+                Motor.move(traction, direction)
+                if traction < 0:
+                    time.sleep(tim)
 
         else:
             print("Waiting for start signal")
