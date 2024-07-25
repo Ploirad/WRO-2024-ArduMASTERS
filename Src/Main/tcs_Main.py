@@ -9,6 +9,7 @@ first_color_obteined = ""
 turn_started = False
 turn_done = False
 turn_count = 0
+lap_count = 0
 
 def signal_handler(sig, frame):
     global stop_event
