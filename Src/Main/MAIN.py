@@ -2,7 +2,7 @@ import json
 import time
 from Libraries import MOTOR_DRIVER as Motor
 from Libraries import Boton
-from Libraries import parking
+#from Libraries import parking
 
 can_start = False
 
@@ -22,7 +22,7 @@ while True:
                     direction = int(CAM["DIRECTION"])
 
                 if CAM["Parking"]:
-                    parking.parking()
+                    print("parking")#parking.parking()
                 
                 else:
                     if CAM["Ignore"]:
