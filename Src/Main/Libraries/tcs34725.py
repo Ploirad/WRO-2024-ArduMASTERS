@@ -25,7 +25,7 @@ def get_color():
 
         # Print the raw and normalized color values for debugging
         # print(f"Raw color values - Red: {r}, Green: {g}, Blue: {b}, Clear: {c}")
-        # print(f"Normalized values - Red: {r_norm:.2f}, Green: {g_norm:.2f}, Blue: {b_norm:.2f}")
+        print(f"Normalized values - Red: {r_norm:.2f}, Green: {g_norm:.2f}, Blue: {b_norm:.2f}")
 
         # Determine the detected color based on normalized RGB values
         if r_norm > 0.6 and r_norm > g_norm and r_norm > b_norm and g < 25:
