@@ -63,11 +63,22 @@ def color_detection(stop_event):
 
         # Optional sleep to reduce the frequency of measurements
         time.sleep(0.1)
+        print(turn_done)
         
 
 threads = []
 stop_event = threading.Event()
 signal.signal(signal.SIGINT, signal_handler)
+
+data = {
+            "first_color_obteined": "",
+            "color_obteined" : "",
+            "turns": 0,
+            "laps": 0 
+        }
+
+with open("tcs_color_detection.json", "w", encoding='utf-8') as j:
+    json.dump(data, j, indent=4)
 
 try:
     t = threading.Thread(target=color_detection, args=(stop_event,))
