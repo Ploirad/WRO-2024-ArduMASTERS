@@ -21,10 +21,9 @@ def color_detection(stop_event):
         color_obteined = tcs.get_color()
 
         if first_color_obteined == "":
-            if color_obteined == "Orange":
+            if color_obteined == "Orange" or color_obteined == "Blue":
                 first_color_obteined = color_obteined
-            if color_obteined == "Blue":
-                first_color_obteined = color_obteined
+
 
         if color_obteined == "Orange" and first_color_obteined == "Orange" and not turn_started:
             turn_started = True
