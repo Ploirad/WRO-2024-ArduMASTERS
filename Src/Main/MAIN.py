@@ -12,7 +12,11 @@ while True:
                 traction = int(data["TRACTION"])
                 direction = int(data["DIRECTION"])
 
-                Motor.move(traction, direction)
+                if traction < 0:
+                    Motor.move(traction, direction)
+                    time.sleep(1)
+                else:
+                    Motor.move(traction, direction)
             else:
                 print("Invalid data format in JSON file")
 
