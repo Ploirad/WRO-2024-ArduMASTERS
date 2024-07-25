@@ -5,11 +5,7 @@ import signal
 import json
 from Libraries import tcs34725 as tcs
 
-first_color_obteined = ""
-turn_started = False
-turn_done = False
-turn_count = 0
-lap_count = 0
+
 
 def signal_handler(sig, frame):
     global stop_event
@@ -17,6 +13,11 @@ def signal_handler(sig, frame):
 
 
 def color_detection(stop_event):
+    first_color_obteined = ""
+    turn_started = False
+    turn_done = False
+    turn_count = 0
+    lap_count = 0
     while not stop_event.is_set():
         color_obteined = tcs.get_color()
 
