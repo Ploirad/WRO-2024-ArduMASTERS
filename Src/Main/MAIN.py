@@ -4,14 +4,6 @@ from Libraries import MOTOR_DRIVER as Motor
 from Libraries import Boton
 #from Libraries import parking
 
-import subprocess
-cmd1 = "python3 Movement.py"
-cmd2 = "python3 Camera.py"
-cmd3 = "python3 tcs_Main.py"
-proc1 = subprocess.Popen(cmd1, shell=True)
-proc2 = subprocess.Popen(cmd2, shell=True)
-proc3 = subprocess.Popen(cmd3, shell=True)
-
 can_start = False
 
 tim = float(input("Tim: "))
