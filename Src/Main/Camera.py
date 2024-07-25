@@ -19,7 +19,6 @@ camera.framerate = 30 #65
 camera.resolution = (640, 480)
 raw_capture = PiRGBArray(camera, size=(640, 480))
 raw_capture.truncate(0)
-park = False
 
 def principal_logic(areas, centroids):
     max_area = max(areas, key=areas.get)
@@ -37,6 +36,7 @@ def principal_logic(areas, centroids):
     return traction, direction, max_area, ignore
 
 def detect(stop_event):
+    park = False
     while not stop_event.is_set():
         for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port=True):
             image = frame.array
