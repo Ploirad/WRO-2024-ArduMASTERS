@@ -3,5 +3,6 @@
     "Color": "",
     "Parking": false,
     "TRACTION": 0,
-    "DIRECTION": 0
+    "DIRECTION": 0,
+    "MagentaC": 0
 }

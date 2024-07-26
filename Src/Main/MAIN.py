@@ -2,27 +2,50 @@ import json
 import time
 from Libraries import MOTOR_DRIVER as Motor
 from Libraries import Boton
-#from Libraries import parking
+import End_rounds as End
 
 can_start = False
-
+waiting_magenta = False
 tim = float(input("Tim: "))
+tcs_color = ""
+first_front_distance = 0
+first_right_distance = 0
+first_loop_done = False
 
 while True:
     try:
         if can_start:
+            if not first_loop_done:
+                with open("Move.json", "r", encoding='utf-8') as f:
+                    Move = json.load(f)
+                    first_front_distance = Move["HC0"]
+                    first_right_distance = Move["HC1"]
+                first_loop_done = True
+
             traction = 0
             direction = 0
             with open("CAM.json", "r", encoding='utf-8') as f:
                 CAM = json.load(f)
                 print(CAM)
 
+                color = CAM["Color"]
+                ignore = CAM["Ignore"]
+
+                if (color == "red" or color == "green" or color == "magenta") and not ignore:
+                    second_round = True
+
+                if waiting_magenta:
+                    if second_round:
+                        if color == "magenta":
+                           End.parking()
+                    else:
+                        if tcs_color == "Gray":
+                            End.home_sweet_home(first_front_distance, first_right_distance)
+                            break
+
                 if "TRACTION" in CAM and "DIRECTION" in CAM:
                     traction = int(CAM["TRACTION"])
                     direction = int(CAM["DIRECTION"])
-
-                if CAM["Parking"]:
-                    print("parking")#parking.parking()
                 
                 else:
                     if CAM["Ignore"]:
@@ -43,10 +66,11 @@ while True:
                 print(tcs)
 
                 laps = tcs["laps"]
+                tcs_color = tcs["color_obtained"]
 
                 if laps >= 3:
                     print("OK")
-                    break
+                    waiting_magenta = True
 
                 Motor.move(traction, direction)
                 if traction < 0:

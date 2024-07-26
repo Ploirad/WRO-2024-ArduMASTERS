@@ -20,7 +20,7 @@ camera.resolution = (640, 480)
 raw_capture = PiRGBArray(camera, size=(640, 480))
 raw_capture.truncate(0)
 
-def principal_logic(areas, centroids):
+def principal_logic(areas):
     max_area = max(areas, key=areas.get)
 
     traction = 100
@@ -42,24 +42,26 @@ def detect(stop_event):
             image = frame.array
             height, width = image.shape[:2]
             lower_half = image[height//2:, :]
-            green_centroid, green_area = CAM.detect_green(lower_half)
-            red_centroid, red_area = CAM.detect_red(lower_half)
+            _, green_area = CAM.detect_green(lower_half)
+            _, red_area = CAM.detect_red(lower_half)
             magenta_centroid, magenta_area = CAM.detect_magenta(lower_half)
         
             color_areas = {"green": green_area, "red": red_area, "magenta": magenta_area}
-            color_centroids = {"green": green_centroid, "red": red_centroid, "magenta": magenta_centroid}
 
-            t, d, color, ignore = principal_logic(color_areas, color_centroids)
+            t, d, color, ignore = principal_logic(color_areas)
             
             if color == "magenta":
                 park = True
+            else:
+                park = False
 
             data = {
                     "Ignore": ignore,
                     "Color": color,
                     "Parking": park,
                     "TRACTION": t,
-                    "DIRECTION": d
+                    "DIRECTION": d,
+                    "MagentaC": magenta_centroid
                 }
             raw_capture.truncate(0)
             
