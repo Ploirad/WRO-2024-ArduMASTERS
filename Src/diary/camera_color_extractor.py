@@ -10,19 +10,28 @@ camera = PiCamera()
 camera.resolution = resolucion
 rawCapture = PiRGBArray(camera, size=resolucion)
 
-frame = camera.capture_continuous(rawCapture, format="bgr", use_video_port=True).array
+# allow the camera to warmup
+time.sleep(0.1)
 
-r = cv2.selectROI("frame", frame, fromCenter=False, showCrosshair=True)
-r = tuple(map(int,r))
+for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+    image = frame.array
+    r = cv2.selectROI("frame", image, fromCenter=False, showCrosshair=True)
+    r = tuple(map(int,r))
 
-frameHSV = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-imagenNueva = frameHSV[r[1]:r[1]+r[3],r[0]:r[0]+r[2]]
-H,S,V = imagenNueva[:,:,0], imagenNueva[:,:,1], imagenNueva[:,:,2]
-hMin, hMax = np.min(H), np.max(H)
-sMin, sMax = np.min(S), np.max(S)
-vMin, vMax = np.min(V), np.max(V)
+    frameHSV = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    imagenNueva = frameHSV[r[1]:r[1]+r[3],r[0]:r[0]+r[2]]
+    H,S,V = imagenNueva[:,:,0], imagenNueva[:,:,1], imagenNueva[:,:,2]
+    hMin, hMax = np.min(H), np.max(H)
+    sMin, sMax = np.min(S), np.max(S)
+    vMin, vMax = np.min(V), np.max(V)
     
-bajo = np.array([hMin, sMin, vMin], np.uint8)
-alto = np.array([hMax, sMax, vMax], np.uint8)
+    bajo = np.array([hMin, sMin, vMin], np.uint8)
+    alto = np.array([hMax, sMax, vMax], np.uint8)
     
-print(f"Min: {bajo} Max: {alto}")
+    print(f"Min: {bajo} Max: {alto}")
+    
+    # clear the stream in preparation for the next frame
+    rawCapture.truncate(0)
+    
+    # break the loop if you only want to process one frame
+    break
