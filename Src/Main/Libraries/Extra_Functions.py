@@ -26,10 +26,10 @@ def change_direction():
     normal_traction = 100
     print("Backward and right")
     MD.move(-100, normal_traction)
-    print("delay 5s")
+    print("delay 1.5s")
     time.sleep(1.5)
     print("Forward and left")
     MD.move(100, -normal_traction)
-    print("delay 2s")
+    print("delay 1.5s")
     time.sleep(1.5)
     print("Direction changed")

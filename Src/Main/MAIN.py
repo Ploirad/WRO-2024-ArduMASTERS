@@ -2,15 +2,19 @@ import json
 import time
 from Libraries import MOTOR_DRIVER as Motor
 from Libraries import Boton
+from Libraries import Extra_Functions as F
 import End_rounds as End
 
 can_start = False
 waiting_magenta = False
+possible_changing_direction = False
+last_pillar = ""
 tim = float(input("Tim: "))
 tcs_color = ""
 first_front_distance = 0
 first_right_distance = 0
 first_loop_done = False
+extra_lap = False
 
 while True:
     try:
@@ -33,6 +37,9 @@ while True:
 
                 if (color == "red" or color == "green" or color == "magenta") and not ignore:
                     second_round = True
+
+                if second_round and possible_changing_direction and not ignore:
+                    last_pillar = color
 
                 if waiting_magenta:
                     if second_round:
@@ -65,8 +72,19 @@ while True:
                 tcs = json.load(f)
                 print(tcs)
 
-                laps = tcs["laps"]
+                laps = tcs["laps"] + extra_laps
+                tcs_first_color = tcs["first_color_obtained"]
+                turns = tcs["turns"]
                 tcs_color = tcs["color_obtained"]
+
+                if laps == 1 and turns == 3:
+                    possible_changing_direction = True
+
+                if tcs_first_color == tcs_color and possible_changing_direction:
+                    if last_pillar == "red":
+                        F.change_direction()
+                    possible_changing_direction = False
+                    extra_lap = True
 
                 if laps >= 3:
                     print("OK")
