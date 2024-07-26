@@ -15,6 +15,7 @@ first_front_distance = 0
 first_right_distance = 0
 first_loop_done = False
 extra_lap = False
+second_round = False
 
 while True:
     try:
@@ -72,7 +73,7 @@ while True:
                 tcs = json.load(f)
                 print(tcs)
 
-                laps = tcs["laps"] + extra_laps
+                laps = tcs["laps"]
                 tcs_first_color = tcs["first_color_obtained"]
                 turns = tcs["turns"]
                 tcs_color = tcs["color_obtained"]
