@@ -2,7 +2,7 @@ import json
 import time
 from Libraries import MOTOR_DRIVER as Motor
 from Libraries import Boton
-from Libraries import Extra_Functions as F
+import Extra_Functions as F
 import End_rounds as End
 
 can_start = False
