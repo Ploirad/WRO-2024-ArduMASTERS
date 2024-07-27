@@ -32,6 +32,8 @@ def principal_logic(areas):
     elif max_area == "red" and areas[max_area] > 550:
         direction = -100
         ignore = False
+    elif max_area == "magenta" and areas[max_area] > 1000:
+        ignore = False
 
     return traction, direction, max_area, ignore
 
