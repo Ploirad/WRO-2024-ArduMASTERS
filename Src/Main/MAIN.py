@@ -52,7 +52,7 @@ if __name__ == "__main__":
                                 End.home_sweet_home(first_front_distance, first_right_distance)
                                 break
 
-                    if "TRACTION" in CAM and "DIRECTION" in CAM:
+                    if ("TRACTION" in CAM and "DIRECTION" in CAM) and not CAM["Ignore"]:
                         traction = int(CAM["TRACTION"])
                         direction = int(CAM["DIRECTION"])
                     
@@ -77,7 +77,7 @@ if __name__ == "__main__":
                     laps = tcs["laps"]
                     tcs_first_color = tcs["first_color_obteined"]
                     turns = tcs["turns"]
-                    tcs_color = tcs["color_obtained"]
+                    tcs_color = tcs["color_obteined"]
 
                     if laps == 1 and turns == 3:
                         possible_changing_direction = True
