@@ -75,7 +75,7 @@ if __name__ == "__main__":
                     print(tcs)
 
                     laps = tcs["laps"]
-                    tcs_first_color = tcs["first_color_obtained"]
+                    tcs_first_color = tcs["first_color_obteined"]
                     turns = tcs["turns"]
                     tcs_color = tcs["color_obtained"]
 
