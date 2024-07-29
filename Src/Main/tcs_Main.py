@@ -65,7 +65,7 @@ def color_detection(stop_event):
 
         # Optional sleep to reduce the frequency of measurements
         time.sleep(0.1)
-        print(turn_done)
+        # print(turn_done)
         
 
 threads = []
