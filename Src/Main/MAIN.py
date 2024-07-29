@@ -45,7 +45,7 @@ if __name__ == "__main__":
                     if waiting_magenta:
                         if second_round:
                             if color == "magenta":
-                            End.parking()
+                                End.parking()
                         else:
                             if tcs_color == "Gray":
                                 End.home_sweet_home(first_front_distance, first_right_distance)
