@@ -5,6 +5,8 @@ from Libraries import Boton
 import Extra_Functions as F
 import End_rounds as End
 
+extra_lap = False
+
 if __name__ == "__main__":
     can_start = False
     waiting_magenta = False
@@ -14,7 +16,6 @@ if __name__ == "__main__":
     first_front_distance = 0
     first_right_distance = 0
     first_loop_done = False
-    extra_lap = False
     second_round = False
     tim = float(input("Tim: "))
     while True:
