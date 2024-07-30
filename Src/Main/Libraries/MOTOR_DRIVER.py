@@ -46,8 +46,8 @@ pwmENB.ChangeDutyCycle(0)
 amplitud = 2 #float(input("AMPLITUD: "))
 center = 7 #float(input("Center: "))
 d = 6
-inf = 2
-sup = 12.5
+inf = float(input("Inf: "))
+sup = float(input("Sup: "))
 
 # Define la función de movimiento
 def move(percent_vel, percent_dir):
