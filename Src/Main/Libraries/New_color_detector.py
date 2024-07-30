@@ -15,13 +15,13 @@ def detect_green(frame):
     return detect_color(frame, G_bajo, G_alto)
 
 def detect_red(frame):
-    R_bajo = np.array([171, 126, 179])  # HSV values for red
-    R_alto = np.array([175, 174, 245])
+    R_bajo = np.array([154, 101, 24])  # HSV values for red
+    R_alto = np.array([177, 255, 184])
     return detect_color(frame, R_bajo, R_alto)
 
 def detect_magenta(frame):
-    M_bajo = np.array([160, 134, 148])  # HSV values for magenta
-    M_alto = np.array([165, 207, 207])
+    M_bajo = np.array([142, 117, 49])  # HSV values for magenta
+    M_alto = np.array([150, 230, 208])
     return detect_color(frame, M_bajo, M_alto)
 
 # This function is used to take the centroid and the area of the color gived (color_low, color_high) in the respective frame
