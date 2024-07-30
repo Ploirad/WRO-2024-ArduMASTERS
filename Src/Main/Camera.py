@@ -63,7 +63,10 @@ def detect(stop_event):
                     "Parking": park,
                     "TRACTION": t,
                     "DIRECTION": d,
-                    "MagentaC": magenta_centroid
+                    "MagentaC": magenta_centroid,
+                    "GArea": green_area,
+                    "RArea": red_area,
+                    "MArea": magenta_area
                 }
             raw_capture.truncate(0)
             
