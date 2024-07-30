@@ -26,7 +26,7 @@ def principal_logic(areas):
     traction = 100
     direction = 0
     ignore = True
-    if max_area == "green" and areas[max_area] > 1000:
+    if max_area == "green" and areas[max_area] > 0:
         direction = 100
         ignore = False
     elif max_area == "red" and areas[max_area] > 550:
