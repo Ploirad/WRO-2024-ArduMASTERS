@@ -17,7 +17,7 @@ if __name__ == "__main__":
     first_right_distance = 0
     first_loop_done = False
     second_round = False
-    tim = float(input("Tim: "))
+    tim = 1.5
     while True:
         try:
             if can_start:

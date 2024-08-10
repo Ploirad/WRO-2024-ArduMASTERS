@@ -8,10 +8,10 @@ GPIO.setmode(GPIO.BCM)
 
 # Define los pines del motor y del servo
 ENA = 26
-IN1 = 13
-IN2 = 19
-IN3 = 5
-IN4 = 6
+IN1 = 19
+IN2 = 13
+IN3 = 6
+IN4 = 5
 ENB = 11
 SERVO_PIN = 18
 
