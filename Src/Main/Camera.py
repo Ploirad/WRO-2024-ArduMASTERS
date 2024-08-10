@@ -29,7 +29,7 @@ def principal_logic(areas):
     if max_area == "green" and areas[max_area] > 0:
         direction = 100
         ignore = False
-    elif max_area == "red" and areas[max_area] > 30000:
+    elif max_area == "red" and areas[max_area] > 3000:
         direction = -100
         ignore = False
     elif max_area == "magenta" and areas[max_area] > 1000:
