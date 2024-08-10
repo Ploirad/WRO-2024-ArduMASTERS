@@ -28,7 +28,7 @@ def get_color():
         # print(f"Normalized values - Red: {r_norm:.2f}, Green: {g_norm:.2f}, Blue: {b_norm:.2f}")
 
         # Determine the detected color based on normalized RGB values
-        if r_norm > 0.5 and r_norm > g_norm and r_norm > b_norm and g < 25:
+        if r_norm > 0.4 and r_norm > g_norm and r_norm > b_norm and g < 25:
             color = "Orange"
         elif b_norm >= 1 and b_norm > g_norm and b_norm > r_norm:
             color = "Blue"
