@@ -30,7 +30,7 @@ def get_color():
         # Determine the detected color based on normalized RGB values
         if r_norm > 0.5 and r_norm > g_norm and r_norm > b_norm and g < 25:
             color = "Orange"
-        elif b_norm > 1 and b_norm > g_norm and b_norm > r_norm:
+        elif b_norm >= 1 and b_norm > g_norm and b_norm > r_norm:
             color = "Blue"
         elif max(r_norm, g_norm, b_norm) < 0.4:
             color = "Gray"
