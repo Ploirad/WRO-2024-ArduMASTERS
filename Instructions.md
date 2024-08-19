@@ -28,4 +28,8 @@ Once we have all the parts printed it's time to put them together. Now we will s
 
 ### 1. Base
   First of all we place the servo, raspberry and L298N on the base at their places.  
-  ![Base](https://drive.google.com/file/d/1npm9Hcr4kv9ReiQPplQ0aVA_e83HpT41/view?usp=drive_link)
+ ![Base](https://github.com/user-attachments/assets/c1abd998-efcf-4d37-86df-2af5803f1444)
+
+- The servo is placed at the front of the car.
+- The Raspberry is placed transversaly in the middle of the car.  
+- The L298N is placed at the back of the car in between the motors.  
