@@ -14,6 +14,7 @@ In case you have any doubts or found any problem please contact us.
   -   [Pi Camera](https://www.amazon.es/sspa/click?ie=UTF8&spc=MTo1Nzc3MTcyNjUyNTM2NTQzOjE3MjM5NzcyODc6c3BfYXRmOjMwMDA5NzA3NTA5OTkzMjo6MDo6&url=%2FAZDelivery-c%25C3%25A1mara-para-Raspberry-Pi%2Fdp%2FB01M6UCEM5%2Fref%3Dsr_1_1_sspa%3F__mk_es_ES%3D%25C3%2585M%25C3%2585%25C5%25BD%25C3%2595%25C3%2591%26crid%3D1EUMEJ19SW47P%26dib%3DeyJ2IjoiMSJ9.KtSqKQ6nFdfceDLxjZOnfLjNr8JdArhvyeLPzOSBhSPQhmWVr9akLcwwMO7OiW615f1MC7rXTbdvuDdwIYsFt4q4QwefMRGi4XlB5z7Pox_-LO0nx93-m8BCGYWAmR6tWYzWidyS3U3FMkNmkFGQfq1p6rHFJXEo1UPpfFveACg6j5BX2P4f4e0e5zX3yqDOYJP-eBX9RwN6niw-o43p5HfwBM752NnfNy-ZXsp46Gamv9a7yMpSUJS8HebuWwwu9TvC9-DdzqrbzeFEQImYRhGps9xbDv6ykqCjJrHtwPk.Nf1ZPnFfSXzW_34mFGWBDTDya4EUhxxgsIuZ5haDQO4%26dib_tag%3Dse%26keywords%3Dpi%2Bcamera%26qid%3D1723977286%26sprefix%3Dpi%2Bcamera%252Caps%252C153%26sr%3D8-1-spons%26sp_csd%3Dd2lkZ2V0TmFtZT1zcF9hdGY%26psc%3D1%26smid%3DA1X7QLRQH87QA3)
 
 ## 2. Scheme
+
 ![Schemes](Schemes/WRO_Car.jpg)
 
 ## 3. 3D Models
@@ -27,9 +28,48 @@ These parts don't need to support any abnormal forces therefore can be printed i
 Once we have all the parts printed it's time to put them together. Now we will show you how to.
 
 ### 1. Base
-  First of all we place the servo, raspberry and L298N on the base at their places.  
+ 
  ![Base](https://github.com/user-attachments/assets/c1abd998-efcf-4d37-86df-2af5803f1444)
 
-- The servo is placed at the front of the car.
+ First of all we place the raspberry and L298N on the base at their places:  
 - The Raspberry is placed transversaly in the middle of the car.  
-- The L298N is placed at the back of the car in between the motors.  
+- The L298N is placed at the back of the car in between the motors.
+
+### 2. Stub axles
+
+![Manguetas](https://github.com/user-attachments/assets/ef7da460-8c49-4f46-a7f3-60c65c74a723)
+
+Now we place the stub axels, this will serve to transfer the rotation of the servo to the wheels to vary their direction.  
+- We insert a M3 nut in each stub axel for later on
+- We place the part in the hollow rods that stick out of the chassis upwards, as shown in the picture.
+- We fix it in place with a M3 x 20 screw and washer, and screw it to a M3 nut at the botton of the car.
+
+> Be carefull with the hollow rod is etremly fragile.  
+> Don not apply any unnecessary forces on it until it is screwed.  
+
+### 3. Zipper
+
+![Cremallera](https://github.com/user-attachments/assets/1793bc08-a000-4654-8a7a-7aef23531f7d)
+
+Next is the install of the zipper this will syncronize the direction of bowth sides and transfer the servo direction.  
+- We place the zipper as shown in the picture above and screw it with a M3 screw and nut in each side.
+
+### 4. Wheels and DC motors
+
+Now we mount the four wheels to the chassis
+- The two frontal ones are drilled trough the middle and fixed in placed with a M3 screw.
+- We fix the two DC motors in place using glue.
+- The two in the back are simply snapped in place.  
+
+### 5. Gear and servo
+
+![Engranaje](https://github.com/user-attachments/assets/28207653-d117-45be-8ae0-f7848ac34772)
+
+To finish the direction we place the gear and the servo which will guide all the direction system.  
+- We insert the gear in the servo and screw it in place
+- We place the servo in it's place with the gear on top of the zipper. And fix it in place with glue.  
+
+### 6. Cage spacers
+
+![Cage_spacers](https://github.com/user-attachments/assets/f4929349-dbf2-4e2d-890b-60336d332ba4)
+
