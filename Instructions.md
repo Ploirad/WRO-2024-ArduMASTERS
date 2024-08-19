@@ -44,7 +44,7 @@ Now we place the stub axels, this will serve to transfer the rotation of the ser
 - We place the part in the hollow rods that stick out of the chassis upwards, as shown in the picture.
 - We fix it in place with a M3 x 20 screw and washer, and screw it to a M3 nut at the botton of the car.
 
-> Be carefull with the hollow rod is etremly fragile.  
+> Be careful with the hollow rod is etremly fragile.  
 > Don not apply any unnecessary forces on it until it is screwed.  
 
 ### 3. Zipper
@@ -69,7 +69,10 @@ To finish the direction we place the gear and the servo which will guide all the
 - We insert the gear in the servo and screw it in place
 - We place the servo in it's place with the gear on top of the zipper. And fix it in place with glue.  
 
-### 6. Cage spacers
+### 6. Battery sield and spacers
 
 ![Cage_spacers](https://github.com/user-attachments/assets/f4929349-dbf2-4e2d-890b-60336d332ba4)
 
+Finally we install the battery in place to power everything up.
+- We glue the four spacers in place being careful to aling the holes as much as posible.
+- We screw the battery shield trouhg the spacers and the usb looking to the front of the car.  
