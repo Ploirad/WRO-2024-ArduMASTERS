@@ -129,4 +129,4 @@ So here we will guide you command by command how to setup your raspberry pi in o
 
 ![image](https://github.com/user-attachments/assets/891760c8-1dfd-46b7-a89a-17779dc92527)
 
-11. 
+### 2. Auto-login configuration
