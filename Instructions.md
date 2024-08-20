@@ -76,3 +76,57 @@ To finish the direction we place the gear and the servo which will guide all the
 Finally we install the battery in place to power everything up.
 - We glue the four spacers in place being careful to aling the holes as much as posible.
 - We screw the battery shield trouhg the spacers and the usb looking to the front of the car.  
+
+## 5. Software installation
+
+Now that we have all the hardware redy to go, we need a "brain" to move it.  
+So here we will guide you command by command how to setup your raspberry pi in order to work correctly with the hardware.
+
+### 1. OS installation
+
+1. Install [Raspberry Pi Imager](https://www.raspberrypi.com/software/) on your computer.
+
+![image](https://github.com/user-attachments/assets/f455e273-b251-4d44-bf55-d4e965a86079)
+
+2. Download the [Raspberry Pi OS Lite](https://www.raspberrypi.com/software/operating-systems/)
+
+![image](https://github.com/user-attachments/assets/350fb464-95b8-4c5e-8286-bc4d979333ad)
+
+3. Open Imager
+
+![image](https://github.com/user-attachments/assets/027e06e3-96ec-495f-bc63-9d5e86d3c364)
+
+4. Select your model of Raspberry. In our case it's Raspberry Pi 4
+
+![image](https://github.com/user-attachments/assets/7f566e96-096b-4b56-923c-6cc1d759bb27)
+
+5. Select the OS image we downloaded before.
+
+![image](https://github.com/user-attachments/assets/95d730a1-39c8-45bc-901b-1e9dc7376636)
+![image](https://github.com/user-attachments/assets/f12c07ab-5af0-4f07-ab62-4b2feced0ec4)
+
+6. Select the SD card in wich we are going to intall the OS.
+
+![image](https://github.com/user-attachments/assets/2aa9a7c5-b4d4-458c-94d9-fbec4c7d35f7)
+
+7. Click the "Next" buttom. And click in "Edit Settings".
+
+![image](https://github.com/user-attachments/assets/c2b3d18a-b10e-4a8c-b3c2-7a4568006a76)
+![image](https://github.com/user-attachments/assets/7fb9bdac-12e3-47c1-8541-e15d667af66a)
+
+8. Configure username, password and WIFI. And click on "Save".
+
+![image](https://github.com/user-attachments/assets/08c064ea-b3e1-4257-9c1a-05f4a10c101a)
+
+9. Click on "Yes".
+
+![image](https://github.com/user-attachments/assets/3f938b88-6b8e-4ea2-8f78-31dfc66f7ea2)
+![image](https://github.com/user-attachments/assets/6ef216c8-3c7c-4e6e-8748-492a6af70f70)
+
+> Be carefull this proccess will erase all the information saved on the SD card.
+
+10. Insert the SD card in to the Raspberry and power it up.
+
+![image](https://github.com/user-attachments/assets/891760c8-1dfd-46b7-a89a-17779dc92527)
+
+11. 
