@@ -3,17 +3,17 @@
 </p> 
 
 # Files:
-  - [Camera_color_detection_v1.0.0](#Camera_color_detection_v1.0.0.py)
-  - [Camera_color_detection_v1.1.0](#Camera_color_detection_v1.1.0.py)
-  - [Camera_color_detection_v1.1.1](#Camera_color_detection_v1.1.1.py)
-  - [Camera_color_detection_v2.0.0](#Camera_color_detection_v2.0.0.py)
-  - [Camera_color_extractor](#camera_color_extractor.py)
-  - [Color_detector_with_movement](#camera_detector_with_movement.py)
-  - [Engine](#engine.py)
-  - [Servos_test_v1.0.0](#servos_test_v1.0.0.py)
-  - [Servos_test_v1.1.0](#servos_test_v1.1.0.py)
-  - [Ultrasound_v1.0.0](#ultrasound_v1.0.0.py)
-  - [Ultrasound_v1.1.0](#ultrasound_v1.1.0.py)
+  - [Camera_color_detection_v1.0.0](#camera_color_detection_v100py)
+  - [Camera_color_detection_v1.1.0](#camera_color_detection_v110py)
+  - [Camera_color_detection_v1.1.1](#camera_color_detection_v111py)
+  - [Camera_color_detection_v2.0.0](#camera_color_detection_v200py)
+  - [Camera_color_extractor](#camera_color_extractorpy)
+  - [Color_detector_with_movement](#color_detector_with_movementpy)
+  - [Engine](#enginepy)
+  - [Servos_test_v1.0.0](#servos_test_v100py)
+  - [Servos_test_v1.1.0](#servos_test_v110py)
+  - [Ultrasound_v1.0.0](#ultrasound_v100py)
+  - [Ultrasound_v1.1.0](#ultrasound_v110py)
 
 ## [Camera_color_detection_v1.0.0.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary/camera_color_detection_v1.0.0.py)
 This code is a library used to find the range of a color in an image and return another image with the color painted white as its center.
@@ -42,7 +42,7 @@ This code is a library that was used to control the motors of our car.
 This code is in order to test the servos movement 
 
 ## [Servos_test_v1.1.0.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary/servos_test_v1.1.0.py)
-This code is the same than [its previous version](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary/servos_test_v1.0.0.py), but we add a button.
+This code is the same than its [previous version](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary/servos_test_v1.0.0.py), but we add a button.
 
 ## [Ultrasound_v1.0.0.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary/ultrasound_v1.0.0.py)
 That code is an ultrasound test.
