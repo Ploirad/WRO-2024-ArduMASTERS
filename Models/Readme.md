@@ -37,7 +37,13 @@ Here you find two inter folders:
 # [Current_Car_Models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Models/Current_Car_Models)
 
   This folder contains all the things that we have in our car right now, this ones are the best ones we found for our car. This are:
-  - [WRO Car v15.stl](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Models/Current_Car_Models/Coche%20WRO%20v15.stl)
+  - [WRO Bumper.stl](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Models/Current_Car_Models/WRO%20Bumper.stl)
   - [WRO Camera Support 2.0.stl](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Models/Current_Car_Models/WRO%20Camera%20Support%202.0.stl)
-  We only have one file there, because instead of the other car models, this is a unique piece and not a set of modular parts.
+  - [WRO Car_Headlights.stl](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Models/Current_Car_Models/WRO%20Car_Headlights.stl)
+  - [WRO Car_v15.stl](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Models/Current_Car_Models/WRO%20Car_v15.stl)
+  - [WRO HC-SR04 support.stl](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Models/Current_Car_Models/WRO%20HC-SR04%20support.stl)
+  - [WRO Pi_support.stl](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Models/Current_Car_Models/WRO%20Pi_support.stl)
+  - [WRO Steering_bar.stl](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Models/Current_Car_Models/WRO%20Steering_bar.stl)
+
+
 
