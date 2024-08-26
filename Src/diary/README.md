@@ -3,6 +3,7 @@
 </p> 
 
 # Files:
+These ones are the [old funtions](#old-functions)
   - [Camera_color_detection_v1.0.0](#camera_color_detection_v100py)
   - [Camera_color_detection_v1.1.0](#camera_color_detection_v110py)
   - [Camera_color_detection_v1.1.1](#camera_color_detection_v111py)
@@ -14,6 +15,15 @@
   - [Servos_test_v1.1.0](#servos_test_v110py)
   - [Ultrasound_v1.0.0](#ultrasound_v100py)
   - [Ultrasound_v1.1.0](#ultrasound_v110py)
+
+These ones are the [old mains](#old-mains)
+  - [Main_v1.0](#main_v10py)
+  - [Main_v1.1](#main_v11py)
+  - [Main_v1.2](#main_v12py)
+  - [Main_v1.3](#main_v13py)
+
+
+# Old functions
 
 ## [Camera_color_detection_v1.0.0.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary/camera_color_detection_v1.0.0.py)
 This code is a library used to find the range of a color in an image and return another image with the color painted white as its center.
@@ -49,3 +59,17 @@ That code is an ultrasound test.
 
 ## [Ultrasound_v1.1.0.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary/ultrasound_v1.1.0.py)
 This code its the same than its [previous version](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary/ultrasound_v1.0.0.py) but everything its in a functions, making it as a library.
+
+# Old mains 
+## [Main_v1.0.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/diary/Mains/main_v1.0.py)
+This code is our first main code. This code detects colored objects and decides the movement based on the object position, using ultrasonic sensors too.
+
+## [Main_v1.1.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/diary/Mains/main_v1.1.py)
+This code its the same than its [previous version](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/diary/Mains/main_v1.0.py) but it have a more detailed color detection system and it doesn't use the ultrasonic sensors.
+
+## [Main_v1.2.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/diary/Mains/main_v1.2.py)
+This code add to its [last version](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/diary/Mains/main_v1.1.py) a button activation, a parking feature and use again the ultrasonic sensors.
+
+## [Main_v1.3.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/diary/Mains/main_v1.3.py)
+This code is a rework of its [previous version](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/diary/Mains/main_v1.2.py) and we changed the prints and the comments, in order to making it easier to understand and its more modular.
+
