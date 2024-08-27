@@ -8,14 +8,14 @@ def backward(traction, initial_direction):
     print("BACKWARD STARTED")
     traction = abs(traction)
     while True:
-        with open("Json/move_json", "r", encoding='utf-8') as f:
+        with open("Move.json", "r", encoding='utf-8') as f:
             Move = json.load(f)
             front_distance = Move["HC0"]
             back_distance = Move["HC2"]
         
         while front_distance < 40 or back_distance > 100:
             MD.move(-traction, -initial_direction)
-            with open("Json/move_json", "r", encoding='utf-8') as f:
+            with open("Move.json", "r", encoding='utf-8') as f:
                 Move = json.load(f)
                 front_distance = Move["HC0"]
                 back_distance = Move["HC2"]

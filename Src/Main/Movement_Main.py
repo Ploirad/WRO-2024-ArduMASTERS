@@ -104,7 +104,7 @@ def move(stop_event):
             "DIRECTION": d
         }
 
-        with open("Libraries/Json/move_json", "w", encoding='utf-8') as j:
+        with open("Libraries/Move.json", "w", encoding='utf-8') as j:
             json.dump(data, j, indent=4)
 
         # Optional sleep to reduce the frequency of measurements

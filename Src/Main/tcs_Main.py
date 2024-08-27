@@ -60,7 +60,7 @@ def color_detection(stop_event):
             "laps": lap_count 
         }
 
-        with open("Libraries/Json/tcs_json", "w", encoding='utf-8') as j:
+        with open("Libraries/tcs_color_detection.json", "w", encoding='utf-8') as j:
             json.dump(data, j, indent=4)
 
         # Optional sleep to reduce the frequency of measurements
@@ -79,7 +79,7 @@ data = {
             "laps": 0 
         }
 
-with open("Libraries/Json/tcs_json", "w", encoding='utf-8') as j:
+with open("Libraries/tcs_color_detection.json", "w", encoding='utf-8') as j:
     json.dump(data, j, indent=4)
 
 try:
