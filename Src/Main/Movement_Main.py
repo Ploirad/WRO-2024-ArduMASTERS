@@ -5,6 +5,7 @@ import RPi.GPIO as GPIO
 import time
 import threading
 import signal
+import sys
 import json
 
 # Second we create two lists of the pins
@@ -104,7 +105,7 @@ def move(stop_event):
             "DIRECTION": d
         }
 
-        with open("Libraries/Move.json", "w", encoding='utf-8') as j:
+        with open("Move.json", "w", encoding='utf-8') as j:
             json.dump(data, j, indent=4)
 
         # Optional sleep to reduce the frequency of measurements
