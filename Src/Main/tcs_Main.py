@@ -5,6 +5,9 @@ import signal
 import json
 from Libraries import tcs34725 as tcs
 import MAIN
+import os
+
+tcs_json = os.path.join("Json", "tcs_color_detection.json")
 
 def signal_handler(sig, frame):
     global stop_event
@@ -33,7 +36,7 @@ def color_detection(stop_event):
             turn_started = True
             turn_done = False
 
-        elif color_obteined == "Unknown":   #this should be Gray but this to make a test
+        elif color_obteined == "Unknown":   
             turn_started = False
 
         
@@ -60,7 +63,7 @@ def color_detection(stop_event):
             "laps": lap_count 
         }
 
-        with open("tcs_color_detection.json", "w", encoding='utf-8') as j:
+        with open("tcs_json", "w", encoding='utf-8') as j:
             json.dump(data, j, indent=4)
 
         # Optional sleep to reduce the frequency of measurements
@@ -79,7 +82,7 @@ data = {
             "laps": 0 
         }
 
-with open("tcs_color_detection.json", "w", encoding='utf-8') as j:
+with open("tcs_json", "w", encoding='utf-8') as j:
     json.dump(data, j, indent=4)
 
 try:

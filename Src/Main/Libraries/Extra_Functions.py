@@ -1,21 +1,24 @@
 # Libraries
 import time
-from Libraries import MOTOR_DRIVER as MD                # MD.move(percent_vel, percent_dir)
+import MOTOR_DRIVER as MD                # MD.move(percent_vel, percent_dir)
 import json
+import os
+
+move_json = os.path.join("../Json", "Move.json")
 
 # This function is for go backward in the MAIN code
 def backward(traction, initial_direction):
     print("BACKWARD STARTED")
     traction = abs(traction)
     while True:
-        with open("Move.json", "r", encoding='utf-8') as f:
+        with open("move_json", "r", encoding='utf-8') as f:
             Move = json.load(f)
             front_distance = Move["HC0"]
             back_distance = Move["HC2"]
         
         while front_distance < 40 or back_distance > 100:
             MD.move(-traction, -initial_direction)
-            with open("Move.json", "r", encoding='utf-8') as f:
+            with open("move_json", "r", encoding='utf-8') as f:
                 Move = json.load(f)
                 front_distance = Move["HC0"]
                 back_distance = Move["HC2"]

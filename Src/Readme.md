@@ -4,8 +4,9 @@
 
 
 <b>
-<h1>Summary:
+Summary:
   </h1><b/>
+
 # [Diary](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary)
 
   This folder contains all the codes that we have been doing all the curse for our robot. Here you can find this codes:

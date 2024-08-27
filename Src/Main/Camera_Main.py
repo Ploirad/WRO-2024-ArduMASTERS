@@ -1,10 +1,9 @@
 from Libraries import New_color_detector as CAM
 from picamera import PiCamera
 from picamera.array import PiRGBArray
-import time
+import os
 import threading
 import signal
-import sys
 import json
 
 
@@ -19,6 +18,8 @@ camera.framerate = 30 #65
 camera.resolution = (640, 480)
 raw_capture = PiRGBArray(camera, size=(640, 480))
 raw_capture.truncate(0)
+
+cam_json = os.path.join("Json", "CAM.json")
 
 def principal_logic(areas):
     max_area = max(areas, key=areas.get)
@@ -70,7 +71,7 @@ def detect(stop_event):
                 }
             raw_capture.truncate(0)
             
-            with open("CAM.json", "w", encoding='utf-8') as j:
+            with open("cam_json", "w", encoding='utf-8') as j:
                 json.dump(data, j, indent=4)
 
 def signal_handler(sig, frame):
