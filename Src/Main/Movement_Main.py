@@ -6,7 +6,6 @@ import time
 import threading
 import signal
 import json
-import os
 
 # Second we create two lists of the pins
 TRIG = [23, 8, 17, 22]
@@ -18,9 +17,6 @@ for i in range(4):
     GPIO.setup(TRIG[i], GPIO.OUT)
     GPIO.setup(ECHO[i], GPIO.IN)
     GPIO.output(TRIG[i], False)  # Ensure TRIG pins are low
-
-#And finally we create the route to the Json file
-move_json = os.path.join("Json", "Move.json")
 
 # Handler for SIGINT to stop threads
 def signal_handler(sig, frame):
@@ -108,7 +104,7 @@ def move(stop_event):
             "DIRECTION": d
         }
 
-        with open("move_json", "w", encoding='utf-8') as j:
+        with open("Libraries/Json/move_json", "w", encoding='utf-8') as j:
             json.dump(data, j, indent=4)
 
         # Optional sleep to reduce the frequency of measurements

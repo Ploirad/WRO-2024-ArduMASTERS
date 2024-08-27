@@ -1,14 +1,9 @@
 import json
-import os
 import time
 from Libraries import MOTOR_DRIVER as Motor
 from Libraries import Boton
 from Libraries import Extra_Functions as F
 from Libraries import End_rounds as End
-
-tcs_json = os.path.join("Json", "tcs_color_detection.json")
-move_json = os.path.join("Json", "Move.json")
-cam_json = os.path.join("Json", "CAM.json")
 
 extra_lap = False
 
@@ -27,7 +22,7 @@ if __name__ == "__main__":
         try:
             if can_start:
                 if not first_loop_done:
-                    with open("move_json", "r", encoding='utf-8') as f:
+                    with open("Libraries/Json/move_json", "r", encoding='utf-8') as f:
                         Move = json.load(f)
                         first_front_distance = Move["HC0"]
                         first_right_distance = Move["HC1"]
@@ -35,7 +30,7 @@ if __name__ == "__main__":
 
                 traction = 0
                 direction = 0
-                with open("cam_json", "r", encoding='utf-8') as f:
+                with open("Libraries/Json/cam_json", "r", encoding='utf-8') as f:
                     CAM = json.load(f)
                     print(CAM)
 
@@ -64,7 +59,7 @@ if __name__ == "__main__":
                     else:
                         if CAM["Ignore"]:
                             print("Ignore CAM")
-                            with open("move_json", "r", encoding='utf-8') as f:
+                            with open("Libraries/Json/move_json", "r", encoding='utf-8') as f:
                                 Move = json.load(f)
                                 print(Move)
 
@@ -75,7 +70,7 @@ if __name__ == "__main__":
                                 else:
                                     print("Invalid data format in JSON file")
 
-                with open("tcs_json", "r", encoding='utf-8') as f:
+                with open("Libraries/Json/tcs_json", "r", encoding='utf-8') as f:
                     tcs = json.load(f)
                     print(tcs)
 
