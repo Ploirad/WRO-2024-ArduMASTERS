@@ -1,4 +1,4 @@
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 import threading
 import signal
@@ -16,36 +16,36 @@ def signal_handler(sig, frame):
 
 
 def color_detection(stop_event):
-    first_color_obteined = ""
+    first_color_obtained = ""
     turn_started = False
     turn_done = False
     turn_count = 0
     lap_count = 0
     while not stop_event.is_set():
-        color_obteined = tcs.get_color()
+        color_obtained = tcs.get_color()
 
-        if first_color_obteined == "":
-            if color_obteined == "Orange" or color_obteined == "Blue":
-                first_color_obteined = color_obteined
+        if first_color_obtained == "":
+            if color_obtained == "Orange" or color_obtained == "Blue":
+                first_color_obtained = color_obtained
 
 
-        if color_obteined == "Orange" and first_color_obteined == "Orange" and not turn_started:
+        if color_obtained == "Orange" and first_color_obtained == "Orange" and not turn_started:
             turn_started = True
             turn_done = False
 
-        elif color_obteined == "Blue" and first_color_obteined == "Blue" and not turn_started:
+        elif color_obtained == "Blue" and first_color_obtained == "Blue" and not turn_started:
             turn_started = True
             turn_done = False
 
-        elif color_obteined == "Unknown":   
+        elif color_obtained == "Unknown":   
             turn_started = False
 
         
-        if color_obteined == "Orange" and first_color_obteined == "Blue" and not turn_done: 
+        if color_obtained == "Orange" and first_color_obtained == "Blue" and not turn_done: 
             turn_done = True
             turn_count += 1
 
-        if color_obteined == "Blue" and first_color_obteined == "Orange" and not turn_done:
+        if color_obtained == "Blue" and first_color_obtained == "Orange" and not turn_done:
             turn_done = True
             turn_count += 1
 
@@ -58,8 +58,8 @@ def color_detection(stop_event):
             turn_count = 0
 
         data = {
-            "first_color_obteined": first_color_obteined,
-            "color_obteined" : color_obteined,
+            "first_color_obtained": first_color_obtained,
+            "color_obtained" : color_obtained,
             "turns": turn_count,
             "laps": lap_count 
         }
@@ -77,8 +77,8 @@ stop_event = threading.Event()
 signal.signal(signal.SIGINT, signal_handler)
 
 data = {
-            "first_color_obteined": "",
-            "color_obteined" : "",
+            "first_color_obtained": "",
+            "color_obtained" : "",
             "turns": 0,
             "laps": 0 
         }

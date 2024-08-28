@@ -4,7 +4,7 @@ import MOTOR_DRIVER as MD                # MD.move(percent_vel, percent_dir)
 import json
 import os
 
-move_json = os.path.join("../Json", "Move.json")
+move_json = os.path.join(os.path.dirname(__file__), "..","../Json", "Move.json")
 
 # This function is for go backward in the MAIN code
 def backward(traction, initial_direction):

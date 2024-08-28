@@ -2,8 +2,9 @@ import MOTOR_DRIVER as Motor
 import json
 import os
 
-cam_json = os.path.join("../Json", "CAM.json")
-move_json = os.path.join("../Json", "Move.json")
+cam_json = os.path.join(os.path.dirname(__file__), "..", "Json", "CAM.json")
+move_json = os.path.join(os.path.dirname(__file__), "..","../Json", "Move.json")
+
 
 
 def parking(): 
