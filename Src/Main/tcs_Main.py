@@ -1,4 +1,4 @@
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 import time
 import threading
 import signal
@@ -7,7 +7,8 @@ from Libraries import tcs34725 as tcs
 import MAIN
 import os
 
-tcs_json = os.path.join("Json", "tcs_color_detection.json")
+
+move_json = os.path.join(os.path.dirname(__file__), "Json", "tcs_color_detection.json")
 
 def signal_handler(sig, frame):
     global stop_event

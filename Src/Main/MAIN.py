@@ -6,9 +6,9 @@ from Libraries import Boton
 from Libraries import Extra_Functions as F
 from Libraries import End_rounds as End
 
-tcs_json = os.path.join("Json", "tcs_color_detection.json")
-move_json = os.path.join("Json", "Move.json")
-cam_json = os.path.join("Json", "CAM.json")
+tcs_json = os.path.join(os.path.dirname(__file__), "Json", "tcs_color_detection.json")
+move_json = os.path.join(os.path.dirname(__file__), "Json", "Move.json")
+cam_json = os.path.join(os.path.dirname(__file__), "Json", "CAM.json")
 
 extra_lap = False
 

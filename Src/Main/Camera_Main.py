@@ -19,7 +19,7 @@ camera.resolution = (640, 480)
 raw_capture = PiRGBArray(camera, size=(640, 480))
 raw_capture.truncate(0)
 
-cam_json = os.path.join("Json", "CAM.json")
+cam_json = os.path.join(os.path.dirname(__file__), "Json", "CAM.json")
 
 def principal_logic(areas):
     max_area = max(areas, key=areas.get)

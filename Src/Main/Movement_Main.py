@@ -20,7 +20,7 @@ for i in range(4):
     GPIO.output(TRIG[i], False)  # Ensure TRIG pins are low
 
 #And finally we create the route to the Json file
-move_json = os.path.join("Json", "Move.json")
+move_json = os.path.join(os.path.dirname(__file__), "Json", "Move.json")
 
 # Handler for SIGINT to stop threads
 def signal_handler(sig, frame):
