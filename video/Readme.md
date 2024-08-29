@@ -7,4 +7,5 @@
 <h1>Summary:
   </h1><b/>
 
-  In this folder we got a video from our car while it is moving
+  In this folder we got a video of our [car moving by itself](https://www.youtube.com/watch?v=2Q0AEukgsb0) in the first lap of the first challenge.
+> Click in the link of "car moving by itself" if you want to see the video.
