@@ -3,8 +3,8 @@ import os
 import time
 from Libraries import MOTOR_DRIVER as Motor
 from Libraries import Boton
-from Libraries import Extra_Functions as F
-from Libraries import End_rounds as End
+import Extra_Functions as F
+import End_rounds as End
 
 tcs_json = os.path.join(os.path.dirname(__file__), "Json", "tcs_color_detection.json")
 move_json = os.path.join(os.path.dirname(__file__), "Json", "Move.json")
