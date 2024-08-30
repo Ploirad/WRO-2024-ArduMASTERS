@@ -7,6 +7,7 @@ import threading
 import signal
 import json
 import os
+import sys
 
 # Second we create two lists of the pins
 TRIG = [23, 8, 17, 22]

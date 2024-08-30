@@ -6,6 +6,7 @@ import json
 from Libraries import tcs34725 as tcs
 import MAIN
 import os
+import sys
 
 
 move_json = os.path.join(os.path.dirname(__file__), "Json", "tcs_color_detection.json")

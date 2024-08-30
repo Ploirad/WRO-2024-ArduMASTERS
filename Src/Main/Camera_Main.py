@@ -5,6 +5,7 @@ import os
 import threading
 import signal
 import json
+import sys
 
 
 green_centroid = None
