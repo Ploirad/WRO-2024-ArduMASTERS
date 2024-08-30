@@ -1,6 +1,6 @@
 # Libraries
 import time
-import MOTOR_DRIVER as MD                # MD.move(percent_vel, percent_dir)
+from Libraries import MOTOR_DRIVER as MD                # MD.move(percent_vel, percent_dir)
 import json
 import os
 
