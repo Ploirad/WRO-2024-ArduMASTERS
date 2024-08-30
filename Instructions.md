@@ -88,15 +88,15 @@ So here we will guide you command by command how to setup your raspberry pi in o
 
 ![image](https://github.com/user-attachments/assets/f455e273-b251-4d44-bf55-d4e965a86079)
 
-2. Download the [Raspberry Pi OS Lite](https://www.raspberrypi.com/software/operating-systems/)
+2. Download the [Raspberry Pi OS Lite](https://www.raspberrypi.com/software/operating-systems/).
 
 ![image](https://github.com/user-attachments/assets/350fb464-95b8-4c5e-8286-bc4d979333ad)
 
-3. Open Imager
+3. Open Imager.
 
 ![image](https://github.com/user-attachments/assets/027e06e3-96ec-495f-bc63-9d5e86d3c364)
 
-4. Select your model of Raspberry. In our case it's Raspberry Pi 4
+4. Select your model of Raspberry. In our case it's Raspberry Pi 4.
 
 ![image](https://github.com/user-attachments/assets/7f566e96-096b-4b56-923c-6cc1d759bb27)
 
@@ -130,3 +130,77 @@ So here we will guide you command by command how to setup your raspberry pi in o
 ![image](https://github.com/user-attachments/assets/891760c8-1dfd-46b7-a89a-17779dc92527)
 
 ### 2. Auto-login configuration
+
+1. Enter raspberry pi configuration.  
+-       sudo raspi-config
+![image](https://github.com/user-attachments/assets/72cdd631-1af4-4d94-9584-bc9f4dbf60ac)
+![image](https://github.com/user-attachments/assets/2cc71732-ae75-4d74-bc13-6b557a7d86e1)
+
+2. Enter in system options.
+
+![image](https://github.com/user-attachments/assets/9592a369-adf3-4636-8589-9a18ec98121b)
+
+3. Enter in Boot / Auto Login.
+
+![image](https://github.com/user-attachments/assets/1be929a9-a5ed-44ec-9843-1e3dafc4aa82)
+
+4. Enter in Console Autologin.
+
+![image](https://github.com/user-attachments/assets/9f8a67af-0252-4586-9b6e-0dea8add2d85)
+
+### 3. Update packages
+-      sudo apt update & sudo apt upgrade -y
+
+![image](https://github.com/user-attachments/assets/92bddcbb-8b0d-4ad8-a6fc-e7cb7c83e137)
+
+### 4. Install Python
+-      sudo apt install python3-pip
+  
+![image](https://github.com/user-attachments/assets/9d838faa-6011-40a0-9842-0ef1e9eedf00)
+
+### 5. Download our github repository
+1. Install git.
+-      sudo apt install git
+
+![image](https://github.com/user-attachments/assets/7f0703ba-dddd-4a07-812d-cca7b3e5780c)
+
+2. Create directory for the repository.
+      mkdir WRO_repository
+cd WRO_repository
+git init
+git remote add origin https://github.com/Ploirad/WRO-2024-ArduMASTERS.git
+git config core.sparseCheckout true
+echo "Src/" >> .git/info/sparse-checkout
+
+![image](https://github.com/user-attachments/assets/6492c86a-21e1-44e1-8be3-67b9f40e0056)
+
+3. Download repository
+-      git pull origin main
+
+![image](https://github.com/user-attachments/assets/bd5cb9b5-5d64-41f7-ba00-5c111d0b73ba)
+
+### 6. Automate the entrance into the repository
+1. Open the bashrc with nano
+-      nano ~/.bashrc
+
+![image](https://github.com/user-attachments/assets/bbdf2699-9086-47e3-be66-60800686f33b)
+
+2. Add cd /home/"username"/WRO_repository/Src/Main
+
+![image](https://github.com/user-attachments/assets/58944566-2aa7-4798-a71c-a17d102748d3)
+
+3. Reboot to verify changes
+-      sudo reboot
+![image](https://github.com/user-attachments/assets/215987eb-a595-4e0f-b9f0-251b51f3c8ed)
+
+### 7. Usefull commands
+1. Update repository
+-      git pull origin main
+3. Run code
+-      python3 "file name"
+5. See files in current directory
+-      ls
+7. Go to directory
+-      cd "directory name"
+9. Go to the previous directory
+-      cd ../
