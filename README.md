@@ -225,8 +225,8 @@ So here we will guide you command by command how to setup your raspberry pi in o
 ![image](https://github.com/user-attachments/assets/7f0703ba-dddd-4a07-812d-cca7b3e5780c)
 
 2. Create directory for the repository.
--     mkdir WRO_repository
-      cd WRO_repository
+-     mkdir WRO-2024-ArduMASTERS
+      cd WRO-2024-ArduMASTERS
       git init
       git remote add origin https://github.com/Ploirad/WRO-2024-ArduMASTERS.git
       git config core.sparseCheckout true
