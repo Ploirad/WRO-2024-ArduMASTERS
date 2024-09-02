@@ -4,7 +4,7 @@
 
 # Index
 - [Members of the team](#members-and-collaborators-of-the-team)
-- [Flies](#files)
+- [Files](#files)
 - [Building instructions](#building-instructions)
   1. [Components](#1-components)
   2. [Scheme](#2-make-the-scheme)
