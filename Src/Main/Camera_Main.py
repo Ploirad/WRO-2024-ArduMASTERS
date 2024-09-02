@@ -2,8 +2,10 @@ from Libraries import New_color_detector as CAM
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 import time
+import time
 import threading
 import signal
+import sys
 import sys
 import json
 
@@ -70,7 +72,7 @@ def detect(stop_event):
                 }
             raw_capture.truncate(0)
             
-            with open("CAM.json", "w", encoding='utf-8') as j:
+            with open("Libraries/Json/CAM.json", "w", encoding='utf-8') as j:
                 json.dump(data, j, indent=4)
 
 def signal_handler(sig, frame):
