@@ -6,6 +6,7 @@ import time
 import threading
 import signal
 import sys
+import sys
 import json
 
 # Second we create two lists of the pins
