@@ -70,7 +70,7 @@ def detect(stop_event):
                 }
             raw_capture.truncate(0)
             
-            with open(":/Libraries/Json/CAM.json", "w", encoding='utf-8') as j:
+            with open("Libraries/Json/CAM.json", "w", encoding='utf-8') as j:
                 json.dump(data, j, indent=4)
 
 def signal_handler(sig, frame):
