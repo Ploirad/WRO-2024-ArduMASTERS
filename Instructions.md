@@ -17,6 +17,8 @@ In case you have any doubts or found any problem please contact us.
 
 ![Schemes](Schemes/WRO_Car.jpg)
 
+>The color sensor sown in the image it's just for reference the model thar we are really using it's the TCS34725
+
 ## 3. 3D Models
 
 You will need to 3D print the models in the repository 'Models/Current_Car_Models'.  
