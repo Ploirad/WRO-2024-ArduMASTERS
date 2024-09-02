@@ -245,7 +245,13 @@ echo "Src/" >> .git/info/sparse-checkout
 
 ![image](https://github.com/user-attachments/assets/bbdf2699-9086-47e3-be66-60800686f33b)
 
-2. Add cd /home/"username"/WRO_repository/Src/Main
+2. Add the following commands to the bashcr file.
+
+- cd /home/"username"/WRO_repository/Src/Main
+- python3 Camera_Main.py &
+- python3 Movement_Main.py &
+- python3 tcs_Main.py &
+- python3 MAIN.py &
 
 ![image](https://github.com/user-attachments/assets/58944566-2aa7-4798-a71c-a17d102748d3)
 
