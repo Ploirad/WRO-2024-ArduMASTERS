@@ -4,7 +4,7 @@
 
 
 <b>
-<h1>Summary:
+Summary:
   </h1><b/>
 
 # [Diary](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary)

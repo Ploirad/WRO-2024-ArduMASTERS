@@ -3,31 +3,39 @@
 # Libraries
 import cv2
 import numpy as np
+# This code is a library for the camera to take the color centroid and area of a specific frame given
+
+# Libraries
+import cv2
+import numpy as np
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 
 camera = PiCamera()
 
-#This function is used to take the green centroid respect to the X edge and the green area all about the frame gived and they are integer variables
+# This function is used to take the green centroid respect to the X edge and the green area all about the frame gived and they are integer variables
 def detect_green(frame):
-    G_bajo = np.array([0, 110, 0])
-    G_alto = np.array([100, 255, 100])
+    G_bajo = np.array([67, 128, 162])  # HSV values for green
+    G_alto = np.array([71, 160, 191])
     return detect_color(frame, G_bajo, G_alto)
 
 def detect_red(frame):
-    R_bajo = np.array([150, 50, 50])
-    R_alto = np.array([255, 200, 200])
+    R_bajo = np.array([154, 101, 24])  # HSV values for red
+    R_alto = np.array([177, 255, 184])
     return detect_color(frame, R_bajo, R_alto)
 
 def detect_magenta(frame):
-    M_bajo = np.array([150, 0, 150])
-    M_alto = np.array([255, 250, 255])
+    M_bajo = np.array([142, 117, 49])  # HSV values for magenta
+    M_alto = np.array([150, 230, 208])
     return detect_color(frame, M_bajo, M_alto)
 
-#This function is used to take the centroid and the area of the color gived (color_low, color_high) in the respective frame
+# This function is used to take the centroid and the area of the color gived (color_low, color_high) in the respective frame
 def detect_color(frame, color_low, color_high):
-    # Create a mask for the specified color range in RGB
-    mask = cv2.inRange(frame, color_low, color_high)
+    # Convert the frame from BGR to HSV
+    hsv_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
+    # Create a mask for the specified color range in HSV
+    mask = cv2.inRange(hsv_frame, color_low, color_high)
 
     # Find contours in the mask
     _, contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -58,30 +66,3 @@ def detect_dominant_color(frame):
     # Convertir de BGR a RGB
     center_color_rgb = center_color_bgr[::-1]
     return center_color_rgb
-
-
-##Code to try the camera
-#green_centroid = None
-#red_centroid = None
-#magenta_centroid = None
-#green_area = 0
-#red_area = 0
-#magenta_area = 0
-#camera.framerate = 30 #65
-#camera.resolution = (640, 480)
-#raw_capture = PiRGBArray(camera, size=(640, 480))
-#
-#raw_capture.truncate(0)
-#for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port=True):
-#    image = frame.array
-#    height, width = image.shape[:2]
-#    lower_half = image[height//2:, :]
-#    green_centroid, green_area = detect_green(lower_half)
-#    red_centroid, red_area = detect_red(lower_half)
-#    magenta_centroid, magenta_area = detect_magenta(lower_half)
-#    dom_col = detect_dominant_color(lower_half)
-#    print(f"Green Area: {green_area}; Red Area: {red_area}; Magenta Area: {magenta_area}")
-#    print(f"Green Centroid: {green_centroid}; Red Centroid: {red_centroid}; Magenta Centroid: {magenta_centroid}")
-#    print(f"Dominante color: {dom_col}")
-#    print("")
-#    raw_capture.truncate(0)  # Limpiar el búfer para la siguiente captura
