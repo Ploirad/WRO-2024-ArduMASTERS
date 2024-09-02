@@ -268,4 +268,6 @@ So here we will guide you command by command how to setup your raspberry pi in o
 
 AFter reboot your car shoud work like the videos of this [readme.md](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/video) in the video folder.
 
+If you want to test the different componets or recalibrate the camera go to [test codes](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/Test%20codes)
+
 I hope that this guide has been useful, if you have some problemens, do not doubt about talking with us.
