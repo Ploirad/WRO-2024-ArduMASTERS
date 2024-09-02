@@ -15,7 +15,8 @@
   - [Servos_test_v1.2](#servos_test_v1.2.py)
   - [Ultrasound_v1.1](#ultrasound_v1.1.py)
   - [Ultrasound_v1.2](#ultrasound_v1.2.py)
-
+##[camera_color_detection_v1.1.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary/camera_color_detection_v1.1.py)
+This code shows 
 ## [camera_record.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary/camera_record.py)
 This code shows us what do the camera sees for 30 secondsa and it keep in a document called 'video_en_vivo.h264'.
 ## [camera_color_extractor.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary/camera_color_extractor.py)
