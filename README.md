@@ -251,9 +251,9 @@ echo "Src/" >> .git/info/sparse-checkout
 - python3 Camera_Main.py &
 - python3 Movement_Main.py &
 - python3 tcs_Main.py &
-- python3 MAIN.py &
+- python3 MAIN.py
 
-![image](https://github.com/user-attachments/assets/58944566-2aa7-4798-a71c-a17d102748d3)
+![image](https://github.com/user-attachments/assets/a3fe665d-307e-40ff-aa0b-ba82b22afa25)
 
 3. Reboot to verify changes
 -      sudo reboot
