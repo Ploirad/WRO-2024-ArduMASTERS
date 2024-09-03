@@ -116,8 +116,31 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
                     with open("Libraries/Json/Distance.json", "r", encoding='utf-8') as f:
                         Move = json.load(f)
                         print(Move)
-                        traction = int(Move["traccion"])
-                        direction = int(Move["direccion"])
+                        HC0 = int(Move["HC0"])
+                        HC1 = int(Move["HC1"])
+                        HC2 = int(Move["HC2"])
+                        HC3 = int(Move["HC3"])
+
+                        if HC0 > 70:
+                            traction = 100
+                            if HC1 < 15:
+                                direction = 1
+                            elif HC3 < 15:
+                                direction = -1
+                            else:
+                                direction = 0
+                        elif HC0 > 30:
+                            traction = 100
+                            if HC1 > HC3:
+                                direction = 1
+                            else:
+                                direction = -1
+                        else:
+                            traction = -100
+                            if HC1 > HC3:
+                                direction = -1
+                            else:
+                                direction = 1
 
             with open("Libraries/Json/tcs_color_detection.json", "r", encoding='utf-8') as f:
                 tcs = json.load(f)
