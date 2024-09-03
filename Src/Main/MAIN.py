@@ -157,6 +157,11 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
                 if traction < 0:
                     time.sleep(tim)
 
+                print(CAM)
+
+                with open("Libraries/Json/Movement.json", 'r') as jf:
+                    print(json.load(jf))
+
         else:
             print("Waiting for start signal")
             if Boton.button_state():
@@ -170,10 +175,5 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
         print(f"An unexpected error occurred: {e}")
         if e == KeyboardInterrupt:
             break
-
-    print(CAM)
-
-    with open("Libraries/Json/Movement.json", 'r') as jf:
-        print(json.load(jf))
 
     raw_capture.truncate(0)
