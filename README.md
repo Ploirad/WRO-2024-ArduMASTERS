@@ -211,7 +211,20 @@ So here we will guide you command by command how to setup your raspberry pi in o
   
 ![image](https://github.com/user-attachments/assets/9d838faa-6011-40a0-9842-0ef1e9eedf00)
 
-### 5. Download our github repository
+### 5. Install basic libraries for the camera, machine vision and tcs34725
+-     sudo apt install python3-picamera
+      sudo apt install python3-opencv
+      sudo pip3 install adafruit-circuitpython-tcs34725
+      sudo pip3 install adafruit-blinka
+
+### 6. ENABLE THE I2C BUS FOR THE TCS34725
+1. Enter raspberry pi configuration.
+-       sudo raspi-config
+2. Select interface options
+3. Select P5 I2C
+4. Enable it
+
+### 7. Download our github repository
 1. Install git.
 -      sudo apt install git
 
@@ -232,7 +245,7 @@ So here we will guide you command by command how to setup your raspberry pi in o
 
 ![image](https://github.com/user-attachments/assets/bd5cb9b5-5d64-41f7-ba00-5c111d0b73ba)
 
-### 6. Automate the entrance into the repository
+### 8. Automate the entrance into the repository
 1. Open the bashrc with nano
 -      nano ~/.bashrc
 
@@ -252,7 +265,7 @@ So here we will guide you command by command how to setup your raspberry pi in o
 -      sudo reboot
 ![image](https://github.com/user-attachments/assets/215987eb-a595-4e0f-b9f0-251b51f3c8ed)
 
-### 7. Useful commands
+### 9. Useful commands
 1. Update repository
 -      git pull origin main
 3. Run code
