@@ -6,6 +6,7 @@ import time
 from Libraries import Boton
 import Libraries.Extra_Functions as F
 import Libraries.End_rounds as End
+import tcs_Main as TCS_M
 
 green_centroid = None
 red_centroid = None
@@ -138,7 +139,7 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
                     if last_pillar == "red":
                         F.change_direction()
                     possible_changing_direction = False
-                    extra_lap = True
+                    TCS_M.extra_lap = True
 
                 if laps >= 3:
                     print("OK")

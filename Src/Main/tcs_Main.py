@@ -4,7 +4,6 @@ import threading
 import signal
 import json
 from Libraries import tcs34725 as tcs
-import MAIN
 
 def signal_handler(sig, frame):
     global stop_event
@@ -17,6 +16,7 @@ def color_detection(stop_event):
     turn_done = False
     turn_count = 0
     lap_count = 0
+    extra_lap = False
     while not stop_event.is_set():
         color_obteined = tcs.get_color()
 
@@ -45,9 +45,9 @@ def color_detection(stop_event):
             turn_done = True
             turn_count += 1
 
-        if MAIN.extra_lap:
+        if extra_lap:
             lap_count += 1
-            MAIN.extra_lap = False
+            extra_lap = False
 
         if turn_count == 4:
             lap_count += 1
