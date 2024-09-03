@@ -73,7 +73,7 @@ def main(stop_event):
             "HC0": HC0,
             "HC1": HC1,
             "HC2": HC2,
-            "HC3": HC3,
+            "HC3": HC3
         }
 
         with open("Libraries/Json/Move.json", "w", encoding='utf-8') as j:
