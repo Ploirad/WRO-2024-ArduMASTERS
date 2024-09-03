@@ -50,8 +50,8 @@ def detect_color(frame, color_low, color_high):
 def detect_dominant_color(frame):
     height, width, _ = frame.shape
     # Coordenadas del centro del cuadro
-    center_x = width // 2
-    center_y = height // 2
+    center_x = width / 2
+    center_y = height / 2
     # Color en el centro del cuadro
     center_color_bgr = frame[center_y, center_x]
     # Convertir de BGR a RGB
