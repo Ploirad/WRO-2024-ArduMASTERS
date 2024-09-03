@@ -18,7 +18,7 @@ This code is used for extract a color from a photo, then it print the highest an
 
 If you want to adjust the colors go to [this file](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/Libraries/New_color_detector.py) and put your values in the spaces marked in green in the photo.
 
-![Foto camara](https://github.com/user-attachments/assets/75813235-64d3-4d92-8841-321e6346a2e5)
+![Camera photo](<Foto camara.png>)
 
 > Where we have "alto" means the highest value and "bajo" the lowest one.
 
