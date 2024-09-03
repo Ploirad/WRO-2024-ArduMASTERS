@@ -1,4 +1,4 @@
-from Libraries import New_color_detector as CAM
+from Libraries import New_color_detector as cam
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 import json
@@ -13,7 +13,7 @@ magenta_centroid = None
 green_area = 0
 red_area = 0
 magenta_area = 0
-camera = CAM.camera
+camera = cam.camera
 camera.framerate = 30 #65
 camera.resolution = (640, 480)
 raw_capture = PiRGBArray(camera, size=(640, 480))
@@ -52,9 +52,9 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
     image = frame.array
     height, width = image.shape[:2]
     lower_half = image[height//2:, :]
-    _, green_area = CAM.detect_green(lower_half)
-    _, red_area = CAM.detect_red(lower_half)
-    magenta_centroid, magenta_area = CAM.detect_magenta(lower_half)
+    _, green_area = cam.detect_green(lower_half)
+    _, red_area = cam.detect_red(lower_half)
+    magenta_centroid, magenta_area = cam.detect_magenta(lower_half)
 
     color_areas = {"green": green_area, "red": red_area, "magenta": magenta_area}
 
