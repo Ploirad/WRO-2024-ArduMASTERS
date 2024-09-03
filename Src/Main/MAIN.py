@@ -113,7 +113,7 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
             else:
                 if CAM["Ignore"]:
                     print("Ignore CAM")
-                    with open("Libraries/Json/Movement.json", "r", encoding='utf-8') as f:
+                    with open("Libraries/Json/Distance.json", "r", encoding='utf-8') as f:
                         Move = json.load(f)
                         print(Move)
                         traction = int(Move["traccion"])
