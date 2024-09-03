@@ -116,13 +116,8 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
                     with open("Libraries/Json/Move.json", "r", encoding='utf-8') as f:
                         Move = json.load(f)
                         print(Move)
-
-                        if "TRACTION" in Move and "DIRECTION" in Move:
-                            traction = int(Move["TRACTION"])
-                            direction = int(Move["DIRECTION"])
-
-                        else:
-                            print("Invalid data format in JSON file")
+                        traction = int(Move["TRACTION"])
+                        direction = int(Move["DIRECTION"])
 
             with open("Libraries/Json/tcs_color_detection.json", "r", encoding='utf-8') as f:
                 tcs = json.load(f)
