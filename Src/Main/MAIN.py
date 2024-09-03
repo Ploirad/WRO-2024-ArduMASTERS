@@ -13,7 +13,7 @@ magenta_centroid = None
 green_area = 0
 red_area = 0
 magenta_area = 0
-camera = cam.camera
+camera = PiCamera()
 camera.framerate = 30 #65
 camera.resolution = (640, 480)
 raw_capture = PiRGBArray(camera, size=(640, 480))
