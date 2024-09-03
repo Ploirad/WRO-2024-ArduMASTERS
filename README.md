@@ -82,15 +82,15 @@ Once we have all the parts printed it's time to put them together. Now we will s
 
 ### 1. Base
  
- ![Base](https://github.com/user-attachments/assets/c1abd998-efcf-4d37-86df-2af5803f1444)
+ ![Base](https://github.com/user-attachments/assets/74c9a0a8-6e4d-43bb-9972-99ef6d25d5de)
 
  First of all we place the raspberry and L298N on the base at their places:  
 - The Raspberry is placed transversaly in the middle of the car.  
 - The L298N is placed at the back of the car in between the motors.
 
-### 2. Stub axles
+### 2. Stub axels
 
-![Manguetas](https://github.com/user-attachments/assets/ef7da460-8c49-4f46-a7f3-60c65c74a723)
+![Stub axels](https://github.com/user-attachments/assets/ccfe2ea6-afe7-4758-b792-c431bd7df17a)
 
 Now we place the stub axels, this will serve to transfer the rotation of the servo to the wheels to vary their direction.  
 - We insert a M3 nut in each stub axel for later on
@@ -102,7 +102,7 @@ Now we place the stub axels, this will serve to transfer the rotation of the ser
 
 ### 3. Zipper
 
-![Cremallera](https://github.com/user-attachments/assets/1793bc08-a000-4654-8a7a-7aef23531f7d)
+![Zipper](https://github.com/user-attachments/assets/5b64e032-9cc6-40b7-ab98-a234c3fb92f6)
 
 Next is the install of the zipper this will syncronize the direction of bowth sides and transfer the servo direction.  
 - We place the zipper as shown in the picture above and screw it with a M3 screw and nut in each side.
@@ -116,7 +116,7 @@ Now we mount the four wheels to the chassis
 
 ### 5. Gear and servo
 
-![Engranaje](https://github.com/user-attachments/assets/28207653-d117-45be-8ae0-f7848ac34772)
+![Gear](https://github.com/user-attachments/assets/a04b8670-2c3e-482d-8210-b1969d9a60e9)
 
 To finish the direction we place the gear and the servo which will guide all the direction system.  
 - We insert the gear in the servo and screw it in place
