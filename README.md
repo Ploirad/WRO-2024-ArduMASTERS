@@ -21,9 +21,11 @@
       - [Auto login configuration](#2-auto-login-configuration)
       - [Update packages](#3-update-packages)
       - [Install python](#4-install-python)
-      - [Download our github repository](#5-download-our-github-repository)
-      - [Automate the entrance into the repository](#6-automate-the-entrance-into-the-repository)
-      - [Useful commands]( #7-useful-commands)
+      - [Install basic libraries](#5-install-basic-libraries-for-the-camera-machine-vision-and-tcs34725)
+      - [Enable the i2c for the tcs34725](#6-enable-the-i2c-bus-for-the-tcs34725)
+      - [Download our github repository](#7-download-our-github-repository)
+      - [Automate the entrance into the repository](#8-automate-the-entrance-into-the-repository)
+      - [Useful commands](#9-useful-commands)
   6. [Ending](#6-ending)
 
 
