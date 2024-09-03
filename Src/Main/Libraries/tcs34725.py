@@ -19,21 +19,24 @@ def get_color():
 
         # Normalize the values
         max_val = max(r, g, b)
-        r_norm = r / max_val
-        g_norm = g / max_val
-        b_norm = b / max_val
+        if max_val > 0:
+            r_norm = r / max_val
+            g_norm = g / max_val
+            b_norm = b / max_val
 
-        # Print the raw and normalized color values for debugging
-        # print(f"Raw color values - Red: {r}, Green: {g}, Blue: {b}, Clear: {c}")
-        # print(f"Normalized values - Red: {r_norm:.2f}, Green: {g_norm:.2f}, Blue: {b_norm:.2f}")
+            # Print the raw and normalized color values for debugging
+            # print(f"Raw color values - Red: {r}, Green: {g}, Blue: {b}, Clear: {c}")
+            # print(f"Normalized values - Red: {r_norm:.2f}, Green: {g_norm:.2f}, Blue: {b_norm:.2f}")
 
-        # Determine the detected color based on normalized RGB values
-        if r_norm > 0.4 and r_norm > g_norm and r_norm > b_norm and g < 25:
-            color = "Orange"
-        elif b_norm >= 1 and b_norm > g_norm and b_norm > r_norm:
-            color = "Blue"
-        elif max(r_norm, g_norm, b_norm) < 0.4:
-            color = "Gray"
+            # Determine the detected color based on normalized RGB values
+            if r_norm > 0.4 and r_norm > g_norm and r_norm > b_norm and g < 25:
+                color = "Orange"
+            elif b_norm >= 1 and b_norm > g_norm and b_norm > r_norm:
+                color = "Blue"
+            elif max(r_norm, g_norm, b_norm) < 0.4:
+                color = "Gray"
+            else:
+                color = "Unknown"
         else:
             color = "Unknown"
 
