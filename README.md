@@ -10,20 +10,20 @@
   2. [Scheme](#2-make-the-scheme)
   3. [Print the 3d models](#3-print-the-3d-models)
   4. [Chassis assemble](#4-chassis-assemble)
-      - [Base](#1-base)
-      - [Stub axles](#2-stub-axles)
-      - [Zipper](#3-zipper)
-      - [Wheels and dc motors](#4-wheels-and-dc-motors)
-      - [Gear and servo](#5-gear-and-servo)
-      - [Battery shield and spacers](#6-battery-sield-and-spacers)
+      1. [Base](#1-base)
+      2. [Stub axles](#2-stub-axles)
+      3. [Zipper](#3-zipper)
+      4. [Wheels and dc motors](#4-wheels-and-dc-motors)
+      5. [Gear and servo](#5-gear-and-servo)
+      6. [Battery shield and spacers](#6-battery-sield-and-spacers)
   5. [Software installation](#5-software-installation)
-      - [OS installation and adjustment](#1-os-installation-and-adjustment)
-      - [Auto login configuration](#2-auto-login-configuration)
-      - [Update packages](#3-update-packages)
-      - [Install python](#4-install-python)
-      - [Download our github repository](#5-download-our-github-repository)
-      - [Automate the entrance into the repository](#6-automate-the-entrance-into-the-repository)
-      - [Useful commands]( #7-useful-commands)
+      1. [OS installation and adjustment](#1-os-installation-and-adjustment)
+      2. [Auto login configuration](#2-auto-login-configuration)
+      3. [Update packages](#3-update-packages)
+      4. [Install python](#4-install-python)
+      5. [Download our github repository](#5-download-our-github-repository)
+      6. [Automate the entrance into the repository](#6-automate-the-entrance-into-the-repository)
+      7. [Useful commands]( #7-useful-commands)
   6. [Ending](#6-ending)
 
 
@@ -74,7 +74,8 @@
 
 ## 3. Print the 3D models
 
-You will need to 3D print the models in the repository ['Models/Current_Car_Models'](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Models/Current_Car_Models). In our case we have used an Ender 3, an Artillery Sidewinder X4 Pro and a Prusa Mk3s for printing the chassis out. But you can use any printer of your preference. These parts don't need to support any abnormal forces therefore can be printed in any material. In our case we printed them with PLA.  
+You will need to 3D print the models in the repository ['Models/Current_Car_Models'](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Models/Current_Car_Models). In our case we have used an Ender 3, an Artillery Sidewinder X4 Pro and a Prusa Mk3s for printing the chassis out. But you can use any printer of your preference. These parts don't need to support any abnormal forces therefore can be printed in any material. In our case we printed them with PLA.
+> You will need to slice the file [WRO Car_v15.stl](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Models/Current_Car_Models/WRO%20Car_v15.stl)  
 
 ## 4. Chassis assemble
 
