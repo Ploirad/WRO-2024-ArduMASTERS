@@ -16,6 +16,7 @@ def main(stop_event):
     while not stop_event:
         with open("Libraries/Json/Movement.json","r",encoding='utf-8') as j:
             data = json.load(j)
+            print(f"MVMNT-MN:{data}")
 
         M.move(data["traccion"],data["direccion"])
 

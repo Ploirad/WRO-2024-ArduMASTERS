@@ -4,8 +4,8 @@ from picamera.array import PiRGBArray
 import json
 import time
 from Libraries import Boton
-import Libraries.Extra_Functions as F
-import Libraries.End_rounds as End
+from Libraries import Extra_Functions as F
+from Libraries import End_rounds as End
 import tcs_Main as TCS_M
 
 green_centroid = None
