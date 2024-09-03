@@ -42,13 +42,13 @@ def measure_distance(GPIO_TRIGGER, GPIO_ECHO):
     while GPIO.input(GPIO_ECHO) == 0:
         start_time = time.time()
         if start_time - stop_time > 0.1:  # Timeout to avoid infinite loop
-            return None
+            return 0
 
     # Wait for the echo end
     while GPIO.input(GPIO_ECHO) == 1:
         stop_time = time.time()
         if stop_time - start_time > 0.1:  # Timeout to avoid infinite loop
-            return None
+            return 0
 
     # Calculate the duration of the pulse
     elapsed_time = stop_time - start_time
@@ -63,11 +63,7 @@ def main(stop_event):
         HC0 = measure_distance(TRIG[0], ECHO[0])
         HC1 = measure_distance(TRIG[1], ECHO[1])
         HC2 = measure_distance(TRIG[2], ECHO[2])
-        HC3 = measure_distance(TRIG[3], ECHO[3])
-
-        # Check for None values to avoid writing invalid data
-        if HC0 is None or HC1 is None or HC2 is None or HC3 is None:
-            break
+        HC3 = measure_distance(TRIG[3], ECHO[3]) 
 
         data = {
             "HC0": HC0,
