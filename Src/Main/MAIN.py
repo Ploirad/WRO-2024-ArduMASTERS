@@ -146,21 +146,21 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
                     print("OK")
                     waiting_magenta = True
 
-                with open("Libraries/Json/Movement.json", "w") as j:
-                    data_to_write = {
-                        "traccion": traction,
-                        "direccion": direction
-                    }
-                    json.dump(data_to_write, j, indent=4)
+            with open("Libraries/Json/Movement.json", "w") as j:
+                data_to_write = {
+                    "traccion": traction,
+                    "direccion": direction
+                }
+                json.dump(data_to_write, j, indent=4)
 
 
-                if traction < 0:
-                    time.sleep(tim)
+            if traction < 0:
+                time.sleep(tim)
 
-                print(CAM)
+            print(CAM)
 
-                with open("Libraries/Json/Movement.json", 'r') as jf:
-                    print(json.load(jf))
+            with open("Libraries/Json/Movement.json", 'r') as jf:
+                print(json.load(jf))
 
         else:
             print("Waiting for start signal")
@@ -173,7 +173,5 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
         print("Error decoding JSON. Ensure the JSON format is correct.")
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
-        if e == KeyboardInterrupt:
-            break
 
     raw_capture.truncate(0)
