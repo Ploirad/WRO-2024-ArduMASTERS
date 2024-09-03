@@ -169,12 +169,14 @@ try:
             print("Error decoding JSON. Ensure the JSON format is correct.")
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
+            if e == KeyboardInterrupt:
+                break
 
-        print(cam)
+        print(CAM)
 
         with open("Libraries/Json/Movement.json", 'r') as jf:
             print(json.load(jf))
 
         raw_capture.truncate(0)
 except:
-    print("no frame") 
+    print("no frame")
