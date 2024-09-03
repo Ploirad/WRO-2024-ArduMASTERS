@@ -147,10 +147,7 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
                     waiting_magenta = True
 
             with open("Libraries/Json/Movement.json", "w") as j:
-                data_to_write = {
-                    "traccion": traction,
-                    "direccion": direction
-                }
+                data_to_write = {"traccion": traction, "direccion": direction}
                 json.dump(data_to_write, j, indent=4)
 
 
