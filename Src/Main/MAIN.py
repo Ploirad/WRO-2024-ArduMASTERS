@@ -170,6 +170,11 @@ try:
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
 
+        print(cam)
+
+        with open("Libraries/Json/Movement.json", 'r') as jf:
+            print(json.load(jf))
+
         raw_capture.truncate(0)
 except:
     print("no frame") 
