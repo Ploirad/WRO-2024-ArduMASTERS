@@ -142,9 +142,11 @@ So here we will guide you command by command how to setup your raspberry pi in o
 
 ![image](https://github.com/user-attachments/assets/f455e273-b251-4d44-bf55-d4e965a86079)
 
-2. Download the [Raspberry Pi OS Lite](https://www.raspberrypi.com/software/operating-systems/).
+2. Download the [Raspberry Pi OS]([https://www.raspberrypi.com/software/operating-systems/](https://archive.org/details/2021-05-07-raspios-buster-armhf)).
 
-![image](https://github.com/user-attachments/assets/350fb464-95b8-4c5e-8286-bc4d979333ad)
+![OS_1](https://github.com/user-attachments/assets/86d62219-9554-4fa0-8e2f-3c28f6162c73)
+
+![OS_2](https://github.com/user-attachments/assets/5a4f9e5c-543e-4a02-bd89-22cb14cd6989)
 
 3. Open Imager.
 
