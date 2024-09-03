@@ -3,7 +3,6 @@ from picamera import PiCamera
 from picamera.array import PiRGBArray
 import json
 import time
-from Libraries import MOTOR_DRIVER as Motor
 from Libraries import Boton
 import Libraries.Extra_Functions as F
 import Libraries.End_rounds as End
@@ -145,7 +144,14 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
                     print("OK")
                     waiting_magenta = True
 
-                Motor.move(traction, direction)
+                with open("Libraries/Json/Movement.json", "w") as j:
+                    data_to_write = {
+                        "traccion": traction,
+                        "direccion": direction
+                    }
+                    json.dump(data_to_write, j, indent=4)
+
+
                 if traction < 0:
                     time.sleep(tim)
 
