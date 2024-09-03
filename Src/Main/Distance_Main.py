@@ -72,7 +72,7 @@ def main(stop_event):
             "HC3": HC3
         }
 
-        with open("Libraries/Json/Move.json", "w", encoding='utf-8') as j:
+        with open("Libraries/Json/Distance.json", "w", encoding='utf-8') as j:
             json.dump(data, j, indent=4)
 
         # Optional sleep to reduce the frequency of measurements
