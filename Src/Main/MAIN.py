@@ -80,7 +80,7 @@ for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port
     try:
         if can_start:
             if not first_loop_done:
-                with open("Libraries/Json/Move.json", "r", encoding='utf-8') as f:
+                with open("Libraries/Json/Distance.json", "r", encoding='utf-8') as f:
                     Move = json.load(f)
                     first_front_distance = Move["HC0"]
                     first_right_distance = Move["HC1"]
