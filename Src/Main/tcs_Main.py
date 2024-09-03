@@ -79,9 +79,6 @@ data = {
             "laps": 0 
         }
 
-with open("tcs_color_detection.json", "w", encoding='utf-8') as j:
-    json.dump(data, j, indent=4)
-
 if __name__=='__main__':
     try:
         t = threading.Thread(target=color_detection, args=(stop_event,))
