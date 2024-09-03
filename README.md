@@ -223,8 +223,16 @@ So here we will guide you command by command how to setup your raspberry pi in o
 1. Enter raspberry pi configuration.
 -       sudo raspi-config
 2. Select interface options
+
+![Captura de pantalla de 2024-09-03 12-40-56](https://github.com/user-attachments/assets/a9cb56b1-2ef8-47a0-ab85-1f0947e1d126)
+
 3. Select P5 I2C
+
+![Captura de pantalla de 2024-09-03 12-41-05](https://github.com/user-attachments/assets/dc81e6c3-609a-4b0f-815e-24a65109c026)
+
 4. Enable it
+
+![Captura de pantalla de 2024-09-03 12-41-09](https://github.com/user-attachments/assets/f879d168-852f-46b8-a412-8a36cd7f03ba)
 
 ### 7. Download our github repository
 1. Install git.
