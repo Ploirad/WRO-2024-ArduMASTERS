@@ -6,10 +6,10 @@
 These codes are used in order to test the different components of the ArduMASTERS 
 
 # Files
-- [Camera_color_extractor_test.py](#)
-- [Movement_test.py](#)
-- [Tc34725_test.py](#)
-- [Ultrasound.py](#)
+- [Camera_color_extractor_test.py](#camera-color-extractor-testpy)
+- [Movement_test.py](#movement_testpy)
+- [Tc34725_test.py](#tcs34725_testpy))
+- [Ultrasound.py](#ultrasound_testpy)
 > I don't write the file MOTOR_DRIVER in libraries becouse isn't a test code
 
 # Test codes
@@ -18,9 +18,10 @@ This code is used for extract a color from a photo, then it print the highest an
 
 If you want to adjust the colors go to [this file](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/Libraries/New_color_detector.py) and put your values in the spaces marked in green in the photo.
 
-
+![Foto camara](https://github.com/user-attachments/assets/75813235-64d3-4d92-8841-321e6346a2e5)
 
 > Where we have "alto" means the highest value and "bajo" the lowest one.
+
 > WARNING This code can only run in a rasberry pi with enviroment or x.
 
 ## [Movement_test.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Test%20codes/Movement_test.py)
