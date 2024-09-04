@@ -13,8 +13,8 @@ def detect_green(frame):
     return detect_color(frame, G_bajo, G_alto)
 
 def detect_red(frame):
-    R_bajo = np.array([154, 101, 24])  # HSV values for red
-    R_alto = np.array([177, 255, 184])
+    R_bajo = np.array([0, 187,  43])  # HSV values for red
+    R_alto = np.array([179, 255,  84])
     return detect_color(frame, R_bajo, R_alto)
 
 def detect_magenta(frame):
