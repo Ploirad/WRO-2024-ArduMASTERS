@@ -36,8 +36,8 @@ camera = PiCamera()
 camera.resolution = resolucion
 rawCapture = PiRGBArray(camera, size=resolucion)
 time.sleep(0.3)
-bajoR, altoR = np.array([64, 154, 63]),np.array([69, 255, 97])
-bajoG, altoG = np.array([0, 187,  43]),np.array([179, 255,  84])
+bajoR, altoR = np.array([0, 187,  43]),np.array([179, 255,  84])
+bajoG, altoG = np.array([64, 154, 63]),np.array([69, 255, 97])
 bajoM, altoM = np.array([142, 117, 49]),np.array([150, 230, 208])
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     image = frame.array
