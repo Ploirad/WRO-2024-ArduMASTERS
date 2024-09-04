@@ -61,24 +61,24 @@ def move(percent_vel, percent_dir):
     # 2-12, 9.5
     print(d)
 
-    if percent_vel > 0:
+    if percent_vel[0] > 0 and percent_vel[1] > 0:
         print("AVANCE")
         duty_cycle = percent_vel
         GPIO.output(IN1, GPIO.HIGH)
         GPIO.output(IN2, GPIO.LOW)
         GPIO.output(IN3, GPIO.HIGH)
         GPIO.output(IN4, GPIO.LOW)
-        pwmENA.ChangeDutyCycle(duty_cycle)
-        pwmENB.ChangeDutyCycle(duty_cycle)
-    elif percent_vel < 0:
+        pwmENA.ChangeDutyCycle(duty_cycle[0])
+        pwmENB.ChangeDutyCycle(duty_cycle[1])
+    elif percent_vel[0] < 0 and percent_vel[1] > 0:
         print("RETROCESO")
-        duty_cycle = abs(percent_vel)
+        duty_cycle = (abs(percent_vel[0]), abs(percent_vel[1]))
         GPIO.output(IN1, GPIO.LOW)
         GPIO.output(IN2, GPIO.HIGH)
         GPIO.output(IN3, GPIO.LOW)
         GPIO.output(IN4, GPIO.HIGH)
-        pwmENA.ChangeDutyCycle(duty_cycle)
-        pwmENB.ChangeDutyCycle(duty_cycle)
+        pwmENA.ChangeDutyCycle(duty_cycle[0])
+        pwmENB.ChangeDutyCycle(duty_cycle[1])
     else:
         print("STOP")
         GPIO.output(IN1, GPIO.LOW)
