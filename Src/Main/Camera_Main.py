@@ -25,7 +25,7 @@ raw_capture.truncate(0)
 def principal_logic(areas):
     max_area = max(areas, key=areas.get)
 
-    traction = 100
+    traction = 50
     direction = 0
     ignore = True
     if max_area == "green" and areas[max_area] > 0:

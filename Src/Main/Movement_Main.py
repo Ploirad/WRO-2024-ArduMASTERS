@@ -29,7 +29,7 @@ def principal_logic(HC0, HC1, HC3):
     direction = 0
     traction = 0
     if HC0 > 70:
-        traction = 100
+        traction = 50
         if HC1 < 15:
             direction = -100
         elif HC3 < 15:
@@ -37,13 +37,13 @@ def principal_logic(HC0, HC1, HC3):
         else:
             direction = 0
     elif HC0 > 30:
-        traction = 100
+        traction = 50
         if HC1 > HC3:
             direction = 100
         else:
             direction = -100
     else:
-        traction = -100
+        traction = -50
         if HC1 > HC3:
             direction = -100
         else:
