@@ -45,9 +45,9 @@ def principal_logic(HC0, HC1, HC3):
     else:
         traction = -25
         if HC1 > HC3:
-            direction = -100
-        else:
             direction = 100
+        else:
+            direction = -100
 
     return traction, direction
 
