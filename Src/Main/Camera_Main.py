@@ -30,10 +30,10 @@ def principal_logic(areas):
     direction = 0
     ignore = True
     if max_area == "green" and areas[max_area] > 0:
-        direction = 100
+        direction = -100
         ignore = False
     elif max_area == "red" and calculo > 0:
-        direction = -100
+        direction = 100
         ignore = False
     elif max_area == "magenta" and areas[max_area] > 1000:
         ignore = False
