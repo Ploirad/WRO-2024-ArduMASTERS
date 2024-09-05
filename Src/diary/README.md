@@ -1,5 +1,5 @@
 <p> align="center">
-  <img width="200" height="200" Src="https://github.com/Ploirad/WRO-2024-ArduMASTERS/assets/148375115/122c7233-1e41-4727-894d-9d810f12458b">
+  <img width="200" height="200" Src="https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Process/MASTERS.jpeg">
 </p> 
 
 # Files:
@@ -15,6 +15,7 @@ These ones are the [old funtions](#old-functions)
   - [Servos_test_v1.1.0](#servos_test_v110py)
   - [Ultrasound_v1.0.0](#ultrasound_v100py)
   - [Ultrasound_v1.1.0](#ultrasound_v110py)
+  - [Set_servo_in_0]()
 
 These ones are the [old mains](#old-mains)
   - [Main_v1.0](#main_v10py)
@@ -53,6 +54,9 @@ This code is in order to test the servos movement
 
 ## [Servos_test_v1.1.0.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary/servos_test_v1.1.0.py)
 This code is the same than its [previous version](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary/servos_test_v1.0.0.py), but we add a button.
+
+## [Set_servo_in_0.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary/set_servo_in_0.py)
+This code is in order to set the servo in 0 degree.
 
 ## [Ultrasound_v1.0.0.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/diary/ultrasound_v1.0.0.py)
 That code is an ultrasound test.
