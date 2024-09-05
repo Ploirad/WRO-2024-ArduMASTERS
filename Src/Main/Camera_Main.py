@@ -2,10 +2,8 @@ from Libraries import New_color_detector as CAM
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 import time
-import time
 import threading
 import signal
-import sys
 import sys
 import json
 
