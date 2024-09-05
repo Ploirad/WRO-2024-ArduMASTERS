@@ -1,4 +1,4 @@
-<p> align="center">
+<p  align="center">
   <img width="200" height="200" Src="https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Process/MASTERS.jpeg">
 </p> 
 
