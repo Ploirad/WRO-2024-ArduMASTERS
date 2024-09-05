@@ -15,6 +15,7 @@ def extractColor(frame, r):
     
     bajo = np.array([hMin, sMin, vMin], np.uint8)
     alto = np.array([hMax, sMax, vMax], np.uint8)
+    print(bajo, alto)
     return bajo, alto
 
 
@@ -59,7 +60,6 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         bajo, alto = extractColor(image, roi)
     elif cuenta > 10:
         f, mask, cx, cy = testColor(image, bajo, alto)
-        print(cx,cy)
         cv2.imshow("frame", f)
         cv2.imshow("frame2", mask)
         
