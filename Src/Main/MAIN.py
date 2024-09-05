@@ -8,6 +8,7 @@ import Libraries.End_rounds as End
 extra_lap = False
 
 if __name__ == "__main__":
+    dir_changed = False
     can_start = False
     waiting_magenta = False
     possible_changing_direction = False
@@ -44,6 +45,13 @@ if __name__ == "__main__":
                         last_pillar = color
 
                     if waiting_magenta:
+                        if second_round:
+                            if color == "magenta":
+                                End.parking(dir_changed)
+                        else:
+                            if tcs_color == "Gray":
+                                End.home_sweet_home(first_front_distance, first_right_distance)
+                                break
                         if tcs_color == "Gray":
                             End.home_sweet_home(first_front_distance, first_right_distance)
                             break
@@ -82,6 +90,7 @@ if __name__ == "__main__":
                     if tcs_first_color == tcs_color and possible_changing_direction:
                         if last_pillar == "red":
                             F.change_direction()
+                            dir_changed = True
                         possible_changing_direction = False
                         extra_lap = True
 
