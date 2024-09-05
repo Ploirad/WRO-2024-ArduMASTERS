@@ -44,13 +44,9 @@ if __name__ == "__main__":
                         last_pillar = color
 
                     if waiting_magenta:
-                        if second_round:
-                            if color == "magenta":
-                                End.parking()
-                        else:
-                            if tcs_color == "Gray":
-                                End.home_sweet_home(first_front_distance, first_right_distance)
-                                break
+                        if tcs_color == "Gray":
+                            End.home_sweet_home(first_front_distance, first_right_distance)
+                            break
 
                     if ("TRACTION" in CAM and "DIRECTION" in CAM) and not CAM["Ignore"]:
                         traction = int(CAM["TRACTION"])

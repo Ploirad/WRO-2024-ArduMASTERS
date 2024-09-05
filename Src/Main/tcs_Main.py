@@ -33,8 +33,7 @@ def color_detection(stop_event):
             turn_started = True
             turn_done = False
 
-        elif color_obteined == "Unknown":   #this should be Gray but this to make a test
-        elif color_obteined == "Unknown":   #this should be Gray but this to make a test
+        elif color_obteined == "Gray":   #this should be Gray but this to make a test
             turn_started = False
 
         
@@ -80,7 +79,6 @@ data = {
             "laps": 0 
         }
 
-with open("tcs_color_detection.json", "w", encoding='utf-8') as j:
 with open("tcs_color_detection.json", "w", encoding='utf-8') as j:
     json.dump(data, j, indent=4)
 
