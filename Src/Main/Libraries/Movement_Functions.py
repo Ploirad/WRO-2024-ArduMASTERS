@@ -3,7 +3,7 @@ import time
 from Libraries import MOTOR_DRIVER as MD                # MD.move(percent_vel, percent_dir)
 import json
 
-# Controls robot movement based on direction data from the json file of the camera 
+# Controls robot movement based on direction data from the json file of the camera
 def pibot_aproximation(last_direction):
     traction = 25
     opposite_direction = -last_direction
