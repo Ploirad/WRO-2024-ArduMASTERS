@@ -37,8 +37,8 @@ camera.resolution = resolucion
 rawCapture = PiRGBArray(camera, size=resolucion)
 time.sleep(0.3)
 bajoR, altoR = np.array([174, 154, 136]),np.array([178, 209, 212])
-bajoG, altoG = np.array([54, 155, 111]),np.array([60, 211, 135])
-bajoM, altoM = np.array([142, 117, 49]),np.array([150, 230, 208])
+bajoG, altoG = np.array([59, 156,  50]),np.array([68, 255, 107])
+bajoM, altoM = np.array([165, 153, 129]),np.array([169, 234, 207])
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     image = frame.array
     f, mask1, cx1, cy1, w1, h1 = testColor(image, bajoR, altoR, (355, 83, 93))
