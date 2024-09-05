@@ -2,7 +2,7 @@ import json
 import time
 from Libraries import MOTOR_DRIVER as Motor
 from Libraries import Boton
-import Main.Libraries.Movement_Functions as F
+import Libraries.Movement_Functions as F
 import Libraries.End_rounds as End
 
 extra_lap = False
@@ -49,7 +49,7 @@ if __name__ == "__main__":
                             break
 
                     if ("TRACTION" in CAM and "DIRECTION" in CAM) and not CAM["Ignore"]:
-                        F.pibot_aproximation(CAM["DIRECTION"])
+                        F.pivot_aproximation(CAM["DIRECTION"])
                         traction = CAM["TRACTION"]
                         direction = CAM["DIRECTION"]
 
