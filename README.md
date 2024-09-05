@@ -10,20 +10,22 @@
   2. [Scheme](#2-make-the-scheme)
   3. [Print the 3d models](#3-print-the-3d-models)
   4. [Chassis assemble](#4-chassis-assemble)
-      1. [Base](#1-base)
-      2. [Stub axles](#2-stub-axles)
-      3. [Zipper](#3-zipper)
-      4. [Wheels and dc motors](#4-wheels-and-dc-motors)
-      5. [Gear and servo](#5-gear-and-servo)
-      6. [Battery shield and spacers](#6-battery-sield-and-spacers)
+      - [Base](#1-base)
+      - [Stub axles](#2-stub-axles)
+      - [Zipper](#3-zipper)
+      - [Wheels and dc motors](#4-wheels-and-dc-motors)
+      - [Gear and servo](#5-gear-and-servo)
+      - [Battery shield and spacers](#6-battery-sield-and-spacers)
   5. [Software installation](#5-software-installation)
-      1. [OS installation and adjustment](#1-os-installation-and-adjustment)
-      2. [Auto login configuration](#2-auto-login-configuration)
-      3. [Update packages](#3-update-packages)
-      4. [Install python](#4-install-python)
-      5. [Download our github repository](#5-download-our-github-repository)
-      6. [Automate the entrance into the repository](#6-automate-the-entrance-into-the-repository)
-      7. [Useful commands]( #7-useful-commands)
+      - [OS installation and adjustment](#1-os-installation-and-adjustment)
+      - [Auto login configuration](#2-auto-login-configuration)
+      - [Update packages](#3-update-packages)
+      - [Install python](#4-install-python)
+      - [Install basic libraries](#5-install-basic-libraries-for-the-camera-machine-vision-and-tcs34725)
+      - [Enable the i2c for the tcs34725](#6-enable-the-i2c-bus-for-the-tcs34725)
+      - [Download our github repository](#7-download-our-github-repository)
+      - [Automate the entrance into the repository](#8-automate-the-entrance-into-the-repository)
+      - [Useful commands](#9-useful-commands)
   6. [Ending](#6-ending)
 
 
@@ -74,8 +76,7 @@
 
 ## 3. Print the 3D models
 
-You will need to 3D print the models in the repository ['Models/Current_Car_Models'](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Models/Current_Car_Models). In our case we have used an Ender 3, an Artillery Sidewinder X4 Pro and a Prusa Mk3s for printing the chassis out. But you can use any printer of your preference. These parts don't need to support any abnormal forces therefore can be printed in any material. In our case we printed them with PLA.
-> You will need to slice the file [WRO Car_v15.stl](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Models/Current_Car_Models/WRO%20Car_v15.stl)  
+You will need to 3D print the models in the repository ['Models/Current_Car_Models'](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Models/Current_Car_Models). In our case we have used an Ender 3, an Artillery Sidewinder X4 Pro and a Prusa Mk3s for printing the chassis out. But you can use any printer of your preference. These parts don't need to support any abnormal forces therefore can be printed in any material. In our case we printed them with PLA.  
 
 ## 4. Chassis assemble
 
@@ -83,15 +84,15 @@ Once we have all the parts printed it's time to put them together. Now we will s
 
 ### 1. Base
  
- ![Base](https://github.com/user-attachments/assets/c1abd998-efcf-4d37-86df-2af5803f1444)
+ ![Base](https://github.com/user-attachments/assets/74c9a0a8-6e4d-43bb-9972-99ef6d25d5de)
 
  First of all we place the raspberry and L298N on the base at their places:  
 - The Raspberry is placed transversaly in the middle of the car.  
 - The L298N is placed at the back of the car in between the motors.
 
-### 2. Stub axles
+### 2. Stub axels
 
-![Manguetas](https://github.com/user-attachments/assets/ef7da460-8c49-4f46-a7f3-60c65c74a723)
+![Stub axels](https://github.com/user-attachments/assets/ccfe2ea6-afe7-4758-b792-c431bd7df17a)
 
 Now we place the stub axels, this will serve to transfer the rotation of the servo to the wheels to vary their direction.  
 - We insert a M3 nut in each stub axel for later on
@@ -103,7 +104,7 @@ Now we place the stub axels, this will serve to transfer the rotation of the ser
 
 ### 3. Zipper
 
-![Cremallera](https://github.com/user-attachments/assets/1793bc08-a000-4654-8a7a-7aef23531f7d)
+![Zipper](https://github.com/user-attachments/assets/5b64e032-9cc6-40b7-ab98-a234c3fb92f6)
 
 Next is the install of the zipper this will syncronize the direction of bowth sides and transfer the servo direction.  
 - We place the zipper as shown in the picture above and screw it with a M3 screw and nut in each side.
@@ -117,7 +118,7 @@ Now we mount the four wheels to the chassis
 
 ### 5. Gear and servo
 
-![Engranaje](https://github.com/user-attachments/assets/28207653-d117-45be-8ae0-f7848ac34772)
+![Gear](https://github.com/user-attachments/assets/a04b8670-2c3e-482d-8210-b1969d9a60e9)
 
 To finish the direction we place the gear and the servo which will guide all the direction system.  
 - We insert the gear in the servo and screw it in place
@@ -142,11 +143,9 @@ So here we will guide you command by command how to setup your raspberry pi in o
 
 ![image](https://github.com/user-attachments/assets/f455e273-b251-4d44-bf55-d4e965a86079)
 
-2. Download the [Raspberry Pi OS]([https://www.raspberrypi.com/software/operating-systems/](https://archive.org/details/2021-05-07-raspios-buster-armhf)).
+2. Download the [Raspberry Pi OS Lite](https://www.raspberrypi.com/software/operating-systems/).
 
-![OS_1](https://github.com/user-attachments/assets/86d62219-9554-4fa0-8e2f-3c28f6162c73)
-
-![OS_2](https://github.com/user-attachments/assets/5a4f9e5c-543e-4a02-bd89-22cb14cd6989)
+![image](https://github.com/user-attachments/assets/350fb464-95b8-4c5e-8286-bc4d979333ad)
 
 3. Open Imager.
 
@@ -214,7 +213,31 @@ So here we will guide you command by command how to setup your raspberry pi in o
   
 ![image](https://github.com/user-attachments/assets/9d838faa-6011-40a0-9842-0ef1e9eedf00)
 
-### 5. Download our github repository
+### 5. Install basic libraries for the camera, machine vision and tcs34725
+-     sudo apt install python3-picamera
+      sudo apt install python3-opencv
+      sudo pip3 install adafruit-circuitpython-tcs34725
+      sudo pip3 install adafruit-blinka
+
+### 6. ENABLE THE I2C BUS FOR THE TCS34725
+1. Enter raspberry pi configuration.
+-       sudo raspi-config
+2. Select interface options
+
+![Tcs_1](https://github.com/user-attachments/assets/8ab8f1ec-dfc4-4d4d-bde9-c0439ee79825)
+
+
+3. Select P5 I2C
+
+![Tcs_2](https://github.com/user-attachments/assets/6e0c11a1-7a69-4a3b-bd78-6269cd5fd49d)
+
+
+4. Enable it
+
+![Tcs_3](https://github.com/user-attachments/assets/2b09168f-0e8d-41e3-ace3-1a34c674e061)
+
+
+### 7. Download our github repository
 1. Install git.
 -      sudo apt install git
 
@@ -235,7 +258,7 @@ So here we will guide you command by command how to setup your raspberry pi in o
 
 ![image](https://github.com/user-attachments/assets/bd5cb9b5-5d64-41f7-ba00-5c111d0b73ba)
 
-### 6. Automate the entrance into the repository
+### 8. Automate the entrance into the repository
 1. Open the bashrc with nano
 -      nano ~/.bashrc
 
@@ -255,7 +278,7 @@ So here we will guide you command by command how to setup your raspberry pi in o
 -      sudo reboot
 ![image](https://github.com/user-attachments/assets/215987eb-a595-4e0f-b9f0-251b51f3c8ed)
 
-### 7. Useful commands
+### 9. Useful commands
 1. Update repository
 -      git pull origin main
 3. Run code
@@ -274,3 +297,4 @@ AFter reboot your car shoud work like the videos of this [readme.md](https://git
 If you want to test the different componets or recalibrate the camera go to [test codes](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/Test%20codes)
 
 I hope that this guide has been useful, if you have some problemens, do not doubt about talking with us.
+
