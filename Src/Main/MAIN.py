@@ -49,9 +49,10 @@ if __name__ == "__main__":
                             break
 
                     if ("TRACTION" in CAM and "DIRECTION" in CAM) and not CAM["Ignore"]:
-                        traction = int(CAM["TRACTION"])
-                        direction = int(CAM["DIRECTION"])
-                    
+                        F.pibot_aproximation(CAM["DIRECTION"])
+                        traction = CAM["TRACTION"]
+                        direction = CAM["DIRECTION"]
+
                     else:
                         if CAM["Ignore"]:
                             print("Ignore CAM")
