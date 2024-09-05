@@ -24,20 +24,21 @@ raw_capture.truncate(0)
 
 def principal_logic(areas):
     max_area = max(areas, key=areas.get)
+    calculo = (areas[max_area] - areas['magenta'])
 
-    traction = 50
+    traction = 25
     direction = 0
     ignore = True
     if max_area == "green" and areas[max_area] > 0:
         direction = 100
         ignore = False
-    elif max_area == "red" and areas[max_area] > 0:
+    elif max_area == "red" and calculo > 0:
         direction = -100
         ignore = False
     elif max_area == "magenta" and areas[max_area] > 1000:
         ignore = False
 
-    return traction, direction, max_area, ignore
+    return traction, direction, max_area, ignore, calculo
 
 def detect(stop_event):
     park = False
@@ -52,7 +53,7 @@ def detect(stop_event):
         
             color_areas = {"green": green_area, "red": red_area, "magenta": magenta_area}
 
-            t, d, color, ignore = principal_logic(color_areas)
+            t, d, color, ignore, calculo = principal_logic(color_areas)
             
             if color == "magenta":
                 park = True
@@ -68,7 +69,8 @@ def detect(stop_event):
                     "MagentaC": magenta_centroid,
                     "GArea": green_area,
                     "RArea": red_area,
-                    "MArea": magenta_area
+                    "MArea": magenta_area,
+                    "Calculo": calculo
                 }
             raw_capture.truncate(0)
             
