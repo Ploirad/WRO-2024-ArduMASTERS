@@ -3,6 +3,24 @@ import time
 from Libraries import MOTOR_DRIVER as MD                # MD.move(percent_vel, percent_dir)
 import json
 
+# Controls robot movement based on direction data from the json file of the camera 
+def pibot_aproximation(last_direction):
+    traction = 25
+    opposite_direction = -last_direction
+    with open("Json/CAM.json", 'r', encoding='utf-8') as CAM:
+        CAM_data = json.load(CAM)
+    
+    if not CAM_data["ignore"]:
+        with open("Json/CAM.json", 'r', encoding='utf-8') as C1:
+            C1_data = json.load(C1)
+            MD.move(traction, C1_data["DIRECTION"])
+    else:
+        MD.move(traction, opposite_direction)
+        with open("Json/CAM.json", 'r', encoding='utf-8') as C2:
+            C2_data = json.load(C2)
+            if not C2_data["ignore"]:
+                MD.move(traction, C2_data["DIRECTION"])
+
 # This function is for go backward in the MAIN code
 def backward(traction, initial_direction):
     print("BACKWARD STARTED")
