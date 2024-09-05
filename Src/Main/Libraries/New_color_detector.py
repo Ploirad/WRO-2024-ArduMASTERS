@@ -8,8 +8,8 @@ camera = PiCamera()
 
 # This function is used to take the green centroid respect to the X edge and the green area all about the frame gived and they are integer variables
 def detect_green(frame):
-    G_bajo = np.array([54, 155, 111])  # HSV values for green
-    G_alto = np.array([60, 211, 135])
+    G_bajo = np.array([59, 156,  50])  # HSV values for green
+    G_alto = np.array([68, 255, 107])
     return detect_color(frame, G_bajo, G_alto)
 
 def detect_red(frame):
@@ -18,8 +18,8 @@ def detect_red(frame):
     return detect_color(frame, R_bajo, R_alto)
 
 def detect_magenta(frame):
-    M_bajo = np.array([142, 117, 49])  # HSV values for magenta
-    M_alto = np.array([150, 230, 208])
+    M_bajo = np.array([165, 153, 129])  # HSV values for magenta
+    M_alto = np.array([169, 234, 207])
     return detect_color(frame, M_bajo, M_alto)
 
 # This function is used to take the centroid and the area of the color gived (color_low, color_high) in the respective frame
