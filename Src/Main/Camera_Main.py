@@ -58,6 +58,8 @@ def detect(stop_event):
             else:
                 park = False
 
+            color = "" if ignore else color
+
             data = {
                     "Ignore": ignore,
                     "Color": color,
