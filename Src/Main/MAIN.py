@@ -1,13 +1,20 @@
-import json
-import time
-from Libraries import MOTOR_DRIVER as Motor
-from Libraries import Boton
-import Libraries.Movement_Functions as F
-import Libraries.End_rounds as End
-
 extra_lap = False
 
 if __name__ == "__main__":
+    import json
+    import time
+    from Libraries import MOTOR_DRIVER as Motor
+    from Libraries import Boton
+    import Libraries.Movement_Functions as F
+    import Libraries.End_rounds as End
+    import Camera_Main
+    import Movement_Main
+    import tcs_Main
+
+    Camera_Main.start_threds()
+    Movement_Main.start_threds()
+    tcs_Main.start_threds()
+
     dir_changed = False
     can_start = False
     waiting_magenta = False

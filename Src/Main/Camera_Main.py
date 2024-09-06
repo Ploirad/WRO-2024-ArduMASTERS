@@ -86,14 +86,15 @@ threads = []
 stop_event = threading.Event()
 signal.signal(signal.SIGINT, signal_handler)
 
-try:
-    t = threading.Thread(target=detect, args=(stop_event,))
-    t.start()
-    threads.append(t)
+def start_threds():
+    try:
+        t = threading.Thread(target=detect, args=(stop_event,))
+        t.start()
+        threads.append(t)
 
-    # Wait for the end of the threads (in this case it doesn't happen unless interrupted)
-    for t in threads:
-        t.join()
+        # Wait for the end of the threads (in this case it doesn't happen unless interrupted)
+        for t in threads:
+            t.join()
 
-except Exception as e:
-    print(f"Error: {e}")
+    except Exception as e:
+        print(f"Error: {e}")
