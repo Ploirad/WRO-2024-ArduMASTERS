@@ -259,24 +259,15 @@ So here we will guide you command by command how to setup your raspberry pi in o
 ![image](https://github.com/user-attachments/assets/bd5cb9b5-5d64-41f7-ba00-5c111d0b73ba)
 
 ### 8. Automate the entrance into the repository
-1. Open the bashrc with nano
--      nano ~/.bashrc
+1. Open the rc.local file
+-       sudo nano /etc/rc.local
 
-![image](https://github.com/user-attachments/assets/bbdf2699-9086-47e3-be66-60800686f33b)
-
-2. Add the following commands to the bashcr file.
-
--     cd /home/"username"/WRO-2024-ArduMASTERS/Src/Main
-      python3 Camera_Main.py &
-      python3 Movement_Main.py &
-      python3 tcs_Main.py &
-      python3 MAIN.py
-
-![image](https://github.com/user-attachments/assets/a3fe665d-307e-40ff-aa0b-ba82b22afa25)
+2. Put this command before exit 0, replacing USER_NAME to the name of the user
+-        su - USER_NAME -c "cd /home/USER_NAME/WRO-2024-ArduMASTERS/Src/Main; /usr/bin/python3 /home/USER_NAME/WRO-2024-ArduMASTERS/Src/Main/MAIN.py >> /tmp/Main_output 2>&1 &"
+![3f58c6ed-0c3e-40fc-b18e-0f1019878ab6](https://github.com/user-attachments/assets/ff0ce407-040c-460c-9da8-3cb6f0309aea)
 
 3. Reboot to verify changes
 -      sudo reboot
-![image](https://github.com/user-attachments/assets/215987eb-a595-4e0f-b9f0-251b51f3c8ed)
 
 ### 9. Useful commands
 1. Update repository
@@ -289,6 +280,17 @@ So here we will guide you command by command how to setup your raspberry pi in o
 -      cd "directory name"
 5. Go to the previous directory
 -      cd ../
+6. See the output in a ssh conection
+-      tail -f /tmp/Main_output
+7. Kill the process
+   1. See the number of the process
+   -      ps aux | grep python3
+   ![image](https://github.com/user-attachments/assets/6ef61710-0e70-4d8e-b87b-8725f5ccff56)
+
+   2. Use the command kill to destroy the process
+   -      kill NUMBER_OF_THE_PROCESS
+   ![image](https://github.com/user-attachments/assets/7c2ab6ff-a702-4f1b-ab60-9e60480aa2cb)
+
 
 # 6. Ending
 
