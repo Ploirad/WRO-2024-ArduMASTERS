@@ -56,7 +56,7 @@ if __name__ == "__main__":
                             End.home_sweet_home(first_front_distance, first_right_distance)
                             break
 
-                    if ("TRACTION" in CAM and "DIRECTION" in CAM) and not CAM["Ignore"]:
+                    if ("TRACTION" in CAM and "DIRECTION" in CAM) and not ignore and color != "magenta":
                         F.pivot_aproximation(CAM["DIRECTION"])
                         traction = CAM["TRACTION"]
                         direction = CAM["DIRECTION"]
