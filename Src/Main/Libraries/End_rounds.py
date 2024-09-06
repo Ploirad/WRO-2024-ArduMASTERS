@@ -1,83 +1,82 @@
-from Libraries import MOTOR_DRIVER as Motor
+from Libraries import MOTOR_DRIVER as M
 import json
 
-def parking(): 
-    starting_back_distance = 0.0
-    left_distance = 0.0
-    right_distance = 0.0
-    back_distance = 0.0
-    color = ""
-    parking_position = 0
+def parking(half_turn): 
+    phase = 0
+    prev_right_dis = 0
+    prev_left_dis = 0
 
-    with open("Json/Move.json", "r", encoding='utf-8') as f:
-        Move = json.load(f)
-        print(Move)
-        left_distance = float(Move["HC3"])
-        right_distance = float(Move["HC1"])
-        back_distance = float(Move["HC2"])
+    with open("Json/tcs_color_detection.json") as d:
+            data = json.load(d)
+            first_color = data["first_color_obteined"]
+            if (first_color == "orange" and half_turn == False) or (first_color == "blue" and half_turn == True):
+                direction = "der"
+            elif (first_color == "orange" and half_turn == True) or (first_color == "blue" and half_turn == False):
+                direction = "izq"
+    
+    while True:
+        with open("Json/Move.json", "r", encoding="utf-8") as d:
+            data = json.load(d)
+            Fdis = data["HC0"]
+            Rdis = data["HC1"]
+            Bdis = data["HC2"]
+            Ldis = data["HC3"]
 
-    with open("Json/CAM.json", "r", encoding='utf-8') as f:
-        CAM = json.load(f)
-        print(CAM)
-        color = CAM["Color"]
-        magenta_centroid = CAM["MagentaC"]
+            var_right_dis = prev_right_dis - Rdis
+            prev_right_dis = var_right_dis
 
-    if magenta_centroid <= 320:
-        parking_position = -100
-    else:
-        parking_position = 100
+            var_left_dis = prev_left_dis - Rdis
+            prev_left_dis = var_left_dis
 
-    while left_distance < 30:
-        Motor.move(100, -parking_position)
-        with open("Json/Move.json", "r", encoding='utf-8') as f:
-            Move = json.load(f)
-            left_distance = float(Move["HC3"])
-
-    while right_distance < 30:
-        Motor.move(100, -100)
-        with open("Json/Move.json", "r", encoding='utf-8') as f:
-            Move = json.load(f)
-            right_distance = float(Move["HC1"])
-
-    while color == "Magenta":
-        with open("Json/CAM.json", "r", encoding='utf-8') as f:
-            color = CAM["Color"]
-        Motor.move(100, 0)
-
-    with open("Json/Move.json", "r", encoding='utf-8') as f:
-        Move = json.load(f)
-        starting_back_distance = float(Move["HC2"])
-
-    while (starting_back_distance + 27) <= back_distance: # 27 is the car lenght (+1)
-        Motor.move(100, 0)
-        with open("Json/Move.json", "r", encoding='utf-8') as f:
-            Move = json.load(f)
-            back_distance = float(Move["HC2"])
-
-    while back_distance > 10:
-        Motor.move(-100, parking_position)
-        with open("Json/Move.json", "r", encoding='utf-8') as f:
-            Move = json.load(f)
-            back_distance = float(Move["HC2"])
-
-    while back_distance < 25:
-        Motor.move(100, -parking_position)
-        with open("Json/Move.json", "r", encoding='utf-8') as f:
-            Move = json.load(f)
-            back_distance = float(Move["HC2"])
-
-    while back_distance > 5:
-        Motor.move(100, parking_position)
-        with open("Json/Move.json", "r", encoding='utf-8') as f:
-            Move = json.load(f)
-            back_distance = float(Move["HC2"])
-
+        with open("Json/CAM.json", "r", encoding="utf-8") as d: 
+            data = json.load(d)
+            Cen = data["MagentaC"]
+        
+        if phase == 0:
+            if Cen <= 300:
+                M.move(30,-100)
+            elif Cen >= 340:
+                M.move(30,100)
+            else:
+                if Fdis <= 30:
+                    M.move(50,0)
+                else:
+                    phase = 1
+        if phase == 1:
+            
+            if direction == "right":
+                if var_right_dis <= 15:
+                    if Cen >=40:
+                        M.move(30,100)
+                    else:
+                        M.move(50,0)
+                else:
+                    phase = 2
+            else:
+                if var_left_dis <= 15:
+                    if Cen <=600:
+                        M.move(30,-100)
+                    else:
+                        M.move(50,0)
+                else:
+                    phase = 2
+        if phase == 2:
+            if Fdis >= 10:
+                if direction == "right":
+                    M.move(100,-100)
+                else:
+                    M.move(100,100)
+            else:
+                phase = 3
+        if phase == 3:
+            M.move(0,0)
+            print("YOU'VE WON :)")
 
 def home_sweet_home(first_front_distance, first_right_distance):
     traction = 0
     direction = 0
     while True:
-        with open("son/Move.json", "r", encoding='utf-8') as f:
+        with open("Json/Move.json", "r", encoding='utf-8') as f:
             Move = json.load(f)
             front_distance = Move["HC0"]
             right_distance = Move["HC1"]
@@ -95,11 +94,11 @@ def home_sweet_home(first_front_distance, first_right_distance):
         else:
             direction = -100
 
-        Motor.move(traction, direction)
+        M.move(traction, direction)
 
         if (first_front_distance - 3) < front_distance < (first_front_distance + 3):
             if (first_right_distance - 3) < right_distance < (first_right_distance + 3):
-                Motor.move(0, 0)
+                M.move(0, 0)
                 break
 
-    print("YOU WON :)")
+    print("YOU'VE WON :)")
