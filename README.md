@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="200" height="200" src="https://github.com/Ploirad/WRO-2024-ArduMASTERS/assets/148375115/122c7233-1e41-4727-894d-9d810f12458b">
+  <img width="200" height="200" src="https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Process/MASTERS.jpeg">
 </p> 
 
 # Index
@@ -266,11 +266,11 @@ So here we will guide you command by command how to setup your raspberry pi in o
 
 2. Add the following commands to the bashcr file.
 
-- cd /home/"username"/WRO-2024-ArduMASTERS/Src/Main
-- python3 Camera_Main.py &
-- python3 Movement_Main.py &
-- python3 tcs_Main.py &
-- python3 MAIN.py
+-     cd /home/"username"/WRO-2024-ArduMASTERS/Src/Main
+      python3 Camera_Main.py &
+      python3 Movement_Main.py &
+      python3 tcs_Main.py &
+      python3 MAIN.py
 
 ![image](https://github.com/user-attachments/assets/a3fe665d-307e-40ff-aa0b-ba82b22afa25)
 
@@ -281,18 +281,18 @@ So here we will guide you command by command how to setup your raspberry pi in o
 ### 9. Useful commands
 1. Update repository
 -      git pull origin main
-3. Run code
+2. Run code
 -      python3 "file name"
-5. See files in current directory
+3. See files in current directory
 -      ls
-7. Go to directory
+4. Go to directory
 -      cd "directory name"
-9. Go to the previous directory
+5. Go to the previous directory
 -      cd ../
 
 # 6. Ending
 
-AFter reboot your car shoud work like the videos of this [readme.md](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/video) in the video folder.
+After reboot your car shoud work like the videos of this [readme.md](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/video) in the video folder.
 
 If you want to test the different componets or recalibrate the camera go to [test codes](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/Test%20codes)
 

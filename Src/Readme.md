@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="200" height="200" Src="https://github.com/Ploirad/WRO-2024-ArduMASTERS/assets/148375115/122c7233-1e41-4727-894d-9d810f12458b">
+  <img width="200" height="200" Src="https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Process/MASTERS.jpeg">
 </p>
 
 
@@ -28,20 +28,21 @@ In this foder we put all the codes that we [had done](https://github.com/Ploirad
 
 # [Main](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/Main)
   There we have all the codes that we are using right now in our car.
-  - ### [Json]()
+  - ## [Json]()
     - [CAM.json](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/CAM.json)
     - [Move.josn](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/Move.json)
     - [tcs_color_detection.json](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/tcs_color_detection.json)
-  - ### [Libraries](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/Main/Libraries)
+  - ## [Libraries](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/Main/Libraries)
     - [Boton.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/Libraries/Boton.py)
+    - [End_rounds.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/Libraries/End_rounds.py)
     - [MOTOR_DRIVER](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/Libraries/MOTOR_DRIVER.py)
+    - [Movement_Functions.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/Libraries/Movement.py)
     - [New_color_detector.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/Libraries/New_color_detector.py)
-    - [Set_servo_in_0.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/Libraries/Set_servo_in_0.py)
     - [Tcs34725.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/Libraries/tcs34725.py)
-  - ### [Camera_main.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/Camera_Main.py)
-  - ### [Movement_Main.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/Movement_Main.py)
-  - ### [tcs_Main.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/tcs_Main.py)
-  - ### [Main.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/MAIN.py)
+  - ## [Camera_main.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/Camera_Main.py)
+  - ## [Movement_Main.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/Movement_Main.py)
+  - ## [tcs_Main.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/tcs_Main.py)
+  - ## [Main.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Main/MAIN.py)
 # [Proof codes](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/Src/Proof%20codes)
   This folder contains all the proof codes that done for our robot.This folder is in order to test all of our components.
  - [Libraries/MOTOR_DRIVER.py](https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Src/Test%20codes/Libraries/MOTOR_DRIVER.py)
