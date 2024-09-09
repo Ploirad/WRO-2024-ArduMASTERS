@@ -57,7 +57,7 @@ if __name__ == "__main__":
                             break
 
                     if ("TRACTION" in CAM and "DIRECTION" in CAM and not ignore and color != "magenta"):
-                        F.pivot_aproximation(CAM["DIRECTION"])
+                        F.pivot_aproximation(CAM["DIRECTION"], CAM["Color"])
                         traction = CAM["TRACTION"]
                         direction = CAM["DIRECTION"]
 

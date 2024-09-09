@@ -5,13 +5,17 @@ import json
 import os
 
 # Controls robot movement based on direction data from the json file of the camera
-def pivot_aproximation(last_direction):
+def pivot_aproximation(last_direction, color_detected):
     print("sign detected")
     traction = 25
     opposite_direction = -last_direction
     post_passed = False
 
     while True:
+        with open (os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), 'r', encoding='utf-8') as camera_color:
+            camera_color_data = json.load(camera_color)
+            print(camera_color_data)
+            color =  camera_color_data["Color"]
         with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), 'r', encoding='utf-8') as HC_detection:
             HC_detection_data = json.load(HC_detection)
             print(HC_detection_data)
@@ -22,8 +26,8 @@ def pivot_aproximation(last_direction):
         if  front_distance < 5 or front_distance > 2000:
             backward(traction, last_direction)
 
-        if front_distance > 30:
-            if (right_distance < 15 and last_direction == -100) or (left_distance < 15 and last_direction == 100):
+        if front_distance > 30 and color != color_detected:
+            if (right_distance < 41 and last_direction == -100) or (left_distance < 41 and last_direction == 100):
                 post_passed = True
         if post_passed:
             break
@@ -41,7 +45,7 @@ def pivot_aproximation(last_direction):
 
         if camera_color != "" or "magenta":
             print("another sign detected")
-            pivot_aproximation(last_direction)
+            pivot_aproximation(last_direction, camera_color)
             return 
         turn_timer_stop = time.time()
         MD.move(25, opposite_direction)
