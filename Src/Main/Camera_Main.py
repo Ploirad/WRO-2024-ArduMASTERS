@@ -18,7 +18,6 @@ camera = CAM.camera
 camera.framerate = 30 #65
 camera.resolution = (640, 480)
 raw_capture = PiRGBArray(camera, size=(640, 480))
-json_file_path = os.path.join(os.path.dirname(__file__), "Libraries", "Json", "CAM.json")
 
 def principal_logic(areas):
     max_area = max(areas, key=areas.get)
@@ -75,7 +74,7 @@ def detect(stop_event):
             raw_capture.truncate(0)
 
             try:
-                with open(json_file_path, "w", encoding='utf-8') as j:
+                with open(os.path.join(os.path.dirname(__file__), "Libraries", "Json", "CAM.json"), "w", encoding='utf-8') as j:
                     json.dump(data, j, indent=4, ensure_ascii=False)
             except TypeError as e:
                 print(f"Error: {e} - data is not JSON-serializable")

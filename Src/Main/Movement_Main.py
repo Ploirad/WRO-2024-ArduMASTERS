@@ -13,8 +13,6 @@ import os
 TRIG = [23, 8, 17, 22]
 ECHO = [24, 7, 27, 10]
 
-json_file_path = os.path.join(os.path.dirname(__file__), "Libraries", "Json", "Move.json")
-
 # Third we configure the GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -110,7 +108,7 @@ def move(stop_event):
         }
 
         try:
-            with open(json_file_path, "w", encoding='utf-8') as j:
+            with open(os.path.join(os.path.dirname(__file__), "Libraries", "Json", "Move.json"), "w", encoding='utf-8') as j:
                 json.dump(data, j, indent=4, ensure_ascii=False)
         except TypeError as e:
             print(f"Error: {e} - data is not JSON-serializable")

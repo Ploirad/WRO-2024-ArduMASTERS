@@ -1,12 +1,13 @@
 from Libraries import MOTOR_DRIVER as M
 import json
+import os
 
 def parking(half_turn): 
     phase = 0
     prev_right_dis = 0
     prev_left_dis = 0
 
-    with open("Json/tcs_color_detection.json") as d:
+    with open(os.path.join(os.path.dirname(__file__), "Libraries", "Json", "tcs_color_detection.json")) as d:
             data = json.load(d)
             first_color = data["first_color_obteined"]
             if (first_color == "orange" and half_turn == False) or (first_color == "blue" and half_turn == True):
@@ -15,7 +16,7 @@ def parking(half_turn):
                 direction = "izq"
     
     while True:
-        with open("Json/Move.json", "r", encoding="utf-8") as d:
+        with open(os.path.join(os.path.dirname(__file__), "Libraries", "Json", "Move.json"), "r", encoding="utf-8") as d:
             data = json.load(d)
             Fdis = data["HC0"]
             Rdis = data["HC1"]
@@ -28,7 +29,7 @@ def parking(half_turn):
             var_left_dis = prev_left_dis - Rdis
             prev_left_dis = var_left_dis
 
-        with open("Json/CAM.json", "r", encoding="utf-8") as d: 
+        with open(os.path.join(os.path.dirname(__file__), "Libraries", "Json", "CAM.json"), "r", encoding="utf-8") as d: 
             data = json.load(d)
             Cen = data["MagentaC"]
         
@@ -76,7 +77,7 @@ def home_sweet_home(first_front_distance, first_right_distance):
     traction = 0
     direction = 0
     while True:
-        with open("Json/Move.json", "r", encoding='utf-8') as f:
+        with open(os.path.join(os.path.dirname(__file__), "Libraries", "Json", "Move.json"), "r", encoding='utf-8') as f:
             Move = json.load(f)
             front_distance = Move["HC0"]
             right_distance = Move["HC1"]
