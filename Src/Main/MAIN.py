@@ -107,8 +107,8 @@ if __name__ == "__main__":
                 if Boton.button_state():
                     can_start = True
 
-        except FileNotFoundError:
-            print("Move.json file not found. Make sure the file exists.")
+        except FileNotFoundError as e:
+            print(f"file not found. Make sure the file {e} exists")
         except json.JSONDecodeError:
             print("Error decoding JSON. Ensure the JSON format is correct.")
         except Exception as e:
