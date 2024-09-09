@@ -73,9 +73,16 @@ def detect(stop_event):
                     "Calculo": calculo
                 }
             raw_capture.truncate(0)
-            
-            with open("Libraries/Json/CAM.json", "w", encoding='utf-8') as j:
-                json.dump(data, j, indent=4)
+
+            try:
+                with open("Libraries/Json/CAM.json", "w", encoding='utf-8') as j:
+                    json.dump(data, j, indent=4, ensure_ascii=False)
+            except TypeError as e:
+                print(f"Error: {e} - data is not JSON-serializable")
+            except IOError as e:
+                print(f"Error: {e} - unable to write to file")
+            except  Exception as e:
+                print(f"Error: {e}")
 
 def signal_handler(sig, frame):
     global stop_event
