@@ -7,6 +7,7 @@ import signal
 import sys
 import json
 import os
+import pdb
 
 
 green_centroid = None
@@ -75,6 +76,7 @@ def detect(stop_event):
                     "Calculo": calculo
                 }
             raw_capture.truncate(0)
+            pdb.set_trace()
 
             try:
                 with open(json_file_path, "w", encoding='utf-8') as j:
