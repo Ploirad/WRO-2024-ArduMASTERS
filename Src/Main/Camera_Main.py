@@ -7,7 +7,7 @@ import signal
 import sys
 import json
 import os
-
+print("CAM LIBRARIES IMPORTED")
 
 green_centroid = None
 red_centroid = None
@@ -20,7 +20,7 @@ camera.framerate = 30 #65
 camera.resolution = (640, 480)
 raw_capture = PiRGBArray(camera, size=(640, 480))
 json_file_path = os.path.join(os.path.dirname(__file__), "Libraries", "Json", "CAM.json")
-
+print("VARIABLES CREATED")
 
 def principal_logic(areas):
     max_area = max(areas, key=areas.get)
@@ -41,6 +41,7 @@ def principal_logic(areas):
     return traction, direction, max_area, ignore, calculo
 
 def detect(stop_event):
+    print("WE'RE IN DETECT FUNCTION")
     park = False
     while not stop_event.is_set():
         for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port=True):
@@ -90,6 +91,8 @@ def detect(stop_event):
             except  Exception as e:
                 print(f"Error: {e}")
 
+            print("LAP OF THE WHILE OF DETECT FUNCTION")
+
 def signal_handler(sig, frame):
     global stop_event
     stop_event.set()
@@ -100,6 +103,7 @@ stop_event = threading.Event()
 signal.signal(signal.SIGINT, signal_handler)
 
 def start_threds():
+    print("STARTING THREDS")
     try:
         t = threading.Thread(target=detect, args=(stop_event,))
         t.start()
