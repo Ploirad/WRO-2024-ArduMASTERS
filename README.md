@@ -38,7 +38,7 @@
 - Miguel Amez Riendas (born on Dicember 8, 1988)(he is our coach)
 - Marío Torreiro Sevilla (born on March 14, 2008)
 - Francisco Javier Abajo Alonso (born on August 21, 2008)
->The last two of us are only collaborators becouse are going to participate at the start but they are doing the pilgrims route to Santiago de Compostela
+>The last two of us are only collaborators because are going to participate at the start but they are doing the pilgrims route to Santiago de Compostela
 # Files
 ## [models](https://github.com/Ploirad/WRO-2024-ArduMASTERS/tree/main/models)
   In this folder we got all the 3D models that are and were on the car
