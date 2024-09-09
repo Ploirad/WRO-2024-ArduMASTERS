@@ -7,11 +7,6 @@ if __name__ == "__main__":
     from Libraries import Boton
     import Libraries.Movement_Functions as F
     import Libraries.End_rounds as End
-    import subprocess
-
-    subprocess.Popen("python3 Camera_Main.py", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    subprocess.Popen("python3 Movement_Main.py", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    subprocess.Popen("python3 tcs_Main.py", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
     dir_changed = False
     can_start = False
