@@ -6,7 +6,6 @@ import time
 import threading
 import signal
 import sys
-import sys
 import json
 
 # Second we create two lists of the pins
@@ -15,6 +14,7 @@ ECHO = [24, 7, 27, 10]
 
 # Third we configure the GPIO
 GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 for i in range(4):
     GPIO.setup(TRIG[i], GPIO.OUT)
     GPIO.setup(ECHO[i], GPIO.IN)

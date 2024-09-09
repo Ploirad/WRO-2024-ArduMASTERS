@@ -5,7 +5,7 @@ import RPi.GPIO as GPIO
 
 # Inicializa la librería GPIO
 GPIO.setmode(GPIO.BCM)
-
+GPIO.setwarnings(False)
 # Define los pines del motor y del servo
 ENA = 26
 IN1 = 19
