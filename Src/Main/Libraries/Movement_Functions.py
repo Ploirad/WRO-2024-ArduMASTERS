@@ -12,7 +12,7 @@ def pivot_aproximation(last_direction):
     post_passed = False
 
     while True:
-        with open(os.path.join(os.path.dirname(__file__), "Libraries", "Json", "Move.json"), 'r', encoding='utf-8') as HC_detection:
+        with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), 'r', encoding='utf-8') as HC_detection:
             HC_detection_data = json.load(HC_detection)
             front_distance =  HC_detection_data["HC0"]
             right_distance = HC_detection_data["HC1"]
@@ -33,7 +33,7 @@ def pivot_aproximation(last_direction):
     turn_timer_stop = time.time()
 
     while turn_timer_stop - turn_timer_start  < 1.5:
-        with open(os.path.join(os.path.dirname(__file__), "Libraries", "Json", "CAM.json"), 'r', encoding='utf-8') as color_detection:
+        with open(os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), 'r', encoding='utf-8') as color_detection:
             color_detection_data = json.load(color_detection)
             camera_color =  color_detection_data["Color"]
 
@@ -55,14 +55,14 @@ def backward(traction, initial_direction):
     print("BACKWARD STARTED")
     traction = abs(traction)
     while True:
-        with open(os.path.join(os.path.dirname(__file__), "Libraries", "Json", "Move.json"), "r", encoding='utf-8') as f:
+        with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), "r", encoding='utf-8') as f:
             Move = json.load(f)
             front_distance = Move["HC0"]
             back_distance = Move["HC2"]
 
         while front_distance < 40 or back_distance > 100:
             MD.move(-traction, -initial_direction)
-            with open(os.path.join(os.path.dirname(__file__), "Libraries", "Json", "Move.json"), "r", encoding='utf-8') as f:
+            with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), "r", encoding='utf-8') as f:
                 Move = json.load(f)
                 front_distance = Move["HC0"]
                 back_distance = Move["HC2"]
