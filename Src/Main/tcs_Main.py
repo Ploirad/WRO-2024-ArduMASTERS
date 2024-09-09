@@ -90,18 +90,17 @@ data = {
             "laps": 0 
         }
 
-def start_threds():
-    try:
-        t = threading.Thread(target=color_detection, args=(stop_event,))
-        t.start()
-        threads.append(t)
+try:
+    t = threading.Thread(target=color_detection, args=(stop_event,))
+    t.start()
+    threads.append(t)
 
-        # Wait for the end of the threads (in this case it doesn't happen unless interrupted)
-        for t in threads:
-            t.join()
+    # Wait for the end of the threads (in this case it doesn't happen unless interrupted)
+    for t in threads:
+        t.join()
 
-    except Exception as e:
-        print(f"Error: {e}")
-    finally:
-        # Clean the GPIO at the end
-        GPIO.cleanup()
+except Exception as e:
+    print(f"Error: {e}")
+finally:
+    # Clean the GPIO at the end
+    GPIO.cleanup()
