@@ -7,7 +7,9 @@ import signal
 import sys
 import json
 import os
+
 print("CAM LIBRARIES IMPORTED")
+
 
 green_centroid = None
 red_centroid = None

@@ -5,6 +5,9 @@ import signal
 import json
 from Libraries import tcs34725 as tcs
 import MAIN
+import os
+
+json_file_path = os.path.join(os.path.dirname(__file__), "Libraries", "Json", "tcs_color_detection.json")
 
 def signal_handler(sig, frame):
     global stop_event
@@ -61,7 +64,7 @@ def color_detection(stop_event):
         }
 
         try:
-            with open("Libraries/Json/tcs_color_detection.json", "w", encoding='utf-8') as j:
+            with open(json_file_path, "w", encoding='utf-8') as j:
                 json.dump(data, j, indent=4, ensure_ascii=False)
         except TypeError as e:
             print(f"Error: {e} - data is not JSON-serializable")
