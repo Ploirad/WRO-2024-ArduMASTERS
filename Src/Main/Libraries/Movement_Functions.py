@@ -5,21 +5,49 @@ import json
 
 # Controls robot movement based on direction data from the json file of the camera
 def pivot_aproximation(last_direction):
+    print("sign detected")
     traction = 25
     opposite_direction = -last_direction
-    with open("Json/CAM.json", 'r', encoding='utf-8') as CAM:
-        CAM_data = json.load(CAM)
-    
-    if not CAM_data["ignore"]:
-        with open("Json/CAM.json", 'r', encoding='utf-8') as C1:
-            C1_data = json.load(C1)
-            MD.move(traction, C1_data["DIRECTION"])
-    else:
-        MD.move(traction, opposite_direction)
-        with open("Json/CAM.json", 'r', encoding='utf-8') as C2:
-            C2_data = json.load(C2)
-            if not C2_data["ignore"]:
-                MD.move(traction, C2_data["DIRECTION"])
+    post_passed = False
+
+    while True:
+        with open("Json/Move.json", 'r', encoding='utf-8') as HC_detection:
+            HC_detection_data = json.load(HC_detection)
+            front_distance =  HC_detection_data["HC0"]
+            right_distance = HC_detection_data["HC1"]
+            left_distance = HC_detection_data["HC3"]
+
+        if  5 < front_distance or front_distance < 2000:
+            backward(traction, last_direction)
+
+        if front_distance > 30:
+            if (right_distance < 15 and last_direction == -100) or (left_distance < 15 and last_direction == 100):
+                post_passed = True
+        if post_passed:
+            break
+
+        MD.move(traction, last_direction)
+    print("sign passed")
+    turn_timer_start = time.time()
+    turn_timer_stop = time.time()
+
+    while turn_timer_stop - turn_timer_start  < 1.5:
+        with open("Json/CAM.json", 'r', encoding='utf-8') as color_detection:
+            color_detection_data = json.load(color_detection)
+            camera_color =  color_detection_data["Color"]
+
+        if camera_color != "" or "magenta":
+            print("another sign detected")
+            pivot_aproximation(last_direction)
+            return 
+        turn_timer_stop = time.time()
+        MD.move(25, opposite_direction)
+    print("Nothing found")
+    MD.move(25, last_direction)
+    time.sleep(1.5)
+        
+
+
 
 # This function is for go backward in the MAIN code
 def backward(traction, initial_direction):
@@ -41,7 +69,7 @@ def backward(traction, initial_direction):
         MD.move(traction, initial_direction)
         time.sleep(1)
 
-        if front_distance > 100:
+        if front_distance > 50:
             break
 
 # This function is for turn 180 degrees the car
