@@ -65,8 +65,12 @@ def color_detection(stop_event):
                 json.dump(data, j, indent=4, ensure_ascii=False)
         except TypeError as e:
             print(f"Error: {e} - data is not JSON-serializable")
-        except IOError as e:
-            print(f"Error: {e} - unable to write to file")
+        except FileNotFoundError:
+            print("El archivo no existe")
+        except PermissionError:
+            print("No tienes permisos para escribir el archivo")
+        except OSError as e:
+            print("Error al escribir el archivo:", e)
         except  Exception as e:
             print(f"Error: {e}")
 
