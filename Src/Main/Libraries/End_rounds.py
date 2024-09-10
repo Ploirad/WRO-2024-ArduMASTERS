@@ -16,11 +16,11 @@ def parking(half_turn):
     
     while True:
         try:
-            Fdis = ""
-            Ldis = ""
-            Rdis = ""
-            Bdis = ""
-            Cen = ""
+            Fdis = None
+            Ldis = None
+            Rdis = None
+            Bdis = None
+            Cen = None
             prev_right_dis = 0
             prev_left_dis = 0
             with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), "r", encoding="utf-8") as d:
@@ -41,6 +41,8 @@ def parking(half_turn):
                 Cen = data["MagentaC"]
             
             if phase == 0:
+                if Cen == None:
+                    Cen = 0
                 if Cen <= 300:
                     M.move(30,-100)
                 elif Cen >= 340:
