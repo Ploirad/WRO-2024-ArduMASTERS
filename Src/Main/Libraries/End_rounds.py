@@ -17,67 +17,70 @@ def parking(half_turn):
         direction = "left"
     
     while True:
-        Fdis = ""
-        Ldis = ""
-        Rdis = ""
-        Bdis = ""
-        Cen = ""
-        with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), "r", encoding="utf-8") as d:
-            data = json.load(d)
-            Fdis = data["HC0"]
-            Rdis = data["HC1"]
-            Bdis = data["HC2"]
-            Ldis = data["HC3"]
+        try:
+            Fdis = ""
+            Ldis = ""
+            Rdis = ""
+            Bdis = ""
+            Cen = ""
+            with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), "r", encoding="utf-8") as d:
+                data = json.load(d)
+                Fdis = data["HC0"]
+                Rdis = data["HC1"]
+                Bdis = data["HC2"]
+                Ldis = data["HC3"]
 
-            var_right_dis = prev_right_dis - Rdis
-            prev_right_dis = var_right_dis
+                var_right_dis = prev_right_dis - Rdis
+                prev_right_dis = var_right_dis
 
-            var_left_dis = prev_left_dis - Rdis
-            prev_left_dis = var_left_dis
+                var_left_dis = prev_left_dis - Rdis
+                prev_left_dis = var_left_dis
 
-        with open(os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), "r", encoding="utf-8") as d: 
-            data = json.load(d)
-            Cen = data["MagentaC"]
-        
-        if phase == 0:
-            if Cen <= 300:
-                M.move(30,-100)
-            elif Cen >= 340:
-                M.move(30,100)
-            else:
-                if Fdis <= 30:
-                    M.move(50,0)
-                else:
-                    phase = 1
-        if phase == 1:
+            with open(os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), "r", encoding="utf-8") as d: 
+                data = json.load(d)
+                Cen = data["MagentaC"]
             
-            if direction == "right":
-                if var_right_dis <= 15:
-                    if Cen >=40:
-                        M.move(30,100)
-                    else:
-                        M.move(50,0)
+            if phase == 0:
+                if Cen <= 300:
+                    M.move(30,-100)
+                elif Cen >= 340:
+                    M.move(30,100)
                 else:
-                    phase = 2
-            else:
-                if var_left_dis <= 15:
-                    if Cen <=600:
-                        M.move(30,-100)
-                    else:
+                    if Fdis <= 30:
                         M.move(50,0)
-                else:
-                    phase = 2
-        if phase == 2:
-            if Fdis >= 10:
+                    else:
+                        phase = 1
+            if phase == 1:
+                
                 if direction == "right":
-                    M.move(100,-100)
+                    if var_right_dis <= 15:
+                        if Cen >=40:
+                            M.move(30,100)
+                        else:
+                            M.move(50,0)
+                    else:
+                        phase = 2
                 else:
-                    M.move(100,100)
-            else:
-                phase = 3
-        if phase == 3:
-            M.move(0,0)
-            print("YOU'VE WON :)")
+                    if var_left_dis <= 15:
+                        if Cen <=600:
+                            M.move(30,-100)
+                        else:
+                            M.move(50,0)
+                    else:
+                        phase = 2
+            if phase == 2:
+                if Fdis >= 10:
+                    if direction == "right":
+                        M.move(100,-100)
+                    else:
+                        M.move(100,100)
+                else:
+                    phase = 3
+            if phase == 3:
+                M.move(0,0)
+                print("YOU'VE WON :)")
+        except  Exception as e:
+            print(e)
 
 def home_sweet_home(first_front_distance, first_right_distance):
     traction = 0
