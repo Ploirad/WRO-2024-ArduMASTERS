@@ -43,6 +43,8 @@ def parking(half_turn):
             if phase == 0:
                 if Cen == None:
                     Cen = 0
+                if Cen == 0:
+                    M.move(0,0)
                 if Cen <= 300:
                     M.move(30,-100)
                 elif Cen >= 340:
