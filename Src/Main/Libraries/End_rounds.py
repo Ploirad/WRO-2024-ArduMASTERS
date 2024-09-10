@@ -82,7 +82,8 @@ def parking(half_turn):
         except Exception as e:
             if e == KeyboardInterrupt:
                 break
-            print(e, e.__traceback__.tb_lineno)
+            print(e)
+            print(e.__traceback__.tb_lineno)
 
 def home_sweet_home(first_front_distance, first_right_distance):
     traction = 0
