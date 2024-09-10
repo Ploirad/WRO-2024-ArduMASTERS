@@ -11,9 +11,9 @@ def parking(half_turn):
             data = json.load(d)
             first_color = data["first_color_obteined"]
             if (first_color == "orange" and half_turn == False) or (first_color == "blue" and half_turn == True):
-                direction = "der"
+                direction = "right"
             elif (first_color == "orange" and half_turn == True) or (first_color == "blue" and half_turn == False):
-                direction = "izq"
+                direction = "left"
     
     while True:
         with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), "r", encoding="utf-8") as d:
