@@ -12,4 +12,4 @@ while True:
     print("Imma park")
     ER.parking(False)
     break
-  time.sleep(100)  
+  time.sleep(0.1)  
