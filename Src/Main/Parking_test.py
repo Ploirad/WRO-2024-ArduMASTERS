@@ -6,6 +6,8 @@ while True:
   with open(os.path.join(os.path.dirname(__file__), "Libraries", "Json", "CAM.json"), "r", encoding = "utf-8") as d:
     data = json.load(d)
     M = data["MagentaC"]
+    print(M)
     if M != None:
+      print(Imma park)
       ER.parking(False)
-      Break
+      break
