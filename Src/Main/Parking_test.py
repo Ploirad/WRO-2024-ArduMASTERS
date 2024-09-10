@@ -1,3 +1,3 @@
-import Libraries.End_rounds.py as ER
+import Libraries.End_rounds as ER
 
 ER.parking(False)
