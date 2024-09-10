@@ -6,6 +6,8 @@ def parking(half_turn):
     phase = 0
     first_color = ""
     direction = ""
+    prev_right_dis = 0
+    prev_left_dis = 0
     with open(os.path.join(os.path.dirname(__file__), "Json", "tcs_color_detection.json")) as d:
         data = json.load(d)
         first_color = data["first_color_obteined"]
