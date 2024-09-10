@@ -54,7 +54,7 @@ def parking(half_turn):
                 
                 if direction == "right":
                     if var_right_dis <= 15:
-                        if Cen >=40:
+                        if Cen >= 40:
                             M.move(30,100)
                         else:
                             M.move(50,0)
@@ -82,7 +82,7 @@ def parking(half_turn):
         except Exception as e:
             if e == KeyboardInterrupt:
                 break
-            print(e)
+            print(e, e.__traceback__.tb_lineno)
 
 def home_sweet_home(first_front_distance, first_right_distance):
     traction = 0
