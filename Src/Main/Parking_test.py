@@ -8,6 +8,6 @@ while True:
     M = data["MagentaC"]
     print(M)
     if M != None:
-      print(Imma park)
+      print("Imma park")
       ER.parking(False)
       break
