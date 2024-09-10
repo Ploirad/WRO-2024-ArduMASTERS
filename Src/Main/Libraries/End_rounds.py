@@ -59,25 +59,25 @@ def parking(half_turn):
                 if direction == "right":
                     if var_right_dis <= 15:
                         if Cen >= 40:
-                            M.move(30,100)
+                            M.move(25,100)
                         else:
-                            M.move(50,0)
+                            M.move(25,0)
                     else:
                         phase = 2
                 else:
                     if var_left_dis <= 15:
                         if Cen <=600:
-                            M.move(30,-100)
+                            M.move(25,-100)
                         else:
-                            M.move(50,0)
+                            M.move(25,0)
                     else:
                         phase = 2
             if phase == 2:
                 if Fdis >= 10:
                     if direction == "right":
-                        M.move(100,-100)
+                        M.move(25,-100)
                     else:
-                        M.move(100,100)
+                        M.move(25,100)
                 else:
                     phase = 3
             if phase == 3:
