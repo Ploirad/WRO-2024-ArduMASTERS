@@ -4,10 +4,8 @@ import os
 
 def parking(half_turn): 
     phase = 0
-    prev_right_dis = 0
-    prev_left_dis = 0
     first_color = ""
-
+    direction = ""
     with open(os.path.join(os.path.dirname(__file__), "Json", "tcs_color_detection.json")) as d:
         data = json.load(d)
         first_color = data["first_color_obteined"]
@@ -23,6 +21,8 @@ def parking(half_turn):
             Rdis = ""
             Bdis = ""
             Cen = ""
+            prev_right_dis = 0
+            prev_left_dis = 0
             with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), "r", encoding="utf-8") as d:
                 data = json.load(d)
                 Fdis = data["HC0"]
