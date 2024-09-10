@@ -79,7 +79,9 @@ def parking(half_turn):
             if phase == 3:
                 M.move(0,0)
                 print("YOU'VE WON :)")
-        except  Exception as e:
+        except Exception as e:
+            if e == KeyboardInterrupt:
+                break
             print(e)
 
 def home_sweet_home(first_front_distance, first_right_distance):
