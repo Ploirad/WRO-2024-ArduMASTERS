@@ -16,19 +16,13 @@ def parking(half_turn):
     
     while True:
         try:
-            Fdis = None
-            Ldis = None
-            Rdis = None
-            Bdis = None
-            Cen = None
-            prev_right_dis = 0
-            prev_left_dis = 0
             with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), "r", encoding="utf-8") as d:
                 data = json.load(d)
                 Fdis = data["HC0"]
                 Rdis = data["HC1"]
                 Bdis = data["HC2"]
                 Ldis = data["HC3"]
+                print(f" Front distance: {Fdis}, Right distance: {Rdis}")
 
                 var_right_dis = prev_right_dis - Rdis
                 prev_right_dis = var_right_dis
