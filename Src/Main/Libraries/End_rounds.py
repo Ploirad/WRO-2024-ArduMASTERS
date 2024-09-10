@@ -8,12 +8,12 @@ def parking(half_turn):
     prev_left_dis = 0
 
     with open(os.path.join(os.path.dirname(__file__), "Json", "tcs_color_detection.json")) as d:
-            data = json.load(d)
-            first_color = data["first_color_obteined"]
-            if (first_color == "orange" and half_turn == False) or (first_color == "blue" and half_turn == True):
-                direction = "right"
-            elif (first_color == "orange" and half_turn == True) or (first_color == "blue" and half_turn == False):
-                direction = "left"
+        data = json.load(d)
+        first_color = data["first_color_obteined"]
+    if (first_color == "orange" and half_turn == False) or (first_color == "blue" and half_turn == True):
+        direction = "right"
+    elif (first_color == "orange" and half_turn == True) or (first_color == "blue" and half_turn == False):
+        direction = "left"
     
     while True:
         with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), "r", encoding="utf-8") as d:
