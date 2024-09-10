@@ -41,6 +41,7 @@ def parking(half_turn):
                 Cen = data["MagentaC"]
             
             if phase == 0:
+                print("phase 0")
                 if Cen == None:
                     Cen = -1
                 if Cen == -1:
@@ -55,7 +56,7 @@ def parking(half_turn):
                     else:
                         phase = 1
             if phase == 1:
-                
+                print("phase 1")
                 if direction == "right":
                     if var_right_dis <= 15:
                         if Cen >= 40:
@@ -73,6 +74,7 @@ def parking(half_turn):
                     else:
                         phase = 2
             if phase == 2:
+                print("phase 2")
                 if Fdis >= 10:
                     if direction == "right":
                         M.move(25,-100)
@@ -81,6 +83,7 @@ def parking(half_turn):
                 else:
                     phase = 3
             if phase == 3:
+                print("phase 3")
                 M.move(0,0)
                 print("YOU'VE WON :)")
         except Exception as e:
