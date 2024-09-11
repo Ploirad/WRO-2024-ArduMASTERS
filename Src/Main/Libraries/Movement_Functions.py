@@ -24,7 +24,7 @@ def pivot_aproximation(last_direction, color_detected):
                 left_distance = HC_detection_data["HC3"]
 
             if  front_distance < 10 or front_distance > 2000:
-                backward(traction, last_direction)
+                backward(traction, -last_direction)
 
             if color_detected == "green":
                 side = right_distance
