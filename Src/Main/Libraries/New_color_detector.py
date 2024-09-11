@@ -18,8 +18,8 @@ def detect_red(frame):
     return detect_color(frame, R_bajo, R_alto)
 
 def detect_magenta(frame):
-    M_bajo = np.array([170, 155, 119])  # HSV values for magenta
-    M_alto = np.array([174, 228, 219])
+    M_bajo = np.array([165, 117, 120])  # HSV values for magenta
+    M_alto = np.array([169, 185, 209])
     return detect_color(frame, M_bajo, M_alto)
 
 # This function is used to take the centroid and the area of the color gived (color_low, color_high) in the respective frame
