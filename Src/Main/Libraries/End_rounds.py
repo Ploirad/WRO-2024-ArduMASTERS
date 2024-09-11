@@ -1,6 +1,7 @@
 from Libraries import MOTOR_DRIVER as M
 import json
 import os
+import time
 
 def parking(half_turn): 
     phase = 0
@@ -39,18 +40,17 @@ def parking(half_turn):
             if phase == 0:
                 print("phase 0")
                 if Cen == None:
-                    Cen = -1
-                if Cen == -1:
                     M.move(0,0)
                 elif Cen <= 300:
-                    M.move(30,-100)
+                    M.move(25,-100)
                 elif Cen >= 340:
-                    M.move(30,100)
+                    M.move(25,100)
                 else:
                     if Fdis <= 30:
-                        M.move(50,0)
+                        M.move(25,0)
                     else:
                         phase = 1
+            
             if phase == 1:
                 print("phase 1")
                 if direction == "right":
@@ -69,19 +69,29 @@ def parking(half_turn):
                             M.move(25,0)
                     else:
                         phase = 2
+            
             if phase == 2:
                 print("phase 2")
-                if Fdis >= 10:
-                    if direction == "right":
-                        M.move(25,-100)
-                    else:
-                        M.move(25,100)
-                else:
+                if direction == "right":
+                    M.move(25,100)
+                    time.sleep(2)
                     phase = 3
+                else:
+                    M.move(25,-100)
+                    time.sleep(2)
+                    phase = 3
+
             if phase == 3:
+                if Bdis >= 1:
+                    M.move(-25,0)
+                else:
+                    phase = 4
+
+            if phase == 4:
                 print("phase 3")
                 M.move(0,0)
                 print("YOU'VE WON :)")
+        
         except Exception as e:
             if e == KeyboardInterrupt:
                 break
