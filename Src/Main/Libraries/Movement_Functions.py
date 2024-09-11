@@ -12,25 +12,28 @@ def pivot_aproximation(last_direction, color_detected):
     post_passed = False
 
     while True:
-        with open (os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), 'r', encoding='utf-8') as camera_color:
-            camera_color_data = json.load(camera_color)
-            print(camera_color_data)
-            color =  camera_color_data["Color"]
-        with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), 'r', encoding='utf-8') as HC_detection:
-            HC_detection_data = json.load(HC_detection)
-            print(HC_detection_data)
-            front_distance =  HC_detection_data["HC0"]
-            right_distance = HC_detection_data["HC1"]
-            left_distance = HC_detection_data["HC3"]
+        try:
+            with open (os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), 'r', encoding='utf-8') as camera_color:
+                camera_color_data = json.load(camera_color)
+                print(camera_color_data)
+                color =  camera_color_data["Color"]
+            with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), 'r', encoding='utf-8') as HC_detection:
+                HC_detection_data = json.load(HC_detection)
+                print(HC_detection_data)
+                front_distance =  HC_detection_data["HC0"]
+                right_distance = HC_detection_data["HC1"]
+                left_distance = HC_detection_data["HC3"]
 
-        if  front_distance < 10 or front_distance > 2000:
-            backward(traction, last_direction)
+            if  front_distance < 10 or front_distance > 2000:
+                backward(traction, last_direction)
 
-        if front_distance > 30 and color != color_detected:
-            if (right_distance < 41 and last_direction == -100) or (left_distance < 41 and last_direction == 100):
-                post_passed = True
-        if post_passed:
-            break
+            if front_distance > 30 and color != color_detected:
+                if (right_distance < 41 and last_direction == -100) or (left_distance < 41 and last_direction == 100):
+                    post_passed = True
+            if post_passed:
+                break
+        except:
+            print("Error 1 reading json files")
 
         MD.move(traction, last_direction)
     print("sign passed")
@@ -38,17 +41,20 @@ def pivot_aproximation(last_direction, color_detected):
     turn_timer_stop = time.time()
 
     while turn_timer_stop - turn_timer_start  < 1.5:
-        with open(os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), 'r', encoding='utf-8') as color_detection:
-            color_detection_data = json.load(color_detection)
-            print(color_detection_data)
-            camera_color =  color_detection_data["Color"]
+        try:
+            with open(os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), 'r', encoding='utf-8') as color_detection:
+                color_detection_data = json.load(color_detection)
+                print(color_detection_data)
+                camera_color =  color_detection_data["Color"]
 
-        if camera_color != "" or "magenta":
-            print("another sign detected")
-            pivot_aproximation(last_direction, camera_color)
-            return 
-        turn_timer_stop = time.time()
-        MD.move(25, opposite_direction)
+            if camera_color != "" or "magenta":
+                print("another sign detected")
+                pivot_aproximation(last_direction, camera_color)
+                return 
+            turn_timer_stop = time.time()
+            MD.move(25, opposite_direction)
+        except:
+            print("Error 2 reading json files")
     print("Nothing found")
     MD.move(25, last_direction)
     time.sleep(1.5)
