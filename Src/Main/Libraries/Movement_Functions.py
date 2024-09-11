@@ -9,7 +9,10 @@ def pivot_aproximation(last_direction, color_detected):
     print("sign detected")
     traction = 25
     opposite_direction = -last_direction
+    post_reached = False
     post_passed = False
+    side = 0
+    last_side = 0
 
     while True:
         try:
@@ -27,9 +30,19 @@ def pivot_aproximation(last_direction, color_detected):
             if  front_distance < 10 or front_distance > 2000:
                 backward(traction, last_direction)
 
-            if front_distance > 30 and color != color_detected:
-                if (right_distance < 41 and last_direction == -100) or (left_distance < 41 and last_direction == 100):
-                    post_passed = True
+            if color_detected == "green":
+                side = right_distance
+            else:
+                side = left_distance
+
+
+            if (last_side - side) > 30:
+                    post_reached = True
+            last_side = side
+
+            if post_reached and (side - last_side) > 30:
+                post_passed = True
+
             if post_passed:
                 break
         except:
