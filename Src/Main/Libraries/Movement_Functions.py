@@ -34,6 +34,7 @@ def pivot_aproximation(last_direction, color_detected):
 
             if (last_side - side) > 30:
                     post_reached = True
+                    print("post reached")
             last_side = side
 
             if post_reached and (side - last_side) > 30:
