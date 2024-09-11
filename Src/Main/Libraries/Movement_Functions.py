@@ -16,10 +16,6 @@ def pivot_aproximation(last_direction, color_detected):
 
     while True:
         try:
-            with open (os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), 'r', encoding='utf-8') as camera_color:
-                camera_color_data = json.load(camera_color)
-                print(camera_color_data)
-                color =  camera_color_data["Color"]
             with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), 'r', encoding='utf-8') as HC_detection:
                 HC_detection_data = json.load(HC_detection)
                 print(HC_detection_data)
@@ -55,12 +51,12 @@ def pivot_aproximation(last_direction, color_detected):
 
     while turn_timer_stop - turn_timer_start  < 1.5:
         try:
-            with open(os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), 'r', encoding='utf-8') as color_detection:
-                color_detection_data = json.load(color_detection)
-                print(color_detection_data)
-                camera_color =  color_detection_data["Color"]
+            with open (os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), 'r', encoding='utf-8') as camera_color:
+                camera_color_data = json.load(camera_color)
+                print(camera_color_data)
+                color =  camera_color_data["Color"]
 
-            if camera_color != "" or "magenta":
+            if color != "" or "magenta":
                 print("another sign detected")
                 pivot_aproximation(last_direction, camera_color)
                 return 
