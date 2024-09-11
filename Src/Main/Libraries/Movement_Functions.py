@@ -59,7 +59,7 @@ def pivot_aproximation(last_direction, color_detected):
                 print(camera_color_data)
                 color =  camera_color_data["Color"]
 
-            if color != "" or "magenta":
+            if color != "" or color != "magenta":
                 print("another sign detected")
                 pivot_aproximation(last_direction, camera_color)
                 return 
