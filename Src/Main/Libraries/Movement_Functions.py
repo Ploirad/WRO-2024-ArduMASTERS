@@ -39,14 +39,15 @@ def pivot_aproximation(last_direction, color_detected):
 
             if post_reached and (side - last_side) > 30:
                 post_passed = True
+            if post_passed:
+                break
 
             MD.move(traction, last_direction)
 
         except:
             print("Error 1 reading json files")
-        finally:
-            if post_passed:
-                break
+
+            
     print("sign passed")
     turn_timer_start = time.time()
     turn_timer_stop = time.time()
