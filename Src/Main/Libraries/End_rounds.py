@@ -28,10 +28,10 @@ def parking(half_turn):
                 print(f" Front distance: {Fdis}, Right distance: {Rdis}")
 
                 var_right_dis = prev_right_dis - Rdis
-                prev_right_dis = var_right_dis
+                prev_right_dis = Rdis
 
-                var_left_dis = prev_left_dis - Rdis
-                prev_left_dis = var_left_dis
+                var_left_dis = prev_left_dis - Ldis
+                prev_left_dis = Ldis
 
             with open(os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), "r", encoding="utf-8") as d: 
                 data = json.load(d)
