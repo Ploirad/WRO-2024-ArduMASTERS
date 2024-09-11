@@ -40,51 +40,42 @@ def principal_logic(areas):
 def detect(stop_event):
     park = False
     while not stop_event.is_set():
-        for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port=True):
-            image = frame.array
-            height, width = image.shape[:2]
-            lower_half = image[height//2:, :]
-            _, green_area = CAM.detect_green(lower_half)
-            _, red_area = CAM.detect_red(lower_half)
-            magenta_centroid, magenta_area = CAM.detect_magenta(lower_half)
-        
-            color_areas = {"green": green_area, "red": red_area, "magenta": magenta_area}
-
-            t, d, color, ignore, calculo = principal_logic(color_areas)
+        try:
+            for frame in camera.capture_continuous(raw_capture, format="bgr", use_video_port=True):
+                image = frame.array
+                height, width = image.shape[:2]
+                lower_half = image[height//2:, :]
+                _, green_area = CAM.detect_green(lower_half)
+                _, red_area = CAM.detect_red(lower_half)
+                magenta_centroid, magenta_area = CAM.detect_magenta(lower_half)
             
-            if color == "magenta":
-                park = True
-            else:
-                park = False
+                color_areas = {"green": green_area, "red": red_area, "magenta": magenta_area}
 
-            color = "" if ignore else color
+                t, d, color, ignore, calculo = principal_logic(color_areas)
+                
+                if color == "magenta":
+                    park = True
+                else:
+                    park = False
 
-            data = {
-                    "Ignore": ignore,
-                    "Color": color,
-                    "Parking": park,
-                    "TRACTION": t,
-                    "DIRECTION": d,
-                    "MagentaC": magenta_centroid,
-                    "GArea": green_area,
-                    "RArea": red_area,
-                    "MArea": magenta_area,
-                    "Calculo": calculo
-                }
-            raw_capture.truncate(0)
+                color = "" if ignore else color
 
-            try:
+                data = {
+                        "Ignore": ignore,
+                        "Color": color,
+                        "Parking": park,
+                        "TRACTION": t,
+                        "DIRECTION": d,
+                        "MagentaC": magenta_centroid,
+                        "GArea": green_area,
+                        "RArea": red_area,
+                        "MArea": magenta_area,
+                        "Calculo": calculo
+                    }
+                raw_capture.truncate(0)
                 with open(os.path.join(os.path.dirname(__file__), "Libraries", "Json", "CAM.json"), "w", encoding='utf-8') as j:
                     json.dump(data, j, indent=4, ensure_ascii=False)
-            except TypeError as e:
-                print(f"Error: {e} - data is not JSON-serializable")
-            except FileNotFoundError:
-                print("El archivo no existe")
-            except PermissionError:
-                print("No tienes permisos para escribir el archivo")
-            except OSError as e:
-                print("Error al escribir el archivo:", e)
-            except  Exception as e:
+        except  Exception as e:
                 print(f"Error: {e}")
 
 
