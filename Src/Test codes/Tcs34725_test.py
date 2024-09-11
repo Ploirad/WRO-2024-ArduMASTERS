@@ -51,5 +51,5 @@ def get_color():
 
 
 ##Code to try the tcs
-#while True:
-#    print(get_color())
+while True:
+   print(get_color())

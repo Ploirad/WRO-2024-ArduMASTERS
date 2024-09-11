@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="200" height="200" src="https://github.com/Ploirad/WRO-2024-ArduMASTERS/assets/148375115/122c7233-1e41-4727-894d-9d810f12458b">
+  <img width="200" height="200" src="https://github.com/Ploirad/WRO-2024-ArduMASTERS/blob/main/Process/MASTERS.jpeg">
 </p>
 This is a diary where we write down all our progress and achievements across the months:
 
@@ -41,3 +41,4 @@ At this time one mate joined to us but another one left us.
 ## June
 During June, we solved some bugs, created a new car model, we also added a tcs34725 (a color detector) and changed again the main codes according with the cleaner code system.
 ## July
+In July, we reworked the main code, making it work in threads, a more optimized way, we also changed some readme, and refactored the files.

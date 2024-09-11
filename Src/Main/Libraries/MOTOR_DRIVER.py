@@ -5,7 +5,7 @@ import RPi.GPIO as GPIO
 
 # Inicializa la librería GPIO
 GPIO.setmode(GPIO.BCM)
-
+GPIO.setwarnings(False)
 # Define los pines del motor y del servo
 ENA = 26
 IN1 = 19
@@ -46,8 +46,8 @@ pwmENB.ChangeDutyCycle(0)
 amplitud = 2 #float(input("AMPLITUD: "))
 center = 7 #float(input("Center: "))
 d = 6
-inf = 2
-sup = 12.5
+inf = 7 # float(input("Inf: "))
+sup = 4.75 # float(input("Sup: "))
 
 # Define la función de movimiento
 def move(percent_vel, percent_dir):
