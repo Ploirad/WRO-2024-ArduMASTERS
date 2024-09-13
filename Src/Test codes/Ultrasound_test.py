@@ -8,8 +8,8 @@ TRIG_PIN_ATRAS = 17
 ECHO_PIN_ATRAS = 27
 TRIG_PIN_IZQUIERDA = 22
 ECHO_PIN_IZQUIERDA = 10
-TRIG_PIN_DERECHA = 5
-ECHO_PIN_DERECHA = 6
+TRIG_PIN_DERECHA = 8
+ECHO_PIN_DERECHA = 7
 
 # Define variables para almacenar las distancias medidas por cada sensor
 distancia_delante = 0
