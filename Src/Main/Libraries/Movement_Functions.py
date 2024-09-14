@@ -34,31 +34,29 @@ def pivot_aproximation(color):
                 if front_distance < 15:
                     phase = 1
             if phase == 1:
-                if (int(GA) == 0 and target == "green") or (int(RA) == 0 and target == "red")
-                    phase = 2
-            if target == "red":
                 
-                if var_distance >= 30:
-
-                    if RC < 100: # If it's on the left side
-                        MD.move(25, 0) # Forward
-                    else:
-                        MD.move(25, 100) # Turn right
+                if target == "red":
+                    if RC < 20: # If it's on the left side
+                            MD.move(25, 0) # Forward
+                        else:
+                            MD.move(25, 100) # Turn right
                 
-                else:
-                    break
-            
-            elif target == "green":
-            
-                if var_distance >= 30:
-                    
-                    if GC > 540: # If it's on the left side
+                elif target == "green":
+                    if GC > 620: # If it's on the left side
                         MD.move(25, 0) # Forward
                     else:
                         MD.move(25, -100) # Turn left
                 
-                else:
-                    break
+                if (int(GA) <= 50 and target == "green") or (int(RA) <= 50 and target == "red")
+                    phase = 2
+
+                if phase == 3
+                    if var_distance >= 30    
+                        MD.move(25,0)
+                    else:
+                        break
+                
+                    
         except:
             pass
 
