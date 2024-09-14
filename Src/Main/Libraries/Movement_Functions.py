@@ -5,73 +5,56 @@ import json
 import os
 
 # Controls robot movement based on direction data from the json file of the camera
-def pivot_aproximation(last_direction, color_detected):
-    print("sign detected")
-    traction = 25
-    opposite_direction = -last_direction
-    post_reached = False
-    post_passed = False
-    side = 0
-    last_side = 0
-
+def pivot_aproximation(color):
+    target = color
     while True:
         try:
-            with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), 'r', encoding='utf-8') as HC_detection:
-                HC_detection_data = json.load(HC_detection)
-                print(HC_detection_data)
-                front_distance =  HC_detection_data["HC0"]
-                right_distance = HC_detection_data["HC1"]
-                left_distance = HC_detection_data["HC3"]
+           
+            if color != "" and color != "magenta": # If it's the correct color
+           
+                with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), 'r', encoding='utf-8') as M:
+                    HC_data = json.load(M)
+                    var_distance = HC_data["HC1" if target=="green" else "HC3"] - prev_distance
+                    prev_distance = HC_data["HC1" if target=="green" else "HC3"]
 
-            if  front_distance < 10 or front_distance > 2000:
-                backward(traction, -last_direction)
+                with open(os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), 'r', encoding='utf-8') as C:
+                    cam_data = json.load(C)
 
-            if color_detected == "green":
-                side = right_distance
-            else:
-                side = left_distance
+                    GA = cam_data["GArea"]
+                    RA = cam_data["RArea"]
 
+                    GC = cam_data["GreenC"]
+                    RC = cam_data["RedC"]
 
-            if (last_side - side) > 30:
-                    post_reached = True
-                    print("post reached")
-            if post_reached and (side - last_side) > 30:
-                post_passed = True
-            if post_passed:
-                break
+                if target == "red":
+                    
+                    if var_distance >= 30:
+
+                        if RC < 100: # If it's on the left side
+                            MD.move(25, 0) # Forward
+                        else:
+                            MD.move(25, 100) # Turn right
+                    
+                    else:
+                        break
                 
-            last_side = side
-            
-            MD.move(traction, last_direction)
+                elif target == "green":
+                
+                    if var_distance >= 30:
+                        
+                        if GC > 540: # If it's on the left side
+                            MD.move(25, 0) # Forward
+                        else:
+                            MD.move(25, -100) # Turn left
+                    
+                    else:
+                        break
+            else:
+                with open(os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), 'r', encoding='utf-8') as d:
+                    color = json.load(d)["Color"]
 
         except:
-            print("Error 1 reading json files")
-
-            
-    print("sign passed")
-    turn_timer_start = time.time()
-    turn_timer_stop = time.time()
-
-    while turn_timer_stop - turn_timer_start  < 1.5:
-        try:
-            with open (os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), 'r', encoding='utf-8') as camera_color:
-                camera_color_data = json.load(camera_color)
-                print(camera_color_data)
-                color =  camera_color_data["Color"]
-
-            if color != "" or color != "magenta":
-                print("another sign detected")
-                pivot_aproximation(last_direction, camera_color)
-                return 
-            turn_timer_stop = time.time()
-            MD.move(25, opposite_direction)
-        except:
-            print("Error 2 reading json files")
-    print("Nothing found")
-    MD.move(25, last_direction)
-    time.sleep(1.5)
-        
-
+            pass
 
 
 # This function is for go backward in the MAIN code
