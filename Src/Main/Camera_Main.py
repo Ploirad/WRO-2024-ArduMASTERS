@@ -45,8 +45,8 @@ def detect(stop_event):
                 image = frame.array
                 height, width = image.shape[:2]
                 lower_half = image[height//2:, :]
-                _, green_area = CAM.detect_green(lower_half)
-                _, red_area = CAM.detect_red(lower_half)
+                green_centroid, green_area = CAM.detect_green(lower_half)
+                red_centroid, red_area = CAM.detect_red(lower_half)
                 magenta_centroid, magenta_area = CAM.detect_magenta(lower_half)
             
                 color_areas = {"green": green_area, "red": red_area, "magenta": magenta_area}
@@ -67,6 +67,8 @@ def detect(stop_event):
                         "TRACTION": t,
                         "DIRECTION": d,
                         "MagentaC": magenta_centroid,
+                        "GreenC": green_centroid,
+                        "RedC": red_centroid,
                         "GArea": green_area,
                         "RArea": red_area,
                         "MArea": magenta_area,

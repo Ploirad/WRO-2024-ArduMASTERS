@@ -5,6 +5,8 @@
     "TRACTION": 0,
     "DIRECTION": 0,
     "MagentaC": 0,
+    "GreenC": 0,
+    "RedC": 0,
     "GArea": 0,
     "RArea": 0,
     "MArea": 0,

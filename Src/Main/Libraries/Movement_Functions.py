@@ -56,7 +56,6 @@ def pivot_aproximation(color):
         except:
             pass
 
-
 # This function is for go backward in the MAIN code
 def backward(traction, initial_direction):
     print("BACKWARD STARTED")
