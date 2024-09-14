@@ -1,118 +1,97 @@
-extra_lap = False
+import json
+import time
+from Libraries import MOTOR_DRIVER as MD
+from Libraries import Boton as B
+import Libraries.Movement_Functions as F
+import Libraries.End_rounds as End
+import math as M
+
+Phase = 0 # initial phase, unknown direcction
+direction = ""
+alpha = 30 # Car turning angle
+phase = 0
+
+def TD(): # turn distance
+    return (M.pi * (11 / M.sin(alpha)))/2
+
+def DFL(): # distance to first line
+    return M.tan(alpha) * Wall_dist
+
+def AD(): # aproximation distance
+    return Wall_dist - TD()
 
 if __name__ == "__main__":
-    import json
-    import time
-    from Libraries import MOTOR_DRIVER as Motor
-    from Libraries import Boton
-    import Libraries.Movement_Functions as F
-    import Libraries.End_rounds as End
-
-    dir_changed = False
-    can_start = False
-    waiting_magenta = False
-    possible_changing_direction = False
-    last_pillar = ""
-    tcs_color = ""
-    first_front_distance = 0
-    first_right_distance = 0
-    first_loop_done = False
-    second_round = False
-    tim = 1.5
     while True:
-        try:
-            if can_start:
-                if not first_loop_done:
-                    with open("Libraries/Json/Move.json", "r", encoding='utf-8') as f:
-                        Move = json.load(f)
-                        first_front_distance = Move["HC0"]
-                        first_right_distance = Move["HC1"]
-                    first_loop_done = True
+        if B.button_state() == True:
+            while True:
+                with open("Libraries/Json/CAM.json","r", encoding="utf-8") as C:
+                    cam_data = json.load(C)
 
-                traction = 0
-                direction = 0
-                with open("Libraries/Json/CAM.json", "r", encoding='utf-8') as f:
-                    CAM = json.load(f)
-                    print(CAM)
+                    color = cam_data["Color"]
+                    ignore = cam_data["Ignore"]
+                    
+                    RC = cam_data["RedC"]
+                    GC = cam_data["GreenC"]
+                    MC = cam_data["MagentaC"]
+                
+                    RA = cam_data["MArea"]
+                    GC = cam_data["GArea"]
+                    MA = cam_data["MArea"]
 
-                    color = CAM["Color"]
-                    ignore = CAM["Ignore"]
+                with open("tsc_color_dtection.json", "r", encoding="utf-8") as T:
+                    tcs_data = json.load(T)
 
-                    if (color == "red" or color == "green" or color == "magenta") and not ignore:
-                        second_round = True
+                    direction = tcs_data["first_color_obteined"]
+                    Color = tcs_data["color_obteined"]
+                    turns = tcs_data["turns"]
+                    laps = tcs_data["laps"]
 
-                    if second_round and possible_changing_direction and not ignore:
-                        last_pillar = color
+                with open("Libraries/Json/Move.json", "r", encoding="utf-8") as M:
+                    HC_data = json.load(M)
 
-                    if waiting_magenta:
-                        if second_round:
-                            if color == "magenta":
-                                End.parking(dir_changed)
-                        else:
-                            if tcs_color == "Gray":
-                                End.home_sweet_home(first_front_distance, first_right_distance)
-                                break
-                        if tcs_color == "Gray":
-                            End.home_sweet_home(first_front_distance, first_right_distance)
-                            break
+                    HC0 = HC_data["HC0"]
+                    HC1 = HC_data["HC1"]
+                    HC2 = HC_data["HC2"]
+                    HC3 = HC_data["HC3"]
 
-                    if ("TRACTION" in CAM and "DIRECTION" in CAM and not ignore and color != "magenta"):
-                        F.pivot_aproximation(CAM["Color"])
-                        traction = CAM["TRACTION"]
-                        direction = CAM["DIRECTION"]
-
+                    if direction == "blue":
+                        Wall_dist = 95 - HC1
+                        print("Anticlockways direccion")
+                    elif direction == "orange":
+                        Wall_dist = 95 - HC3
+                        print("Clockways direccion")
                     else:
-                        if CAM["Ignore"]:
-                            print("Ignore CAM")
-                            with open("Libraries/Json/Move.json", "r", encoding='utf-8') as f:
-                                Move = json.load(f)
-                                print(Move)
+                        print("Unknown direcction") 
+        
+                if ignore == True:
+                    # If total distance to the walls is less than 1m
+                    if HC1 + HC3 <=100: 
+                        # If to much to the right
+                        if HC1 <= (HC1 + HC3)/2-10: 
+                            MD.move(1,-100) # Turn left
+                        # If to much to the left
+                        elif HC3 <= (HC1 + HC3)/2-10: 
+                            MD.move(1,100) # Turn right
+                        else:
+                            MD.move(1,0) # Continue forward
 
-                                if "TRACTION" in Move and "DIRECTION" in Move:
-                                    traction = int(Move["TRACTION"])
-                                    direction = int(Move["DIRECTION"])
+                    # else:
+                    #     # If there is more distance to the right than the left
+                    #     if HC1 > HC3: 
+                    #         prev_front = HC0 # Save distance to front walls
+                    #         MD.move(1,100) # Turn to right until the front walls it's at the left
+                    #         while not HC3 == range(prev_front-30,prev_front):  time.sleep(.25)
+                    #         MD.move(1,0) # Continue forward until abandoning the corner
+                    #         while HC1 + HC3 >= 150: time.sleep(.25)
+                    #         turns += 1
 
-                                else:
-                                    print("Invalid data format in JSON file")
-
-                with open("Libraries/Json/tcs_color_detection.json", "r", encoding='utf-8') as f:
-                    tcs = json.load(f)
-                    print(tcs)
-
-                    laps = tcs["laps"]
-                    tcs_first_color = tcs["first_color_obteined"]
-                    turns = tcs["turns"]
-                    tcs_color = tcs["color_obteined"]
-
-                    if laps == 1 and turns == 3:
-                        possible_changing_direction = True
-
-                    if tcs_first_color == tcs_color and possible_changing_direction:
-                        if last_pillar == "red":
-                            F.change_direction()
-                            dir_changed = True
-                        possible_changing_direction = False
-                        extra_lap = True
-
-                    if laps >= 3:
-                        print("OK")
-                        waiting_magenta = True
-
-                    Motor.move(traction, direction)
-                    if traction < 0:
-                        time.sleep(tim)
-
-            else:
-                print("Waiting for start signal")
-                if Boton.button_state():
-                    can_start = True
-
-        except FileNotFoundError as e:
-            print(f"file not found. Make sure the file {e} exists")
-        except json.JSONDecodeError:
-            print("Error decoding JSON. Ensure the JSON format is correct.")
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
-
-        # Optional sleep to avoid excessive CPU usage
-        time.sleep(0.1)
+                    #     # If there is more distance to the left than the right
+                    #     elif HC1 < HC3: 
+                    #         prev_front = HC0 # Save distance to front walls
+                    #         MD.move(1,-100) # Turn to right until the front walls it's at the right
+                    #         while not HC3 <= prev_front:  time.sleep(.25)
+                    #         MD.move(1,0) # Continue forward until abandoning the corner
+                    #         while HC1 + HC3 >= 150: time.sleep(.25)
+                else:
+                    if direction == "":
+                        
