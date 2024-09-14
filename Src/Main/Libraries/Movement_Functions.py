@@ -5,52 +5,54 @@ import json
 import os
 
 # Controls robot movement based on direction data from the json file of the camera
-def pivot_aproximation():
+def pivot_aproximation(color):
+    target = color
     while True:
         try:
-            with open(os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), 'r', encoding='utf-8') as d:
-                cam_data = json.load(d)
-                color = cam_data["Color"]
-                GA = cam_data["GArea"]
-                RA = cam_data["RArea"]
-
-                GC = cam_data["GreenC"]
-                RC = cam_data["RedC"]
-
-            if color != "" and color != "magenta": # If detected rectangle is big enought
-                if target == "":
-                    target = color
-                
-                with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), 'r', encoding='utf-8') as f:
-                    HC_data = json.load(f)
+           
+            if color != "" and color != "magenta": # If it's the correct color
+           
+                with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), 'r', encoding='utf-8') as M:
+                    HC_data = json.load(M)
                     var_distance = HC_data["HC1" if target=="green" else "HC3"] - prev_distance
                     prev_distance = HC_data["HC1" if target=="green" else "HC3"]
 
-                if target == "green":
+                with open(os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), 'r', encoding='utf-8') as C:
+                    cam_data = json.load(C)
+
+                    GA = cam_data["GArea"]
+                    RA = cam_data["RArea"]
+
+                    GC = cam_data["GreenC"]
+                    RC = cam_data["RedC"]
+
+                if target == "red":
                     
                     if var_distance >= 30:
 
-                        if GC < 100: # If it's on the left side
-                            MD.move(25, 0) # Forward
-                        else:
-                            MD.move(25, -100) # Turn left
-                    
-                    else:
-                        last_color = target
-                        target = ""
-                
-                elif target == "red":
-                
-                    if var_distance >= 30:
-                        
-                        if RC > 540: # If it's on the left side
+                        if RC < 100: # If it's on the left side
                             MD.move(25, 0) # Forward
                         else:
                             MD.move(25, 100) # Turn right
                     
                     else:
-                        last_color = target
-                        target = ""
+                        break
+                
+                elif target == "green":
+                
+                    if var_distance >= 30:
+                        
+                        if GC > 540: # If it's on the left side
+                            MD.move(25, 0) # Forward
+                        else:
+                            MD.move(25, -100) # Turn left
+                    
+                    else:
+                        break
+            else:
+                with open(os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), 'r', encoding='utf-8') as d:
+                    color = json.load(d)["Color"]
+
         except:
             pass
 
