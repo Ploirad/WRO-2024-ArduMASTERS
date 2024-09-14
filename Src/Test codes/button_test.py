@@ -7,6 +7,7 @@ while True:
         GPIO.setup(9, GPIO.IN)
         if GPIO.input(9) == GPIO.HIGH:
             print("boton pulsado")
+            break
         else:
             print("nada pulsado")
     except KeyboardInterrupt:
