@@ -108,10 +108,10 @@ def home_sweet_home(first_front_distance, first_right_distance):
             right_distance = Move["HC1"]
 
         if front_distance < first_front_distance:
-            traction = 100
+            traction = 25
 
         else:
-            traction = -100
+            traction = -25
 
 
         if right_distance > first_right_distance:
@@ -122,8 +122,8 @@ def home_sweet_home(first_front_distance, first_right_distance):
 
         M.move(traction, direction)
 
-        if (first_front_distance - 3) < front_distance < (first_front_distance + 3):
-            if (first_right_distance - 3) < right_distance < (first_right_distance + 3):
+        if (first_front_distance - 10) < front_distance < (first_front_distance + 10):
+            if (first_right_distance - 10) < right_distance < (first_right_distance + 10):
                 M.move(0, 0)
                 break
 

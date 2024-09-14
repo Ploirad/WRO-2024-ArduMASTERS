@@ -10,14 +10,14 @@ if __name__ == "__main__":
 
     dir_changed = False
     can_start = False
-    waiting_magenta = False
+    laps_ended = False
     possible_changing_direction = False
     last_pillar = ""
     tcs_color = ""
     first_front_distance = 0
     first_right_distance = 0
     first_loop_done = False
-    second_round = False
+    second_challenge = False
     tim = 1.5
     while True:
         try:
@@ -34,46 +34,37 @@ if __name__ == "__main__":
                 with open("Libraries/Json/CAM.json", "r", encoding='utf-8') as f:
                     CAM = json.load(f)
                     print(CAM)
-
                     color = CAM["Color"]
-                    ignore = CAM["Ignore"]
 
-                    if (color == "red" or color == "green" or color == "magenta") and not ignore:
-                        second_round = True
+                    if color != "" :
+                        second_challenge = True
 
-                    if second_round and possible_changing_direction and not ignore:
+                    if possible_changing_direction and color != "":
                         last_pillar = color
 
-                    if waiting_magenta:
-                        if second_round:
-                            if color == "magenta":
-                                End.parking(dir_changed)
+                    if laps_ended:
+                        if second_challenge and color == "magenta":
+                            End.parking(dir_changed)
                         else:
                             if tcs_color == "Gray":
                                 End.home_sweet_home(first_front_distance, first_right_distance)
                                 break
-                        if tcs_color == "Gray":
-                            End.home_sweet_home(first_front_distance, first_right_distance)
-                            break
 
-                    if ("TRACTION" in CAM and "DIRECTION" in CAM and not ignore and color != "magenta"):
+                    if (color != "" and color != "magenta"):
                         F.pivot_aproximation(CAM["DIRECTION"], CAM["Color"])
-                        traction = CAM["TRACTION"]
-                        direction = CAM["DIRECTION"]
 
-                    else:
-                        if CAM["Ignore"]:
-                            print("Ignore CAM")
+                    elif color == "":
+                        print("Ignore CAM")
+                        try:
                             with open("Libraries/Json/Move.json", "r", encoding='utf-8') as f:
                                 Move = json.load(f)
                                 print(Move)
 
-                                if "TRACTION" in Move and "DIRECTION" in Move:
-                                    traction = int(Move["TRACTION"])
-                                    direction = int(Move["DIRECTION"])
+                                traction = int(Move["TRACTION"])
+                                direction = int(Move["DIRECTION"])
 
-                                else:
-                                    print("Invalid data format in JSON file")
+                        except Exception as e:
+                            print(e)
 
                 with open("Libraries/Json/tcs_color_detection.json", "r", encoding='utf-8') as f:
                     tcs = json.load(f)
@@ -84,7 +75,7 @@ if __name__ == "__main__":
                     turns = tcs["turns"]
                     tcs_color = tcs["color_obteined"]
 
-                    if laps == 1 and turns == 3:
+                    if laps == 1 and turns == 3 and second_challenge:
                         possible_changing_direction = True
 
                     if tcs_first_color == tcs_color and possible_changing_direction:
@@ -96,11 +87,9 @@ if __name__ == "__main__":
 
                     if laps >= 3:
                         print("OK")
-                        waiting_magenta = True
+                        laps_ended = True
 
-                    Motor.move(traction, direction)
-                    if traction < 0:
-                        time.sleep(tim)
+                Motor.move(traction, direction)
 
             else:
                 print("Waiting for start signal")
