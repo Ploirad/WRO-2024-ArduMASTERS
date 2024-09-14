@@ -54,7 +54,7 @@ def move(percent_vel, percent_dir):
     if percent_dir > 0:
         d = 7
     elif percent_dir < 0:
-        d = 5
+        d = 4.75
     else:
         d = 6 #center
     Direccion.start(d)
