@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 while True:
     try:
         GPIO.setmode(GPIO.BCM)
-        GPIO.setup(9, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        GPIO.setup(9, GPIO.IN)
         if GPIO.input(9) == GPIO.HIGH:
             print("boton pulsado")
     except KeyboardInterrupt:
