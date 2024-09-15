@@ -55,8 +55,6 @@ def pivot_aproximation(color):
                         MD.move(25,0)
                     else:
                         return target
-
-                
                     
         except:
             pass
@@ -91,7 +89,10 @@ def change_direction():
     while True:
         with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), "r", encoding='utf-8') as M:       
             Ultrasonic_data = json.load(M)
+            front_distance = Ultrasonic_data["HC0"]
+            right_distance = Ultrasonic_data["HC1"]
             back_distance = Ultrasonic_data["HC2"]
+            left_distance = Ultrasonic_data["HC3"]
 
         with open(os.path.join(os.path.dirname(__file__), "Json", "tcs_color_detection.json"), "r", encoding='utf-8') as T:
             Tcs_data = json.load(T)
@@ -100,7 +101,6 @@ def change_direction():
         
         with open(os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), "r", encoding='utf-8') as C:
             cam_data = json.load(C)
-            
             ignore = cam_data["Ignore"]
        
         if phase == 0:
@@ -108,7 +108,6 @@ def change_direction():
                 MD.move(25,-100)
             else:
                 MD.move(25,100)
-            
             if (color == "orange" and orientation== "blue") or (color == " blue" and orientation == "orange"):
                 phase = 1
 
