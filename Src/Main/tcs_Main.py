@@ -4,7 +4,6 @@ import threading
 import signal
 import json
 from Libraries import tcs34725 as tcs
-import MAIN
 import os
 
 def signal_handler(sig, frame):

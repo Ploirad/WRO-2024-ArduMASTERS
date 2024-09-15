@@ -47,7 +47,7 @@ def pivot_aproximation(color):
                     else:
                         MD.move(25, -100) # Turn left
                 
-                if (int(GA) <= 50 and target == "green") or (int(RA) <= 50 and target == "red")
+                if (int(GA) <= 50 and target == "green") or (int(RA) <= 50 and target == "red"):
                     phase = 2
 
                 if phase == 3:
