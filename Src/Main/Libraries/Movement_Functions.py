@@ -47,7 +47,7 @@ def pivot_aproximation(color):
                     else:
                         MD.move(25, -100) # Turn left
                 
-                if (int(GA) <= 50 and target == "green") or (int(RA) <= 50 and target == "red")
+                if (int(GA) <= 50 and target == "green") or (int(RA) <= 50 and target == "red"):
                     phase = 2
 
                 if phase == 3:
@@ -55,8 +55,6 @@ def pivot_aproximation(color):
                         MD.move(25,0)
                     else:
                         return target
-
-                
                     
         except:
             pass
@@ -87,11 +85,24 @@ def backward(traction, initial_direction):
 # This function is for turn 180 degrees the car
 def change_direction():
     phase = 0 
-
+    with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), "r", encoding='utf-8') as M:       
+        Ultrasonic_data = json.load(M)
+        left_distance = Ultrasonic_data["HC3"]
+        right_distance = Ultrasonic_data["HC1"]
+    with open(os.path.join(os.path.dirname(__file__), "Json", "tcs_color_detection.json"), "r", encoding='utf-8') as T:
+        Tcs_data = json.load(T)
+        orientation = Tcs_data["first_color_obteined"]
+    if (left_distance  < 60 and  orientation == "orange") or (right_distance  < 60 and  orientation == "blue"):
+        zone = "left"
+    else:
+        zone = "right"
     while True:
         with open(os.path.join(os.path.dirname(__file__), "Json", "Move.json"), "r", encoding='utf-8') as M:       
             Ultrasonic_data = json.load(M)
+            front_distance = Ultrasonic_data["HC0"]
+            right_distance = Ultrasonic_data["HC1"]
             back_distance = Ultrasonic_data["HC2"]
+            left_distance = Ultrasonic_data["HC3"]
 
         with open(os.path.join(os.path.dirname(__file__), "Json", "tcs_color_detection.json"), "r", encoding='utf-8') as T:
             Tcs_data = json.load(T)
@@ -100,29 +111,47 @@ def change_direction():
         
         with open(os.path.join(os.path.dirname(__file__), "Json", "CAM.json"), "r", encoding='utf-8') as C:
             cam_data = json.load(C)
-            
             ignore = cam_data["Ignore"]
        
         if phase == 0:
             if orientation == "blue":
-                MD.move(25,-100)
+                if zone ==  "left":
+                    MD.move(25, -100)
+                else:
+                    MD.move(25, 100)
             else:
-                MD.move(25,100)
-            
-            if (color == "orange" and orientation== "blue") or (color == " blue" and orientation == "orange"):
-                phase = 1
+                if zone ==  "left":
+                    MD.move(25, 100)
+                else:
+                    MD.move(25, -100)
+            if zone == "left":
+                if color == "Gray":
+                    phase = 1
+            else:
+                if front_distance <= 5:
+                    phase = 1
 
         if phase == 1:
-            if back_distance >= 5:
-                MD.move(-25, 0)
+            MD.move(-25, 0)
+            if zone == "left":
+                if back_distance <= 5:
+                    phase = 2
             else: 
-                phase = 2
+                if (color == "Blue" and orientation == "Orange") or (color == "Orange" and orientation == "Blue"):
+                    phase = 2
         
         if phase == 2:
-            if orientation == "blue":
-                MD.move(25,-100)
+            if zone == "left":
+                if orientation == "blue":
+                    MD.move(25,-100)
+                else:
+                    MD.move(25,100)
             else:
-                MD.move(25,100)
+                if orientation == "blue":
+                    MD.move(25,100)
+                else:
+                    MD.move(25,-100)
 
-            if not ignore:
+
+            if color == "Gray":
                 break
