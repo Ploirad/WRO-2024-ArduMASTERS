@@ -14,7 +14,7 @@ if __name__ == "__main__":
     while True:
         try:
             if button_pressed:
-                with open("Libraries/Json/CAM.json","r", encoding="utf-8") as C:
+               with open(os.path.join(os.path.dirname(__file__), "Libraries", "Json", "CAM.json"),  "r", encoding="utf-8") as C:
                     cam_data = json.load(C)
 
                     color = cam_data["Color"]
@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
                     parking = cam_data["Parking"]
 
-                with open("Libraries/Json/tcs_color_detection.json", "r", encoding="utf-8") as T:
+                with open(os.path.join(os.path.dirname(__file__), "Libraries", "Json", "tcs_color_detection.json"), "r", encoding="utf-8") as T:
                     tcs_data = json.load(T)
 
                     orientation = tcs_data["first_color_obteined"]
@@ -38,7 +38,7 @@ if __name__ == "__main__":
                     turns = tcs_data["turns"]
                     laps = tcs_data["laps"]
 
-                with open("Libraries/Json/Move.json", "r", encoding="utf-8") as M:
+                with open(os.path.join(os.path.dirname(__file__), "Libraries", "Json", "Move.json"), "r", encoding="utf-8") as M:
                     HC_data = json.load(M)
 
                     HC0 = HC_data["HC0"]
