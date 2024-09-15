@@ -1,107 +1,85 @@
-extra_lap = False
+import json
+import time
+from Libraries import MOTOR_DRIVER as MD
+from Libraries import Boton as B
+import Libraries.Movement_Functions as F
+import Libraries.End_rounds as End
+import math as M
+
+button_pressed = False
+time_to_90_degrees = 5
+half_turn = False
 
 if __name__ == "__main__":
-    import json
-    import time
-    from Libraries import MOTOR_DRIVER as Motor
-    from Libraries import Boton
-    import Libraries.Movement_Functions as F
-    import Libraries.End_rounds as End
-
-    dir_changed = False
-    can_start = False
-    laps_ended = False
-    possible_changing_direction = False
-    last_pillar = ""
-    tcs_color = ""
-    first_front_distance = 0
-    first_right_distance = 0
-    first_loop_done = False
-    second_challenge = False
-    tim = 1.5
     while True:
-        try:
-            if can_start:
-                if not first_loop_done:
-                    with open("Libraries/Json/Move.json", "r", encoding='utf-8') as f:
-                        Move = json.load(f)
-                        first_front_distance = Move["HC0"]
-                        first_right_distance = Move["HC1"]
-                    first_loop_done = True
+        if button_pressed:
+            with open("Libraries/Json/CAM.json","r", encoding="utf-8") as C:
+                cam_data = json.load(C)
 
-                traction = 0
-                direction = 0
-                with open("Libraries/Json/CAM.json", "r", encoding='utf-8') as f:
-                    CAM = json.load(f)
-                    print(CAM)
-                    color = CAM["Color"]
+                color = cam_data["Color"]
+                ignore = cam_data["Ignore"]
+                
+                RC = cam_data["RedC"]
+                GC = cam_data["GreenC"]
+                MC = cam_data["MagentaC"]
+            
+                RA = cam_data["MArea"]
+                GC = cam_data["GArea"]
+                MA = cam_data["MArea"]
 
-                    if color != "" :
-                        second_challenge = True
+                parking = cam_data["Parking"]
 
-                    if possible_changing_direction and color != "":
-                        last_pillar = color
+            with open("Libraries/Json/tsc_color_detection.json", "r", encoding="utf-8") as T:
+                tcs_data = json.load(T)
 
-                    if laps_ended:
-                        if second_challenge and color == "magenta":
-                            End.parking(dir_changed)
-                        else:
-                            if tcs_color == "Gray":
-                                End.home_sweet_home(first_front_distance, first_right_distance)
-                                break
+                orientation = tcs_data["first_color_obteined"]
+                floor_color = tcs_data["color_obteined"]
+                turns = tcs_data["turns"]
+                laps = tcs_data["laps"]
 
-                    if (color != "" and color != "magenta"):
-                        F.pivot_aproximation(CAM["DIRECTION"], CAM["Color"])
+            with open("Libraries/Json/Move.json", "r", encoding="utf-8") as M:
+                HC_data = json.load(M)
 
-                    elif color == "":
-                        print("Ignore CAM")
-                        try:
-                            with open("Libraries/Json/Move.json", "r", encoding='utf-8') as f:
-                                Move = json.load(f)
-                                print(Move)
+                HC0 = HC_data["HC0"]
+                HC1 = HC_data["HC1"]
+                HC2 = HC_data["HC2"]
+                HC3 = HC_data["HC3"]
 
-                                traction = int(Move["TRACTION"])
-                                direction = int(Move["DIRECTION"])
+            if laps == 1 and  turns == 3 and orientation == floor_color:
+                if last_sign == "red":
+                    F.change_direction()
+                    half_turn = True
+            
+            if laps >= 3:
+                    if parking == True:
+                        End.parking(half_turn)
+                    else:
+                        End.home_sweet_home()
 
-                        except Exception as e:
-                            print(e)
+            if ignore == True:
 
-                with open("Libraries/Json/tcs_color_detection.json", "r", encoding='utf-8') as f:
-                    tcs = json.load(f)
-                    print(tcs)
-
-                    laps = tcs["laps"]
-                    tcs_first_color = tcs["first_color_obteined"]
-                    turns = tcs["turns"]
-                    tcs_color = tcs["color_obteined"]
-
-                    if laps == 1 and turns == 3 and second_challenge:
-                        possible_changing_direction = True
-
-                    if tcs_first_color == tcs_color and possible_changing_direction:
-                        if last_pillar == "red":
-                            F.change_direction()
-                            dir_changed = True
-                        possible_changing_direction = False
-                        extra_lap = True
-
-                    if laps >= 3:
-                        print("OK")
-                        laps_ended = True
-
-                Motor.move(traction, direction)
+                if floor_color == "unknown" or floor_color == "gray":
+                    
+                    if HC1 <= (HC1 + HC3)/2 - 10:
+                        MD.move(25,-100)
+                    if HC3 <= (HC1 + HC3)/2 - 10:
+                        MD.move(25,100)
+                    else:
+                        MD.move(25,0)
+                
+                else:
+                    if floor_color == "blue":
+                        MD.move(25, -100)
+                        time.sleep(time_to_90_degrees)
+                
+                    elif floor_color == "orange":
+                        MD.move(25, 100)
+                        time.sleep(time_to_90_degrees)
 
             else:
-                print("Waiting for start signal")
-                if Boton.button_state():
-                    can_start = True
-
-        except FileNotFoundError as e:
-            print(f"file not found. Make sure the file {e} exists")
-        except json.JSONDecodeError:
-            print("Error decoding JSON. Ensure the JSON format is correct.")
-        except Exception as e:
-            print(f"An unexpected error occurred: {e}")
-
-        # Optional sleep to avoid excessive CPU usage
-        time.sleep(0.1)
+                if color == "green" or color== "red":
+                    last_sign = F.pivot_aproximation(color)
+        else:
+            if B.button_state() == True:
+                print("Button pressed")
+                button_pressed = True
